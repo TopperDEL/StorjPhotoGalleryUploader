@@ -155,7 +155,12 @@
       <Visible>false</Visible>
     </ImageAsset>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\StorjPhotoGalleryUploader.Contracts\StorjPhotoGalleryUploader.Contracts.csproj">
+      <Project>{97107b09-f7ec-42ae-97e8-676d3d31f9cd}</Project>
+      <Name>StorjPhotoGalleryUploader.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\StorjPhotoGalleryUploader.Shared\StorjPhotoGalleryUploader.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

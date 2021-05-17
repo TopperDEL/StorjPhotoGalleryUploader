@@ -97,7 +97,12 @@
     <ImageAsset Include="Assets.xcassets\unologo.imageset\Contents.json" />
     <ImageAsset Include="Assets.xcassets\unologo.imageset\unoplatform.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\StorjPhotoGalleryUploader.Contracts\StorjPhotoGalleryUploader.Contracts.csproj">
+      <Project>{97107b09-f7ec-42ae-97e8-676d3d31f9cd}</Project>
+      <Name>StorjPhotoGalleryUploader.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
     <None Include="Entitlements.plist" />
