@@ -112,7 +112,7 @@ namespace StorjPhotoGalleryUploader
                     }
                     else
                     {
-                        rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                        rootFrame.Navigate(typeof(LoginPage), e.Arguments);
                     }
                 }
                 // Ensure the current window is active

@@ -41,6 +41,7 @@ namespace StorjPhotoGalleryUploader.Helper
             var services = new ServiceCollection();
 
             services.AddSingleton<ILoginService, LoginService>();
+            services.AddTransient<ViewModels.LoginViewModel>();
 
             return services.BuildServiceProvider(true);
         }
