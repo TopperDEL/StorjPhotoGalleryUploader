@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using MvvmGen.Events;
 using StorjPhotoGalleryUploader.Contracts.Interfaces;
 using StorjPhotoGalleryUploader.Services;
 using StorjPhotoGalleryUploader.UnoAppServices;
@@ -22,7 +23,7 @@ namespace StorjPhotoGalleryUploader.Helper
         {
             var services = new ServiceCollection();
 
-            services.AddSingleton<ILoginService, LoginService>();
+            AddBasics(services);
             services.AddSingleton(access);
             services.AddSingleton<IBucketService, BucketService>();
             services.AddSingleton<IObjectService, ObjectService>();
@@ -40,10 +41,16 @@ namespace StorjPhotoGalleryUploader.Helper
         {
             var services = new ServiceCollection();
 
-            services.AddSingleton<ILoginService, LoginService>();
+            AddBasics(services);
             services.AddTransient<ViewModels.LoginViewModel>();
 
             return services.BuildServiceProvider(true);
+        }
+
+        private static void AddBasics(ServiceCollection services)
+        {
+            services.AddSingleton<ILoginService, LoginService>();
+            services.AddSingleton<IEventAggregator, EventAggregator>();
         }
     }
 }

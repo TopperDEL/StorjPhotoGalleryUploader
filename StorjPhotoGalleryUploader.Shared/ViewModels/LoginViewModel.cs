@@ -1,4 +1,6 @@
 ﻿using MvvmGen;
+using MvvmGen.Events;
+using StorjPhotoGalleryUploader.Contracts.Interfaces;
 using StorjPhotoGalleryUploader.Contracts.Models;
 using System;
 using System.Collections.Generic;
@@ -6,6 +8,8 @@ using System.Text;
 
 namespace StorjPhotoGalleryUploader.ViewModels
 {
+    [Inject(typeof(ILoginService))]
+    [Inject(typeof(IEventAggregator))]
     [ViewModel]
     public partial class LoginViewModel
     {
@@ -15,7 +19,17 @@ namespace StorjPhotoGalleryUploader.ViewModels
         [Command]
         private void Login()
         {
-            
+            AppConfig appConfig = new AppConfig(AccessGrant, BucketName);
+            var loggedIn = LoginService.Login(appConfig);
+
+            if(loggedIn)
+            {
+                EventAggregator.Publish(appConfig);
+            }
+            else
+            {
+                //ToDo: Raise error
+            }
         }
     }
 }

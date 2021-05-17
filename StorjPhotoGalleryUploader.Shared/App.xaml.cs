@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MvvmGen.Events;
 using StorjPhotoGalleryUploader.Contracts.Interfaces;
+using StorjPhotoGalleryUploader.Contracts.Models;
 using StorjPhotoGalleryUploader.Pages;
 using System;
 using System.Collections.Generic;
@@ -24,7 +26,7 @@ namespace StorjPhotoGalleryUploader
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public sealed partial class App : Application
+    public sealed partial class App : Application, IEventSubscriber<AppConfig>
     {
         public static IServiceProvider Services { get; private set; }
 
@@ -101,14 +103,14 @@ namespace StorjPhotoGalleryUploader
                     // configuring the new page by passing required information as a navigation
                     // parameter
                     Services = Helper.DependencyInjectionInitHelper.ConfigureServices();
+                    var eventAggregator = Services.GetService<IEventAggregator>();
+                    eventAggregator.RegisterSubscriber(this);
 
                     var loginService = Services.GetService<ILoginService>();
                     if (loginService.GetIsLoggedIn())
                     {
                         var appConfig = loginService.GetLogin();
-                        Services = Helper.DependencyInjectionInitHelper.ConfigureServices(new uplink.NET.Models.Access(appConfig.AccessGrant));
-
-                        rootFrame.Navigate(typeof(AlbumListPage), e.Arguments);
+                        OnEvent(appConfig);
                     }
                     else
                     {
@@ -198,6 +200,15 @@ namespace StorjPhotoGalleryUploader
             });
 
             global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;
+        }
+
+        public void OnEvent(AppConfig appConfig)
+        {
+            var rootFrame = _window.Content as Frame;
+
+            Services = Helper.DependencyInjectionInitHelper.ConfigureServices(new uplink.NET.Models.Access(appConfig.AccessGrant));
+
+            rootFrame.Navigate(typeof(AlbumListPage), null);
         }
     }
 }
