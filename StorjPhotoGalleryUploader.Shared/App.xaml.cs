@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using StorjPhotoGalleryUploader.Contracts.Interfaces;
 using StorjPhotoGalleryUploader.Pages;
 using System;
 using System.Collections.Generic;
@@ -40,7 +41,6 @@ namespace StorjPhotoGalleryUploader
         /// </summary>
         public App()
         {
-            Services = Helper.DependencyInjectionInitHelper.ConfigureServices();
             InitializeLogging();
 
             this.InitializeComponent();
@@ -100,7 +100,20 @@ namespace StorjPhotoGalleryUploader
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    rootFrame.Navigate(typeof(AlbumListPage), e.Arguments);
+                    Services = Helper.DependencyInjectionInitHelper.ConfigureServices();
+
+                    var loginService = Services.GetService<ILoginService>();
+                    if (loginService.GetIsLoggedIn())
+                    {
+                        var appConfig = loginService.GetLogin();
+                        Services = Helper.DependencyInjectionInitHelper.ConfigureServices(new uplink.NET.Models.Access(appConfig.AccessGrant));
+
+                        rootFrame.Navigate(typeof(AlbumListPage), e.Arguments);
+                    }
+                    else
+                    {
+                        rootFrame.Navigate(typeof(MainPage), e.Arguments);
+                    }
                 }
                 // Ensure the current window is active
                 _window.Activate();

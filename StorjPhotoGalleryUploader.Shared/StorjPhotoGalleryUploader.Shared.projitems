@@ -25,6 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Pages\AlbumListPage.xaml.cs">
       <DependentUpon>AlbumListPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)UnoAppServices\LoginService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumViewModel.cs" />
   </ItemGroup>
