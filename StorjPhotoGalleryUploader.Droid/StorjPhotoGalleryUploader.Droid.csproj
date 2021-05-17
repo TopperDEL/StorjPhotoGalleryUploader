@@ -74,6 +74,9 @@
     <PackageReference Include="uplink.NET">
       <Version>2.6.1451</Version>
     </PackageReference>
+    <PackageReference Include="uplink.NET.Droid">
+      <Version>2.6.1451</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />

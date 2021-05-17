@@ -128,6 +128,9 @@
     <PackageReference Include="uplink.NET">
       <Version>2.6.1451</Version>
     </PackageReference>
+    <PackageReference Include="uplink.NET.iOS">
+      <Version>2.6.1451</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Contents.json">

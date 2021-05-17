@@ -82,6 +82,9 @@
     <PackageReference Include="uplink.NET">
       <Version>2.6.1451</Version>
     </PackageReference>
+    <PackageReference Include="uplink.NET.Mac">
+      <Version>2.6.1283</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="..\StorjPhotoGalleryUploader.Shared\StorjPhotoGalleryUploader.Shared.projitems" Label="Shared" />
   <ItemGroup>
