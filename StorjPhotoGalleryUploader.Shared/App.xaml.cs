@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using StorjPhotoGalleryUploader.Pages;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,8 @@ namespace StorjPhotoGalleryUploader
     /// </summary>
     public sealed partial class App : Application
     {
+        public static IServiceProvider Services { get; private set; }
+
 #if NET5_0 && WINDOWS
         private Window _window;
 
@@ -37,6 +40,7 @@ namespace StorjPhotoGalleryUploader
         /// </summary>
         public App()
         {
+            Services = Helper.DependencyInjectionInitHelper.ConfigureServices();
             InitializeLogging();
 
             this.InitializeComponent();

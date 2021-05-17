@@ -1,5 +1,5 @@
 ﻿using MvvmGen;
-using StorjPhotoGalleryUploader.Models;
+using StorjPhotoGalleryUploader.Contracts.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace StorjPhotoGalleryUploader.ViewModels
 {
+    [Inject(typeof(IAlbumService))]
     [ViewModel]
     public partial class AlbumListViewModel
     {
@@ -16,7 +17,11 @@ namespace StorjPhotoGalleryUploader.ViewModels
         [Command]
         private async Task LoadAlbumsAsync()
         {
-
+            var albums = await AlbumService.ListAlbumsAsync();
+            foreach(var album in albums)
+            {
+                _albumList.Add(new AlbumViewModel(album));
+            }
         }
     }
 }
