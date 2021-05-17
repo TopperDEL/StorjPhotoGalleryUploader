@@ -47,6 +47,11 @@ namespace StorjPhotoGalleryUploader
 
             this.InitializeComponent();
 
+#if __IOS__
+            //Initialize the uplink.NET-library
+            uplink.NET.Models.Access.Init_iOs(Foundation.NSBundle.MainBundle.BundlePath);
+#endif
+
 #if HAS_UNO || NETFX_CORE
             this.Suspending += OnSuspending;
 #endif
@@ -206,7 +211,7 @@ namespace StorjPhotoGalleryUploader
         {
             var rootFrame = _window.Content as Frame;
 
-            Services = Helper.DependencyInjectionInitHelper.ConfigureServices(new uplink.NET.Models.Access(appConfig.AccessGrant));
+            Services = Helper.DependencyInjectionInitHelper.ConfigureServices(appConfig);
 
             rootFrame.Navigate(typeof(AlbumListPage), null);
         }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MvvmGen.Events;
 using StorjPhotoGalleryUploader.Contracts.Interfaces;
+using StorjPhotoGalleryUploader.Contracts.Models;
 using StorjPhotoGalleryUploader.Services;
 using StorjPhotoGalleryUploader.UnoAppServices;
 using System;
@@ -19,12 +20,13 @@ namespace StorjPhotoGalleryUploader.Helper
         /// </summary>
         /// <param name="access">The Storj DCS-Access object to use</param>
         /// <returns></returns>
-        internal static IServiceProvider ConfigureServices(Access access)
+        internal static IServiceProvider ConfigureServices(AppConfig appConfig)
         {
             var services = new ServiceCollection();
 
             AddBasics(services);
-            services.AddSingleton(access);
+            services.AddSingleton(appConfig);
+            services.AddSingleton(new Access(appConfig.AccessGrant));
             services.AddSingleton<IBucketService, BucketService>();
             services.AddSingleton<IObjectService, ObjectService>();
             services.AddTransient<IAlbumService, AlbumService>();
