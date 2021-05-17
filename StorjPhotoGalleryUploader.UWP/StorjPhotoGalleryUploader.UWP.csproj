@@ -11,7 +11,13 @@
       <Version>6.2.11</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml" Version="2.5.0" />
+    <PackageReference Include="MvvmGen">
+      <Version>1.0.0</Version>
+    </PackageReference>
     <PackageReference Include="Uno.Core" Version="2.3.0" />
+    <PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Uwp.Managed">
+      <Version>2.0.3-uno.92</Version>
+    </PackageReference>
     <PackageReference Include="Uno.UI" Version="3.7.4" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
@@ -19,7 +25,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
-    <ProjectGuid>7b989374-4b0f-441e-87e9-a0d3a9f32338</ProjectGuid>
+    <ProjectGuid>{7B989374-4B0F-441E-87E9-A0D3A9F32338}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>StorjPhotoGalleryUploader</RootNamespace>
