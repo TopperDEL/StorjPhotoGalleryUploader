@@ -32,13 +32,13 @@
       Executable="$targetnametoken$.exe"
       EntryPoint="StorjPhotoGalleryUploader.App">
       <uap:VisualElements
-        DisplayName="StorjPhotoGalleryUploader"
+        DisplayName="Storj Photo Gallery Uploader"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="StorjPhotoGalleryUploader"
+        Description="This app enables you to upload pictures from your local device to the Storj DCS (Decentralised Cloud Storage) and to generate shareable Albums of them."
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
-        <uap:SplashScreen Image="Assets\SplashScreen.png" />
+        <uap:SplashScreen Image="Assets\SplashScreen.png"  BackgroundColor="white"/>
       </uap:VisualElements>
     </Application>
   </Applications>
