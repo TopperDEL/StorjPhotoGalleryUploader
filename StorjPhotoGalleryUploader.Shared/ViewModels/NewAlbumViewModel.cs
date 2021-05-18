@@ -6,22 +6,17 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage.Pickers;
 
 namespace StorjPhotoGalleryUploader.ViewModels
 {
     [Inject(typeof(IEventAggregator))]
     [Inject(typeof(IAlbumImageViewModelFactory))]
     [ViewModel]
-    public partial class NewAlbumViewModel: IEventSubscriber<ImageAddedMessage>
+    public partial class NewAlbumViewModel
     {
         [Property] private string _albumName;
         [Property] private ObservableCollection<AlbumImageViewModel> _albumImages = new ObservableCollection<AlbumImageViewModel>();
-
-        [Command]
-        private async Task InitAlbum()
-        {
-            AlbumImages.Add(AlbumImageViewModelFactory.Create());
-        }
 
         [Command(CanExecuteMethod = nameof(CanSave))]
         private async Task Save()
@@ -42,9 +37,29 @@ namespace StorjPhotoGalleryUploader.ViewModels
             EventAggregator.Publish(new DoNavigateMessage(NavigationTarget.AlbumList));
         }
 
-        public void OnEvent(ImageAddedMessage eventData)
+        [Command]
+        private async Task AddImagesAsync()
         {
-            AlbumImages.Add(AlbumImageViewModelFactory.Create());
+            var fileOpenPicker = new FileOpenPicker();
+            fileOpenPicker.SuggestedStartLocation = PickerLocationId.PicturesLibrary;
+            fileOpenPicker.FileTypeFilter.Add(".jpg");
+            fileOpenPicker.FileTypeFilter.Add(".png");
+            var pickedFiles = await fileOpenPicker.PickMultipleFilesAsync();
+            if (pickedFiles.Count > 0)
+            {
+                // At least one file was picked, you can use them
+                foreach (var file in pickedFiles)
+                {
+                    var albumVM = AlbumImageViewModelFactory.Create();
+                    await albumVM.LoadImageAsync(file);
+                    AlbumImages.Add(albumVM);
+                }
+            }
+            else
+            {
+                // No file was picked or the dialog was cancelled.
+                return;
+            }
         }
     }
 }

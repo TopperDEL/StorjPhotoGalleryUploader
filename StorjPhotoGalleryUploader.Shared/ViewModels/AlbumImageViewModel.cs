@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Storage;
+using Windows.UI.Xaml.Media.Imaging;
 
 namespace StorjPhotoGalleryUploader.ViewModels
 {
@@ -13,13 +15,12 @@ namespace StorjPhotoGalleryUploader.ViewModels
     [ViewModel]
     public partial class AlbumImageViewModel
     {
-        [Property] private bool _hasContent;
+        [Property] private BitmapImage _imageThumbnail = new BitmapImage();
 
-        [Command]
-        private async Task SelectImageAsync()
+        public async Task LoadImageAsync(StorageFile imageFile)
         {
-            HasContent = true;
-            EventAggregator.Publish(new ImageAddedMessage());
+            var thumb = await imageFile.GetScaledImageAsThumbnailAsync(Windows.Storage.FileProperties.ThumbnailMode.PicturesView, 500);
+            await _imageThumbnail.SetSourceAsync(thumb);
         }
     }
 }
