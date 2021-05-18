@@ -5,8 +5,18 @@
     xmlns:local="using:StorjPhotoGalleryUploader.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:viewmodels="using:StorjPhotoGalleryUploader.ViewModels"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Interactivity:Interaction.Behaviors>
+        <Interactions:EventTriggerBehavior EventName="Loaded">
+            <Interactions:EventTriggerBehavior.Actions>
+                <Interactions:InvokeCommandAction Command="{Binding InitAlbumCommand}"/>
+            </Interactions:EventTriggerBehavior.Actions>
+        </Interactions:EventTriggerBehavior>
+    </Interactivity:Interaction.Behaviors>
 
     <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10">
         <Grid.RowDefinitions>
@@ -23,5 +33,16 @@
             <Button Content="Save" VerticalAlignment="Bottom" Command="{Binding SaveCommand}" Margin="5"/>
             <Button Content="Cancel" VerticalAlignment="Bottom" Command="{Binding CancelCommand}" Margin="5"/>
         </StackPanel>
+
+        <GridView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding AlbumImages, Mode=OneWay}">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="viewmodels:AlbumImageViewModel">
+                    <Grid>
+                        <Button Content="Select..." Visibility="{Binding HasContent, Converter={StaticResource TrueIsCollapsedConverter}}"/>
+                        <Button Content="Image" Visibility="{Binding HasContent, Converter={StaticResource TrueIsVisibleConverter}}"/>
+                    </Grid>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
     </Grid>
 </Page>

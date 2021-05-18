@@ -18,6 +18,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Converter\TrueIsCollapsedConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converter\TrueIsVisibleConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\DependencyInjectionInitHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\AlbumListPage.xaml.cs">
       <DependentUpon>AlbumListPage.xaml</DependentUpon>
@@ -29,6 +31,7 @@
       <DependentUpon>NewAlbumPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)UnoAppServices\LoginService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumImageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\LoginViewModel.cs" />
@@ -44,6 +47,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Pages\NewAlbumPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Resources\Converters.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
