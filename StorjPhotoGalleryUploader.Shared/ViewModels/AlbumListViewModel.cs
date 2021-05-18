@@ -20,8 +20,11 @@ namespace StorjPhotoGalleryUploader.ViewModels
             var albums = await AlbumService.ListAlbumsAsync();
             foreach(var album in albums)
             {
-                _albumList.Add(new AlbumViewModel(album));
+                AlbumList.Add(new AlbumViewModel(album));
             }
+
+            AlbumList.Add(new AlbumViewModel(new Contracts.Models.Album() { Name = "Holiday Spain 2021" }));
+            AlbumList.Add(new AlbumViewModel(new Contracts.Models.Album() { Name = "Holiday Green 2020" }));
         }
     }
 }

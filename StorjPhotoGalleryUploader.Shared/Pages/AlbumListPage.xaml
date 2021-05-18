@@ -6,6 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:viewModels="using:StorjPhotoGalleryUploader.ViewModels"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -17,7 +18,29 @@
         </Interactions:EventTriggerBehavior>
     </Interactivity:Interaction.Behaviors>
 
-    <Grid>
-       
+    <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Button Content="New album" Grid.Row="0" HorizontalAlignment="Center"/>
+        <ListView Grid.Row="1" ItemsSource="{Binding AlbumList, Mode=OneWay}" HorizontalAlignment="Center">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="viewModels:AlbumViewModel">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="{Binding Name}" VerticalAlignment="Center"/>
+                        <Button Grid.Column="1" Content="+"/>
+                        <Button Grid.Column="2" Content="S"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
