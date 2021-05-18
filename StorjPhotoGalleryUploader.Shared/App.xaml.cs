@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Logging;
 using MvvmGen.Events;
 using StorjPhotoGalleryUploader.Contracts.Interfaces;
+using StorjPhotoGalleryUploader.Contracts.Messages;
 using StorjPhotoGalleryUploader.Contracts.Models;
 using StorjPhotoGalleryUploader.Pages;
 using System;
@@ -26,7 +27,7 @@ namespace StorjPhotoGalleryUploader
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public sealed partial class App : Application, IEventSubscriber<AppConfig>
+    public sealed partial class App : Application, IEventSubscriber<UserLoggedInMessage>
     {
         public static IServiceProvider Services { get; private set; }
 
@@ -115,7 +116,7 @@ namespace StorjPhotoGalleryUploader
                     if (loginService.GetIsLoggedIn())
                     {
                         var appConfig = loginService.GetLogin();
-                        OnEvent(appConfig);
+                        OnEvent(new UserLoggedInMessage(appConfig));
                     }
                     else
                     {
@@ -207,11 +208,11 @@ namespace StorjPhotoGalleryUploader
             global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;
         }
 
-        public void OnEvent(AppConfig appConfig)
+        public void OnEvent(UserLoggedInMessage loggedInMessage)
         {
             var rootFrame = _window.Content as Frame;
 
-            Services = Helper.DependencyInjectionInitHelper.ConfigureServices(appConfig);
+            Services = Helper.DependencyInjectionInitHelper.ConfigureServices(loggedInMessage.AppConfig);
 
             rootFrame.Navigate(typeof(AlbumListPage), null);
         }

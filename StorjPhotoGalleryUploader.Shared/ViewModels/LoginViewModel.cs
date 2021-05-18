@@ -1,6 +1,7 @@
 ﻿using MvvmGen;
 using MvvmGen.Events;
 using StorjPhotoGalleryUploader.Contracts.Interfaces;
+using StorjPhotoGalleryUploader.Contracts.Messages;
 using StorjPhotoGalleryUploader.Contracts.Models;
 using System;
 using System.Collections.Generic;
@@ -24,7 +25,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
 
             if(loggedIn)
             {
-                EventAggregator.Publish(appConfig);
+                EventAggregator.Publish(new UserLoggedInMessage(appConfig));
             }
             else
             {
