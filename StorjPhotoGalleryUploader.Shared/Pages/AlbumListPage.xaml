@@ -33,11 +33,13 @@
                             <ColumnDefinition Width="300"/>
                             <ColumnDefinition Width="40"/>
                             <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="40"/>
                         </Grid.ColumnDefinitions>
 
                         <TextBlock Grid.Column="0" Text="{Binding Name}" VerticalAlignment="Center"/>
                         <Button Grid.Column="1" Content="+"/>
-                        <Button Grid.Column="2" Content="S"/>
+                        <Button Grid.Column="2" Content="O"/>
+                        <Button Grid.Column="3" Content="S"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
