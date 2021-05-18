@@ -8,14 +8,14 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Margin="10">
+    <Grid Margin="10" HorizontalAlignment="Stretch" VerticalAlignment="Center" MaxWidth="500">
         <Grid.RowDefinitions>
             <RowDefinition Height="60"/>
             <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0" x:Uid="AccessGrant" Text="{Binding AccessGrant, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Access grant"/>
-        <TextBox Grid.Row="1" x:Uid="BucketName" Text="{Binding BucketName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Bucket name"/>
+        <TextBox Grid.Row="0" x:Uid="AccessGrant" Text="{Binding AccessGrant, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Access grant" MaxWidth="400"/>
+        <TextBox Grid.Row="1" x:Uid="BucketName" Text="{Binding BucketName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Bucket name" MaxWidth="400"/>
         <Button Grid.Row="2" x:Uid="LoginButton" Command="{Binding LoginCommand}" Content="Login" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10"/>
     </Grid>
 </Page>
