@@ -17,7 +17,6 @@ namespace StorjPhotoGalleryUploader.UnoAppServices
 
         public bool GetIsLoggedIn()
         {
-            return false;
             try
             {
                 var access = GetLogin();
