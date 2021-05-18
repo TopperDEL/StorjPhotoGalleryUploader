@@ -27,7 +27,7 @@ namespace StorjPhotoGalleryUploader
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public sealed partial class App : Application, IEventSubscriber<UserLoggedInMessage>, IEventSubscriber<NewAlbumRequestedMessage>
+    public sealed partial class App : Application, IEventSubscriber<UserLoggedInMessage>, IEventSubscriber<DoNavigateMessage>
     {
         public static IServiceProvider Services { get; private set; }
 
@@ -211,13 +211,27 @@ namespace StorjPhotoGalleryUploader
         public void OnEvent(UserLoggedInMessage loggedInMessage)
         {
             Services = Helper.DependencyInjectionInitHelper.ConfigureServices(loggedInMessage.AppConfig);
+            var eventAggregator = Services.GetService<IEventAggregator>();
+            eventAggregator.RegisterSubscriber(this);
 
             DoNavigate(typeof(AlbumListPage));
         }
 
-        public void OnEvent(NewAlbumRequestedMessage eventData)
+        public void OnEvent(DoNavigateMessage navigationData)
         {
-            DoNavigate(typeof(NewAlbumPage));
+            Type pageType = null;
+            switch(navigationData.NavigationTarget)
+            {
+                case NavigationTarget.NewAlbum:
+                    pageType = typeof(NewAlbumPage);
+                    break;
+                case NavigationTarget.AlbumList:
+                    pageType = typeof(AlbumListPage);
+                    break;
+            }
+
+            if (pageType != null)
+                DoNavigate(pageType);
         }
 
         private void DoNavigate(Type pageType)

@@ -31,6 +31,7 @@ namespace StorjPhotoGalleryUploader.Helper
             services.AddSingleton<IObjectService, ObjectService>();
             services.AddTransient<IAlbumService, AlbumService>();
             services.AddTransient<ViewModels.AlbumListViewModel>();
+            services.AddTransient<ViewModels.NewAlbumViewModel>();
 
             return services.BuildServiceProvider(true);
         }

@@ -8,7 +8,20 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="120"/>
+        </Grid.ColumnDefinitions>
 
+        <TextBox Text="{Binding AlbumName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Album name" Grid.Row="0" Grid.Column="0" MinWidth="200" MaxWidth="400" Margin="5"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+            <Button Content="Save" VerticalAlignment="Bottom" Command="{Binding SaveCommand}" Margin="5"/>
+            <Button Content="Cancel" VerticalAlignment="Bottom" Command="{Binding CancelCommand}" Margin="5"/>
+        </StackPanel>
     </Grid>
 </Page>

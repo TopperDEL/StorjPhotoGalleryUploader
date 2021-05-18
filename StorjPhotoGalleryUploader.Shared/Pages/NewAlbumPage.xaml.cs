@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StorjPhotoGalleryUploader.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -25,6 +26,7 @@ namespace StorjPhotoGalleryUploader.Pages
         public NewAlbumPage()
         {
             this.InitializeComponent();
+            DataContext = App.Services.GetService(typeof(NewAlbumViewModel));
         }
     }
 }

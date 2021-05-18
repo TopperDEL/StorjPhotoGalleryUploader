@@ -43,7 +43,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
         [Command]
         private void NavigateNewAlbum()
         {
-            EventAggregator.Publish(new NewAlbumRequestedMessage());
+            EventAggregator.Publish(new DoNavigateMessage(NavigationTarget.NewAlbum));
         }
     }
 }
