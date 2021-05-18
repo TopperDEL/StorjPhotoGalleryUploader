@@ -10,8 +10,9 @@ using System.Threading.Tasks;
 namespace StorjPhotoGalleryUploader.ViewModels
 {
     [Inject(typeof(IEventAggregator))]
+    [Inject(typeof(IAlbumImageViewModelFactory))]
     [ViewModel]
-    public partial class NewAlbumViewModel
+    public partial class NewAlbumViewModel: IEventSubscriber<ImageAddedMessage>
     {
         [Property] private string _albumName;
         [Property] private ObservableCollection<AlbumImageViewModel> _albumImages = new ObservableCollection<AlbumImageViewModel>();
@@ -19,7 +20,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
         [Command]
         private async Task InitAlbum()
         {
-            AlbumImages.Add(new AlbumImageViewModel());
+            AlbumImages.Add(AlbumImageViewModelFactory.Create());
         }
 
         [Command(CanExecuteMethod = nameof(CanSave))]
@@ -41,10 +42,9 @@ namespace StorjPhotoGalleryUploader.ViewModels
             EventAggregator.Publish(new DoNavigateMessage(NavigationTarget.AlbumList));
         }
 
-        [Command]
-        private async Task AddImageAsync()
+        public void OnEvent(ImageAddedMessage eventData)
         {
-
+            AlbumImages.Add(AlbumImageViewModelFactory.Create());
         }
     }
 }

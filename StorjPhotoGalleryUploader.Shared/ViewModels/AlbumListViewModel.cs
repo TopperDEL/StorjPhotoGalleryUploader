@@ -28,7 +28,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 var albums = await AlbumService.ListAlbumsAsync();
                 foreach (var album in albums)
                 {
-                    AlbumList.Add(new AlbumViewModel(album));
+                    AlbumList.Add( new AlbumViewModel(album));
                 }
 
                 AlbumList.Add(new AlbumViewModel(new Contracts.Models.Album() { Name = "Holiday Spain 2021" }));

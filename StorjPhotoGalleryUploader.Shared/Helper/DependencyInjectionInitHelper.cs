@@ -4,6 +4,7 @@ using StorjPhotoGalleryUploader.Contracts.Interfaces;
 using StorjPhotoGalleryUploader.Contracts.Models;
 using StorjPhotoGalleryUploader.Services;
 using StorjPhotoGalleryUploader.UnoAppServices;
+using StorjPhotoGalleryUploader.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -30,8 +31,9 @@ namespace StorjPhotoGalleryUploader.Helper
             services.AddSingleton<IBucketService, BucketService>();
             services.AddSingleton<IObjectService, ObjectService>();
             services.AddTransient<IAlbumService, AlbumService>();
-            services.AddTransient<ViewModels.AlbumListViewModel>();
-            services.AddTransient<ViewModels.NewAlbumViewModel>();
+            services.AddTransient<AlbumListViewModel>();
+            services.AddTransient<NewAlbumViewModel>();
+            services.AddSingleton<IAlbumImageViewModelFactory, AlbumImageViewModelFactory>();
 
             return services.BuildServiceProvider(true);
         }
@@ -45,7 +47,7 @@ namespace StorjPhotoGalleryUploader.Helper
             var services = new ServiceCollection();
 
             AddBasics(services);
-            services.AddTransient<ViewModels.LoginViewModel>();
+            services.AddTransient<LoginViewModel>();
 
             return services.BuildServiceProvider(true);
         }

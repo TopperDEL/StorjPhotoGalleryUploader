@@ -38,7 +38,7 @@
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="viewmodels:AlbumImageViewModel">
                     <Grid>
-                        <Button Content="Select..." Visibility="{Binding HasContent, Converter={StaticResource TrueIsCollapsedConverter}}"/>
+                        <Button Content="Select..." Visibility="{Binding HasContent, Converter={StaticResource TrueIsCollapsedConverter}}" Command="{Binding SelectImageAsyncCommand}"/>
                         <Button Content="Image" Visibility="{Binding HasContent, Converter={StaticResource TrueIsVisibleConverter}}"/>
                     </Grid>
                 </DataTemplate>
