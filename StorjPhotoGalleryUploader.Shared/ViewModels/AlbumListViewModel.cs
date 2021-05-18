@@ -1,6 +1,7 @@
 ﻿using MvvmGen;
 using MvvmGen.Events;
 using StorjPhotoGalleryUploader.Contracts.Interfaces;
+using StorjPhotoGalleryUploader.Contracts.Messages;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -42,7 +43,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
         [Command]
         private void NavigateNewAlbum()
         {
-
+            EventAggregator.Publish(new NewAlbumRequestedMessage());
         }
     }
 }
