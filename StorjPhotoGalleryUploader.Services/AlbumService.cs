@@ -27,7 +27,20 @@ namespace StorjPhotoGalleryUploader.Services
         {
             if(_bucket == null)
             {
-                _bucket = await _bucketService.EnsureBucketAsync(_appConfig.BucketName);
+                try
+                {
+                    _bucket = await _bucketService.EnsureBucketAsync(_appConfig.BucketName);
+                }
+                catch {
+                    try
+                    {
+                        _bucket = await _bucketService.GetBucketAsync(_appConfig.BucketName);
+                    }
+                    catch
+                    {
+
+                    }
+                }
             }
         }
 
