@@ -1,6 +1,4 @@
-﻿using SixLabors.ImageSharp.Formats.Jpeg;
-using SixLabors.ImageSharp.Processing;
-using SkiaSharp;
+﻿using SkiaSharp;
 using StorjPhotoGalleryUploader.Contracts.Interfaces;
 using System;
 using System.Collections.Generic;
