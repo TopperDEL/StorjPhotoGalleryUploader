@@ -31,7 +31,7 @@
         <GridView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding AlbumImages, Mode=OneWay}">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="viewmodels:AlbumImageViewModel">
-                        <Image Source="{Binding ImageThumbnail}" MaxWidth="500" MaxHeight="500"/>
+                        <Image Source="{Binding ImageThumbnail}" MaxWidth="500" MaxHeight="500" MinWidth="300" MinHeight="300"/>
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>
