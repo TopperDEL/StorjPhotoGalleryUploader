@@ -140,11 +140,11 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
-    <ProjectReference Include="..\..\StorjPhotoGalleryUploader.Contracts\StorjPhotoGalleryUploader.Contracts.csproj">
+    <ProjectReference Include="..\StorjPhotoGalleryUploader.Contracts\StorjPhotoGalleryUploader.Contracts.csproj">
       <Project>{97107b09-f7ec-42ae-97e8-676d3d31f9cd}</Project>
       <Name>StorjPhotoGalleryUploader.Contracts</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\StorjPhotoGalleryUploader.Services\StorjPhotoGalleryUploader.Services.csproj">
+    <ProjectReference Include="..\StorjPhotoGalleryUploader.Services\StorjPhotoGalleryUploader.Services.csproj">
       <Project>{4df8799a-2ebe-481e-8181-74878b2658e5}</Project>
       <Name>StorjPhotoGalleryUploader.Services</Name>
     </ProjectReference>
