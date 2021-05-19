@@ -8,6 +8,6 @@ namespace StorjPhotoGalleryUploader.Contracts.Interfaces
 {
     public interface IThumbnailGeneratorService
     {
-        Task<Stream> GenerateThumbnailFromImageAsync(Stream imageStream, int targetWidth);
+        Task<Stream> GenerateThumbnailFromImageAsync(Stream imageStream, int targetWidth, int targetHeight);
     }
 }

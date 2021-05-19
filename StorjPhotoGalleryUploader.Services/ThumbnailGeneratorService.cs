@@ -1,5 +1,6 @@
 ﻿using SixLabors.ImageSharp.Formats.Jpeg;
 using SixLabors.ImageSharp.Processing;
+using SkiaSharp;
 using StorjPhotoGalleryUploader.Contracts.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,17 +12,24 @@ namespace StorjPhotoGalleryUploader.Services
 {
     public class ThumbnailGeneratorService : IThumbnailGeneratorService
     {
-        public async Task<Stream> GenerateThumbnailFromImageAsync(Stream imageStream, int targetWidth)
+        public async Task<Stream> GenerateThumbnailFromImageAsync(Stream imageStream, int targetWidth, int targetHeight)
         {
             imageStream.Position = 0;
-            using (var image = await SixLabors.ImageSharp.Image.LoadAsync(imageStream))
+            using (SKBitmap sourceBitmap = SKBitmap.Decode(imageStream))
             {
-                image.Mutate(x => x.Resize(targetWidth, 0, KnownResamplers.Lanczos3));
-                MemoryStream mstream = new MemoryStream();
-                await image.SaveAsync(mstream, new JpegEncoder());
+                int height = Math.Min(targetHeight, sourceBitmap.Height);
+                int width = Math.Min(targetWidth, sourceBitmap.Width);
 
-                mstream.Position = 0;
-                return mstream;
+                using (SKBitmap scaledBitmap = sourceBitmap.Resize(new SKImageInfo(width, height), SKFilterQuality.High))
+                {
+                    using (SKImage scaledImage = SKImage.FromBitmap(scaledBitmap))
+                    {
+                        using (SKData data = scaledImage.Encode())
+                        {
+                            return new MemoryStream(data.ToArray());
+                        }
+                    }
+                }
             }
         }
     }

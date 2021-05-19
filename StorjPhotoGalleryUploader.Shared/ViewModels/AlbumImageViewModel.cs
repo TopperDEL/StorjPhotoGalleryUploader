@@ -24,7 +24,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
         {
             using (var imageStream = await imageFile.OpenAsync(FileAccessMode.Read))
             {
-                var thumb = await ThumbnailGeneratorService.GenerateThumbnailFromImageAsync(imageStream.AsStream(), 500);
+                var thumb = await ThumbnailGeneratorService.GenerateThumbnailFromImageAsync(imageStream.AsStream(), 500, 500);
                 await _imageThumbnail.SetSourceAsync(thumb.AsRandomAccessStream());
             }
         }
