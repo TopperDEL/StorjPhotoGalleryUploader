@@ -1,9 +1,12 @@
 ﻿using MvvmGen;
 using MvvmGen.Events;
+using StorjPhotoGalleryUploader.Contracts.Interfaces;
 using StorjPhotoGalleryUploader.Contracts.Messages;
+using StorjPhotoGalleryUploader.Contracts.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage.Pickers;
@@ -12,6 +15,9 @@ namespace StorjPhotoGalleryUploader.ViewModels
 {
     [Inject(typeof(IEventAggregator))]
     [Inject(typeof(IAlbumImageViewModelFactory))]
+    [Inject(typeof(IAlbumService))]
+    [Inject(typeof(IStoreService))]
+    [Inject(typeof(AppConfig))]
     [ViewModel]
     public partial class NewAlbumViewModel
     {
@@ -21,14 +27,27 @@ namespace StorjPhotoGalleryUploader.ViewModels
         [Command(CanExecuteMethod = nameof(CanSave))]
         private async Task Save()
         {
-            //ToDo: save
+            var album = await AlbumService.CreateAlbumAsync(AlbumName);
+
+            foreach(var image in AlbumImages)
+            {
+                using (var imageStream = await image.File.OpenReadAsync())
+                {
+                    var uploaded = await StoreService.PutObjectAsync(AppConfig, album, "pics/original/" + AlbumName + "/" + image.File.Name, imageStream.AsStream());
+                    if (!uploaded)
+                    {
+                        //ToDo: Raise error
+                    }
+                }
+            }
+
             EventAggregator.Publish(new DoNavigateMessage(NavigationTarget.AlbumList));
         }
 
         [CommandInvalidate(nameof(AlbumName))]
         private bool CanSave()
         {
-            return !string.IsNullOrEmpty(AlbumName) && !AlbumName.Contains("/");
+            return !string.IsNullOrEmpty(AlbumName) && !AlbumName.Contains("/") && AlbumImages.Count > 0;
         }
 
         [Command]

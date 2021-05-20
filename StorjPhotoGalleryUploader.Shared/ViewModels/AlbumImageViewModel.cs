@@ -19,9 +19,11 @@ namespace StorjPhotoGalleryUploader.ViewModels
     public partial class AlbumImageViewModel
     {
         [Property] private BitmapImage _imageThumbnail = new BitmapImage();
+        [Property] private StorageFile _file;
 
         public async Task LoadImageAsync(StorageFile imageFile)
         {
+            File = imageFile;
             using (var imageStream = await imageFile.OpenAsync(FileAccessMode.Read))
             {
                 var thumb = await ThumbnailGeneratorService.GenerateThumbnailFromImageAsync(imageStream.AsStream(), 500, 500);
