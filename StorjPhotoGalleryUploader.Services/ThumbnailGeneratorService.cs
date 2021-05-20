@@ -15,10 +15,29 @@ namespace StorjPhotoGalleryUploader.Services
             imageStream.Position = 0;
             using (SKBitmap sourceBitmap = SKBitmap.Decode(imageStream))
             {
-                int height = Math.Min(targetHeight, sourceBitmap.Height);
-                int width = Math.Min(targetWidth, sourceBitmap.Width);
+                SKImageInfo resizeInfo = new SKImageInfo(targetWidth, targetHeight);//, info.ColorType, info.AlphaType, info.ColorSpace);
 
-                using (SKBitmap scaledBitmap = sourceBitmap.Resize(new SKImageInfo(width, height), SKFilterQuality.High))
+                // Test whether there is more room in width or height
+                if (Math.Abs(sourceBitmap.Width - targetWidth) > Math.Abs(sourceBitmap.Height - targetHeight))
+                {
+                    // More room in width, so leave image width set to canvas width
+                    // and increase/decrease height by same ratio
+                    double widthRatio = (double)targetWidth / (double)sourceBitmap.Width;
+                    int newHeight = (int)Math.Floor(sourceBitmap.Height * widthRatio);
+
+                    resizeInfo.Height = newHeight;
+                }
+                else
+                {
+                    // More room in height, so leave image height set to canvas height
+                    // and increase/decrease width by same ratio                 
+                    double heightRatio = (double)targetHeight / (double)sourceBitmap.Height;
+                    int newWidth = (int)Math.Floor(sourceBitmap.Width * heightRatio);
+
+                    resizeInfo.Width = newWidth;
+                }
+
+                using (SKBitmap scaledBitmap = sourceBitmap.Resize(resizeInfo, SKFilterQuality.High))
                 {
                     using (SKImage scaledImage = SKImage.FromBitmap(scaledBitmap))
                     {
