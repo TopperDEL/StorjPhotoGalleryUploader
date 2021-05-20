@@ -31,12 +31,12 @@ namespace StorjPhotoGalleryUploader.Services
                 {
                     _bucket = await _bucketService.EnsureBucketAsync(_appConfig.BucketName);
                 }
-                catch {
+                catch (Exception ex2) {
                     try
                     {
                         _bucket = await _bucketService.GetBucketAsync(_appConfig.BucketName);
                     }
-                    catch
+                    catch (Exception ex)
                     {
 
                     }
@@ -54,7 +54,7 @@ namespace StorjPhotoGalleryUploader.Services
             List<Album> albums = new List<Album>();
 
             await InitAsync();
-            //if (_bucket == null)
+            if (_bucket == null)
                 return albums;
 
             ListObjectsOptions listOptions = new ListObjectsOptions();

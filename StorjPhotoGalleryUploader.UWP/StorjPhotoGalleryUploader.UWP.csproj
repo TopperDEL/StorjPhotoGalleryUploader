@@ -22,7 +22,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
     <PackageReference Include="uplink.NET">
-      <Version>2.6.1451</Version>
+      <Version>2.7.1-dev</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.Win">
       <Version>2.6.1451</Version>
