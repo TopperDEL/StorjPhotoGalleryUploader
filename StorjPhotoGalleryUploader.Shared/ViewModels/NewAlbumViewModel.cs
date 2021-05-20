@@ -17,6 +17,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
     [Inject(typeof(IAlbumImageViewModelFactory))]
     [Inject(typeof(IAlbumService))]
     [Inject(typeof(IStoreService))]
+    [Inject(typeof(IThumbnailGeneratorService))]
     [Inject(typeof(AppConfig))]
     [ViewModel]
     public partial class NewAlbumViewModel
@@ -33,8 +34,25 @@ namespace StorjPhotoGalleryUploader.ViewModels
             {
                 using (var imageStream = await image.File.OpenReadAsync())
                 {
-                    var uploaded = await StoreService.PutObjectAsync(AppConfig, album, "pics/original/" + AlbumName + "/" + image.File.Name, imageStream.AsStream());
-                    if (!uploaded)
+                    //Original
+                    var uploadedOriginal = await StoreService.PutObjectAsync(AppConfig, album, "pics/original/" + AlbumName + "/" + image.File.Name, imageStream.AsStream());
+                    if (!uploadedOriginal)
+                    {
+                        //ToDo: Raise error
+                    }
+
+                    //Scaled 1
+                    var scaled1 = await ThumbnailGeneratorService.GenerateThumbnailFromImageAsync(imageStream.AsStream(), 1200, 750);
+                    var uploadedScaled1 = await StoreService.PutObjectAsync(AppConfig, album, "pics/resized/1200x750/" + AlbumName + "/" + image.File.Name, scaled1);
+                    if (!uploadedScaled1)
+                    {
+                        //ToDo: Raise error
+                    }
+
+                    //Scaled 2
+                    var scaled2 = await ThumbnailGeneratorService.GenerateThumbnailFromImageAsync(imageStream.AsStream(), 360, 225);
+                    var uploadedScaled2 = await StoreService.PutObjectAsync(AppConfig, album, "pics/resized/360x225/" + AlbumName + "/" + image.File.Name, scaled1);
+                    if (!uploadedScaled2)
                     {
                         //ToDo: Raise error
                     }
