@@ -33,6 +33,7 @@
                 <DataTemplate x:DataType="viewmodels:AlbumImageViewModel">
                     <Grid>
                         <Image Source="{Binding ImageThumbnail}" MaxWidth="500" MaxHeight="500" MinWidth="300" MinHeight="300"/>
+                        <Rectangle Fill="White" Opacity="0.5" Visibility="{Binding IsUploading, Converter={StaticResource TrueIsVisibleConverter}}"/>
                         <ProgressRing IsActive="{Binding IsUploading}"/>
                     </Grid>
                 </DataTemplate>
