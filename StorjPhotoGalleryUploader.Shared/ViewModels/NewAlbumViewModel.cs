@@ -24,54 +24,87 @@ namespace StorjPhotoGalleryUploader.ViewModels
     {
         [Property] private string _albumName;
         [Property] private ObservableCollection<AlbumImageViewModel> _albumImages = new ObservableCollection<AlbumImageViewModel>();
+        [Property] private bool _isUploading;
 
         [Command(CanExecuteMethod = nameof(CanSave))]
         private async Task Save()
         {
-            var album = await AlbumService.CreateAlbumAsync(AlbumName);
+            IsUploading = true;
 
-            foreach(var image in AlbumImages)
+            try
             {
-                using (var imageStream = await image.File.OpenReadAsync())
+                var album = await AlbumService.CreateAlbumAsync(AlbumName);
+
+                foreach (var image in AlbumImages)
                 {
-                    //Original
-                    var uploadedOriginal = await StoreService.PutObjectAsync(AppConfig, album, "pics/original/" + AlbumName + "/" + image.File.Name, imageStream.AsStream());
-                    if (!uploadedOriginal)
+                    image.IsUploading = true;
+                    using (var imageStream = await image.File.OpenReadAsync())
                     {
-                        //ToDo: Raise error
+                        //Original
+                        var uploadedOriginal = await StoreService.PutObjectAsync(AppConfig, album, "pics/original/" + AlbumName + "/" + image.File.Name, imageStream.AsStream());
+                        if (!uploadedOriginal)
+                        {
+                            //ToDo: Raise error
+                            image.FailedUploading = true;
+                            continue;
+                        }
                     }
 
-                    //Scaled 1
-                    var scaled1 = await ThumbnailGeneratorService.GenerateThumbnailFromImageAsync(imageStream.AsStream(), 1200, 750);
-                    var uploadedScaled1 = await StoreService.PutObjectAsync(AppConfig, album, "pics/resized/1200x750/" + AlbumName + "/" + image.File.Name, scaled1);
-                    if (!uploadedScaled1)
+                    using (var imageStream = await image.File.OpenReadAsync())
                     {
-                        //ToDo: Raise error
+                        //Scaled 1
+                        var scaled1 = await ThumbnailGeneratorService.GenerateThumbnailFromImageAsync(imageStream.AsStream(), 1200, 750);
+                        var uploadedScaled1 = await StoreService.PutObjectAsync(AppConfig, album, "pics/resized/1200x750/" + AlbumName + "/" + image.File.Name, scaled1);
+                        if (!uploadedScaled1)
+                        {
+                            //ToDo: Raise error
+                            image.FailedUploading = true;
+                            continue;
+                        }
                     }
 
-                    //Scaled 2
-                    var scaled2 = await ThumbnailGeneratorService.GenerateThumbnailFromImageAsync(imageStream.AsStream(), 360, 225);
-                    var uploadedScaled2 = await StoreService.PutObjectAsync(AppConfig, album, "pics/resized/360x225/" + AlbumName + "/" + image.File.Name, scaled1);
-                    if (!uploadedScaled2)
+                    using (var imageStream = await image.File.OpenReadAsync())
                     {
-                        //ToDo: Raise error
+                        //Scaled 2
+                        var scaled2 = await ThumbnailGeneratorService.GenerateThumbnailFromImageAsync(imageStream.AsStream(), 360, 225);
+                        var uploadedScaled2 = await StoreService.PutObjectAsync(AppConfig, album, "pics/resized/360x225/" + AlbumName + "/" + image.File.Name, scaled2);
+                        if (!uploadedScaled2)
+                        {
+                            //ToDo: Raise error
+                            image.FailedUploading = true;
+                            continue;
+                        }
                     }
+                    image.IsUploading = false;
+                    image.IsUploaded = true;
                 }
-            }
 
-            EventAggregator.Publish(new DoNavigateMessage(NavigationTarget.AlbumList));
+                EventAggregator.Publish(new DoNavigateMessage(NavigationTarget.AlbumList));
+            }
+            finally
+            {
+                IsUploading = false;
+            }
         }
 
         [CommandInvalidate(nameof(AlbumName))]
         private bool CanSave()
         {
+            if (IsUploading)
+                return false;
+
             return !string.IsNullOrEmpty(AlbumName) && !AlbumName.Contains("/") && AlbumImages.Count > 0;
         }
 
-        [Command]
+        [Command(CanExecuteMethod = nameof(CanCancel))]
         private void Cancel()
         {
             EventAggregator.Publish(new DoNavigateMessage(NavigationTarget.AlbumList));
+        }
+
+        private bool CanCancel()
+        {
+            return !IsUploading;
         }
 
         [Command]

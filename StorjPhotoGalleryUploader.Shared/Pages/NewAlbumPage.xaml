@@ -31,7 +31,10 @@
         <GridView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding AlbumImages, Mode=OneWay}">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="viewmodels:AlbumImageViewModel">
+                    <Grid>
                         <Image Source="{Binding ImageThumbnail}" MaxWidth="500" MaxHeight="500" MinWidth="300" MinHeight="300"/>
+                        <ProgressRing IsActive="{Binding IsUploading}"/>
+                    </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>
         </GridView>

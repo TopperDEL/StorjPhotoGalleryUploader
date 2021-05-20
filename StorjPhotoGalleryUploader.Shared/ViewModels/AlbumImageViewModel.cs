@@ -20,6 +20,9 @@ namespace StorjPhotoGalleryUploader.ViewModels
     {
         [Property] private BitmapImage _imageThumbnail = new BitmapImage();
         [Property] private StorageFile _file;
+        [Property] private bool _isUploading;
+        [Property] private bool _isUploaded;
+        [Property] private bool _failedUploading;
 
         public async Task LoadImageAsync(StorageFile imageFile)
         {
