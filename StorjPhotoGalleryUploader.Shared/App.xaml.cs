@@ -47,6 +47,7 @@ namespace StorjPhotoGalleryUploader
             InitializeLogging();
 
             this.InitializeComponent();
+            this.UnhandledException += App_UnhandledException;
 
 #if __IOS__
             //Initialize the uplink.NET-library
@@ -56,6 +57,10 @@ namespace StorjPhotoGalleryUploader
 #if HAS_UNO || NETFX_CORE
             this.Suspending += OnSuspending;
 #endif
+        }
+
+        private void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
         }
 
         /// <summary>

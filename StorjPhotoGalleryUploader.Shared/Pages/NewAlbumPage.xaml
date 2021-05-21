@@ -36,7 +36,9 @@
                         <Rectangle Fill="White" Opacity="0.7" Visibility="{Binding IsUploaded, Converter={StaticResource TrueIsVisibleConverter}}"/>
                         <Rectangle Fill="White" Opacity="0.7" Visibility="{Binding FailedUploading, Converter={StaticResource TrueIsVisibleConverter}}"/>
                         <Rectangle Fill="White" Opacity="0.5" Visibility="{Binding IsUploading, Converter={StaticResource TrueIsVisibleConverter}}"/>
-                        <ProgressRing IsActive="{Binding IsUploading}"/>
+                        <Grid Visibility="{Binding IsUploading, Converter={StaticResource TrueIsVisibleConverter}}">
+                            <ProgressRing/>
+                        </Grid>
                         <Viewbox MaxHeight="50" MaxWidth="50" Visibility="{Binding IsUploaded, Converter={StaticResource TrueIsVisibleConverter}}" >
                             <SymbolIcon Symbol="Accept" Foreground="Green"/>
                         </Viewbox>

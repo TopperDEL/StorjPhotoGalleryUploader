@@ -15,7 +15,7 @@
             <RowDefinition Height="60"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Image Source="/Assets/StorjLogo.png" Grid.Row="0" MaxWidth="200" MaxHeight="200"/>
+        <Image Source="/Assets/StorjLogo.png" Grid.Row="0" MaxWidth="100" MaxHeight="100"/>
         <TextBox Grid.Row="1" x:Uid="AccessGrant" Text="{Binding AccessGrant, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Access grant" MaxWidth="400"/>
         <TextBox Grid.Row="2" x:Uid="BucketName" Text="{Binding BucketName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Bucket name" MaxWidth="400"/>
         <Button Grid.Row="3" x:Uid="LoginButton" Command="{Binding LoginCommand}" Content="Login" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10"/>
