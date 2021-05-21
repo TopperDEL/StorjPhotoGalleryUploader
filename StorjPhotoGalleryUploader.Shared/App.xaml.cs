@@ -219,7 +219,7 @@ namespace StorjPhotoGalleryUploader
             var eventAggregator = Services.GetService<IEventAggregator>();
             eventAggregator.RegisterSubscriber(this);
 
-            DoNavigate(typeof(AlbumListPage));
+            DoNavigate(typeof(BucketCheckPage));
         }
 
         public void OnEvent(DoNavigateMessage navigationData)

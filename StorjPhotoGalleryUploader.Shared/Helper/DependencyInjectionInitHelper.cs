@@ -25,16 +25,27 @@ namespace StorjPhotoGalleryUploader.Helper
         {
             var services = new ServiceCollection();
 
+            //Basics
             AddBasics(services);
             services.AddSingleton(appConfig);
+
+            //Uplink-Singletons
             services.AddSingleton(new Access(appConfig.AccessGrant));
             services.AddSingleton<IBucketService, BucketService>();
             services.AddSingleton<IObjectService, ObjectService>();
+
+            //Services
             services.AddTransient<IAlbumService, AlbumService>();
             services.AddTransient<IStoreService, StorjStoreService>();
             services.AddTransient<IThumbnailGeneratorService, ThumbnailGeneratorService>();
+            services.AddTransient<IPrepareBucketService, PrepareBucketService>();
+
+            //ViewModels
             services.AddTransient<AlbumListViewModel>();
             services.AddTransient<NewAlbumViewModel>();
+            services.AddTransient<BucketCheckViewModel>();
+
+            //ViewModel-Factories
             services.AddSingleton<IAlbumImageViewModelFactory, AlbumImageViewModelFactory>();
 
             return services.BuildServiceProvider(true);
