@@ -33,8 +33,16 @@
                 <DataTemplate x:DataType="viewmodels:AlbumImageViewModel">
                     <Grid>
                         <Image Source="{Binding ImageThumbnail}" MaxWidth="500" MaxHeight="500" MinWidth="300" MinHeight="300"/>
+                        <Rectangle Fill="White" Opacity="0.7" Visibility="{Binding IsUploaded, Converter={StaticResource TrueIsVisibleConverter}}"/>
+                        <Rectangle Fill="White" Opacity="0.7" Visibility="{Binding FailedUploading, Converter={StaticResource TrueIsVisibleConverter}}"/>
                         <Rectangle Fill="White" Opacity="0.5" Visibility="{Binding IsUploading, Converter={StaticResource TrueIsVisibleConverter}}"/>
                         <ProgressRing IsActive="{Binding IsUploading}"/>
+                        <Viewbox MaxHeight="50" MaxWidth="50" Visibility="{Binding IsUploaded, Converter={StaticResource TrueIsVisibleConverter}}" >
+                            <SymbolIcon Symbol="Accept" Foreground="Green"/>
+                        </Viewbox>
+                        <Viewbox MaxHeight="50" MaxWidth="50" Visibility="{Binding FailedUploading, Converter={StaticResource TrueIsVisibleConverter}}" >
+                            <SymbolIcon Symbol="Cancel" Foreground="Red"/>
+                        </Viewbox>
                     </Grid>
                 </DataTemplate>
             </GridView.ItemTemplate>

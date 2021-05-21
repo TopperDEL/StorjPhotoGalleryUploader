@@ -46,6 +46,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                         {
                             //ToDo: Raise error
                             image.FailedUploading = true;
+                            image.IsUploading = false;
                             continue;
                         }
                     }
@@ -59,6 +60,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                         {
                             //ToDo: Raise error
                             image.FailedUploading = true;
+                            image.IsUploading = false;
                             continue;
                         }
                     }
@@ -72,6 +74,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                         {
                             //ToDo: Raise error
                             image.FailedUploading = true;
+                            image.IsUploading = false;
                             continue;
                         }
                     }
@@ -79,6 +82,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                     image.IsUploaded = true;
                 }
 
+                await Task.Delay(1000);
                 EventAggregator.Publish(new DoNavigateMessage(NavigationTarget.AlbumList));
             }
             finally
