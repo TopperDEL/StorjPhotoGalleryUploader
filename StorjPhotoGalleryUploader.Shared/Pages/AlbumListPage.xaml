@@ -24,8 +24,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Button Content="New album" Grid.Row="0" HorizontalAlignment="Center" Command="{Binding NavigateNewAlbumCommand}"/>
-        <ProgressRing Grid.Row="1" IsActive="{Binding IsLoading}"/>
+        <Button Content="New album" Grid.Row="0" HorizontalAlignment="Center" Command="{Binding NavigateNewAlbumCommand}" Background="{StaticResource StorjBlueBrush}" Foreground="White" CornerRadius="5"/>
+        <ProgressRing Grid.Row="1" IsActive="{Binding IsLoading}" Foreground="{StaticResource StorjBlueBrush}"/>
         <ListView Grid.Row="1" ItemsSource="{Binding AlbumList, Mode=OneWay}" HorizontalAlignment="Center">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="viewModels:AlbumViewModel">

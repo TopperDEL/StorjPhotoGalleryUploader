@@ -20,10 +20,10 @@
             <ColumnDefinition Width="120"/>
         </Grid.ColumnDefinitions>
 
-        <TextBox Text="{Binding AlbumName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Album name" Grid.Row="0" Grid.Column="0" MinWidth="200" MaxWidth="400" Margin="5"/>
+        <TextBox Text="{Binding AlbumName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Album name" Grid.Row="0" Grid.Column="0" MinWidth="200" MaxWidth="400" Margin="5" BorderBrush="{StaticResource StorjBlueBrush}"/>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-            <Button Content="Save" VerticalAlignment="Bottom" Command="{Binding SaveCommand}" Margin="5"/>
-            <Button Content="Cancel" VerticalAlignment="Bottom" Command="{Binding CancelCommand}" Margin="5"/>
+            <Button Content="Save" VerticalAlignment="Bottom" Command="{Binding SaveCommand}" Margin="5" Background="{StaticResource StorjBlueBrush}" Foreground="White" CornerRadius="5"/>
+            <Button Content="Cancel" VerticalAlignment="Bottom" Command="{Binding CancelCommand}" Margin="5" Background="{StaticResource StorjBlueBrush}" Foreground="White" CornerRadius="5"/>
         </StackPanel>
 
         <Button Content="Add images..." Grid.Row="1" Grid.ColumnSpan="2" Command="{Binding AddImagesAsyncCommand}"/>
@@ -37,7 +37,7 @@
                         <Rectangle Fill="White" Opacity="0.7" Visibility="{Binding FailedUploading, Converter={StaticResource TrueIsVisibleConverter}}"/>
                         <Rectangle Fill="White" Opacity="0.5" Visibility="{Binding IsUploading, Converter={StaticResource TrueIsVisibleConverter}}"/>
                         <Grid Visibility="{Binding IsUploading, Converter={StaticResource TrueIsVisibleConverter}}">
-                            <ProgressRing/>
+                            <ProgressRing Foreground="{StaticResource StorjBlueBrush}"/>
                         </Grid>
                         <Viewbox MaxHeight="50" MaxWidth="50" Visibility="{Binding IsUploaded, Converter={StaticResource TrueIsVisibleConverter}}" >
                             <SymbolIcon Symbol="Accept" Foreground="Green"/>
