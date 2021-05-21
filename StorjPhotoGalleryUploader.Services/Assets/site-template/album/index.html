@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>{{ .AlbumName }}</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!--[if lte IE 8]><script src="../assets/album/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="../assets/album/css/main.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" href="../assets/album/css/ie8.css" /><![endif]-->
+    <!--[if lte IE 9]><link rel="stylesheet" href="../assets/album/css/ie9.css" /><![endif]-->
+    <noscript><link rel="stylesheet" href="../assets/album/css/noscript.css" /></noscript>
+  </head>
+  <body>
+    <div id="main">
+      <header id="header">
+        <h1>{{ .AlbumName }}</h1>
+      </header>
+      <section id="thumbnails">
+        {{- $albumName := .AlbumName -}}
+        {{- range .Pictures}}
+        <article>
+          <a class="thumbnail" href="../pics/resized/1200x750/{{ $albumName }}/{{ . }}" data-position="center"><img class="lazy" src="../assets/album/css/images/placeholder.png" data-original="../pics/resized/360x225/{{ $albumName }}/{{ . }}" width="360" height="225"/></a>
+          <div class="share-modal">
+            <div class="social-wrapper">
+              <h2 class="share-title">Share</h2>
+              <img class="close-icon" src="../assets/album/images/close-icon.svg" />
+              <div class="sharethis-inline-share-buttons"></div>
+            </div>
+          </div>
+          <p><a href="../">Back to albums</a><a class="image-link-download" href="../pics/original/{{ $albumName }}/{{ . }}" download>Download Full Size</a><a href="#" class="social-share-btn">Share</a><a href="https://www.storj.io/" target="_blank" class="image-link-hosted">Hosted on Storj DCS</a></p>
+        </article>
+        {{- end}}
+      </section>
+      <footer id="footer">
+        <ul class="copyright">
+          <li>Design: <a href="https://html5up.net">HTML5 UP</a>.</li>
+        </ul>
+      </footer>
+    </div>
+    <script type='text/javascript' src='https://platform-api.sharethis.com/js/sharethis.js#property=60a3c3a3ccbbe50012c02d94&product=inline-share-buttons' async='async'></script>
+    <script src="../assets/album/js/jquery.min.js"></script>
+    <script src="../assets/album/js/skel.min.js"></script>
+    <!--[if lte IE 8]><script src="../assets/album/js/ie/respond.min.js"></script><![endif]-->
+    <script src="../assets/album/js/main.js"></script>
+    <script src="../assets/album/js/jquery.lazyload.js"></script>
+    <script type="text/javascript" charset="utf-8">
+    $(document).on('click', '.social-share-btn', function(){
+        $(".social-wrapper").show();
+     });
+
+    $(document).on('click', '.close-icon', function(){
+        $(".social-wrapper").hide();
+    });
+    $(window).ready(function() {
+        $("img.lazy").lazyload();
+    });
+    </script>
+  </body>
+</html>
