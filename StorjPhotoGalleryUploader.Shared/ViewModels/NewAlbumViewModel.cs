@@ -10,6 +10,7 @@ using System.IO;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage.Pickers;
+using System.Linq;
 
 namespace StorjPhotoGalleryUploader.ViewModels
 {
@@ -33,7 +34,13 @@ namespace StorjPhotoGalleryUploader.ViewModels
 
             try
             {
-                var album = await AlbumService.CreateAlbumAsync(AlbumName);
+                var imageNames = AlbumImages.Select(i => i.File.Name).ToList();
+                var album = await AlbumService.CreateAlbumAsync(AlbumName, imageNames);
+                if(album == null)
+                {
+                    //ToDo: Inform user
+                    return;
+                }
 
                 foreach (var image in AlbumImages)
                 {

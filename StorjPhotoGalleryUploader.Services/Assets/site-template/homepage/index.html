@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title>{{ .Title }}</title>
+    <title>Photo Gallery powered by Storj DCS</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <!--[if lte IE 8]><script src="./assets/homepage/js/ie/html5shiv.js"></script><![endif]-->
@@ -16,12 +16,12 @@
         <h1>Photo gallery hosted on <a href="https://www.storj.io/" target="_blank">Storj DCS</a></h1>
       </header>
       <div id="main">
-        {{- range .Albums}}
+        {{ for album in albums }}
         <article class="thumb">
-          <a href="{{ .Name }}/" class="image"><img src="./pics/resized/1200x750/{{ .Name }}/{{ .CoverImage }}" alt="" /></a>
-          <h2>{{ .Name }}</h2>
+          <a href="{{album}}/" class="image"><img src="./pics/resized/1200x750/{{album}}/{{cover_image}}" alt="" /></a>
+          <h2>{{album}}</h2>
         </article>
-        {{- end}}
+        {{ end }}
       </div>
     </div>
     <script src="./assets/homepage/js/jquery.min.js"></script>

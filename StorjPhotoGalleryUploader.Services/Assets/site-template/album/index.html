@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <title>{{ .AlbumName }}</title>
+    <title>{{album_name}}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--[if lte IE 8]><script src="../assets/album/js/ie/html5shiv.js"></script><![endif]-->
@@ -13,13 +13,12 @@
   <body>
     <div id="main">
       <header id="header">
-        <h1>{{ .AlbumName }}</h1>
+          <h1>{{album_name}}</h1>
       </header>
       <section id="thumbnails">
-        {{- $albumName := .AlbumName -}}
-        {{- range .Pictures}}
+        {{ for imageName in image_names }}
         <article>
-          <a class="thumbnail" href="../pics/resized/1200x750/{{ $albumName }}/{{ . }}" data-position="center"><img class="lazy" src="../assets/album/css/images/placeholder.png" data-original="../pics/resized/360x225/{{ $albumName }}/{{ . }}" width="360" height="225"/></a>
+          <a class="thumbnail" href="../pics/resized/1200x750/{{album_name}}/{{imageName}}" data-position="center"><img class="lazy" src="../assets/album/css/images/placeholder.png" data-original="../pics/resized/360x225/{{albumName}}/{{imageName}}" width="360" height="225"/></a>
           <div class="share-modal">
             <div class="social-wrapper">
               <h2 class="share-title">Share</h2>
@@ -27,9 +26,9 @@
               <div class="sharethis-inline-share-buttons"></div>
             </div>
           </div>
-          <p><a href="../">Back to albums</a><a class="image-link-download" href="../pics/original/{{ $albumName }}/{{ . }}" download>Download Full Size</a><a href="#" class="social-share-btn">Share</a><a href="https://www.storj.io/" target="_blank" class="image-link-hosted">Hosted on Storj DCS</a></p>
+          <p><a href="../">Back to albums</a><a class="image-link-download" href="../pics/original/{{album_name}}/{{imageName}}" download>Download Full Size</a><a href="#" class="social-share-btn">Share</a><a href="https://www.storj.io/" target="_blank" class="image-link-hosted">Hosted on Storj DCS</a></p>
         </article>
-        {{- end}}
+        {{ end }}
       </section>
       <footer id="footer">
         <ul class="copyright">

@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using uplink.NET.Interfaces;
 using uplink.NET.Models;
 using System.Linq;
+using Scriban;
+using System.Reflection;
+using System.IO;
+using System.Text;
 
 namespace StorjPhotoGalleryUploader.Services
 {
@@ -25,13 +29,14 @@ namespace StorjPhotoGalleryUploader.Services
 
         private async Task InitAsync()
         {
-            if(_bucket == null)
+            if (_bucket == null)
             {
                 try
                 {
                     _bucket = await _bucketService.EnsureBucketAsync(_appConfig.BucketName);
                 }
-                catch (Exception ex2) {
+                catch (Exception ex2)
+                {
                     try
                     {
                         _bucket = await _bucketService.GetBucketAsync(_appConfig.BucketName);
@@ -44,8 +49,32 @@ namespace StorjPhotoGalleryUploader.Services
             }
         }
 
-        public async Task<Album> CreateAlbumAsync(string albumName)
+        public async Task<Album> CreateAlbumAsync(string albumName, List<string> imageNames)
         {
+            await InitAsync();
+
+            Assembly assembly = GetType().GetTypeInfo().Assembly;
+            using (var indexStream = assembly.GetManifestResourceStream("StorjPhotoGalleryUploader.Services.Assets.site_template.album.index.html"))
+            {
+                using (StreamReader sr = new StreamReader(indexStream))
+                {
+                    var albumIndexTemplate = Template.Parse(sr.ReadToEnd());
+
+                    try
+                    {
+                        var result = await albumIndexTemplate.RenderAsync(new { AlbumName = albumName, ImageNames = imageNames });
+
+                        var upload = await _objectService.UploadObjectAsync(_bucket, albumName + "/index.html", new UploadOptions(), Encoding.UTF8.GetBytes(result), false);
+                        await upload.StartUploadAsync();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        return null;
+                    }
+                }
+            }
+
             return new Album() { Name = albumName }; //ToDo
         }
 
@@ -61,9 +90,9 @@ namespace StorjPhotoGalleryUploader.Services
             listOptions.Recursive = false;
             listOptions.Prefix = "pics/original/";
             var albumItems = await _objectService.ListObjectsAsync(_bucket, listOptions);
-            foreach(var albumItem in albumItems.Items.Where(i=>i.IsPrefix))
+            foreach (var albumItem in albumItems.Items.Where(i => i.IsPrefix))
             {
-                albums.Add(new Album() { Name = albumItem.Key.Replace("pics/original/","").Replace("/","") });
+                albums.Add(new Album() { Name = albumItem.Key.Replace("pics/original/", "").Replace("/", "") });
             }
 
             return albums;
