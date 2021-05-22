@@ -33,7 +33,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
 
             try
             {
-                var bucketIsready = await PrepareBucketService.CheckIfBucketNeedsPrepareAsync();
+                var bucketIsready = await PrepareBucketService.CheckIfBucketIsReadyAsync();
                 if(!bucketIsready)
                 {
                     wasUpdating = true;

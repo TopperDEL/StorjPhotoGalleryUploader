@@ -6,56 +6,127 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 using uplink.NET.Interfaces;
+using uplink.NET.Models;
 
 namespace StorjPhotoGalleryUploader.Services
 {
     public class PrepareBucketService : IPrepareBucketService
     {
+        const string ASSET_BASE = "StorjPhotoGalleryUploader.Services.Assets.site_template.";
         public event PreparationStateChangedEventHandler PreparationStateChangedEvent;
 
         private IEnumerable<string> _assetNames;
 
         readonly IObjectService _objectService;
         readonly IBucketService _bucketService;
+        readonly AppConfig _appConfig;
+        private Bucket _currentBucket;
 
-        public PrepareBucketService(IObjectService objectService, IBucketService bucketService)
+        public PrepareBucketService(IObjectService objectService, IBucketService bucketService, AppConfig appConfig)
         {
             _objectService = objectService;
             _bucketService = bucketService;
+            _appConfig = appConfig;
         }
 
-        private void Init()
+        private async Task InitAsync()
         {
             if (_assetNames == null)
             {
                 Assembly assembly = GetType().GetTypeInfo().Assembly;
                 _assetNames = assembly.GetManifestResourceNames().Where(n => n.Contains("StorjPhotoGalleryUploader.Services.Assets.site_template") && !n.Contains("index.html"));
             }
+            if (_currentBucket == null)
+            {
+                _currentBucket = await _bucketService.GetBucketAsync(_appConfig.BucketName);
+            }
         }
 
-        public async Task<bool> CheckIfBucketNeedsPrepareAsync()
+        public async Task<bool> CheckIfBucketIsReadyAsync()
         {
-            Init();
+            await InitAsync();
 
-            //ToDo: Check if every file exists in the bucket
-            await Task.Delay(100);
-            return false;
+            try
+            {
+                var listOptions = new ListObjectsOptions();
+                listOptions.Recursive = true;
+                listOptions.Prefix = "assets/";
+                var content = await _objectService.ListObjectsAsync(_currentBucket, listOptions);
+
+                foreach (var necessaryFile in _assetNames)
+                {
+                    if (content.Items.Where(i => i.Key.Contains(GetFileName(necessaryFile))).Count() != 1)
+                    {
+                        return false;
+                    }
+                }
+
+                return true;
+            }
+            catch
+            {
+                //Whatever happened, try to prepare again (which would throw additional infos then)
+                return false;
+            }
         }
 
         public async Task<BucketPrepareResult> PrepareBucketAsync()
         {
-            Init();   
-
-            int current = 0;
-            foreach(var name in _assetNames)
+            try
             {
-                var fileName = name.Replace("StorjPhotoGalleryUploader.Services.Assets.site_template.", "");
-                PreparationStateChangedEvent?.Invoke(current, _assetNames.Count(), fileName);
-                await Task.Delay(10); //ToDo: Upload file, respect correct filename
-                current++;
+                await InitAsync();
+
+                Assembly assembly = GetType().GetTypeInfo().Assembly;
+
+                int current = 0;
+                foreach (var name in _assetNames)
+                {
+                    var fileName = GetFileName(name);
+                    PreparationStateChangedEvent?.Invoke(current, _assetNames.Count(), fileName);
+
+                    using (var stream = assembly.GetManifestResourceStream(name))
+                    {
+                        var upload = await _objectService.UploadObjectAsync(_currentBucket, fileName, new UploadOptions(), stream, false);
+                        await upload.StartUploadAsync();
+
+                        if (!upload.Completed)
+                        {
+                            return new BucketPrepareResult() { Successfull = false, PrepareErrorMessage = "Could not upload file '" + fileName + "'" };
+                        }
+                    }
+
+                    current++;
+                }
+
+                return new BucketPrepareResult() { Successfull = true };
+
+            }
+            catch (Exception ex)
+            {
+                return new BucketPrepareResult() { Successfull = false, PrepareErrorMessage = ex.Message };
+            }
+        }
+
+        private string GetFileName(string assetName)
+        {
+            var fileName = assetName.Replace(ASSET_BASE, "");
+            while (fileName.Where(c => c == '.').Count() > 1)
+            {
+                //Some names have two dots, like "awesome-library.min.js"
+                if (fileName.Where(c => c == '.').Count() == 2 && fileName.Contains(".min."))
+                {
+                    break;
+                }
+                var index = fileName.IndexOf('.');
+                StringBuilder sb = new StringBuilder(fileName);
+                sb[index] = '/';
+                fileName = sb.ToString();
             }
 
-            return new BucketPrepareResult() { Successfull = false, PrepareErrorMessage = "This is a long and longer info about what might have happened. So show it to the user then..." };
+            //The order in the template is different, so flip it
+            fileName = fileName.Replace("album/assets/", "assets/album/");
+            fileName = fileName.Replace("homepage/assets/", "assets/homepage/");
+            return fileName;
         }
     }
 }

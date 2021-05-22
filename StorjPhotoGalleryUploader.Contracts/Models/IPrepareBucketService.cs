@@ -8,7 +8,7 @@ namespace StorjPhotoGalleryUploader.Contracts.Models
     public delegate void PreparationStateChangedEventHandler(int currentStep, int totalStepCount, string currentStepDescription);
     public interface IPrepareBucketService
     {
-        Task<bool> CheckIfBucketNeedsPrepareAsync();
+        Task<bool> CheckIfBucketIsReadyAsync();
         Task<BucketPrepareResult> PrepareBucketAsync();
         event PreparationStateChangedEventHandler PreparationStateChangedEvent;
     }
