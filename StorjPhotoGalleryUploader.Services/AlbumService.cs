@@ -75,7 +75,7 @@ namespace StorjPhotoGalleryUploader.Services
                 }
             }
 
-            return new Album() { Name = albumName }; //ToDo
+            return new Album() { Name = albumName };
         }
 
         public async Task<List<Album>> ListAlbumsAsync()
@@ -96,6 +96,33 @@ namespace StorjPhotoGalleryUploader.Services
             }
 
             return albums;
+        }
+
+        public async Task<bool> RefreshAlbumIndex(List<Album> albums)
+        {
+            Assembly assembly = GetType().GetTypeInfo().Assembly;
+            using (var indexStream = assembly.GetManifestResourceStream("StorjPhotoGalleryUploader.Services.Assets.site_template.homepage.index.html"))
+            {
+                using (StreamReader sr = new StreamReader(indexStream))
+                {
+                    var homepageIndexTemplate = Template.Parse(sr.ReadToEnd());
+
+                    try
+                    {
+                        var result = await homepageIndexTemplate.RenderAsync(new { Albums = albums.Select(a=>new { Name = a.Name, CoverImage = "todo.png" }).ToList() });
+
+                        var upload = await _objectService.UploadObjectAsync(_bucket, "index.html", new UploadOptions(), Encoding.UTF8.GetBytes(result), false);
+                        await upload.StartUploadAsync();
+
+                    }
+                    catch (Exception ex)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
         }
     }
 }

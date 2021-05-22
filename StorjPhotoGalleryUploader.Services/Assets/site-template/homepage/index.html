@@ -18,8 +18,8 @@
       <div id="main">
         {{ for album in albums }}
         <article class="thumb">
-          <a href="{{album}}/" class="image"><img src="./pics/resized/1200x750/{{album}}/{{cover_image}}" alt="" /></a>
-          <h2>{{album}}</h2>
+          <a href="{{album.name}}/" class="image"><img src="./pics/resized/1200x750/{{album.name}}/{{album.cover_image}}" alt="" /></a>
+          <h2>{{album.name}}</h2>
         </article>
         {{ end }}
       </div>

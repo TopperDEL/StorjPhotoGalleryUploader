@@ -89,6 +89,9 @@ namespace StorjPhotoGalleryUploader.ViewModels
                     image.IsUploaded = true;
                 }
 
+                var albumList = await AlbumService.ListAlbumsAsync();
+                await AlbumService.RefreshAlbumIndex(albumList);
+
                 await Task.Delay(1000);
                 EventAggregator.Publish(new DoNavigateMessage(NavigationTarget.AlbumList));
             }

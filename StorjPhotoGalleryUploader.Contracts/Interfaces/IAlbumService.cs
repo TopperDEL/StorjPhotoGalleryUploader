@@ -11,5 +11,6 @@ namespace StorjPhotoGalleryUploader.Contracts.Interfaces
     {
         Task<List<Album>> ListAlbumsAsync();
         Task<Album> CreateAlbumAsync(string albumName, List<string> imageNames);
+        Task<bool> RefreshAlbumIndex(List<Album> albums);
     }
 }
