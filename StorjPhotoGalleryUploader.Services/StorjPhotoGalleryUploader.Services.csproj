@@ -54,9 +54,6 @@
     <None Remove="Assets\site-template\album\assets\sass\noscript.scss" />
     <None Remove="Assets\site-template\album\assets\StorjDCS-logo.svg" />
     <None Remove="Assets\site-template\album\index.html" />
-    <None Remove="Assets\site-template\homepage\android-chrome-192x192.png" />
-    <None Remove="Assets\site-template\homepage\android-chrome-512x512.png" />
-    <None Remove="Assets\site-template\homepage\apple-touch-icon.png" />
     <None Remove="Assets\site-template\homepage\assets\css\font-awesome.min.css" />
     <None Remove="Assets\site-template\homepage\assets\css\ie8.css" />
     <None Remove="Assets\site-template\homepage\assets\css\ie9.css" />
@@ -96,11 +93,7 @@
     <None Remove="Assets\site-template\homepage\assets\sass\libs\_vars.scss" />
     <None Remove="Assets\site-template\homepage\assets\sass\main.scss" />
     <None Remove="Assets\site-template\homepage\assets\StorjDCS-logo.svg" />
-    <None Remove="Assets\site-template\homepage\favicon-16x16.png" />
-    <None Remove="Assets\site-template\homepage\favicon-32x32.png" />
-    <None Remove="Assets\site-template\homepage\favicon.ico" />
     <None Remove="Assets\site-template\homepage\index.html" />
-    <None Remove="Assets\site-template\homepage\site.webmanifest" />
   </ItemGroup>
 
   <ItemGroup>
@@ -153,9 +146,7 @@
     <EmbeddedResource Include="Assets\site-template\album\assets\sass\noscript.scss" />
     <EmbeddedResource Include="Assets\site-template\album\assets\StorjDCS-logo.svg" />
     <EmbeddedResource Include="Assets\site-template\album\index.html" />
-    <EmbeddedResource Include="Assets\site-template\android-chrome-192x192.png" />
-    <EmbeddedResource Include="Assets\site-template\android-chrome-512x512.png" />
-    <EmbeddedResource Include="Assets\site-template\apple-touch-icon.png" />
+    <EmbeddedResource Include="Assets\site-template\homepage\assets\apple-touch-icon.png" />
     <EmbeddedResource Include="Assets\site-template\homepage\assets\css\font-awesome.min.css" />
     <EmbeddedResource Include="Assets\site-template\homepage\assets\css\ie8.css" />
     <EmbeddedResource Include="Assets\site-template\homepage\assets\css\ie9.css" />
@@ -195,11 +186,10 @@
     <EmbeddedResource Include="Assets\site-template\homepage\assets\sass\libs\_vars.scss" />
     <EmbeddedResource Include="Assets\site-template\homepage\assets\sass\main.scss" />
     <EmbeddedResource Include="Assets\site-template\homepage\assets\StorjDCS-logo.svg" />
-    <EmbeddedResource Include="Assets\site-template\favicon-16x16.png" />
-    <EmbeddedResource Include="Assets\site-template\favicon-32x32.png" />
-    <EmbeddedResource Include="Assets\site-template\favicon.ico" />
+    <EmbeddedResource Include="Assets\site-template\homepage\assets\favicon-16x16.png" />
+    <EmbeddedResource Include="Assets\site-template\homepage\assets\favicon-32x32.png" />
+    <EmbeddedResource Include="Assets\site-template\homepage\assets\favicon.ico" />
     <EmbeddedResource Include="Assets\site-template\homepage\index.html" />
-    <EmbeddedResource Include="Assets\site-template\site.webmanifest" />
   </ItemGroup>
 
   <ItemGroup>

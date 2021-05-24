@@ -42,6 +42,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                     return;
                 }
 
+                bool coverIsUploaded = false;
                 foreach (var image in AlbumImages)
                 {
                     image.IsUploading = true;
@@ -69,6 +70,22 @@ namespace StorjPhotoGalleryUploader.ViewModels
                             image.FailedUploading = true;
                             image.IsUploading = false;
                             continue;
+                        }
+
+                        //Upload first one as "cover image".
+                        //ToDo: let the user select it and make it dynamic so that the image is not uploaded twice.
+                        if (!coverIsUploaded)
+                        {
+                            scaled1.Position = 0;
+                            var uploadedScaled2 = await StoreService.PutObjectAsync(AppConfig, album, "pics/resized/1200x750/" + AlbumName + "/cover_image.jpg", scaled1);
+                            if (!uploadedScaled2)
+                            {
+                                //ToDo: Raise error
+                                image.FailedUploading = true;
+                                image.IsUploading = false;
+                                continue;
+                            }
+                            coverIsUploaded = true;
                         }
                     }
 

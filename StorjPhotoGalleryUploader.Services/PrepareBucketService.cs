@@ -69,7 +69,7 @@ namespace StorjPhotoGalleryUploader.Services
 
                 foreach (var necessaryFile in _assetNames)
                 {
-                    if (content.Items.Where(i => i.Key.Contains(GetFileName(necessaryFile))).Count() != 1)
+                    if (content.Items.Where(i => i.Key.EndsWith(GetFileName(necessaryFile))).Count() != 1)
                     {
                         return false;
                     }
