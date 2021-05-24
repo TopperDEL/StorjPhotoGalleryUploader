@@ -38,7 +38,21 @@ namespace StorjPhotoGalleryUploader.Services
             }
             if (_currentBucket == null)
             {
-                _currentBucket = await _bucketService.GetBucketAsync(_appConfig.BucketName);
+                try
+                {
+                    _currentBucket = await _bucketService.GetBucketAsync(_appConfig.BucketName);
+                }
+                catch
+                {
+                    try
+                    {
+                        _currentBucket = await _bucketService.EnsureBucketAsync(_appConfig.BucketName);
+                    }
+                    catch
+                    {
+                        //ToDo: info to user
+                    }
+                }
             }
         }
 
@@ -113,7 +127,7 @@ namespace StorjPhotoGalleryUploader.Services
             while (fileName.Where(c => c == '.').Count() > 1)
             {
                 //Some names have two dots, like "awesome-library.min.js"
-                if (fileName.Where(c => c == '.').Count() == 2 && fileName.Contains(".min."))
+                if (fileName.Where(c => c == '.').Count() == 2 && (fileName.Contains(".min.") || fileName.Contains(".lazyload.")))
                 {
                     break;
                 }

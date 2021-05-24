@@ -1,15 +1,19 @@
 <!DOCTYPE HTML>
 <html>
-  <head>
+<head>
     <title>{{album_name}}</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--[if lte IE 8]><script src="../assets/album/js/ie/html5shiv.js"></script><![endif]-->
     <link rel="stylesheet" href="../assets/album/css/main.css" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+    <link rel="manifest" href="../site.webmanifest">
     <!--[if lte IE 8]><link rel="stylesheet" href="../assets/album/css/ie8.css" /><![endif]-->
     <!--[if lte IE 9]><link rel="stylesheet" href="../assets/album/css/ie9.css" /><![endif]-->
     <noscript><link rel="stylesheet" href="../assets/album/css/noscript.css" /></noscript>
-  </head>
+</head>
   <body>
     <div id="main">
       <header id="header">
@@ -18,7 +22,7 @@
       <section id="thumbnails">
         {{ for imageName in image_names }}
         <article>
-          <a class="thumbnail" href="../pics/resized/1200x750/{{album_name}}/{{imageName}}" data-position="center"><img class="lazy" src="../assets/album/css/images/placeholder.png" data-original="../pics/resized/360x225/{{albumName}}/{{imageName}}" width="360" height="225"/></a>
+          <a class="thumbnail" href="../pics/resized/1200x750/{{album_name}}/{{imageName}}" data-position="center"><img class="lazy" src="../assets/album/css/images/placeholder.png" data-original="../pics/resized/360x225/{{album_name}}/{{imageName}}" width="360" height="225"/></a>
           <div class="share-modal">
             <div class="social-wrapper">
               <h2 class="share-title">Share</h2>
