@@ -195,7 +195,7 @@
   <ItemGroup>
     <PackageReference Include="Scriban" Version="3.7.0" />
     <PackageReference Include="SkiaSharp" Version="2.80.2" />
-    <PackageReference Include="uplink.NET" Version="2.6.1451" />
+    <PackageReference Include="uplink.NET" Version="2.7.1488-alpha" />
   </ItemGroup>
 
   <ItemGroup>
