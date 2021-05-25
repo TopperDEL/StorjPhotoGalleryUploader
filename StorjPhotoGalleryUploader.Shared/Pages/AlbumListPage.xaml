@@ -1,0 +1,55 @@
+﻿<Page
+    x:Class="StorjPhotoGalleryUploader.Pages.AlbumListPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StorjPhotoGalleryUploader.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:viewModels="using:StorjPhotoGalleryUploader.ViewModels"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Interactivity:Interaction.Behaviors>
+        <Interactions:EventTriggerBehavior EventName="Loaded">
+            <Interactions:EventTriggerBehavior.Actions>
+                <Interactions:InvokeCommandAction Command="{Binding LoadAlbumsAsyncCommand}"/>
+            </Interactions:EventTriggerBehavior.Actions>
+        </Interactions:EventTriggerBehavior>
+    </Interactivity:Interaction.Behaviors>
+
+    <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Button Content="New album" Grid.Row="0" HorizontalAlignment="Center" Command="{Binding NavigateNewAlbumCommand}" Background="{StaticResource StorjBlueBrush}" Foreground="White" CornerRadius="5"/>
+        <ProgressRing Grid.Row="1" IsActive="{Binding IsLoading}" Foreground="{StaticResource StorjBlueBrush}"/>
+        <ListView Grid.Row="1" ItemsSource="{Binding AlbumList, Mode=OneWay}" HorizontalAlignment="Center">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="viewModels:AlbumViewModel">
+                    <Grid MaxWidth="500">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" MinWidth="200"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="40"/>
+                            <ColumnDefinition Width="40"/>
+                        </Grid.ColumnDefinitions>
+
+                        <TextBlock Grid.Column="0" Text="{Binding Name}" VerticalAlignment="Center"/>
+                        <Button Grid.Column="1" Background="Transparent">
+                            <SymbolIcon Symbol="Add" Foreground="Black"/>
+                        </Button>
+                        <Button Grid.Column="2" Background="Transparent">
+                            <SymbolIcon Symbol="Globe" Foreground="Black"/>
+                        </Button>
+                        <Button Grid.Column="3" Background="Transparent">
+                            <SymbolIcon Symbol="Share" Foreground="Black"/>
+                        </Button>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
