@@ -1,0 +1,45 @@
+# Xamarin.Android
+# Build a Xamarin.Android project.
+# Add steps that test, sign, and distribute an app, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/xamarin
+
+trigger:
+- release
+
+pool:
+  vmImage: 'windows-2019'
+
+variables:
+  buildConfiguration: 'Debug'
+  outputDirectory: '$(build.binariesDirectory)/$(buildConfiguration)'
+
+steps:
+- task: NuGetToolInstaller@1
+
+- task: NuGetCommand@2
+  inputs:
+    command: 'restore'
+    restoreSolution: '*Droid.sln'
+    feedsToUse: 'select'
+
+- task: android-manifest-package-name@1
+  inputs:
+    sourcePath: 'StorjPhotoGalleryUploader.Droid/Properties/AndroidManifest.xml'
+    packageName: 'io.storj.photogalleryuploader'
+    appLabel: 'Storj Photo Gallery Uploader'
+    printFile: true
+
+- task: android-manifest-version@1
+  inputs:
+    sourcePath: 'StorjPhotoGalleryUploader.Droid/Properties/AndroidManifest.xml'
+    versionCodeOption: 'buildid'
+    versionCode: '$(Build.BuildId)'
+    printFile: true
+
+- task: XamarinAndroid@1
+  inputs:
+    projectFile: '*Droid.sln'
+    outputDirectory: '$(outputDirectory)'
+    configuration: '$(buildConfiguration)'
+    msbuildArguments: '-target:StorjPhotoGalleryUploader_Services:Rebuild;StorjPhotoGalleryUploader_Contracts:Rebuild'
+    jdkOption: 'JDKVersion'
