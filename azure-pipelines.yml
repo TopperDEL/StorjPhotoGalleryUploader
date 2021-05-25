@@ -41,7 +41,6 @@ steps:
     projectFile: '*Droid.sln'
     outputDirectory: '$(outputDirectory)'
     configuration: '$(buildConfiguration)'
-    msbuildArguments: '-target:StorjPhotoGalleryUploader_Services:Rebuild;StorjPhotoGalleryUploader_Contracts:Rebuild'
     jdkOption: 'JDKVersion'
 
 - task: AndroidSigning@3
