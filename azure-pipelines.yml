@@ -45,7 +45,7 @@ steps:
 - task: AndroidSigning@3
   displayName: 'Signing and aligning APK file(s) **/*.apk'
   inputs:
-    apksignerKeystoreFile: Barembo.keystore
+    apksignerKeystoreFile: StorjPhotoGalleryUploader.keystore
     apksignerKeystorePassword: '$(keystore.password)'
     apksignerKeystoreAlias: '$(keystore.alias)'
     apksignerKeyPassword: '$(keystore.keypassword)'
@@ -55,7 +55,7 @@ steps:
   displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
   inputs:
     SourceFolder: '$(outputDirectory)'
-    Contents: '*de.barembo.release.apk'
+    Contents: '*io.storj.photogalleryuploader.release.apk'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
   condition: succeededOrFailed()
 
