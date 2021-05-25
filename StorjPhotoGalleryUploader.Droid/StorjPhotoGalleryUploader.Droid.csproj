@@ -106,22 +106,22 @@
     <AndroidResource Include="Resources\values\Styles.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\StorjPhotoGalleryUploader.Contracts\StorjPhotoGalleryUploader.Contracts.csproj">
-      <Project>{97107b09-f7ec-42ae-97e8-676d3d31f9cd}</Project>
-      <Name>StorjPhotoGalleryUploader.Contracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\StorjPhotoGalleryUploader.Services\StorjPhotoGalleryUploader.Services.csproj">
-      <Project>{4df8799a-2ebe-481e-8181-74878b2658e5}</Project>
-      <Name>StorjPhotoGalleryUploader.Services</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\splash.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\Storj.png">
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\StorjPhotoGalleryUploader.Uno.Contracts\StorjPhotoGalleryUploader.Uno.Contracts.csproj">
+      <Project>{949d3b78-7a70-4f00-9794-f25ff2992d2b}</Project>
+      <Name>StorjPhotoGalleryUploader.Uno.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StorjPhotoGalleryUploader.Uno.Services\StorjPhotoGalleryUploader.Uno.Services.csproj">
+      <Project>{848c9690-8eb8-4144-8c9d-d748857f29ac}</Project>
+      <Name>StorjPhotoGalleryUploader.Uno.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="..\StorjPhotoGalleryUploader.Shared\StorjPhotoGalleryUploader.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

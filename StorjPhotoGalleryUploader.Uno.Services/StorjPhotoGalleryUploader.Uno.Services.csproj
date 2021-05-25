@@ -1,9 +1,31 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="MSBuild.Sdk.Extras/2.0.54">
+  <!--
+	Adding project references to this project requires some manual adjustments.
+	Please see https://github.com/unoplatform/uno/issues/3909 for more details.
+	-->
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;xamarinios10;xamarinmac20;MonoAndroid11.0;monoandroid10.0;uap10.0.18362</TargetFrameworks>
+    <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
+    <GenerateLibraryLayout>true</GenerateLibraryLayout>
+    <RootNamespace>StorjPhotoGalleryUploader.Services</RootNamespace>
   </PropertyGroup>
-
+  <ItemGroup>
+    <PackageReference Include="Scriban" Version="3.8.1" />
+    <PackageReference Include="SkiaSharp" Version="2.80.2" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
+    <PackageReference Include="Uno.UI" Version="3.7.4" />
+    <PackageReference Include="uplink.NET" Version="2.7.1488-alpha" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+    <Compile Update="**\*.xaml.cs">
+      <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
+  </ItemGroup>
   <ItemGroup>
     <None Remove="Assets\site-template\album\assets\css\font-awesome.min.css" />
     <None Remove="Assets\site-template\album\assets\css\ie8.css" />
@@ -54,6 +76,7 @@
     <None Remove="Assets\site-template\album\assets\sass\noscript.scss" />
     <None Remove="Assets\site-template\album\assets\StorjDCS-logo.svg" />
     <None Remove="Assets\site-template\album\index.html" />
+    <None Remove="Assets\site-template\homepage\assets\apple-touch-icon.png" />
     <None Remove="Assets\site-template\homepage\assets\css\font-awesome.min.css" />
     <None Remove="Assets\site-template\homepage\assets\css\ie8.css" />
     <None Remove="Assets\site-template\homepage\assets\css\ie9.css" />
@@ -61,6 +84,9 @@
     <None Remove="Assets\site-template\homepage\assets\css\images\close.svg" />
     <None Remove="Assets\site-template\homepage\assets\css\images\spinner.svg" />
     <None Remove="Assets\site-template\homepage\assets\css\main.css" />
+    <None Remove="Assets\site-template\homepage\assets\favicon-16x16.png" />
+    <None Remove="Assets\site-template\homepage\assets\favicon-32x32.png" />
+    <None Remove="Assets\site-template\homepage\assets\favicon.ico" />
     <None Remove="Assets\site-template\homepage\assets\fonts\fontawesome-webfont.eot" />
     <None Remove="Assets\site-template\homepage\assets\fonts\fontawesome-webfont.svg" />
     <None Remove="Assets\site-template\homepage\assets\fonts\fontawesome-webfont.ttf" />
@@ -95,7 +121,6 @@
     <None Remove="Assets\site-template\homepage\assets\StorjDCS-logo.svg" />
     <None Remove="Assets\site-template\homepage\index.html" />
   </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="Assets\site-template\album\assets\css\font-awesome.min.css" />
     <EmbeddedResource Include="Assets\site-template\album\assets\css\ie8.css" />
@@ -154,6 +179,9 @@
     <EmbeddedResource Include="Assets\site-template\homepage\assets\css\images\close.svg" />
     <EmbeddedResource Include="Assets\site-template\homepage\assets\css\images\spinner.svg" />
     <EmbeddedResource Include="Assets\site-template\homepage\assets\css\main.css" />
+    <EmbeddedResource Include="Assets\site-template\homepage\assets\favicon-16x16.png" />
+    <EmbeddedResource Include="Assets\site-template\homepage\assets\favicon-32x32.png" />
+    <EmbeddedResource Include="Assets\site-template\homepage\assets\favicon.ico" />
     <EmbeddedResource Include="Assets\site-template\homepage\assets\fonts\fontawesome-webfont.eot" />
     <EmbeddedResource Include="Assets\site-template\homepage\assets\fonts\fontawesome-webfont.svg" />
     <EmbeddedResource Include="Assets\site-template\homepage\assets\fonts\fontawesome-webfont.ttf" />
@@ -186,20 +214,9 @@
     <EmbeddedResource Include="Assets\site-template\homepage\assets\sass\libs\_vars.scss" />
     <EmbeddedResource Include="Assets\site-template\homepage\assets\sass\main.scss" />
     <EmbeddedResource Include="Assets\site-template\homepage\assets\StorjDCS-logo.svg" />
-    <EmbeddedResource Include="Assets\site-template\homepage\assets\favicon-16x16.png" />
-    <EmbeddedResource Include="Assets\site-template\homepage\assets\favicon-32x32.png" />
-    <EmbeddedResource Include="Assets\site-template\homepage\assets\favicon.ico" />
     <EmbeddedResource Include="Assets\site-template\homepage\index.html" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Scriban" Version="3.7.0" />
-    <PackageReference Include="SkiaSharp" Version="2.80.2" />
-    <PackageReference Include="uplink.NET" Version="2.7.1488-alpha" />
+    <ProjectReference Include="..\StorjPhotoGalleryUploader.Uno.Contracts\StorjPhotoGalleryUploader.Uno.Contracts.csproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\StorjPhotoGalleryUploader.Contracts\StorjPhotoGalleryUploader.Contracts.csproj" />
-  </ItemGroup>
-
 </Project>
