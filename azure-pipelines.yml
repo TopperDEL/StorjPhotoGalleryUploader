@@ -38,10 +38,9 @@ steps:
 
 - task: XamarinAndroid@1
   inputs:
-    projectFile: '*Droid.sln'
+    projectFile: '**/*Droid.csproj'
     outputDirectory: '$(outputDirectory)'
     configuration: '$(buildConfiguration)'
-    msbuildArguments: '-target:StorjPhotoGalleryUploader_Services:Rebuild;StorjPhotoGalleryUploader_Contracts:Rebuild'
     jdkOption: 'JDKVersion'
 
 - task: AndroidSigning@3
