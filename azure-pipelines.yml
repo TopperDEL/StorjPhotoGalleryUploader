@@ -38,7 +38,7 @@ steps:
 
 - task: XamarinAndroid@1
   inputs:
-    projectFile: '*Droid.sln'
+    projectFile: '**/*Droid.csproj'
     outputDirectory: '$(outputDirectory)'
     configuration: '$(buildConfiguration)'
     jdkOption: 'JDKVersion'
