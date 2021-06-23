@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Linq;
 using uplink.NET.Interfaces;
 using uplink.NET.Models;
+using uplink.NET.UnoHelpers.Contracts.Models;
 
 namespace StorjPhotoGalleryUploader.Services
 {

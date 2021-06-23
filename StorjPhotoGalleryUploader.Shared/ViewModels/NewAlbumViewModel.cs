@@ -2,7 +2,6 @@
 using MvvmGen.Events;
 using StorjPhotoGalleryUploader.Contracts.Interfaces;
 using StorjPhotoGalleryUploader.Contracts.Messages;
-using StorjPhotoGalleryUploader.Contracts.Models;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,7 +18,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
     [Inject(typeof(IAlbumService))]
     [Inject(typeof(IStoreService))]
     [Inject(typeof(IThumbnailGeneratorService))]
-    [Inject(typeof(AppConfig))]
+    [Inject(typeof(uplink.NET.UnoHelpers.Contracts.Models.AppConfig))]
     [ViewModel]
     public partial class NewAlbumViewModel
     {

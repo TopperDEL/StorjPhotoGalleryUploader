@@ -3,7 +3,6 @@ using MvvmGen.Events;
 using StorjPhotoGalleryUploader.Contracts.Interfaces;
 using StorjPhotoGalleryUploader.Contracts.Models;
 using StorjPhotoGalleryUploader.Services;
-using StorjPhotoGalleryUploader.UnoAppServices;
 using StorjPhotoGalleryUploader.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -11,6 +10,10 @@ using System.Text;
 using uplink.NET.Interfaces;
 using uplink.NET.Models;
 using uplink.NET.Services;
+using uplink.NET.UnoHelpers.Contracts.Interfaces;
+using uplink.NET.UnoHelpers.Contracts.Models;
+using uplink.NET.UnoHelpers.Services;
+using uplink.NET.UnoHelpers.ViewModels;
 
 namespace StorjPhotoGalleryUploader.Helper
 {

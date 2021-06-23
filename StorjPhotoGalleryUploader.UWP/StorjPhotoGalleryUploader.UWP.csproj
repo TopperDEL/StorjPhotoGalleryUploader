@@ -12,7 +12,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.UI.Xaml" Version="2.5.0" />
     <PackageReference Include="MvvmGen">
-      <Version>1.0.0</Version>
+      <Version>1.1.1</Version>
     </PackageReference>
     <PackageReference Include="Uno.Core" Version="2.3.0" />
     <PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Uwp.Managed">
@@ -23,6 +23,12 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
     <PackageReference Include="uplink.NET">
       <Version>2.7.1488-alpha</Version>
+    </PackageReference>
+    <PackageReference Include="uplink.NET.UnoHelpers">
+      <Version>0.9.3</Version>
+    </PackageReference>
+    <PackageReference Include="uplink.NET.UnoHelpers.Contracts">
+      <Version>0.9.3</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.Win">
       <Version>2.7.1488-alpha</Version>

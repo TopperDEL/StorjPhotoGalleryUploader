@@ -26,7 +26,7 @@ namespace StorjPhotoGalleryUploader.Pages
         public BucketCheckPage()
         {
             this.InitializeComponent();
-            DataContext = App.Services.GetService(typeof(BucketCheckViewModel));
+            DataContext = uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService(typeof(BucketCheckViewModel));
         }
     }
 }

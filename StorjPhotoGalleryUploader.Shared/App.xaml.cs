@@ -1,15 +1,16 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using MvvmGen.Events;
-using StorjPhotoGalleryUploader.Contracts.Interfaces;
 using StorjPhotoGalleryUploader.Contracts.Messages;
-using StorjPhotoGalleryUploader.Contracts.Models;
 using StorjPhotoGalleryUploader.Pages;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using uplink.NET.UnoHelpers.Contracts.Interfaces;
+using uplink.NET.UnoHelpers.Messages;
+using uplink.NET.UnoHelpers.Views;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -29,7 +30,7 @@ namespace StorjPhotoGalleryUploader
     /// </summary>
     public sealed partial class App : Application, IEventSubscriber<UserLoggedInMessage>, IEventSubscriber<DoNavigateMessage>
     {
-        public static IServiceProvider Services { get; private set; }
+        private const string STORJPHOTOGALLERY_RESOURCE = "STORJPHOTOGALLERY";
 
 #if NET5_0 && WINDOWS
         private Window _window;
@@ -113,11 +114,13 @@ namespace StorjPhotoGalleryUploader
                     // When the navigation stack isn't restored navigate to the first page,
                     // configuring the new page by passing required information as a navigation
                     // parameter
-                    Services = Helper.DependencyInjectionInitHelper.ConfigureServices();
-                    var eventAggregator = Services.GetService<IEventAggregator>();
+                    var services = Helper.DependencyInjectionInitHelper.ConfigureServices();
+                    uplink.NET.UnoHelpers.Services.Initializer.Init(services, STORJPHOTOGALLERY_RESOURCE);
+
+                    var eventAggregator = uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService<IEventAggregator>();
                     eventAggregator.RegisterSubscriber(this);
 
-                    var loginService = Services.GetService<ILoginService>();
+                    var loginService = uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService<ILoginService>();
                     if (loginService.GetIsLoggedIn())
                     {
                         var appConfig = loginService.GetLogin();
@@ -215,8 +218,9 @@ namespace StorjPhotoGalleryUploader
 
         public void OnEvent(UserLoggedInMessage loggedInMessage)
         {
-            Services = Helper.DependencyInjectionInitHelper.ConfigureServices(loggedInMessage.AppConfig);
-            var eventAggregator = Services.GetService<IEventAggregator>();
+            var services = Helper.DependencyInjectionInitHelper.ConfigureServices(loggedInMessage.AppConfig);
+            uplink.NET.UnoHelpers.Services.Initializer.Init(services, STORJPHOTOGALLERY_RESOURCE);
+            var eventAggregator = uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService<IEventAggregator>();
             eventAggregator.RegisterSubscriber(this);
 
             DoNavigate(typeof(BucketCheckPage));

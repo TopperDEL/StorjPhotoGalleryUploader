@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using uplink.NET.UnoHelpers.Contracts.Models;
 
 namespace StorjPhotoGalleryUploader.Contracts.Interfaces
 {

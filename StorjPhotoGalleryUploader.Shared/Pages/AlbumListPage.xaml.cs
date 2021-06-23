@@ -26,7 +26,7 @@ namespace StorjPhotoGalleryUploader.Pages
         public AlbumListPage()
         {
             this.InitializeComponent();
-            DataContext = App.Services.GetService(typeof(AlbumListViewModel));
+            DataContext = uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService(typeof(AlbumListViewModel));
         }
     }
 }

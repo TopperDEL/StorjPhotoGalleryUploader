@@ -10,6 +10,7 @@ using Scriban;
 using System.Reflection;
 using System.IO;
 using System.Text;
+using uplink.NET.UnoHelpers.Contracts.Models;
 
 namespace StorjPhotoGalleryUploader.Services
 {
