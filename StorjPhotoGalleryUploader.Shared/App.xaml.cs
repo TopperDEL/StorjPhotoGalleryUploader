@@ -28,7 +28,7 @@ namespace StorjPhotoGalleryUploader
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public sealed partial class App : Application, IEventSubscriber<UserLoggedInMessage>, IEventSubscriber<DoNavigateMessage>
+    public sealed partial class App : Application, IEventSubscriber<UserLoggedInMessage>, IEventSubscriber<DoNavigateMessage>, IEventSubscriber<ErrorOccuredMessage>
     {
         private const string STORJPHOTOGALLERY_RESOURCE = "STORJPHOTOGALLERY";
 
@@ -248,6 +248,20 @@ namespace StorjPhotoGalleryUploader
             var rootFrame = _window.Content as Frame;
 
             rootFrame.Navigate(pageType, null);
+        }
+
+        public async void OnEvent(ErrorOccuredMessage eventData)
+        {
+            var errorDialog = new ContentDialog
+            {
+                Title = "Error",
+                Content = eventData.ErrorMessage
+            };
+
+            errorDialog.PrimaryButtonText = "Ok";
+            errorDialog.PrimaryButtonStyle = this.Resources["ButtonRoundedStyle"] as Style;
+
+            await errorDialog.ShowAsync();
         }
     }
 }
