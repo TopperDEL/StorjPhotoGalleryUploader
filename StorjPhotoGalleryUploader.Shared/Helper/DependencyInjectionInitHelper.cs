@@ -33,7 +33,14 @@ namespace StorjPhotoGalleryUploader.Helper
             services.AddSingleton(appConfig);
 
             //Uplink-Singletons
-            services.AddSingleton(new Access(appConfig.AccessGrant));
+            if (!string.IsNullOrEmpty(appConfig.AccessGrant))
+            {
+                services.AddSingleton(new Access(appConfig.AccessGrant));
+            }
+            else
+            {
+                services.AddSingleton(new Access(appConfig.SatelliteAddress, appConfig.ApiKey, appConfig.Secret));
+            }
             services.AddSingleton<IBucketService, BucketService>();
             services.AddSingleton<IObjectService, ObjectService>();
 
