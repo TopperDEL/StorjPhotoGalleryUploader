@@ -23,15 +23,16 @@ namespace StorjPhotoGalleryUploader.Pages
     /// </summary>
     public sealed partial class AlbumListPage : Page
     {
+        AlbumListViewModel _viewModel;
         public AlbumListPage()
         {
             this.InitializeComponent();
-            DataContext = uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService(typeof(AlbumListViewModel));
+            DataContext = _viewModel = (AlbumListViewModel)uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService(typeof(AlbumListViewModel));
         }
 
         private void CurrentUploadsButton_Clicked(object sender, EventArgs e)
         {
-
+            _viewModel.NavigateCurrentUploadsCommand.Execute("");
         }
     }
 }

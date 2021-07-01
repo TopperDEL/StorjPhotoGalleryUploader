@@ -11,6 +11,7 @@
                 <XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
                 <ResourceDictionary Source="uplink.NET.UnoHelpers/Resources/DefaultStyles.xaml" />
                 <ResourceDictionary Source="uplink.NET.UnoHelpers/Resources/Animations.xaml" />
+                <ResourceDictionary Source="uplink.NET.UnoHelpers/Resources/Converters.xaml" />
                 <ResourceDictionary Source="Resources/Converters.xaml"/>
                 <ResourceDictionary Source="Resources/Styles.xaml"/>
             </ResourceDictionary.MergedDictionaries>

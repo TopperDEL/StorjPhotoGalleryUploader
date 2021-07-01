@@ -28,7 +28,7 @@ namespace StorjPhotoGalleryUploader
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public sealed partial class App : Application, IEventSubscriber<UserLoggedInMessage>, IEventSubscriber<DoNavigateMessage>, IEventSubscriber<ErrorOccuredMessage>
+    public sealed partial class App : Application, IEventSubscriber<UserLoggedInMessage>, IEventSubscriber<DoNavigateMessage>, IEventSubscriber<ErrorOccuredMessage>, IEventSubscriber<NavigateBackFromCurrentUploadsMessage>
     {
         private const string STORJPHOTOGALLERY_RESOURCE = "STORJPHOTOGALLERY";
 
@@ -237,6 +237,9 @@ namespace StorjPhotoGalleryUploader
                 case NavigationTarget.AlbumList:
                     pageType = typeof(AlbumListPage);
                     break;
+                case NavigationTarget.CurrentUploads:
+                    pageType = typeof(CurrentUploadsPage);
+                    break;
             }
 
             if (pageType != null)
@@ -262,6 +265,11 @@ namespace StorjPhotoGalleryUploader
             errorDialog.PrimaryButtonStyle = this.Resources["ButtonRoundedStyle"] as Style;
 
             await errorDialog.ShowAsync();
+        }
+
+        public void OnEvent(NavigateBackFromCurrentUploadsMessage eventData)
+        {
+            OnEvent(new DoNavigateMessage(NavigationTarget.AlbumList));
         }
     }
 }

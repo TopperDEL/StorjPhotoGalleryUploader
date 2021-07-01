@@ -7,7 +7,8 @@ namespace StorjPhotoGalleryUploader.Contracts.Messages
     public enum NavigationTarget
     {
         AlbumList,
-        NewAlbum
+        NewAlbum,
+        CurrentUploads
     }
     public class DoNavigateMessage
     {

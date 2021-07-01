@@ -19,7 +19,7 @@
         </Interactions:EventTriggerBehavior>
     </Interactivity:Interaction.Behaviors>
 
-    <Grid VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10">
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
@@ -53,6 +53,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <ctrls:CurrentUploadsButton Grid.Row="2" Clicked="CurrentUploadsButton_Clicked" VerticalAlignment="Center"/>
+        <ctrls:CurrentUploadsButton Grid.Row="2" Clicked="CurrentUploadsButton_Clicked" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
     </Grid>
 </Page>
