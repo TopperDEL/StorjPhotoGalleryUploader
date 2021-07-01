@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
     xmlns:viewModels="using:StorjPhotoGalleryUploader.ViewModels"
+    xmlns:ctrls="using:uplink.NET.UnoHelpers.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -22,6 +23,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="60"/>
         </Grid.RowDefinitions>
 
         <Button Content="New album" Grid.Row="0" HorizontalAlignment="Center" Command="{Binding NavigateNewAlbumCommand}" Background="{StaticResource StorjBlueBrush}" Foreground="White" CornerRadius="5"/>
@@ -51,5 +53,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <ctrls:CurrentUploadsButton Grid.Row="2" Clicked="CurrentUploadsButton_Clicked" VerticalAlignment="Center"/>
     </Grid>
 </Page>

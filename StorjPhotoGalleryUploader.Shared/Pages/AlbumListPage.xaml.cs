@@ -28,5 +28,10 @@ namespace StorjPhotoGalleryUploader.Pages
             this.InitializeComponent();
             DataContext = uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService(typeof(AlbumListViewModel));
         }
+
+        private void CurrentUploadsButton_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

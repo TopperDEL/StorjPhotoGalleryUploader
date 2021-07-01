@@ -6,6 +6,7 @@ using StorjPhotoGalleryUploader.Services;
 using StorjPhotoGalleryUploader.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 using uplink.NET.Interfaces;
 using uplink.NET.Models;
@@ -43,7 +44,8 @@ namespace StorjPhotoGalleryUploader.Helper
             }
             services.AddSingleton<IBucketService, BucketService>();
             services.AddSingleton<IObjectService, ObjectService>();
-            services.AddSingleton<IUploadQueueService, UploadQueueService>();
+            var uploadQueueService = new UploadQueueService(Path.Combine(Windows.Storage.ApplicationData.Current.LocalCacheFolder.Path, "uplinkNET.db"));
+            services.AddSingleton<IUploadQueueService>(uploadQueueService);
 
             //Services
             services.AddTransient<IAlbumService, AlbumService>();
@@ -55,6 +57,8 @@ namespace StorjPhotoGalleryUploader.Helper
             services.AddTransient<AlbumListViewModel>();
             services.AddTransient<NewAlbumViewModel>();
             services.AddTransient<BucketCheckViewModel>();
+            services.AddTransient<LoginViewModel>();
+            services.AddTransient<CurrentUploadsViewModel>();
 
             //ViewModel-Factories
             services.AddSingleton<IAlbumImageViewModelFactory, AlbumImageViewModelFactory>();

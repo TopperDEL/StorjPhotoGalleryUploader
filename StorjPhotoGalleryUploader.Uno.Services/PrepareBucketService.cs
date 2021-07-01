@@ -8,6 +8,7 @@ using System.Linq;
 using uplink.NET.Interfaces;
 using uplink.NET.Models;
 using uplink.NET.UnoHelpers.Contracts.Models;
+using Uno.Extensions;
 
 namespace StorjPhotoGalleryUploader.Services
 {
@@ -20,13 +21,15 @@ namespace StorjPhotoGalleryUploader.Services
 
         readonly IObjectService _objectService;
         readonly IBucketService _bucketService;
+        readonly IUploadQueueService _uploadQueueService;
         readonly AppConfig _appConfig;
         private Bucket _currentBucket;
 
-        public PrepareBucketService(IObjectService objectService, IBucketService bucketService, AppConfig appConfig)
+        public PrepareBucketService(IObjectService objectService, IBucketService bucketService, IUploadQueueService uploadQueueService, AppConfig appConfig)
         {
             _objectService = objectService;
             _bucketService = bucketService;
+            _uploadQueueService = uploadQueueService;
             _appConfig = appConfig;
         }
 
@@ -101,13 +104,15 @@ namespace StorjPhotoGalleryUploader.Services
 
                     using (var stream = assembly.GetManifestResourceStream(name))
                     {
-                        var upload = await _objectService.UploadObjectAsync(_currentBucket, fileName, new UploadOptions(), stream, false);
-                        await upload.StartUploadAsync();
+                        await _uploadQueueService.AddObjectToUploadQueue(_currentBucket.Name, fileName, _appConfig.AccessGrant, stream.ToMemoryStream().ToArray(), fileName);
 
-                        if (!upload.Completed)
-                        {
-                            return new BucketPrepareResult() { Successfull = false, PrepareErrorMessage = "Could not upload file '" + fileName + "'" };
-                        }
+                        //var upload = await _objectService.UploadObjectAsync(_currentBucket, fileName, new UploadOptions(), stream, false);
+                        //await upload.StartUploadAsync();
+
+                        //if (!upload.Completed)
+                        //{
+                        //    return new BucketPrepareResult() { Successfull = false, PrepareErrorMessage = "Could not upload file '" + fileName + "'" };
+                        //}
                     }
 
                     current++;
