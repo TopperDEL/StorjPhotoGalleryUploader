@@ -18,13 +18,15 @@ namespace StorjPhotoGalleryUploader.Services
     {
         readonly IBucketService _bucketService;
         readonly IObjectService _objectService;
+        readonly IUploadQueueService _uploadQueueService;
         readonly AppConfig _appConfig;
         private Bucket _bucket;
 
-        public AlbumService(IBucketService bucketService, IObjectService objectService, AppConfig appConfig)
+        public AlbumService(IBucketService bucketService, IObjectService objectService, IUploadQueueService uploadQueueService, AppConfig appConfig)
         {
             _bucketService = bucketService;
             _objectService = objectService;
+            _uploadQueueService = uploadQueueService;
             _appConfig = appConfig;
         }
 
@@ -65,9 +67,7 @@ namespace StorjPhotoGalleryUploader.Services
                     {
                         var result = await albumIndexTemplate.RenderAsync(new { AlbumName = albumName, ImageNames = imageNames });
 
-                        var upload = await _objectService.UploadObjectAsync(_bucket, albumName + "/index.html", new UploadOptions(), Encoding.UTF8.GetBytes(result), false);
-                        await upload.StartUploadAsync();
-
+                        await _uploadQueueService.AddObjectToUploadQueue(_bucket.Name, albumName + "/index.html", _appConfig.AccessGrant, Encoding.UTF8.GetBytes(result), albumName + "/index.html");
                     }
                     catch (Exception ex)
                     {
