@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using uplink.NET.Interfaces;
 using uplink.NET.UnoHelpers.Contracts.Interfaces;
 using uplink.NET.UnoHelpers.Messages;
 using uplink.NET.UnoHelpers.Views;
@@ -222,6 +223,9 @@ namespace StorjPhotoGalleryUploader
             uplink.NET.UnoHelpers.Services.Initializer.Init(services, STORJPHOTOGALLERY_RESOURCE);
             var eventAggregator = uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService<IEventAggregator>();
             eventAggregator.RegisterSubscriber(this);
+
+            var uploadQueueService = uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService<IUploadQueueService>();
+            uploadQueueService.ProcessQueueInBackground();
 
             DoNavigate(typeof(BucketCheckPage));
         }
