@@ -96,6 +96,7 @@ namespace StorjPhotoGalleryUploader.Services
 
                 Assembly assembly = GetType().GetTypeInfo().Assembly;
 
+                var currentUploads = await _uploadQueueService.GetAwaitingUploadsAsync();
                 int current = 0;
                 foreach (var name in _assetNames)
                 {
@@ -104,7 +105,11 @@ namespace StorjPhotoGalleryUploader.Services
 
                     using (var stream = assembly.GetManifestResourceStream(name))
                     {
-                        await _uploadQueueService.AddObjectToUploadQueueAsync(_currentBucket.Name, fileName, _appConfig.AccessGrant, stream, fileName);
+                        if (currentUploads.Where(u => u.AccessGrant == _appConfig.AccessGrant && u.Key == fileName && u.BucketName == _currentBucket.Name).Count() == 0)
+                        {
+                            //File is not yet in upload queue for this access => upload it
+                            await _uploadQueueService.AddObjectToUploadQueueAsync(_currentBucket.Name, fileName, _appConfig.AccessGrant, stream, fileName);
+                        }
                     }
 
                     current++;
