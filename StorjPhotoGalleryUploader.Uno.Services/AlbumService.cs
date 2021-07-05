@@ -11,6 +11,7 @@ using System.Reflection;
 using System.IO;
 using System.Text;
 using uplink.NET.UnoHelpers.Contracts.Models;
+using uplink.NET.UnoHelpers.Services;
 
 namespace StorjPhotoGalleryUploader.Services
 {
@@ -56,6 +57,10 @@ namespace StorjPhotoGalleryUploader.Services
         {
             await InitAsync();
 
+            var accessGrant = _appConfig.TryGetAccessGrant(out bool success);
+            if (!success)
+                return null;
+
             Assembly assembly = GetType().GetTypeInfo().Assembly;
             using (var indexStream = assembly.GetManifestResourceStream("StorjPhotoGalleryUploader.Services.Assets.site_template.album.index.html"))
             {
@@ -67,7 +72,7 @@ namespace StorjPhotoGalleryUploader.Services
                     {
                         var result = await albumIndexTemplate.RenderAsync(new { AlbumName = albumName, ImageNames = imageNames });
 
-                        await _uploadQueueService.AddObjectToUploadQueueAsync(_bucket.Name, albumName + "/index.html", _appConfig.AccessGrant, Encoding.UTF8.GetBytes(result), albumName + "/index.html");
+                        await _uploadQueueService.AddObjectToUploadQueueAsync(_bucket.Name, albumName + "/index.html", accessGrant, Encoding.UTF8.GetBytes(result), albumName + "/index.html");
                     }
                     catch
                     {
@@ -101,6 +106,10 @@ namespace StorjPhotoGalleryUploader.Services
 
         public async Task<bool> RefreshAlbumIndex(List<Album> albums)
         {
+            var accessGrant = _appConfig.TryGetAccessGrant(out bool success);
+            if (!success)
+                return false;
+
             Assembly assembly = GetType().GetTypeInfo().Assembly;
             using (var indexStream = assembly.GetManifestResourceStream("StorjPhotoGalleryUploader.Services.Assets.site_template.homepage.index.html"))
             {
@@ -112,7 +121,7 @@ namespace StorjPhotoGalleryUploader.Services
                     {
                         var result = await homepageIndexTemplate.RenderAsync(new { Albums = albums.Select(a=>new { Name = a.Name, CoverImage = "cover_image.jpg" }).ToList() });
 
-                        await _uploadQueueService.AddObjectToUploadQueueAsync(_bucket.Name, "/index.html", _appConfig.AccessGrant, Encoding.UTF8.GetBytes(result), "/index.html");
+                        await _uploadQueueService.AddObjectToUploadQueueAsync(_bucket.Name, "/index.html", accessGrant, Encoding.UTF8.GetBytes(result), "/index.html");
                     }
                     catch
                     {

@@ -14,9 +14,10 @@
     <PackageReference Include="Scriban" Version="3.8.1" />
     <PackageReference Include="SkiaSharp" Version="2.80.2" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
-    <PackageReference Include="Uno.UI" Version="3.7.4" />
+    <PackageReference Include="Uno.UI" Version="3.8.6" />
     <PackageReference Include="uplink.NET" Version="2.7.1590" />
-    <PackageReference Include="uplink.NET.UnoHelpers.Contracts" Version="0.9.8" />
+    <PackageReference Include="uplink.NET.UnoHelpers" Version="0.9.9" />
+    <PackageReference Include="uplink.NET.UnoHelpers.Contracts" Version="0.9.9" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />

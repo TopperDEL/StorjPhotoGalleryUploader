@@ -9,6 +9,7 @@ using uplink.NET.Interfaces;
 using uplink.NET.Models;
 using uplink.NET.UnoHelpers.Contracts.Models;
 using Uno.Extensions;
+using uplink.NET.UnoHelpers.Services;
 
 namespace StorjPhotoGalleryUploader.Services
 {
@@ -96,6 +97,10 @@ namespace StorjPhotoGalleryUploader.Services
 
                 Assembly assembly = GetType().GetTypeInfo().Assembly;
 
+                var accessGrant = _appConfig.TryGetAccessGrant(out bool success);
+                if (!success)
+                    return new BucketPrepareResult() { Successfull = false, PrepareErrorMessage = "Wrong ApiKey" };
+
                 var currentUploads = await _uploadQueueService.GetAwaitingUploadsAsync();
                 int current = 0;
                 foreach (var name in _assetNames)
@@ -105,10 +110,10 @@ namespace StorjPhotoGalleryUploader.Services
 
                     using (var stream = assembly.GetManifestResourceStream(name))
                     {
-                        if (currentUploads.Where(u => u.AccessGrant == _appConfig.AccessGrant && u.Key == fileName && u.BucketName == _currentBucket.Name).Count() == 0)
+                        if (currentUploads.Where(u => u.AccessGrant == accessGrant && u.Key == fileName && u.BucketName == _currentBucket.Name).Count() == 0)
                         {
                             //File is not yet in upload queue for this access => upload it
-                            await _uploadQueueService.AddObjectToUploadQueueAsync(_currentBucket.Name, fileName, _appConfig.AccessGrant, stream, fileName);
+                            await _uploadQueueService.AddObjectToUploadQueueAsync(_currentBucket.Name, fileName, accessGrant, stream, fileName);
                         }
                     }
 

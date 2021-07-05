@@ -9,6 +9,7 @@ using Uno.Extensions;
 using uplink.NET.Interfaces;
 using uplink.NET.Models;
 using uplink.NET.UnoHelpers.Contracts.Models;
+using uplink.NET.UnoHelpers.Services;
 
 namespace StorjPhotoGalleryUploader.Services
 {
@@ -29,7 +30,11 @@ namespace StorjPhotoGalleryUploader.Services
 
             try
             {
-                await _uploadQueueService.AddObjectToUploadQueueAsync(bucket.Name, key, appConfig.AccessGrant, objectData, key);
+                var accessGrant = appConfig.TryGetAccessGrant(out bool success);
+                if (!success)
+                    return false;
+
+                await _uploadQueueService.AddObjectToUploadQueueAsync(bucket.Name, key, accessGrant, objectData, key);
 
                 return true;
             }
