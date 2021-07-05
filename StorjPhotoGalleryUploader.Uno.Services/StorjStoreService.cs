@@ -29,7 +29,7 @@ namespace StorjPhotoGalleryUploader.Services
 
             try
             {
-                await _uploadQueueService.AddObjectToUploadQueue(bucket.Name, key, appConfig.AccessGrant, objectData.ToMemoryStream().ToArray(), key);
+                await _uploadQueueService.AddObjectToUploadQueueAsync(bucket.Name, key, appConfig.AccessGrant, objectData, key);
 
                 return true;
             }

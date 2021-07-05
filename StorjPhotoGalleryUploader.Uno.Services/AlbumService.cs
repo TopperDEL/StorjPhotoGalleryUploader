@@ -67,7 +67,7 @@ namespace StorjPhotoGalleryUploader.Services
                     {
                         var result = await albumIndexTemplate.RenderAsync(new { AlbumName = albumName, ImageNames = imageNames });
 
-                        await _uploadQueueService.AddObjectToUploadQueue(_bucket.Name, albumName + "/index.html", _appConfig.AccessGrant, Encoding.UTF8.GetBytes(result), albumName + "/index.html");
+                        await _uploadQueueService.AddObjectToUploadQueueAsync(_bucket.Name, albumName + "/index.html", _appConfig.AccessGrant, Encoding.UTF8.GetBytes(result), albumName + "/index.html");
                     }
                     catch
                     {
@@ -112,9 +112,7 @@ namespace StorjPhotoGalleryUploader.Services
                     {
                         var result = await homepageIndexTemplate.RenderAsync(new { Albums = albums.Select(a=>new { Name = a.Name, CoverImage = "cover_image.jpg" }).ToList() });
 
-                        var upload = await _objectService.UploadObjectAsync(_bucket, "index.html", new UploadOptions(), Encoding.UTF8.GetBytes(result), false);
-                        await upload.StartUploadAsync();
-
+                        await _uploadQueueService.AddObjectToUploadQueueAsync(_bucket.Name, "/index.html", _appConfig.AccessGrant, Encoding.UTF8.GetBytes(result), "/index.html");
                     }
                     catch
                     {

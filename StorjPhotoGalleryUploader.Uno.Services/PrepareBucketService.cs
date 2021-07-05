@@ -104,7 +104,7 @@ namespace StorjPhotoGalleryUploader.Services
 
                     using (var stream = assembly.GetManifestResourceStream(name))
                     {
-                        await _uploadQueueService.AddObjectToUploadQueue(_currentBucket.Name, fileName, _appConfig.AccessGrant, stream.ToMemoryStream().ToArray(), fileName);
+                        await _uploadQueueService.AddObjectToUploadQueueAsync(_currentBucket.Name, fileName, _appConfig.AccessGrant, stream, fileName);
                     }
 
                     current++;
