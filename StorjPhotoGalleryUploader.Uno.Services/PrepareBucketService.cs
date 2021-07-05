@@ -105,14 +105,6 @@ namespace StorjPhotoGalleryUploader.Services
                     using (var stream = assembly.GetManifestResourceStream(name))
                     {
                         await _uploadQueueService.AddObjectToUploadQueue(_currentBucket.Name, fileName, _appConfig.AccessGrant, stream.ToMemoryStream().ToArray(), fileName);
-
-                        //var upload = await _objectService.UploadObjectAsync(_currentBucket, fileName, new UploadOptions(), stream, false);
-                        //await upload.StartUploadAsync();
-
-                        //if (!upload.Completed)
-                        //{
-                        //    return new BucketPrepareResult() { Successfull = false, PrepareErrorMessage = "Could not upload file '" + fileName + "'" };
-                        //}
                     }
 
                     current++;

@@ -38,13 +38,13 @@ namespace StorjPhotoGalleryUploader.Services
                 {
                     _bucket = await _bucketService.EnsureBucketAsync(_appConfig.BucketName);
                 }
-                catch (Exception ex2)
+                catch
                 {
                     try
                     {
                         _bucket = await _bucketService.GetBucketAsync(_appConfig.BucketName);
                     }
-                    catch (Exception ex)
+                    catch
                     {
 
                     }
@@ -69,7 +69,7 @@ namespace StorjPhotoGalleryUploader.Services
 
                         await _uploadQueueService.AddObjectToUploadQueue(_bucket.Name, albumName + "/index.html", _appConfig.AccessGrant, Encoding.UTF8.GetBytes(result), albumName + "/index.html");
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         return null;
                     }
@@ -116,7 +116,7 @@ namespace StorjPhotoGalleryUploader.Services
                         await upload.StartUploadAsync();
 
                     }
-                    catch (Exception ex)
+                    catch
                     {
                         return false;
                     }
