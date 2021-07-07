@@ -47,9 +47,16 @@ namespace StorjPhotoGalleryUploader
         public App()
         {
             InitializeLogging();
-
-            this.InitializeComponent();
             this.UnhandledException += App_UnhandledException;
+
+            try
+            {
+                this.InitializeComponent();
+            }
+            catch(Exception ex)
+            {
+
+            }
 
 #if __IOS__
             //Initialize the uplink.NET-library

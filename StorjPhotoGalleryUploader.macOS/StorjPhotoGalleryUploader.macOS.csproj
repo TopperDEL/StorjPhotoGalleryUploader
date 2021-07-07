@@ -75,8 +75,8 @@
     <PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.0.3-uno.92</Version>
     </PackageReference>
-    <PackageReference Include="Uno.UI" Version="3.7.4" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="3.7.4" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI" Version="3.8.11" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="3.8.11" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
     <PackageReference Include="uplink.NET">
@@ -86,10 +86,10 @@
       <Version>2.6.1283</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers">
-      <Version>0.9.9</Version>
+      <Version>0.9.10</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers.Contracts">
-      <Version>0.9.9</Version>
+      <Version>0.9.10</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="..\StorjPhotoGalleryUploader.Shared\StorjPhotoGalleryUploader.Shared.projitems" Label="Shared" />
