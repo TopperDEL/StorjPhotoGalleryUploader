@@ -80,16 +80,16 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="uplink.NET">
-      <Version>2.7.1590</Version>
+      <Version>2.7.1604</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.Droid">
-      <Version>2.7.1590</Version>
+      <Version>2.7.1604</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers">
-      <Version>0.9.10</Version>
+      <Version>0.9.11</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers.Contracts">
-      <Version>0.9.10</Version>
+      <Version>0.9.11</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
