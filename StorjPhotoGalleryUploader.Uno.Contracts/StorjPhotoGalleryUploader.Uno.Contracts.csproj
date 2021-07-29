@@ -11,8 +11,8 @@
     <RootNamespace>StorjPhotoGalleryUploader.Contracts</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="SkiaSharp" Version="2.80.2" />
-    <PackageReference Include="Uno.UI" Version="3.7.4" />
+    <PackageReference Include="SkiaSharp" Version="2.80.3" />
+    <PackageReference Include="Uno.UI" Version="3.9.1" />
     <PackageReference Include="uplink.NET.UnoHelpers.Contracts" Version="0.9.11" />
   </ItemGroup>
   <ItemGroup>

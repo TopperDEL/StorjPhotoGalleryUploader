@@ -12,9 +12,9 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Scriban" Version="3.8.1" />
-    <PackageReference Include="SkiaSharp" Version="2.80.2" />
+    <PackageReference Include="SkiaSharp" Version="2.80.3" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
-    <PackageReference Include="Uno.UI" Version="3.8.6" />
+    <PackageReference Include="Uno.UI" Version="3.9.1" />
     <PackageReference Include="uplink.NET" Version="2.7.1604" />
     <PackageReference Include="uplink.NET.UnoHelpers" Version="0.9.11" />
     <PackageReference Include="uplink.NET.UnoHelpers.Contracts" Version="0.9.11" />

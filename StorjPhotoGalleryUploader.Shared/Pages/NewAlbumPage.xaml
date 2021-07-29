@@ -28,7 +28,7 @@
 
         <Button Content="Add images..." Grid.Row="1" Grid.ColumnSpan="2" Command="{Binding AddImagesAsyncCommand}"/>
 
-        <GridView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding AlbumImages, Mode=OneWay}">
+        <GridView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding AlbumImages, Mode=OneWay}" CanReorderItems="True" AllowDrop="True" IsSwipeEnabled="True">
             <GridView.ItemTemplate>
                 <DataTemplate x:DataType="viewmodels:AlbumImageViewModel">
                     <Grid>
