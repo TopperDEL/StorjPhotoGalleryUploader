@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using uplink.NET.UnoHelpers.Contracts.Interfaces;
 using Windows.Storage;
 using Windows.UI.Xaml.Media.Imaging;
 
@@ -29,7 +30,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
             File = imageFile;
             using (var imageStream = await imageFile.OpenAsync(FileAccessMode.Read))
             {
-                var thumb = await ThumbnailGeneratorService.GenerateThumbnailFromImageAsync(imageStream.AsStream(), 500, 500);
+                var thumb = await ThumbnailGeneratorService.GenerateThumbnailForStreamAsync(imageStream.AsStream(), "image/jpeg", 500, 500);
                 await _imageThumbnail.SetSourceAsync(thumb.AsRandomAccessStream());
             }
         }

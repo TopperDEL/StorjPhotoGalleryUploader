@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage.Pickers;
 using System.Linq;
+using uplink.NET.UnoHelpers.Contracts.Interfaces;
 
 namespace StorjPhotoGalleryUploader.ViewModels
 {
@@ -61,7 +62,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                     using (var imageStream = await image.File.OpenReadAsync())
                     {
                         //Scaled 1
-                        var scaled1 = await ThumbnailGeneratorService.GenerateThumbnailFromImageAsync(imageStream.AsStream(), 1200, 750);
+                        var scaled1 = await ThumbnailGeneratorService.GenerateThumbnailForStreamAsync(imageStream.AsStream(), "image/jpeg", 1200, 750);
                         var uploadedScaled1 = await StoreService.PutObjectAsync(AppConfig, album, "pics/resized/1200x750/" + AlbumName + "/" + image.File.Name, scaled1);
                         if (!uploadedScaled1)
                         {
@@ -91,7 +92,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                     using (var imageStream = await image.File.OpenReadAsync())
                     {
                         //Scaled 2
-                        var scaled2 = await ThumbnailGeneratorService.GenerateThumbnailFromImageAsync(imageStream.AsStream(), 360, 225);
+                        var scaled2 = await ThumbnailGeneratorService.GenerateThumbnailForStreamAsync(imageStream.AsStream(), "image/jpeg", 360, 225);
                         var uploadedScaled2 = await StoreService.PutObjectAsync(AppConfig, album, "pics/resized/360x225/" + AlbumName + "/" + image.File.Name, scaled2);
                         if (!uploadedScaled2)
                         {
