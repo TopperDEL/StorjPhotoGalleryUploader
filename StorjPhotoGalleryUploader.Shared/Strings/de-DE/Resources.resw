@@ -124,4 +124,7 @@
   <data name="ApplicationName" xml:space="preserve">
     <value>Storj Foto-Gallery</value>
   </data>
+  <data name="PreparingForUpload.Text" xml:space="preserve">
+    <value>Bilder werden vorbereitet, bitte warten</value>
+  </data>
 </root>

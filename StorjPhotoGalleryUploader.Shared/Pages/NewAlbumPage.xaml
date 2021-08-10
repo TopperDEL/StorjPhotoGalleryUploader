@@ -7,25 +7,42 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="using:StorjPhotoGalleryUploader.ViewModels"
     xmlns:helper="using:uplink.NET.UnoHelpers.Controls"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:brushes="using:Microsoft.Toolkit.Uwp.UI.Media"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="120"/>
-        </Grid.ColumnDefinitions>
+    <Grid>
+        <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="120"/>
+            </Grid.ColumnDefinitions>
 
-        <TextBox Text="{Binding AlbumName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Album name" Grid.Row="0" Grid.Column="0" MinWidth="200" MaxWidth="400" Margin="5" BorderBrush="{StaticResource StorjBlueBrush}"/>
-        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
-            <Button Content="Save" VerticalAlignment="Bottom" Command="{Binding SaveCommand}" Margin="5" Background="{StaticResource StorjBlueBrush}" Foreground="White" CornerRadius="5"/>
-            <Button Content="Cancel" VerticalAlignment="Bottom" Command="{Binding CancelCommand}" Margin="5" Background="{StaticResource StorjBlueBrush}" Foreground="White" CornerRadius="5"/>
-        </StackPanel>
+            <TextBox Text="{Binding AlbumName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Header="Album name" Grid.Row="0" Grid.Column="0" MinWidth="200" MaxWidth="400" Margin="5" BorderBrush="{StaticResource StorjBlueBrush}"/>
+            <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="1">
+                <Button Content="Save" VerticalAlignment="Bottom" Command="{Binding SaveCommand}" Margin="5" Background="{StaticResource StorjBlueBrush}" Foreground="White" CornerRadius="5"/>
+                <Button Content="Cancel" VerticalAlignment="Bottom" Command="{Binding CancelCommand}" Margin="5" Background="{StaticResource StorjBlueBrush}" Foreground="White" CornerRadius="5"/>
+            </StackPanel>
 
-        <helper:AttachmentContainerControl Grid.Row="1" x:Name="AttachmentContainer"/>
+            <helper:AttachmentContainerControl Grid.Row="1" x:Name="AttachmentContainer"/>
+
+        </Grid>
+        <controls:Loading x:Name="LoadingControl" IsLoading="{Binding IsUploading}">
+            <controls:Loading.Background>
+                <brushes:AcrylicBrush BackgroundSource="Backdrop"
+                              TintColor="Black"
+                              TintOpacity="0.4"
+                              BlurAmount="8"/>
+            </controls:Loading.Background>
+            <StackPanel Orientation="Horizontal" Padding="12">
+                <ProgressRing IsActive="True" Margin="0,0,12,0" Foreground="{StaticResource StorjBlueBrush}" />
+                <TextBlock x:Uid="PreparingForUpload" Text="Preparing images for upload, please wait" VerticalAlignment="Center" Foreground="White" TextWrapping="Wrap" />
+            </StackPanel>
+        </controls:Loading>
     </Grid>
 </Page>
