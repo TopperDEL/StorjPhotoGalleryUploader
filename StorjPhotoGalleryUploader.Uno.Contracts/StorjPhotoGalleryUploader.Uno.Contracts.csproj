@@ -13,7 +13,7 @@
   <ItemGroup>
     <PackageReference Include="SkiaSharp" Version="2.80.3" />
     <PackageReference Include="Uno.UI" Version="3.9.1" />
-    <PackageReference Include="uplink.NET.UnoHelpers.Contracts" Version="0.9.14" />
+    <PackageReference Include="uplink.NET.UnoHelpers.Contracts" Version="0.9.19" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />

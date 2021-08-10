@@ -6,12 +6,12 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewmodels="using:StorjPhotoGalleryUploader.ViewModels"
+    xmlns:helper="using:uplink.NET.UnoHelpers.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="10">
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
             <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -26,28 +26,6 @@
             <Button Content="Cancel" VerticalAlignment="Bottom" Command="{Binding CancelCommand}" Margin="5" Background="{StaticResource StorjBlueBrush}" Foreground="White" CornerRadius="5"/>
         </StackPanel>
 
-        <Button Content="Add images..." Grid.Row="1" Grid.ColumnSpan="2" Command="{Binding AddImagesAsyncCommand}"/>
-
-        <GridView Grid.Row="2" Grid.ColumnSpan="2" ItemsSource="{Binding AlbumImages, Mode=OneWay}" CanReorderItems="True" AllowDrop="True" IsSwipeEnabled="True">
-            <GridView.ItemTemplate>
-                <DataTemplate x:DataType="viewmodels:AlbumImageViewModel">
-                    <Grid>
-                        <Image Source="{Binding ImageThumbnail}" MaxWidth="500" MaxHeight="500" MinWidth="300" MinHeight="300"/>
-                        <Rectangle Fill="White" Opacity="0.7" Visibility="{Binding IsUploaded, Converter={StaticResource TrueIsVisibleConverter}}"/>
-                        <Rectangle Fill="White" Opacity="0.7" Visibility="{Binding FailedUploading, Converter={StaticResource TrueIsVisibleConverter}}"/>
-                        <Rectangle Fill="White" Opacity="0.5" Visibility="{Binding IsUploading, Converter={StaticResource TrueIsVisibleConverter}}"/>
-                        <Grid Visibility="{Binding IsUploading, Converter={StaticResource TrueIsVisibleConverter}}">
-                            <ProgressRing Foreground="{StaticResource StorjBlueBrush}"/>
-                        </Grid>
-                        <Viewbox MaxHeight="50" MaxWidth="50" Visibility="{Binding IsUploaded, Converter={StaticResource TrueIsVisibleConverter}}" >
-                            <SymbolIcon Symbol="Accept" Foreground="Green"/>
-                        </Viewbox>
-                        <Viewbox MaxHeight="50" MaxWidth="50" Visibility="{Binding FailedUploading, Converter={StaticResource TrueIsVisibleConverter}}" >
-                            <SymbolIcon Symbol="Cancel" Foreground="Red"/>
-                        </Viewbox>
-                    </Grid>
-                </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>
+        <helper:AttachmentContainerControl Grid.Row="1" x:Name="AttachmentContainer"/>
     </Grid>
 </Page>

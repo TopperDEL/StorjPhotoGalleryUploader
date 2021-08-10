@@ -52,6 +52,7 @@ namespace StorjPhotoGalleryUploader.Helper
             services.AddTransient<IStoreService, StorjStoreService>();
             services.AddTransient<IThumbnailGeneratorService, ThumbnailGeneratorService>();
             services.AddTransient<IPrepareBucketService, PrepareBucketService>();
+            services.AddTransient<IAttachmentSelectService, AttachmentSelectService>();
 
             //ViewModels
             services.AddTransient<AlbumListViewModel>();
@@ -59,9 +60,11 @@ namespace StorjPhotoGalleryUploader.Helper
             services.AddTransient<BucketCheckViewModel>();
             services.AddTransient<LoginViewModel>();
             services.AddTransient<CurrentUploadsViewModel>();
+            services.AddTransient<AttachmentContainerViewModel>();
 
             //ViewModel-Factories
             services.AddSingleton<IAlbumImageViewModelFactory, AlbumImageViewModelFactory>();
+            services.AddSingleton<IAttachmentViewModelFactory, AttachmentViewModelFactory>();
 
             return services.BuildServiceProvider(true);
         }
