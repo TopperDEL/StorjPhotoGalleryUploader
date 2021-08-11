@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddContent.Content" xml:space="preserve">
+    <value>Add....</value>
+  </data>
   <data name="ApplicationDescription" xml:space="preserve">
     <value>This app enables you to upload pictures from your local device to the Storj DCS (Decentralised Cloud Storage) and to generate shareable Albums of them. The pictures can only be seen by those you give explicit access. Not even Storj is able to access your pictures!</value>
   </data>

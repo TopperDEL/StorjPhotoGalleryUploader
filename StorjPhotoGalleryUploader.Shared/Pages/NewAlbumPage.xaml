@@ -32,7 +32,7 @@
             <helper:AttachmentContainerControl Grid.Row="1" x:Name="AttachmentContainer"/>
 
         </Grid>
-        <controls:Loading x:Name="LoadingControl" IsLoading="{Binding IsUploading}">
+        <controls:Loading x:Name="LoadingControl" IsLoading="{Binding IsUploading}" Visibility="{Binding IsUploading, Converter={StaticResource TrueIsVisibleConverter}}">
             <controls:Loading.Background>
                 <brushes:AcrylicBrush BackgroundSource="Backdrop"
                               TintColor="Black"
