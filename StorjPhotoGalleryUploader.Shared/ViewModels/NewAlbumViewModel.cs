@@ -13,6 +13,7 @@ using System.Linq;
 using uplink.NET.UnoHelpers.Contracts.Interfaces;
 using uplink.NET.UnoHelpers.Contracts.Models;
 using uplink.NET.UnoHelpers.Models;
+using uplink.NET.UnoHelpers.Messages;
 
 namespace StorjPhotoGalleryUploader.ViewModels
 {
@@ -23,7 +24,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
     [Inject(typeof(IThumbnailGeneratorService))]
     [Inject(typeof(uplink.NET.UnoHelpers.Contracts.Models.AppConfig))]
     [ViewModel]
-    public partial class NewAlbumViewModel
+    public partial class NewAlbumViewModel : IEventSubscriber<AttachmentAddedMessage>
     {
         [Property] private string _albumName;
         [Property] private bool _isUploading;
@@ -115,12 +116,8 @@ namespace StorjPhotoGalleryUploader.ViewModels
         {
             if (IsUploading)
                 return false;
-            if (GetAttachmentsFunction == null)
-                return false;
 
-            var attachments = GetAttachmentsFunction();
-
-            return !string.IsNullOrEmpty(AlbumName) && !AlbumName.Contains("/") && attachments.Count > 0;
+            return !string.IsNullOrEmpty(AlbumName) && !AlbumName.Contains("/") && _hasAttachments;
         }
 
         [Command(CanExecuteMethod = nameof(CanCancel))]
@@ -132,6 +129,14 @@ namespace StorjPhotoGalleryUploader.ViewModels
         private bool CanCancel()
         {
             return !IsUploading;
+        }
+
+        private bool _hasAttachments;
+
+        public void OnEvent(AttachmentAddedMessage eventData)
+        {
+            _hasAttachments = true;
+            SaveCommand.RaiseCanExecuteChanged();
         }
     }
 }

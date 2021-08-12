@@ -137,10 +137,10 @@
       <Version>2.7.1604</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers">
-      <Version>0.9.19</Version>
+      <Version>0.9.21</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers.Contracts">
-      <Version>0.9.19</Version>
+      <Version>0.9.21</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
