@@ -16,6 +16,7 @@
                 <ResourceDictionary Source="Resources/UnoHelpers/Converters.xaml" />
                 <ResourceDictionary Source="Resources/Converters.xaml"/>
                 <ResourceDictionary Source="Resources/Styles.xaml"/>
+                <ResourceDictionary Source="Resources/FigmaStyles.xaml"/>
             </controls:XamlControlsResources.MergedDictionaries>
         </controls:XamlControlsResources>
     </Application.Resources>

@@ -1,0 +1,40 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:viewModels="using:StorjPhotoGalleryUploader.ViewModels">
+    <DataTemplate x:Key="AlbumCard">
+        <Border BorderBrush="#E4ECFA" BorderThickness="7" CornerRadius="14" Height="419" Width="336" Margin="5">
+            <Grid Background="White">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="228"/>
+                    <RowDefinition Height="100"/>
+                    <RowDefinition Height="77"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="112"/>
+                    <ColumnDefinition Width="112"/>
+                    <ColumnDefinition Width="112"/>
+                </Grid.ColumnDefinitions>
+
+                <Image Source="https://picsum.photos/seed/test1/313/235" Stretch="UniformToFill"
+                   Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
+                <Image Source="https://picsum.photos/seed/test2/313/235" Stretch="UniformToFill"
+                   Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1"/>
+                <Image Source="https://picsum.photos/seed/test3/313/235" Stretch="UniformToFill" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1"/>
+                <Image Source="https://picsum.photos/seed/test4/313/235" Stretch="UniformToFill" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1"/>
+                <StackPanel Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="3" Padding="14,18,0,0">
+                    <TextBlock Text="{Binding Name}" FontFamily="Inter" FontSize="18" FontWeight="Bold"/>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="15 shots" FontFamily="Inter" FontWeight="Light" FontSize="12" Foreground="#777777" Padding="0,6,0,0" />
+                        <Image Source="/Assets/SingleDot.png" Margin="9,6,9,0"/>
+                        <TextBlock Text="June 2020" FontFamily="Inter" FontWeight="Light" FontSize="12" Foreground="#777777" Padding="0,6,0,0" />
+                    </StackPanel>
+                </StackPanel>
+                <Button Background="White" Foreground="#ABABAB" Height="40" BorderThickness="0"
+                    Grid.Row="3" Grid.Column="3" Margin="45,0,0,0">
+                    <Image Source="/Assets/DotsMenu.png" Width="22" Height="6" />
+                </Button>
+            </Grid>
+        </Border>
+    </DataTemplate>
+</ResourceDictionary>
