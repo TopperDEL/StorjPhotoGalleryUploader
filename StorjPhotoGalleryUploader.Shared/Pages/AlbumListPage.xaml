@@ -37,6 +37,9 @@
                 </LinearGradientBrush>
             </Grid.Background>
         </Grid>
+        <Button Width="62" Height="62" Background="#286CFF">
+            <Image Source="/Assets/Plus.png" Width="21" Height="21" />
+        </Button>
         <!--<ctrls:CurrentUploadsButton Grid.Row="2" Clicked="CurrentUploadsButton_Clicked" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>-->
     </Grid>
 </Page>
