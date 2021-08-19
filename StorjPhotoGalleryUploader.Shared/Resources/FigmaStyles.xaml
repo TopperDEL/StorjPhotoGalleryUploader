@@ -27,7 +27,7 @@
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="15 shots" FontFamily="Inter" FontWeight="Light" FontSize="12" Foreground="#777777" Padding="0,6,0,0" />
                         <Image Source="/Assets/SingleDot.png" Margin="9,6,9,0"/>
-                        <TextBlock Text="June 2020" FontFamily="Inter" FontWeight="Light" FontSize="12" Foreground="#777777" Padding="0,6,0,0" />
+                        <TextBlock Text="{Binding CreationDate, Converter={StaticResource DateTimeConverter}}" FontFamily="Inter" FontWeight="Light" FontSize="12" Foreground="#777777" Padding="0,6,0,0" />
                     </StackPanel>
                 </StackPanel>
                 <Button Background="White" Foreground="#ABABAB" Height="40" BorderThickness="0"

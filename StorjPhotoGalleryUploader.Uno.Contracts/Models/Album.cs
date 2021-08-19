@@ -9,5 +9,6 @@ namespace StorjPhotoGalleryUploader.Contracts.Models
     public class Album
     {
         public string Name { get; set; }
+        public DateTime CreationDate { get; set; }
     }
 }

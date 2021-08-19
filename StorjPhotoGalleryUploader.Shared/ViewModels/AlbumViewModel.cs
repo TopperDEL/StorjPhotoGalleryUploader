@@ -9,6 +9,8 @@ namespace StorjPhotoGalleryUploader.ViewModels
     [ViewModel(typeof(Album))]
     public partial class AlbumViewModel
     {
+        [Property] int _imageCount;
+
         internal AlbumViewModel(Album album)
         {
             Model = album;
