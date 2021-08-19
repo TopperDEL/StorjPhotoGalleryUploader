@@ -26,7 +26,8 @@
             <!--<RowDefinition Height="60"/>-->
         </Grid.RowDefinitions>
 
-        <Button Content="New album" Grid.Row="0" HorizontalAlignment="Center" Command="{Binding NavigateNewAlbumCommand}" Background="{StaticResource StorjBlueBrush}" Foreground="White" CornerRadius="5"/>
+        <TextBlock Text="Albums" Grid.Row="0" FontFamily="Inter" HorizontalAlignment="Center" FontSize="34" FontWeight="ExtraBold" Foreground="Black" 
+                   Margin="0,20,200,0"/>
         <ProgressRing Grid.Row="1" IsActive="{Binding IsLoading}" Foreground="{StaticResource StorjBlueBrush}"/>
         <ListView Grid.Row="1" ItemsSource="{Binding AlbumList, Mode=OneWay}" HorizontalAlignment="Center" ItemTemplate="{StaticResource AlbumCard}" SelectionMode="None"/>
         <Grid Grid.Row="1" IsHitTestVisible="False" Height="104" VerticalAlignment="Bottom">
@@ -37,7 +38,9 @@
                 </LinearGradientBrush>
             </Grid.Background>
         </Grid>
-        <Button Width="62" Height="62" Background="#286CFF">
+        <Button Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                Margin="0,0,0,34" Command="{Binding NavigateNewAlbumCommand}"
+            Width="62" Height="62" Background="#286CFF" CornerRadius="31">
             <Image Source="/Assets/Plus.png" Width="21" Height="21" />
         </Button>
         <!--<ctrls:CurrentUploadsButton Grid.Row="2" Clicked="CurrentUploadsButton_Clicked" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>-->
