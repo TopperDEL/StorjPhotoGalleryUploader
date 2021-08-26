@@ -1,6 +1,7 @@
 ﻿using StorjPhotoGalleryUploader.Contracts.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,5 +14,7 @@ namespace StorjPhotoGalleryUploader.Contracts.Interfaces
         Task<Album> CreateAlbumAsync(string albumName, List<string> imageNames);
         Task<bool> RefreshAlbumIndex(List<Album> albums);
         Task<AlbumInfo> GetAlbumInfoAsync(string albumName);
+        Task<List<string>> GetImageKeysAsync(string albumName, int requestedImageCount);
+        Task<Stream> GetImageStreamAsync(string key); 
     }
 }

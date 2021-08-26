@@ -150,5 +150,25 @@ namespace StorjPhotoGalleryUploader.Services
             info.CreationDate = albumImages.Items.Select(c => c.SystemMetadata).OrderBy(m => m.Created).FirstOrDefault().Created;
             return info;
         }
+
+        public async Task<List<string>> GetImageKeysAsync(string albumName, int requestedImageCount)
+        {
+            ListObjectsOptions listOptions = new ListObjectsOptions();
+            listOptions.Recursive = true;
+            listOptions.Prefix = "pics/resized/360x225/" + albumName + "/";
+            listOptions.System = true;
+            var albumImages = await _objectService.ListObjectsAsync(_bucket, listOptions);
+
+            return albumImages.Items.Take(requestedImageCount).Select(i => i.Key).ToList();
+        }
+
+        public async Task<Stream> GetImageStreamAsync(string key)
+        {
+            await InitAsync();
+
+            var objectInfo = await _objectService.GetObjectAsync(_bucket, key);
+
+            return new DownloadStream(_bucket, (int)objectInfo.SystemMetadata.ContentLength, key);
+        }
     }
 }

@@ -16,12 +16,12 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Image Source="https://picsum.photos/seed/test1/313/235" Stretch="UniformToFill"
+                <Image Source="{Binding Image1, Mode=OneWay}" Stretch="UniformToFill"
                    Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
-                <Image Source="https://picsum.photos/seed/test2/313/235" Stretch="UniformToFill"
+                <Image Source="{Binding Image2, Mode=OneWay}" Stretch="UniformToFill"
                    Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1"/>
-                <Image Source="https://picsum.photos/seed/test3/313/235" Stretch="UniformToFill" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1"/>
-                <Image Source="https://picsum.photos/seed/test4/313/235" Stretch="UniformToFill" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1"/>
+                <Image Source="{Binding Image3, Mode=OneWay}" Stretch="UniformToFill" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1"/>
+                <Image Source="{Binding Image4, Mode=OneWay}" Stretch="UniformToFill" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1"/>
                 <StackPanel Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="3" Padding="14,18,0,0">
                     <TextBlock Text="{Binding Name}" FontFamily="Inter" FontSize="18" FontWeight="Bold"/>
                     <StackPanel Orientation="Horizontal">

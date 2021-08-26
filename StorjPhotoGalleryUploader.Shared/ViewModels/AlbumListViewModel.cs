@@ -32,6 +32,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                     AlbumList.Add(vm);
 
                     await vm.RefreshImageCountAsync();
+                    await vm.LoadImagesAsync();
                 }
             }
             finally
