@@ -27,7 +27,7 @@
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="60"/>
         </Grid.ColumnDefinitions>
 
         <TextBlock Grid.Column="0" Grid.Row="0" Text="Albums" FontFamily="Inter" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="34" FontWeight="ExtraBold" Foreground="Black" 
