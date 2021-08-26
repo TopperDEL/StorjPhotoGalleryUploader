@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:viewModels="using:StorjPhotoGalleryUploader.ViewModels">
     <DataTemplate x:Key="AlbumCard">
-        <Border BorderBrush="#E4ECFA" BorderThickness="7" CornerRadius="14" Height="419" Width="336" Margin="5">
+        <Border BorderBrush="#E4ECFA" BorderThickness="7" CornerRadius="14" Height="419" Margin="0,5">
             <Grid Background="White">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="228"/>

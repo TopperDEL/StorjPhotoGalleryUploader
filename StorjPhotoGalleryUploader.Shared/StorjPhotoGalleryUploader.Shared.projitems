@@ -85,6 +85,7 @@
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\DotsMenu.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Plus.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\PlusBlue.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SingleDot.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\StorjLogo.png" />

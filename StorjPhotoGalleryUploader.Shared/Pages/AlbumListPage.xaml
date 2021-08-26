@@ -19,18 +19,26 @@
         </Interactions:EventTriggerBehavior>
     </Interactivity:Interaction.Behaviors>
 
-    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="10">
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0" MaxWidth="400">
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
-            <!--<RowDefinition Height="60"/>-->
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Albums" Grid.Row="0" FontFamily="Inter" HorizontalAlignment="Center" FontSize="34" FontWeight="ExtraBold" Foreground="Black" 
-                   Margin="0,20,200,0"/>
-        <ProgressRing Grid.Row="1" IsActive="{Binding IsLoading}" Foreground="{StaticResource StorjBlueBrush}"/>
-        <ListView Grid.Row="1" ItemsSource="{Binding AlbumList, Mode=OneWay}" HorizontalAlignment="Center" ItemTemplate="{StaticResource AlbumCard}" SelectionMode="None"/>
-        <Grid Grid.Row="1" IsHitTestVisible="False" Height="104" VerticalAlignment="Bottom">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="120"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Albums" FontFamily="Inter" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="34" FontWeight="ExtraBold" Foreground="Black" 
+                       Margin="25,20"/>
+        <Button Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" BorderThickness="0"
+                Command="{Binding NavigateNewAlbumCommand}" Foreground="#286CFF" Background="White" >
+            <Image Source="/Assets/PlusBlue.png" Width="21" Height="21"/>
+        </Button>
+        <ProgressRing Grid.Row="1" Grid.ColumnSpan="2" IsActive="{Binding IsLoading}" Foreground="{StaticResource StorjBlueBrush}"/>
+        <ListView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding AlbumList, Mode=OneWay}" HorizontalAlignment="Center" ItemTemplate="{StaticResource AlbumCard}" SelectionMode="None"/>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2" IsHitTestVisible="False" Height="104" VerticalAlignment="Bottom">
             <Grid.Background>
                 <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
                     <GradientStop Color="Transparent" Offset="0"/>
@@ -38,11 +46,6 @@
                 </LinearGradientBrush>
             </Grid.Background>
         </Grid>
-        <Button Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center"
-                Margin="0,0,0,34" Command="{Binding NavigateNewAlbumCommand}"
-            Width="62" Height="62" Background="#286CFF" CornerRadius="31">
-            <Image Source="/Assets/Plus.png" Width="21" Height="21" />
-        </Button>
         <!--<ctrls:CurrentUploadsButton Grid.Row="2" Clicked="CurrentUploadsButton_Clicked" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>-->
     </Grid>
 </Page>
