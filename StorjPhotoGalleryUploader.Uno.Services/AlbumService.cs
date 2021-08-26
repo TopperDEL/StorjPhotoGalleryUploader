@@ -99,8 +99,10 @@ namespace StorjPhotoGalleryUploader.Services
             var albumItems = await _objectService.ListObjectsAsync(_bucket, listOptions);
             foreach (var albumItem in albumItems.Items.Where(i => i.IsPrefix))
             {
-                albums.Add(new Album() { Name = albumItem.Key.Replace("pics/original/", "").Replace("/", ""),
-                                         CreationDate = albumItem.SystemMetadata.Created });
+                albums.Add(new Album()
+                {
+                    Name = albumItem.Key.Replace("pics/original/", "").Replace("/", "")
+                });
             }
 
             return albums;
@@ -121,7 +123,7 @@ namespace StorjPhotoGalleryUploader.Services
 
                     try
                     {
-                        var result = await homepageIndexTemplate.RenderAsync(new { Albums = albums.Select(a=>new { Name = a.Name, CoverImage = "cover_image.jpg" }).ToList() });
+                        var result = await homepageIndexTemplate.RenderAsync(new { Albums = albums.Select(a => new { Name = a.Name, CoverImage = "cover_image.jpg" }).ToList() });
 
                         await _uploadQueueService.AddObjectToUploadQueueAsync(_bucket.Name, "/index.html", accessGrant, Encoding.UTF8.GetBytes(result), "/index.html");
                     }
@@ -133,6 +135,20 @@ namespace StorjPhotoGalleryUploader.Services
             }
 
             return true;
+        }
+
+        public async Task<AlbumInfo> GetAlbumInfoAsync(string albumName)
+        {
+            ListObjectsOptions listOptions = new ListObjectsOptions();
+            listOptions.Recursive = true;
+            listOptions.Prefix = "pics/original/" + albumName+"/";
+            listOptions.System = true;
+            var albumImages = await _objectService.ListObjectsAsync(_bucket, listOptions);
+
+            AlbumInfo info = new AlbumInfo();
+            info.ImageCount = albumImages.Items.Count;
+            info.CreationDate = albumImages.Items.Select(c => c.SystemMetadata).OrderBy(m => m.Created).FirstOrDefault().Created;
+            return info;
         }
     }
 }

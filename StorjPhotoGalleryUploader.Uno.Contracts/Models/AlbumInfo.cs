@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace StorjPhotoGalleryUploader.Contracts.Models
 {
-    public class Album
+    public class AlbumInfo
     {
-        public string Name { get; set; }
+        public int ImageCount { get; set; }
+        public DateTime CreationDate { get; set; }
     }
 }

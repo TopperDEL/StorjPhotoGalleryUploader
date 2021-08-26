@@ -28,7 +28,10 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 var albums = await AlbumService.ListAlbumsAsync();
                 foreach (var album in albums)
                 {
-                    AlbumList.Add( new AlbumViewModel(album));
+                    var vm = new AlbumViewModel(album, AlbumService);
+                    AlbumList.Add(vm);
+
+                    await vm.RefreshImageCountAsync();
                 }
             }
             finally

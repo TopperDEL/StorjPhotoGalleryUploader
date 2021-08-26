@@ -130,4 +130,7 @@
   <data name="PreparingForUpload.Text" xml:space="preserve">
     <value>Bilder werden vorbereitet, bitte warten</value>
   </data>
+  <data name="Shots.Text" xml:space="preserve">
+    <value>Fotos</value>
+  </data>
 </root>
