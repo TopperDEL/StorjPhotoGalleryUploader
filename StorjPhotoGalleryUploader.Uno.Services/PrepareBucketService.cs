@@ -45,13 +45,13 @@ namespace StorjPhotoGalleryUploader.Services
             {
                 try
                 {
-                    _currentBucket = await _bucketService.GetBucketAsync(_appConfig.BucketName);
+                    _currentBucket = await _bucketService.GetBucketAsync(_appConfig.BucketName).ConfigureAwait(false);
                 }
                 catch
                 {
                     try
                     {
-                        _currentBucket = await _bucketService.EnsureBucketAsync(_appConfig.BucketName);
+                        _currentBucket = await _bucketService.EnsureBucketAsync(_appConfig.BucketName).ConfigureAwait(false);
                     }
                     catch
                     {
@@ -70,7 +70,7 @@ namespace StorjPhotoGalleryUploader.Services
                 var listOptions = new ListObjectsOptions();
                 listOptions.Recursive = true;
                 listOptions.Prefix = "assets/";
-                var content = await _objectService.ListObjectsAsync(_currentBucket, listOptions);
+                var content = await _objectService.ListObjectsAsync(_currentBucket, listOptions).ConfigureAwait(false);
 
                 foreach (var necessaryFile in _assetNames)
                 {
@@ -101,7 +101,7 @@ namespace StorjPhotoGalleryUploader.Services
                 if (!success)
                     return new BucketPrepareResult() { Successfull = false, PrepareErrorMessage = "Wrong ApiKey" };
 
-                var currentUploads = await _uploadQueueService.GetAwaitingUploadsAsync();
+                var currentUploads = await _uploadQueueService.GetAwaitingUploadsAsync().ConfigureAwait(false);
                 int current = 0;
                 foreach (var name in _assetNames)
                 {
@@ -113,7 +113,7 @@ namespace StorjPhotoGalleryUploader.Services
                         if (currentUploads.Where(u => u.AccessGrant == accessGrant && u.Key == fileName && u.BucketName == _currentBucket.Name).Count() == 0)
                         {
                             //File is not yet in upload queue for this access => upload it
-                            await _uploadQueueService.AddObjectToUploadQueueAsync(_currentBucket.Name, fileName, accessGrant, stream, fileName);
+                            await _uploadQueueService.AddObjectToUploadQueueAsync(_currentBucket.Name, fileName, accessGrant, stream, fileName).ConfigureAwait(false);
                         }
                     }
 

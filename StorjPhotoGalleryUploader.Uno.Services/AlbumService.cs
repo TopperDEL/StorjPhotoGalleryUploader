@@ -37,13 +37,13 @@ namespace StorjPhotoGalleryUploader.Services
             {
                 try
                 {
-                    _bucket = await _bucketService.EnsureBucketAsync(_appConfig.BucketName);
+                    _bucket = await _bucketService.EnsureBucketAsync(_appConfig.BucketName).ConfigureAwait(false);
                 }
                 catch
                 {
                     try
                     {
-                        _bucket = await _bucketService.GetBucketAsync(_appConfig.BucketName);
+                        _bucket = await _bucketService.GetBucketAsync(_appConfig.BucketName).ConfigureAwait(false);
                     }
                     catch
                     {
@@ -70,9 +70,9 @@ namespace StorjPhotoGalleryUploader.Services
 
                     try
                     {
-                        var result = await albumIndexTemplate.RenderAsync(new { AlbumName = albumName, ImageNames = imageNames });
+                        var result = await albumIndexTemplate.RenderAsync(new { AlbumName = albumName, ImageNames = imageNames }).ConfigureAwait(false);
 
-                        await _uploadQueueService.AddObjectToUploadQueueAsync(_bucket.Name, albumName + "/index.html", accessGrant, Encoding.UTF8.GetBytes(result), albumName + "/index.html");
+                        await _uploadQueueService.AddObjectToUploadQueueAsync(_bucket.Name, albumName + "/index.html", accessGrant, Encoding.UTF8.GetBytes(result), albumName + "/index.html").ConfigureAwait(false);
                     }
                     catch
                     {
@@ -96,7 +96,7 @@ namespace StorjPhotoGalleryUploader.Services
             listOptions.Recursive = false;
             listOptions.Prefix = "pics/original/";
             listOptions.System = true;
-            var albumItems = await _objectService.ListObjectsAsync(_bucket, listOptions);
+            var albumItems = await _objectService.ListObjectsAsync(_bucket, listOptions).ConfigureAwait(false);
             foreach (var albumItem in albumItems.Items.Where(i => i.IsPrefix))
             {
                 albums.Add(new Album()
@@ -125,7 +125,7 @@ namespace StorjPhotoGalleryUploader.Services
                     {
                         var result = await homepageIndexTemplate.RenderAsync(new { Albums = albums.Select(a => new { Name = a.Name, CoverImage = "cover_image.jpg" }).ToList() });
 
-                        await _uploadQueueService.AddObjectToUploadQueueAsync(_bucket.Name, "/index.html", accessGrant, Encoding.UTF8.GetBytes(result), "/index.html");
+                        await _uploadQueueService.AddObjectToUploadQueueAsync(_bucket.Name, "/index.html", accessGrant, Encoding.UTF8.GetBytes(result), "/index.html").ConfigureAwait(false);
                     }
                     catch
                     {
@@ -143,7 +143,7 @@ namespace StorjPhotoGalleryUploader.Services
             listOptions.Recursive = true;
             listOptions.Prefix = "pics/original/" + albumName+"/";
             listOptions.System = true;
-            var albumImages = await _objectService.ListObjectsAsync(_bucket, listOptions);
+            var albumImages = await _objectService.ListObjectsAsync(_bucket, listOptions).ConfigureAwait(false);
 
             AlbumInfo info = new AlbumInfo();
             info.ImageCount = albumImages.Items.Count;
@@ -157,7 +157,7 @@ namespace StorjPhotoGalleryUploader.Services
             listOptions.Recursive = true;
             listOptions.Prefix = "pics/resized/360x225/" + albumName + "/";
             listOptions.System = true;
-            var albumImages = await _objectService.ListObjectsAsync(_bucket, listOptions);
+            var albumImages = await _objectService.ListObjectsAsync(_bucket, listOptions).ConfigureAwait(false);
 
             return albumImages.Items.Take(requestedImageCount).Select(i => i.Key).ToList();
         }
@@ -166,7 +166,7 @@ namespace StorjPhotoGalleryUploader.Services
         {
             await InitAsync();
 
-            var objectInfo = await _objectService.GetObjectAsync(_bucket, key);
+            var objectInfo = await _objectService.GetObjectAsync(_bucket, key).ConfigureAwait(false);
 
             return new DownloadStream(_bucket, (int)objectInfo.SystemMetadata.ContentLength, key);
         }
