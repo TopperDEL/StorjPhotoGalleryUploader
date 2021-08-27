@@ -106,7 +106,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
             {
                 var image = new BitmapImage();
 #if WINDOWS_UWP
-                var stream = (await AlbumService.GetImageStreamAsync(_images[0])).AsRandomAccessStream();
+                var stream = (await AlbumService.GetImageStreamAsync(_images[imageNumber-1])).AsRandomAccessStream();
                 await image.SetSourceAsync(stream);
 
 #else
