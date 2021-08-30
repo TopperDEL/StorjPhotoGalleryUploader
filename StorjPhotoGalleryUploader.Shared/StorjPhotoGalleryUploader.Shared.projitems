@@ -21,7 +21,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\SkiaSharpImageControl.xaml.cs">
       <DependentUpon>SkiaSharpImageControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Converter\AsyncLoadedAndCachedImageConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converter\DateTimeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converter\TrueIsCollapsedConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converter\TrueIsVisibleConverter.cs" />
