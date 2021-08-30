@@ -1,27 +1,12 @@
 ﻿using SkiaSharp;
 using StorjPhotoGalleryUploader.Contracts.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Uno;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
-using Windows.UI.Xaml.Navigation;
 using StorjPhotoGalleryUploader.Helper;
 using System.Threading.Tasks;
 using MonkeyCache.FileStore;
 using System.Buffers;
-
-// The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
 namespace StorjPhotoGalleryUploader.Controls
 {
@@ -49,7 +34,7 @@ namespace StorjPhotoGalleryUploader.Controls
             skiaCanvas.PaintSurface += SkiaCanvas_PaintSurface;
         }
 
-        private async void SkiaCanvas_PaintSurface(object sender, SkiaSharp.Views.UWP.SKPaintSurfaceEventArgs e)
+        private void SkiaCanvas_PaintSurface(object sender, SkiaSharp.Views.UWP.SKPaintSurfaceEventArgs e)
         {
             if (_skiaBmp != null)
             {
@@ -63,7 +48,6 @@ namespace StorjPhotoGalleryUploader.Controls
             SkiaSharpImageControl control = d as SkiaSharpImageControl;
             control.OnStorjObjectKeyChanged(e);
         }
-
 
         private async void OnStorjObjectKeyChanged(DependencyPropertyChangedEventArgs e)
         {
