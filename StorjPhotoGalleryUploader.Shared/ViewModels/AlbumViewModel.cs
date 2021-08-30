@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using uplink.NET.Interfaces;
 using Windows.UI.Xaml.Media.Imaging;
+using System.Linq;
 
 namespace StorjPhotoGalleryUploader.ViewModels
 {
@@ -38,11 +39,13 @@ namespace StorjPhotoGalleryUploader.ViewModels
 
         public async Task LoadImagesAsync()
         {
-            var images = await AlbumService.GetImageKeysAsync(Model.Name, 4);
-
+            var images = await AlbumService.GetImageKeysAsync(Model.Name, 4, ImageResolution.Small); 
+            
             if (images.Count >= 1)
             {
-                Image1 = images[0];
+                //First image with higher resolution
+                Image1 = images[0].Replace(ImageResolution.Small, ImageResolution.Medium);
+
                 OnPropertyChanged(nameof(Image1));
             }
             if (images.Count >= 2)

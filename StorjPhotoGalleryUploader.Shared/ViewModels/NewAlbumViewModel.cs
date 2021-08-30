@@ -14,6 +14,7 @@ using uplink.NET.UnoHelpers.Contracts.Interfaces;
 using uplink.NET.UnoHelpers.Contracts.Models;
 using uplink.NET.UnoHelpers.Models;
 using uplink.NET.UnoHelpers.Messages;
+using StorjPhotoGalleryUploader.Contracts.Models;
 
 namespace StorjPhotoGalleryUploader.ViewModels
 {
@@ -52,7 +53,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                     using (var stream = await image.GetAttachmentStreamAsync())
                     {
                         //Original
-                        var uploadedOriginal = await StoreService.PutObjectAsync(AppConfig, album, "pics/original/" + AlbumName + "/" + image.Filename, stream);
+                        var uploadedOriginal = await StoreService.PutObjectAsync(AppConfig, album, "pics/" + ImageResolution.Original + AlbumName + "/" + image.Filename, stream);
                         if (!uploadedOriginal)
                         {
                             //ToDo: Raise error
@@ -64,7 +65,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                     {
                         //Scaled 1
                         var scaled1 = await ThumbnailGeneratorService.GenerateThumbnailForStreamAsync(stream, "image/jpeg", 1200, 750);
-                        var uploadedScaled1 = await StoreService.PutObjectAsync(AppConfig, album, "pics/resized/1200x750/" + AlbumName + "/" + image.Filename, scaled1);
+                        var uploadedScaled1 = await StoreService.PutObjectAsync(AppConfig, album, "pics/" + ImageResolution.Medium + "/" + AlbumName + "/" + image.Filename, scaled1);
                         if (!uploadedScaled1)
                         {
                             //ToDo: Raise error
@@ -76,7 +77,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                         if (!coverIsUploaded)
                         {
                             scaled1.Position = 0;
-                            var uploadedScaled2 = await StoreService.PutObjectAsync(AppConfig, album, "pics/resized/1200x750/" + AlbumName + "/cover_image.jpg", scaled1);
+                            var uploadedScaled2 = await StoreService.PutObjectAsync(AppConfig, album, "pics/" + ImageResolution.Medium + "/" + AlbumName + "/cover_image.jpg", scaled1);
                             if (!uploadedScaled2)
                             {
                                 //ToDo: Raise error
@@ -90,7 +91,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                     {
                         //Scaled 2
                         var scaled2 = await ThumbnailGeneratorService.GenerateThumbnailForStreamAsync(stream, "image/jpeg", 360, 225);
-                        var uploadedScaled3 = await StoreService.PutObjectAsync(AppConfig, album, "pics/resized/360x225/" + AlbumName + "/" + image.Filename, scaled2);
+                        var uploadedScaled3 = await StoreService.PutObjectAsync(AppConfig, album, "pics/" + ImageResolution.Small + "/" + AlbumName + "/" + image.Filename, scaled2);
                         if (!uploadedScaled3)
                         {
                             //ToDo: Raise error

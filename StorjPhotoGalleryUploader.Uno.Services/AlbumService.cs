@@ -141,7 +141,7 @@ namespace StorjPhotoGalleryUploader.Services
         {
             ListObjectsOptions listOptions = new ListObjectsOptions();
             listOptions.Recursive = true;
-            listOptions.Prefix = "pics/original/" + albumName+"/";
+            listOptions.Prefix = "pics/original/" + albumName + "/";
             listOptions.System = true;
             var albumImages = await _objectService.ListObjectsAsync(_bucket, listOptions).ConfigureAwait(false);
 
@@ -151,11 +151,11 @@ namespace StorjPhotoGalleryUploader.Services
             return info;
         }
 
-        public async Task<List<string>> GetImageKeysAsync(string albumName, int requestedImageCount)
+        public async Task<List<string>> GetImageKeysAsync(string albumName, int requestedImageCount, ImageResolution resolution)
         {
             ListObjectsOptions listOptions = new ListObjectsOptions();
             listOptions.Recursive = true;
-            listOptions.Prefix = "pics/resized/360x225/" + albumName + "/";
+            listOptions.Prefix = "pics/" + resolution.Value + "/" + albumName + "/";
             listOptions.System = true;
             var albumImages = await _objectService.ListObjectsAsync(_bucket, listOptions).ConfigureAwait(false);
 
