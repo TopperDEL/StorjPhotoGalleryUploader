@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:viewModels="using:StorjPhotoGalleryUploader.ViewModels">
+    xmlns:viewModels="using:StorjPhotoGalleryUploader.ViewModels"
+    xmlns:storjControls="using:StorjPhotoGalleryUploader.Controls">
     <DataTemplate x:Key="AlbumCard">
         <Border BorderBrush="#E4ECFA" BorderThickness="7" CornerRadius="14" Height="419" MinWidth="330" Margin="0,5">
             <Grid Background="White">
@@ -16,12 +17,11 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Image Source="{Binding Image1, Mode=OneWay}" Stretch="UniformToFill"
-                   Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
-                <Image Source="{Binding Image2, Mode=OneWay}" Stretch="UniformToFill"
-                   Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1"/>
-                <Image Source="{Binding Image3, Mode=OneWay}" Stretch="UniformToFill" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1"/>
-                <Image Source="{Binding Image4, Mode=OneWay}" Stretch="UniformToFill" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1"/>
+                <storjControls:SkiaSharpImageControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" StorjObjectKey="{Binding Image1, Mode=OneWay}"/>
+                <storjControls:SkiaSharpImageControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" StorjObjectKey="{Binding Image2, Mode=OneWay}"/>
+                <storjControls:SkiaSharpImageControl Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" StorjObjectKey="{Binding Image3, Mode=OneWay}"/>
+                <storjControls:SkiaSharpImageControl Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1" StorjObjectKey="{Binding Image4, Mode=OneWay}"/>
+
                 <StackPanel Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="3" Padding="14,18,0,0">
                     <TextBlock Text="{Binding Name}" FontFamily="Inter" FontSize="18" FontWeight="Bold"/>
                     <StackPanel Orientation="Horizontal">
