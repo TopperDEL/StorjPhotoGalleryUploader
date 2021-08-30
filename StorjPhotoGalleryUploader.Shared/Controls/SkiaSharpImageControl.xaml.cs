@@ -19,6 +19,7 @@ using Windows.UI.Xaml.Navigation;
 using StorjPhotoGalleryUploader.Helper;
 using System.Threading.Tasks;
 using MonkeyCache.FileStore;
+using System.Buffers;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -26,7 +27,6 @@ namespace StorjPhotoGalleryUploader.Controls
 {
     public sealed partial class SkiaSharpImageControl : UserControl
     {
-        private byte[] _bytes;
         private SKBitmap _skiaBmp;
 
         public string StorjObjectKey
@@ -37,31 +37,20 @@ namespace StorjPhotoGalleryUploader.Controls
         public static readonly DependencyProperty StorjObjectKeyProperty =
             DependencyProperty.Register("StorjObjectKey", typeof(string), typeof(SkiaSharpImageControl), new PropertyMetadata("", new PropertyChangedCallback(OnStorjObjectKeyChanged)));
 
+        static SkiaSharpImageControl()
+        {
+            Barrel.ApplicationId = "STORJ_PHOTO_GALLERY";
+        }
+
         public SkiaSharpImageControl()
         {
             this.InitializeComponent();
-
-            Barrel.ApplicationId = "STORJ_PHOTO_GALLERY";
 
             skiaCanvas.PaintSurface += SkiaCanvas_PaintSurface;
         }
 
         private async void SkiaCanvas_PaintSurface(object sender, SkiaSharp.Views.UWP.SKPaintSurfaceEventArgs e)
         {
-            if (_bytes != null && _skiaBmp == null)
-            {
-                try
-                {
-                    _skiaBmp = SKBitmap.Decode(_bytes);
-                    _bytes = null;
-                }
-                catch
-                {
-                    //Might be loaded on the next rendering
-                    _skiaBmp = null;
-                }
-            }
-
             if (_skiaBmp != null)
             {
                 e.Surface.Canvas.Clear();
@@ -90,13 +79,15 @@ namespace StorjPhotoGalleryUploader.Controls
             {
                 var albumService = (IAlbumService)uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService(typeof(IAlbumService));
                 var _stream = await albumService.GetImageStreamAsync(imageKey);
-                _bytes = new byte[_stream.Length];
-                await _stream.ReadAsync(_bytes, 0, (int)_stream.Length);
-                Barrel.Current.Add(imageKey, _bytes, TimeSpan.FromDays(180));
+                var bytes = ArrayPool<byte>.Shared.Rent((int)_stream.Length);
+                await _stream.ReadAsync(bytes, 0, (int)_stream.Length);
+                Barrel.Current.Add(imageKey, bytes, TimeSpan.FromDays(180));
+                _skiaBmp = SKBitmap.Decode(bytes);
+                ArrayPool<byte>.Shared.Return(bytes);
             }
             else
             {
-                _bytes = Barrel.Current.Get<byte[]>(imageKey);
+                _skiaBmp = SKBitmap.Decode(Barrel.Current.Get<byte[]>(imageKey));
             }
 
             skiaCanvas.Invalidate();
