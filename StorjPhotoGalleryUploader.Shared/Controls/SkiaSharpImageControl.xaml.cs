@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 using StorjPhotoGalleryUploader.Helper;
 using System.Threading.Tasks;
+using MonkeyCache.FileStore;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -39,6 +40,8 @@ namespace StorjPhotoGalleryUploader.Controls
         public SkiaSharpImageControl()
         {
             this.InitializeComponent();
+
+            Barrel.ApplicationId = "STORJ_PHOTO_GALLERY";
 
             skiaCanvas.PaintSurface += SkiaCanvas_PaintSurface;
         }
@@ -83,10 +86,18 @@ namespace StorjPhotoGalleryUploader.Controls
 
         private async Task LoadImageAsync(string imageKey)
         {
-            var albumService = (IAlbumService)uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService(typeof(IAlbumService));
-            var _stream = await albumService.GetImageStreamAsync(imageKey);
-            _bytes = new byte[_stream.Length];
-            await _stream.ReadAsync(_bytes, 0, (int)_stream.Length);
+            if (Barrel.Current.IsExpired(imageKey))
+            {
+                var albumService = (IAlbumService)uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService(typeof(IAlbumService));
+                var _stream = await albumService.GetImageStreamAsync(imageKey);
+                _bytes = new byte[_stream.Length];
+                await _stream.ReadAsync(_bytes, 0, (int)_stream.Length);
+                Barrel.Current.Add(imageKey, _bytes, TimeSpan.FromDays(180));
+            }
+            else
+            {
+                _bytes = Barrel.Current.Get<byte[]>(imageKey);
+            }
 
             skiaCanvas.Invalidate();
         }
