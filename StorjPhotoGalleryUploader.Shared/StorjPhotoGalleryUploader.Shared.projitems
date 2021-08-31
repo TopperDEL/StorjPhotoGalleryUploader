@@ -22,6 +22,7 @@
       <DependentUpon>SkiaSharpImageControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Converter\DateTimeConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converter\TrueIsActiveConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converter\TrueIsCollapsedConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converter\TrueIsVisibleConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\BitmapExtensions.cs" />
@@ -33,13 +34,20 @@
     <Compile Include="$(MSBuildThisFileDirectory)Pages\BucketCheckPage.xaml.cs">
       <DependentUpon>BucketCheckPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\NewAlbumPage.xaml.cs">
       <DependentUpon>NewAlbumPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumImageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BucketCheckViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewAlbumViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -55,7 +63,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\MainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Pages\NewAlbumPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -92,11 +108,13 @@
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en-US\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\AlbumsIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DotsMenu.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Plus.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\PlusBlue.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SingleDot.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\StorjLogo.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\UploadsIcon.png" />
   </ItemGroup>
 </Project>

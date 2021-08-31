@@ -246,7 +246,7 @@ namespace StorjPhotoGalleryUploader
                     pageType = typeof(NewAlbumPage);
                     break;
                 case NavigationTarget.AlbumList:
-                    pageType = typeof(AlbumListPage);
+                    pageType = typeof(MainPage);
                     break;
                 case NavigationTarget.CurrentUploads:
                     pageType = typeof(CurrentUploadsPage);

@@ -61,6 +61,7 @@ namespace StorjPhotoGalleryUploader.Helper
             services.AddTransient<LoginViewModel>();
             services.AddTransient<CurrentUploadsViewModel>();
             services.AddTransient<AttachmentContainerViewModel>();
+            services.AddTransient<MainPageViewModel>();
 
             //ViewModel-Factories
             services.AddSingleton<IAlbumImageViewModelFactory, AlbumImageViewModelFactory>();
