@@ -7,12 +7,15 @@ using StorjPhotoGalleryUploader.Helper;
 using System.Threading.Tasks;
 using MonkeyCache.FileStore;
 using System.Buffers;
+using System.Collections.Generic;
 
 namespace StorjPhotoGalleryUploader.Controls
 {
     public sealed partial class SkiaSharpImageControl : UserControl
     {
-        private SKBitmap _skiaBmp;
+        private static Dictionary<string, SKBitmap> _bitmaps = new Dictionary<string, SKBitmap>();
+
+        //private SKBitmap _skiaBmp;
 
         public string StorjObjectKey
         {
@@ -36,10 +39,10 @@ namespace StorjPhotoGalleryUploader.Controls
 
         private void SkiaCanvas_PaintSurface(object sender, SkiaSharp.Views.UWP.SKPaintSurfaceEventArgs e)
         {
-            if (_skiaBmp != null)
+            if (StorjObjectKey != null && _bitmaps.ContainsKey(StorjObjectKey))// _skiaBmp != null)
             {
                 e.Surface.Canvas.Clear();
-                e.Surface.Canvas.DrawBitmap(_skiaBmp, e.Info.Rect, BitmapStretch.UniformToFill);
+                e.Surface.Canvas.DrawBitmap(_bitmaps[StorjObjectKey], e.Info.Rect, BitmapStretch.UniformToFill);
             }
         }
 
@@ -59,19 +62,26 @@ namespace StorjPhotoGalleryUploader.Controls
 
         private async Task LoadImageAsync(string imageKey)
         {
-            if (Barrel.Current.IsExpired(imageKey))
+            if (!_bitmaps.ContainsKey(imageKey))
             {
-                var albumService = (IAlbumService)uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService(typeof(IAlbumService));
-                var _stream = await albumService.GetImageStreamAsync(imageKey);
-                var bytes = ArrayPool<byte>.Shared.Rent((int)_stream.Length);
-                await _stream.ReadAsync(bytes, 0, (int)_stream.Length);
-                Barrel.Current.Add(imageKey, bytes, TimeSpan.FromDays(180));
-                _skiaBmp = SKBitmap.Decode(bytes);
-                ArrayPool<byte>.Shared.Return(bytes);
-            }
-            else
-            {
-                _skiaBmp = SKBitmap.Decode(Barrel.Current.Get<byte[]>(imageKey));
+                if (Barrel.Current.IsExpired(imageKey))
+                {
+                    var albumService = (IAlbumService)uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService(typeof(IAlbumService));
+                    using (var _stream = await albumService.GetImageStreamAsync(imageKey))
+                    {
+                        var bytes = ArrayPool<byte>.Shared.Rent((int)_stream.Length);
+                        await _stream.ReadAsync(bytes, 0, (int)_stream.Length);
+                        Barrel.Current.Add(imageKey, bytes, TimeSpan.FromDays(180));
+                        var skiaBmp = SKBitmap.Decode(bytes);
+                        _bitmaps.Add(imageKey, skiaBmp);
+                        ArrayPool<byte>.Shared.Return(bytes);
+                    }
+                }
+                else
+                {
+                    var skiaBmp = SKBitmap.Decode(Barrel.Current.Get<byte[]>(imageKey));
+                    _bitmaps.Add(imageKey, skiaBmp);
+                }
             }
 
             skiaCanvas.Invalidate();
