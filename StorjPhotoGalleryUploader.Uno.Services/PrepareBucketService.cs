@@ -101,7 +101,7 @@ namespace StorjPhotoGalleryUploader.Services
                 if (!success)
                     return new BucketPrepareResult() { Successfull = false, PrepareErrorMessage = "Wrong ApiKey" };
 
-                var currentUploads = await _uploadQueueService.GetAwaitingUploadsAsync().ConfigureAwait(false);
+                var currentUploads = await _uploadQueueService.GetAwaitingUploadsAsync();
                 int current = 0;
                 foreach (var name in _assetNames)
                 {
@@ -113,7 +113,7 @@ namespace StorjPhotoGalleryUploader.Services
                         if (currentUploads.Where(u => u.AccessGrant == accessGrant && u.Key == fileName && u.BucketName == _currentBucket.Name).Count() == 0)
                         {
                             //File is not yet in upload queue for this access => upload it
-                            await _uploadQueueService.AddObjectToUploadQueueAsync(_currentBucket.Name, fileName, accessGrant, stream, fileName).ConfigureAwait(false);
+                            await _uploadQueueService.AddObjectToUploadQueueAsync(_currentBucket.Name, fileName, accessGrant, stream, fileName);
                         }
                     }
 
