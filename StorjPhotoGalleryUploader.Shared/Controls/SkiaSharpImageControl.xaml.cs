@@ -71,14 +71,14 @@ namespace StorjPhotoGalleryUploader.Controls
                         await _stream.ReadAsync(bytes, 0, (int)_stream.Length);
                         Barrel.Current.Add(imageKey, bytes, TimeSpan.FromDays(180));
                         var skiaBmp = SKBitmap.Decode(bytes);
-                        _bitmaps.Add(imageKey, skiaBmp);
+                        _bitmaps.TryAdd(imageKey, skiaBmp);
                         ArrayPool<byte>.Shared.Return(bytes);
                     }
                 }
                 else
                 {
                     var skiaBmp = SKBitmap.Decode(Barrel.Current.Get<byte[]>(imageKey));
-                    _bitmaps.Add(imageKey, skiaBmp);
+                    _bitmaps.TryAdd(imageKey, skiaBmp);
                 }
             }
 
