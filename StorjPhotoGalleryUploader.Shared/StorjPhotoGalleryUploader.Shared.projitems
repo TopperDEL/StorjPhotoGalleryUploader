@@ -111,6 +111,7 @@
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\AlbumsIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DotsMenu.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\File.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\PlusBlue.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SettingsIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SingleDot.png" />
