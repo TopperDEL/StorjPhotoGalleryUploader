@@ -53,7 +53,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                     using (var stream = await image.GetAttachmentStreamAsync())
                     {
                         //Original
-                        var uploadedOriginal = await StoreService.PutObjectAsync(AppConfig, album, "pics/" + ImageResolution.Original + AlbumName + "/" + image.Filename, stream);
+                        var uploadedOriginal = await StoreService.PutObjectAsync(AppConfig, album, "pics/" + ImageResolution.Original + "/" + AlbumName + "/" + image.Filename, stream);
                         if (!uploadedOriginal)
                         {
                             //ToDo: Raise error
