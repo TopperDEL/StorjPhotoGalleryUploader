@@ -15,8 +15,6 @@ namespace StorjPhotoGalleryUploader.Controls
     {
         private static Dictionary<string, SKBitmap> _bitmaps = new Dictionary<string, SKBitmap>();
 
-        //private SKBitmap _skiaBmp;
-
         public string StorjObjectKey
         {
             get { return (string)GetValue(StorjObjectKeyProperty); }
@@ -39,7 +37,7 @@ namespace StorjPhotoGalleryUploader.Controls
 
         private void SkiaCanvas_PaintSurface(object sender, SkiaSharp.Views.UWP.SKPaintSurfaceEventArgs e)
         {
-            if (StorjObjectKey != null && _bitmaps.ContainsKey(StorjObjectKey))// _skiaBmp != null)
+            if (StorjObjectKey != null && _bitmaps.ContainsKey(StorjObjectKey))
             {
                 e.Surface.Canvas.Clear();
                 e.Surface.Canvas.DrawBitmap(_bitmaps[StorjObjectKey], e.Info.Rect, BitmapStretch.UniformToFill);
