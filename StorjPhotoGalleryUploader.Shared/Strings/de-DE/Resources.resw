@@ -120,6 +120,9 @@
   <data name="AddContent.Content" xml:space="preserve">
     <value>Hinzufügen...</value>
   </data>
+  <data name="AlbumListEmpty.Text" xml:space="preserve">
+    <value>Die Liste ist leer.</value>
+  </data>
   <data name="AlbumListTitle.Text" xml:space="preserve">
     <value>Alben</value>
   </data>
@@ -129,6 +132,12 @@
   </data>
   <data name="ApplicationName" xml:space="preserve">
     <value>Storj Foto-Gallery</value>
+  </data>
+  <data name="CreateAlbum.Content" xml:space="preserve">
+    <value>+ Album anlegen</value>
+  </data>
+  <data name="CreateOne.Text" xml:space="preserve">
+    <value>Erstelle ein Album!</value>
   </data>
   <data name="Logout.Content" xml:space="preserve">
     <value>Abmelden</value>

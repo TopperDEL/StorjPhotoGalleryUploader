@@ -17,6 +17,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
     {
         [Property] private ObservableCollection<AlbumViewModel> _albumList = new ObservableCollection<AlbumViewModel>();
         [Property] private bool _isLoading;
+        [Property] private bool _isEmpty;
 
         [Command]
         private async Task LoadAlbumsAsync()
@@ -34,6 +35,11 @@ namespace StorjPhotoGalleryUploader.ViewModels
                     await vm.RefreshImageCountAsync();
                     await vm.LoadImagesAsync();
                 }
+
+                if (albums.Count == 0)
+                    IsEmpty = true;
+                else
+                    IsEmpty = false;
             }
             finally
             {

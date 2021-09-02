@@ -33,10 +33,18 @@
         <TextBlock x:Uid="AlbumListTitle" Grid.Column="0" Grid.Row="0" Text="Albums" FontFamily="Inter" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="34" FontWeight="ExtraBold" Foreground="Black" 
                    Margin="25,20"/>
         <Button Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" BorderThickness="0"
-                Command="{Binding NavigateNewAlbumCommand}" Foreground="#286CFF" Background="White" >
+                Command="{Binding NavigateNewAlbumCommand}" Foreground="#286CFF" Background="White">
             <Image Source="/Assets/PlusBlue.png" Width="21" Height="21"/>
         </Button>
-        <ProgressRing Grid.Row="1" Grid.ColumnSpan="2" IsActive="{Binding IsLoading}" Foreground="{StaticResource StorjBlueBrush}"/>
+
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding IsEmpty,Converter={StaticResource TrueIsVisibleConverter}}">
+            <TextBlock x:Uid="AlbumListEmpty" Text="The album list is empty." HorizontalAlignment="Center" FontFamily="Inter" FontSize="24" Foreground="#8F8F8F"/>
+            <TextBlock x:Uid="CreateOne" Text="Create one!" HorizontalAlignment="Center" FontFamily="Inter" FontSize="24" Foreground="#8F8F8F"/>
+            <Button x:Uid="CreateAlbum" Content="+ Create album" HorizontalAlignment="Center" Margin="30" FontFamily="Inter" FontSize="17" Background="{StaticResource StorjBlue}" Foreground="White"
+                    Command="{Binding NavigateNewAlbumCommand}"/>
+        </StackPanel>
+
         <ListView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding AlbumList, Mode=OneWay}" HorizontalAlignment="Center" ItemTemplate="{StaticResource AlbumCard}" SelectionMode="None"/>
+        <ProgressRing Grid.Row="1" Grid.ColumnSpan="2" IsActive="{Binding IsLoading}" Foreground="{StaticResource StorjBlueBrush}" MaxWidth="50" MaxHeight="50"/>
     </Grid>
 </Page>
