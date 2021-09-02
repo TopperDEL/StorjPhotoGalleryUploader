@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="using:StorjPhotoGalleryUploader.Converter"
-    xmlns:helperConverters="using:uplink.NET.UnoHelpers.Converter">
+    xmlns:converters="using:StorjPhotoGalleryUploader.Converter">
 
     <SolidColorBrush x:Key="StorjBlue" Color="#286CFF"/>
     <SolidColorBrush x:Key="StorjGray" Color="#A3A3A3"/>
@@ -11,6 +10,4 @@
     <converters:TrueIsCollapsedConverter x:Key="TrueIsCollapsedConverter"/>
     <converters:DateTimeConverter x:Key="DateTimeConverter"/>
     <converters:TrueIsActiveConverter x:Key="TrueIsActiveConverter" ActiveColor="{StaticResource StorjBlue}" InactiveColor="{StaticResource StorjGray}"/>
-    <helperConverters:TrueIsHighlightedConverter x:Key="TrueIsHighlightedConverter"/>
-    <helperConverters:BytesToHumanConverter x:Key="BytesToHumanConverter"/>
 </ResourceDictionary>

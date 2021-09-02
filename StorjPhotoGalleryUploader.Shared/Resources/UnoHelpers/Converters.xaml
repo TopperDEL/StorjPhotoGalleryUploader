@@ -4,4 +4,6 @@
 
     <conv:TrueIsVisibleConverter x:Name="TrueIsVisibleConverter"/>
     <conv:FalseIsVisibleConverter x:Name="FalseIsVisibleConverter"/>
+    <conv:TrueIsHighlightedConverter x:Key="TrueIsHighlightedConverter"/>
+    <conv:BytesToHumanConverter x:Key="BytesToHumanConverter"/>
 </ResourceDictionary>
