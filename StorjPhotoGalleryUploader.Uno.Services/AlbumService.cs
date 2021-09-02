@@ -53,7 +53,38 @@ namespace StorjPhotoGalleryUploader.Services
             }
         }
 
-        public async Task<Album> CreateAlbumAsync(string albumName, List<string> imageNames)
+        public async Task<Album> CreateAlbumAsync(string albumName)
+        {
+            await InitAsync();
+
+            var accessGrant = _appConfig.TryGetAccessGrant(out bool success);
+            if (!success)
+                return null;
+
+            Assembly assembly = GetType().GetTypeInfo().Assembly;
+            using (var indexStream = assembly.GetManifestResourceStream("StorjPhotoGalleryUploader.Services.Assets.site_template.album.index.html"))
+            {
+                using (StreamReader sr = new StreamReader(indexStream))
+                {
+                    var albumIndexTemplate = Template.Parse(sr.ReadToEnd());
+
+                    try
+                    {
+                        var result = await albumIndexTemplate.RenderAsync(new { AlbumName = albumName }).ConfigureAwait(false);
+
+                        await _uploadQueueService.AddObjectToUploadQueueAsync(_bucket.Name, albumName + "/index.html", accessGrant, Encoding.UTF8.GetBytes(result), albumName + "/index.html").ConfigureAwait(false);
+                    }
+                    catch
+                    {
+                        return null;
+                    }
+                }
+            }
+
+            return new Album() { Name = albumName };
+        }
+
+        public async Task<Album> RefreshAlbumAsync(string albumName, List<string> imageNames)
         {
             await InitAsync();
 

@@ -21,15 +21,26 @@ namespace StorjPhotoGalleryUploader.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class NewAlbumPage : Page
+    public sealed partial class EditAlbumPage : Page
     {
-        NewAlbumViewModel _viewModel;
-        public NewAlbumPage()
+        EditAlbumViewModel _viewModel;
+
+        public EditAlbumPage()
         {
             this.InitializeComponent();
-            DataContext = _viewModel = (NewAlbumViewModel)uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService(typeof(NewAlbumViewModel));
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            DataContext = _viewModel = (EditAlbumViewModel)uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService(typeof(EditAlbumViewModel));
+            if (e.Parameter != null)
+            {
+                _viewModel.AlbumName = e.Parameter.ToString();
+            }
 
             _viewModel.GetAttachmentsFunction = AttachmentContainer.GetAttachments;
+            _viewModel.SelectImagesAction = async () => await ((uplink.NET.UnoHelpers.ViewModels.AttachmentContainerViewModel)AttachmentContainer.DataContext).SelectNewContentAsync();
         }
     }
 }

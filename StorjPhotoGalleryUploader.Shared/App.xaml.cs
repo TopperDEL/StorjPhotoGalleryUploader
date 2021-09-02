@@ -234,7 +234,8 @@ namespace StorjPhotoGalleryUploader
             var uploadQueueService = uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService<IUploadQueueService>();
             uploadQueueService.ProcessQueueInBackground();
 
-            DoNavigate(typeof(BucketCheckPage));
+            DoNavigate(typeof(EditAlbumPage), "Empty");
+            //DoNavigate(typeof(BucketCheckPage));
         }
 
         public void OnEvent(DoNavigateMessage navigationData)
@@ -246,7 +247,10 @@ namespace StorjPhotoGalleryUploader
                     pageType = typeof(LoginPage);
                     break;
                 case NavigationTarget.NewAlbum:
-                    pageType = typeof(NewAlbumPage);
+                    pageType = typeof(CreateAlbumPage);
+                    break;
+                case NavigationTarget.EditAlbum:
+                    pageType = typeof(EditAlbumPage);
                     break;
                 case NavigationTarget.AlbumList:
                     pageType = typeof(MainPage);
@@ -257,14 +261,14 @@ namespace StorjPhotoGalleryUploader
             }
 
             if (pageType != null)
-                DoNavigate(pageType);
+                DoNavigate(pageType, navigationData.Parameter);
         }
 
-        private void DoNavigate(Type pageType)
+        private void DoNavigate(Type pageType, string parameter = null)
         {
             var rootFrame = _window.Content as Frame;
 
-            rootFrame.Navigate(pageType, null);
+            rootFrame.Navigate(pageType, parameter);
         }
 
         public async void OnEvent(ErrorOccuredMessage eventData)

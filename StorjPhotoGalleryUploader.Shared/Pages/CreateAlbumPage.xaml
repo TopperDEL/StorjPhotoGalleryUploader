@@ -1,0 +1,43 @@
+﻿<Page
+    x:Class="StorjPhotoGalleryUploader.Pages.CreateAlbumPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StorjPhotoGalleryUploader.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewmodels="using:StorjPhotoGalleryUploader.ViewModels"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:brushes="using:Microsoft.Toolkit.Uwp.UI.Media"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="70"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="0" HorizontalAlignment="Left" Background="White" Margin="10"
+                    Command="{Binding CancelCommand}">
+            <Image Source="/Assets/Arrow.png" Width="21" Height="21"/>
+        </Button>
+        <TextBlock Text="New album" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Inter" FontSize="17" FontWeight="SemiBold"/>
+        <Border BorderThickness="0,0,0,1" BorderBrush="#E5E9F4" Grid.Row="0"/>
+
+        <StackPanel Grid.Row="1">
+            <TextBox Text="{Binding AlbumName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         Header="Name" Height="68"
+                         Margin="20" BorderThickness="0" CornerRadius="6"
+                         Background="#F0F5FF" SelectionHighlightColor="{StaticResource StorjBlue}" SelectionHighlightColorWhenNotFocused="{StaticResource StorjBlue}"
+                         FontFamily="Inter" FontSize="17">
+                <TextBox.HeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontFamily="Inter" FontSize="15" FontWeight="SemiBold"/>
+                    </DataTemplate>
+                </TextBox.HeaderTemplate>
+            </TextBox>
+            <Button x:Uid="CreateNewAlbum" Content="Create" Margin="20" FontFamily="Inter" FontWeight="SemiBold" FontSize="17" Background="{StaticResource StorjBlue}" Foreground="White"
+                    Command="{Binding SaveCommand}" CornerRadius="6" HorizontalAlignment="Stretch" Height="48"/>
+        </StackPanel>
+    </Grid>
+</Page>

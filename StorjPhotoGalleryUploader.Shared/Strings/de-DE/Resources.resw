@@ -120,6 +120,15 @@
   <data name="AddContent.Content" xml:space="preserve">
     <value>Hinzufügen...</value>
   </data>
+  <data name="AddImage.Content" xml:space="preserve">
+    <value>Hochladen</value>
+  </data>
+  <data name="AddImages.Text" xml:space="preserve">
+    <value>Lade Bilder hoch!</value>
+  </data>
+  <data name="AlbumEmpty.Text" xml:space="preserve">
+    <value>Das Album ist noch leer.</value>
+  </data>
   <data name="AlbumListEmpty.Text" xml:space="preserve">
     <value>Die Liste ist leer.</value>
   </data>

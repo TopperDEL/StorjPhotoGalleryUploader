@@ -25,11 +25,13 @@ namespace StorjPhotoGalleryUploader.ViewModels
     [Inject(typeof(IThumbnailGeneratorService))]
     [Inject(typeof(uplink.NET.UnoHelpers.Contracts.Models.AppConfig))]
     [ViewModel]
-    public partial class NewAlbumViewModel : IEventSubscriber<AttachmentAddedMessage>
+    public partial class EditAlbumViewModel : IEventSubscriber<AttachmentAddedMessage>
     {
         [Property] private string _albumName;
+        [Property] private bool _hasImages;
         [Property] private bool _isUploading;
         [Property] private Func<List<Attachment>> _getAttachmentsFunction;
+        [Property] private Action _selectImagesAction;
 
         [Command(CanExecuteMethod = nameof(CanSave))]
         private async Task Save()
@@ -40,7 +42,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
             {
                 var attachments = GetAttachmentsFunction();
                 var imageNames = attachments.Select(i => i.Filename).ToList();
-                var album = await AlbumService.CreateAlbumAsync(AlbumName, imageNames);
+                var album = await AlbumService.RefreshAlbumAsync(AlbumName, imageNames);
                 if (album == null)
                 {
                     //ToDo: Inform user
@@ -118,7 +120,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
             if (IsUploading)
                 return false;
 
-            return !string.IsNullOrEmpty(AlbumName) && !AlbumName.Contains("/") && _hasAttachments;
+            return !string.IsNullOrEmpty(AlbumName) && !AlbumName.Contains("/") && HasImages;
         }
 
         [Command(CanExecuteMethod = nameof(CanCancel))]
@@ -132,12 +134,19 @@ namespace StorjPhotoGalleryUploader.ViewModels
             return !IsUploading;
         }
 
-        private bool _hasAttachments;
-
         public void OnEvent(AttachmentAddedMessage eventData)
         {
-            _hasAttachments = true;
             SaveCommand.RaiseCanExecuteChanged();
+            HasImages = true;
+        }
+
+        [Command]
+        public void SelectImages()
+        {
+            if(SelectImagesAction!= null)
+            {
+                SelectImagesAction.Invoke();
+            }
         }
     }
 }

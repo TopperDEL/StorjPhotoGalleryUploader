@@ -35,11 +35,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Pages\BucketCheckPage.xaml.cs">
       <DependentUpon>BucketCheckPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\EditAlbumPage.xaml.cs">
+      <DependentUpon>EditAlbumPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Pages\NewAlbumPage.xaml.cs">
-      <DependentUpon>NewAlbumPage.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\CreateAlbumPage.xaml.cs">
+      <DependentUpon>CreateAlbumPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -48,8 +51,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BucketCheckViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\EditAlbumViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainPageViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\NewAlbumViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CreateAlbumViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -65,11 +69,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\EditAlbumPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Pages\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="$(MSBuildThisFileDirectory)Pages\NewAlbumPage.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Pages\CreateAlbumPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -111,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Assets\AlbumsIcon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Arrow.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DotsMenu.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\File.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\PlusBlue.png" />

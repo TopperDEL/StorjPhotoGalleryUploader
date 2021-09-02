@@ -11,7 +11,8 @@ namespace StorjPhotoGalleryUploader.Contracts.Interfaces
     public interface IAlbumService
     {
         Task<List<Album>> ListAlbumsAsync();
-        Task<Album> CreateAlbumAsync(string albumName, List<string> imageNames);
+        Task<Album> CreateAlbumAsync(string albumName);
+        Task<Album> RefreshAlbumAsync(string albumName, List<string> imageNames);
         Task<bool> RefreshAlbumIndex(List<Album> albums);
         Task<AlbumInfo> GetAlbumInfoAsync(string albumName);
         Task<List<string>> GetImageKeysAsync(string albumName, int requestedImageCount, ImageResolution resolution);

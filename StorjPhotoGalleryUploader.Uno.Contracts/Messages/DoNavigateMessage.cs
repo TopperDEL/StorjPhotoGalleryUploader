@@ -9,7 +9,8 @@ namespace StorjPhotoGalleryUploader.Contracts.Messages
         Login,
         AlbumList,
         NewAlbum,
-        CurrentUploads
+        CurrentUploads,
+        EditAlbum
     }
     public class DoNavigateMessage
     {
@@ -18,6 +19,14 @@ namespace StorjPhotoGalleryUploader.Contracts.Messages
             NavigationTarget = navigationTarget;
         }
 
+        public DoNavigateMessage(NavigationTarget navigationTarget, string parameter)
+        {
+            NavigationTarget = navigationTarget;
+            Parameter = parameter;
+        }
+
         public NavigationTarget NavigationTarget { get; }
+
+        public string Parameter { get; }
     }
 }
