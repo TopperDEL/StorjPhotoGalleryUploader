@@ -33,7 +33,7 @@
                     Click="AlbumList_Click">
                 <StackPanel Orientation="Vertical">
                     <BitmapIcon UriSource="/Assets/AlbumsIcon.png" Width="25" Height="30" VerticalAlignment="Top" Foreground="{Binding AlbumListActive, Converter={StaticResource TrueIsActiveConverter}}"/>
-                    <TextBlock Text="Albums" Foreground="{Binding AlbumListActive, Converter={StaticResource TrueIsActiveConverter}}" FontFamily="Inter" Margin="0,4,0,0"/>
+                    <TextBlock x:Uid="AlbumListTitle" Text="Albums" Foreground="{Binding AlbumListActive, Converter={StaticResource TrueIsActiveConverter}}" FontFamily="Inter" Margin="0,4,0,0"/>
                 </StackPanel>
             </Button>
 
@@ -41,7 +41,7 @@
                     Click="CurrentUploadsButton_Click">
                 <StackPanel Orientation="Vertical">
                     <BitmapIcon UriSource="/Assets/UploadsIcon.png" Width="25" Height="30" VerticalAlignment="Top" Foreground="{Binding CurrentUploadsActive, Converter={StaticResource TrueIsActiveConverter}}"/>
-                    <TextBlock Text="Uploads" Foreground="{Binding CurrentUploadsActive, Converter={StaticResource TrueIsActiveConverter}}" FontFamily="Inter" Margin="0,4,0,0"/>
+                    <TextBlock x:Uid="UploadsTitle" Text="Uploads" Foreground="{Binding CurrentUploadsActive, Converter={StaticResource TrueIsActiveConverter}}" FontFamily="Inter" Margin="0,4,0,0"/>
                 </StackPanel>
             </Button>
 
@@ -49,7 +49,7 @@
                     Click="SettingsButton_Click">
                 <StackPanel Orientation="Vertical">
                     <BitmapIcon UriSource="/Assets/SettingsIcon.png" Width="25" Height="30" VerticalAlignment="Top" Foreground="{Binding SettingsActive, Converter={StaticResource TrueIsActiveConverter}}"/>
-                    <TextBlock Text="Settings" Foreground="{Binding SettingsActive, Converter={StaticResource TrueIsActiveConverter}}" FontFamily="Inter" Margin="0,4,0,0"/>
+                    <TextBlock x:Uid="SettingsTitle" Text="Settings" Foreground="{Binding SettingsActive, Converter={StaticResource TrueIsActiveConverter}}" FontFamily="Inter" Margin="0,4,0,0"/>
                 </StackPanel>
             </Button>
         </Grid>

@@ -242,6 +242,9 @@ namespace StorjPhotoGalleryUploader
             Type pageType = null;
             switch(navigationData.NavigationTarget)
             {
+                case NavigationTarget.Login:
+                    pageType = typeof(LoginPage);
+                    break;
                 case NavigationTarget.NewAlbum:
                     pageType = typeof(NewAlbumPage);
                     break;

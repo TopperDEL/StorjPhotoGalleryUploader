@@ -120,6 +120,9 @@
   <data name="AddContent.Content" xml:space="preserve">
     <value>Hinzufügen...</value>
   </data>
+  <data name="AlbumListTitle.Text" xml:space="preserve">
+    <value>Alben</value>
+  </data>
   <data name="ApplicationDescription" xml:space="preserve">
     <value>Diese App ermöglicht dir das hochladen von Fotos aus deiner lokalen Fotogallery zu Storj DCS (Dezentraler Cloud Speicher), um daraus ein mit anderen teilbares Album zu erzeugen. Die Fotos bekommen dabei nur diejenigen zu sehen, denen du Zugriff dazu erteilst. Nicht einmal Storj hat Zugriff auf deine Bilder!</value>
     <comment>This app enables you to upload pictures from your local device to the Storj DCS (Decentralised Cloud Storage) and to generate shareable Albums of them. The pictures can only be seen by those you give explicit access. Not even Storj is able to access your pictures!</comment>
@@ -127,10 +130,19 @@
   <data name="ApplicationName" xml:space="preserve">
     <value>Storj Foto-Gallery</value>
   </data>
+  <data name="Logout.Content" xml:space="preserve">
+    <value>Abmelden</value>
+  </data>
   <data name="PreparingForUpload.Text" xml:space="preserve">
     <value>Bilder werden vorbereitet, bitte warten</value>
   </data>
+  <data name="SettingsTitle.Text" xml:space="preserve">
+    <value>Einstellungen</value>
+  </data>
   <data name="Shots.Text" xml:space="preserve">
     <value>Fotos</value>
+  </data>
+  <data name="UploadsTitle.Text" xml:space="preserve">
+    <value>Übermittlungen</value>
   </data>
 </root>

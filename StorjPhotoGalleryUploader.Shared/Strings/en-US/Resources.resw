@@ -120,16 +120,28 @@
   <data name="AddContent.Content" xml:space="preserve">
     <value>Add....</value>
   </data>
+  <data name="AlbumListTitle.Text" xml:space="preserve">
+    <value>Albums</value>
+  </data>
   <data name="ApplicationDescription" xml:space="preserve">
     <value>This app enables you to upload pictures from your local device to the Storj DCS (Decentralised Cloud Storage) and to generate shareable Albums of them. The pictures can only be seen by those you give explicit access. Not even Storj is able to access your pictures!</value>
   </data>
   <data name="ApplicationName" xml:space="preserve">
     <value>Storj Photo Gallery</value>
   </data>
+  <data name="Logout.Content" xml:space="preserve">
+    <value>Logout</value>
+  </data>
   <data name="PreparingForUpload.Text" xml:space="preserve">
     <value>Preparing images for upload, please wait</value>
   </data>
+  <data name="SettingsTitle.Text" xml:space="preserve">
+    <value>Settings</value>
+  </data>
   <data name="Shots.Text" xml:space="preserve">
     <value>shots</value>
+  </data>
+  <data name="UploadsTitle.Text" xml:space="preserve">
+    <value>Uploads</value>
   </data>
 </root>

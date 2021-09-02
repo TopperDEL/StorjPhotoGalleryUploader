@@ -8,7 +8,21 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0" MaxWidth="400">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="200"/>
+        </Grid.RowDefinitions>
 
+        <TextBlock x:Uid="SettingsTitle" Grid.Row="0" Text="Settings" FontFamily="Inter" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="34" FontWeight="ExtraBold" Foreground="Black" 
+                   Margin="25,20"/>
+
+        <Button x:Uid="Logout" Content="Logout" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Stretch"
+                Command="{Binding LogoutCommand}"
+                Foreground="#890F36" Background="White" 
+                FontFamily="Inter" FontSize="17" FontWeight="SemiBold"
+                BorderThickness="0,2,0,2" BorderBrush="#E5E9F4"
+                />
     </Grid>
 </Page>

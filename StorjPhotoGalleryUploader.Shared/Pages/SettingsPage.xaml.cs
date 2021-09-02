@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StorjPhotoGalleryUploader.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -22,9 +23,11 @@ namespace StorjPhotoGalleryUploader.Pages
     /// </summary>
     public sealed partial class SettingsPage : Page
     {
+        SettingsViewModel _viewModel;
         public SettingsPage()
         {
             this.InitializeComponent();
+            DataContext = _viewModel = (SettingsViewModel)uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService(typeof(SettingsViewModel));
         }
     }
 }

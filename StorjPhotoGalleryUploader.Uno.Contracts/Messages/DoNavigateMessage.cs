@@ -6,6 +6,7 @@ namespace StorjPhotoGalleryUploader.Contracts.Messages
 {
     public enum NavigationTarget
     {
+        Login,
         AlbumList,
         NewAlbum,
         CurrentUploads

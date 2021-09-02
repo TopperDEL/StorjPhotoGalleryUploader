@@ -30,8 +30,8 @@
             <ColumnDefinition Width="60"/>
         </Grid.ColumnDefinitions>
 
-        <TextBlock Grid.Column="0" Grid.Row="0" Text="Albums" FontFamily="Inter" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="34" FontWeight="ExtraBold" Foreground="Black" 
-                       Margin="25,20"/>
+        <TextBlock x:Uid="AlbumListTitle" Grid.Column="0" Grid.Row="0" Text="Albums" FontFamily="Inter" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="34" FontWeight="ExtraBold" Foreground="Black" 
+                   Margin="25,20"/>
         <Button Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" BorderThickness="0"
                 Command="{Binding NavigateNewAlbumCommand}" Foreground="#286CFF" Background="White" >
             <Image Source="/Assets/PlusBlue.png" Width="21" Height="21"/>
