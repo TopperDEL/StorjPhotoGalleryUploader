@@ -8,6 +8,7 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
     xmlns:viewModels="using:StorjPhotoGalleryUploader.ViewModels"
     xmlns:ctrls="using:uplink.NET.UnoHelpers.Controls"
+    xmlns:helper="using:StorjPhotoGalleryUploader.Helper"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -44,7 +45,13 @@
                     Command="{Binding NavigateNewAlbumCommand}"/>
         </StackPanel>
 
-        <ListView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding AlbumList, Mode=OneWay}" HorizontalAlignment="Center" ItemTemplate="{StaticResource AlbumCard}" SelectionMode="None"/>
+        <ListView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding AlbumList, Mode=OneWay}" HorizontalAlignment="Center" ItemTemplate="{StaticResource AlbumCard}" SelectionMode="None">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <helper:BottomPaddedStackPanel />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+        </ListView>
         <ProgressRing Grid.Row="1" Grid.ColumnSpan="2" IsActive="{Binding IsLoading}" Foreground="{StaticResource StorjBlueBrush}" MaxWidth="50" MaxHeight="50"/>
     </Grid>
 </Page>
