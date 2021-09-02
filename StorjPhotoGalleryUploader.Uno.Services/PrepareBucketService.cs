@@ -113,7 +113,8 @@ namespace StorjPhotoGalleryUploader.Services
                         if (currentUploads.Where(u => u.AccessGrant == accessGrant && u.Key == fileName && u.BucketName == _currentBucket.Name).Count() == 0)
                         {
                             //File is not yet in upload queue for this access => upload it
-                            await _uploadQueueService.AddObjectToUploadQueueAsync(_currentBucket.Name, fileName, accessGrant, stream, fileName);
+                            var identifier = fileName.Split('/').Last();
+                            await _uploadQueueService.AddObjectToUploadQueueAsync(_currentBucket.Name, fileName, accessGrant, stream, identifier);
                         }
                     }
 
