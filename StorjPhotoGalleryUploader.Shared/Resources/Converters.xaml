@@ -12,4 +12,5 @@
     <converters:DateTimeConverter x:Key="DateTimeConverter"/>
     <converters:TrueIsActiveConverter x:Key="TrueIsActiveConverter" ActiveColor="{StaticResource StorjBlue}" InactiveColor="{StaticResource StorjGray}"/>
     <helperConverters:TrueIsHighlightedConverter x:Key="TrueIsHighlightedConverter"/>
+    <helperConverters:BytesToHumanConverter x:Key="BytesToHumanConverter"/>
 </ResourceDictionary>
