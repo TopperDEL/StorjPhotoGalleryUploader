@@ -16,8 +16,8 @@
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
     <PackageReference Include="Uno.UI" Version="3.9.1" />
     <PackageReference Include="uplink.NET" Version="2.7.1710" />
-    <PackageReference Include="uplink.NET.UnoHelpers" Version="0.9.24" />
-    <PackageReference Include="uplink.NET.UnoHelpers.Contracts" Version="0.9.24" />
+    <PackageReference Include="uplink.NET.UnoHelpers" Version="0.9.25" />
+    <PackageReference Include="uplink.NET.UnoHelpers.Contracts" Version="0.9.25" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
