@@ -184,6 +184,8 @@ namespace StorjPhotoGalleryUploader.Services
 
         public async Task<List<string>> GetImageKeysAsync(string albumName, int requestedImageCount, ImageResolution resolution)
         {
+            await InitAsync();
+
             ListObjectsOptions listOptions = new ListObjectsOptions();
             listOptions.Recursive = true;
             listOptions.Prefix = "pics/" + resolution.Value + "/" + albumName + "/";

@@ -15,6 +15,8 @@ using uplink.NET.UnoHelpers.Contracts.Models;
 using uplink.NET.UnoHelpers.Models;
 using uplink.NET.UnoHelpers.Messages;
 using StorjPhotoGalleryUploader.Contracts.Models;
+using uplink.NET.UnoHelpers.ViewModels;
+using System.Buffers;
 
 namespace StorjPhotoGalleryUploader.ViewModels
 {
@@ -32,6 +34,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
     //beim laden alle kleinen bilder laden
     //menü "als cover setzen"
     [Inject(typeof(uplink.NET.UnoHelpers.Contracts.Models.AppConfig))]
+    [Inject(typeof(IAttachmentViewModelFactory))]
     [ViewModel]
     public partial class EditAlbumViewModel : IEventSubscriber<AttachmentAddedMessage>
     {
@@ -40,7 +43,43 @@ namespace StorjPhotoGalleryUploader.ViewModels
         [Property] private bool _isUploading;
         [Property] private Func<List<Attachment>> _getAttachmentsFunction;
         [Property] private Action _selectImagesAction;
+        [Property] private Action<AttachmentViewModel> _addAttachmentAction;
 
+        partial void OnInitialize()
+        {
+            LoadExistingAttachmentsAsync();
+        }
+
+        private bool isInitializing = true;
+        private async Task LoadExistingAttachmentsAsync()
+        {
+            while (AlbumName == null)
+            {
+                await Task.Delay(100);
+            }
+            var images = await AlbumService.GetImageKeysAsync(AlbumName, int.MaxValue, ImageResolution.Small);
+            foreach (var image in images)
+            {
+                var attachment = new Attachment();
+                var attachmentVm = AttachmentViewModelFactory.Create();
+                attachment.Filename = image;
+                attachment.MimeType = "image/jpeg";
+                using (var stream = await AlbumService.GetImageStreamAsync(image))
+                {
+                    var bytes = ArrayPool<byte>.Shared.Rent((int)stream.Length);
+                    await stream.ReadAsync(bytes, 0, (int)stream.Length);
+                    MemoryStream mstream = new MemoryStream(bytes);
+                    attachment.AttachmentData = mstream;
+                    ArrayPool<byte>.Shared.Return(bytes);
+                }
+                await attachmentVm.SetAttachmentAsync(attachment);
+
+                AddAttachmentAction(attachmentVm);
+                HasImages = true;
+            }
+
+            isInitializing = false;
+        }
 
         [Command(CanExecuteMethod = nameof(CanCancel))]
         private void Cancel()
@@ -55,6 +94,9 @@ namespace StorjPhotoGalleryUploader.ViewModels
 
         public async void OnEvent(AttachmentAddedMessage eventData)
         {
+            if (isInitializing)
+                return;
+
             IsUploading = true;
 
             try

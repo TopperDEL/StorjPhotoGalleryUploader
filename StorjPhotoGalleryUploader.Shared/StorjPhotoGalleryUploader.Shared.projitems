@@ -122,11 +122,14 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Arrow.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DotsMenu.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\File.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\HorizontalDots.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\PlusBlue.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SettingsIcon.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Share.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SingleDot.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SplashScreen.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\StorjLogo.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\AddImage.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\UploadsIcon.png" />
   </ItemGroup>
 </Project>
