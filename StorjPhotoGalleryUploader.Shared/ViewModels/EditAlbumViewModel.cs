@@ -23,6 +23,14 @@ namespace StorjPhotoGalleryUploader.ViewModels
     [Inject(typeof(IAlbumService))]
     [Inject(typeof(IStoreService))]
     [Inject(typeof(IThumbnailGeneratorService))]
+    [Inject(typeof(IPhotoUploadService))] //einbinden
+
+    //    wenn erstes foto: mache cover draus
+    //lade sofort das kleinste hoch
+    //im hintergrund die zwei anderen größen
+
+    //beim laden alle kleinen bilder laden
+    //menü "als cover setzen"
     [Inject(typeof(uplink.NET.UnoHelpers.Contracts.Models.AppConfig))]
     [ViewModel]
     public partial class EditAlbumViewModel : IEventSubscriber<AttachmentAddedMessage>
@@ -33,95 +41,6 @@ namespace StorjPhotoGalleryUploader.ViewModels
         [Property] private Func<List<Attachment>> _getAttachmentsFunction;
         [Property] private Action _selectImagesAction;
 
-        [Command(CanExecuteMethod = nameof(CanSave))]
-        private async Task Save()
-        {
-            IsUploading = true;
-
-            try
-            {
-                var attachments = GetAttachmentsFunction();
-                var imageNames = attachments.Select(i => i.Filename).ToList();
-                var album = await AlbumService.RefreshAlbumAsync(AlbumName, imageNames);
-                if (album == null)
-                {
-                    //ToDo: Inform user
-                    return;
-                }
-
-                bool coverIsUploaded = false;
-                foreach (var image in attachments)
-                {
-                    using (var stream = await image.GetAttachmentStreamAsync())
-                    {
-                        //Original
-                        var uploadedOriginal = await StoreService.PutObjectAsync(AppConfig, album, "pics/" + ImageResolution.Original + "/" + AlbumName + "/" + image.Filename, stream, image.Filename);
-                        if (!uploadedOriginal)
-                        {
-                            //ToDo: Raise error
-                            continue;
-                        }
-                    }
-
-                    using (var stream = await image.GetAttachmentStreamAsync())
-                    {
-                        //Scaled 1
-                        var scaled1 = await ThumbnailGeneratorService.GenerateThumbnailForStreamAsync(stream, "image/jpeg", 1200, 750);
-                        var uploadedScaled1 = await StoreService.PutObjectAsync(AppConfig, album, "pics/" + ImageResolution.Medium + "/" + AlbumName + "/" + image.Filename, scaled1, ImageResolution.MediumDescription + "/" + image.Filename);
-                        if (!uploadedScaled1)
-                        {
-                            //ToDo: Raise error
-                            continue;
-                        }
-
-                        //Upload first one as "cover image".
-                        //ToDo: let the user select it and make it dynamic so that the image is not uploaded twice.
-                        if (!coverIsUploaded)
-                        {
-                            scaled1.Position = 0;
-                            var uploadedScaled2 = await StoreService.PutObjectAsync(AppConfig, album, "pics/" + ImageResolution.Medium + "/" + AlbumName + "/cover_image.jpg", scaled1, "Cover-Image");
-                            if (!uploadedScaled2)
-                            {
-                                //ToDo: Raise error
-                                continue;
-                            }
-                            coverIsUploaded = true;
-                        }
-                    }
-
-                    using (var stream = await image.GetAttachmentStreamAsync())
-                    {
-                        //Scaled 2
-                        var scaled2 = await ThumbnailGeneratorService.GenerateThumbnailForStreamAsync(stream, "image/jpeg", 360, 225);
-                        var uploadedScaled3 = await StoreService.PutObjectAsync(AppConfig, album, "pics/" + ImageResolution.Small + "/" + AlbumName + "/" + image.Filename, scaled2, ImageResolution.SmallDescription + "/" + image.Filename);
-                        if (!uploadedScaled3)
-                        {
-                            //ToDo: Raise error
-                            continue;
-                        }
-                    }
-                }
-
-                var albumList = await AlbumService.ListAlbumsAsync();
-                await AlbumService.RefreshAlbumIndex(albumList);
-
-                await Task.Delay(1000);
-                EventAggregator.Publish(new DoNavigateMessage(NavigationTarget.AlbumList));
-            }
-            finally
-            {
-                IsUploading = false;
-            }
-        }
-
-        [CommandInvalidate(nameof(AlbumName))]
-        private bool CanSave()
-        {
-            if (IsUploading)
-                return false;
-
-            return !string.IsNullOrEmpty(AlbumName) && !AlbumName.Contains("/") && HasImages;
-        }
 
         [Command(CanExecuteMethod = nameof(CanCancel))]
         private void Cancel()
@@ -134,16 +53,68 @@ namespace StorjPhotoGalleryUploader.ViewModels
             return !IsUploading;
         }
 
-        public void OnEvent(AttachmentAddedMessage eventData)
+        public async void OnEvent(AttachmentAddedMessage eventData)
         {
-            SaveCommand.RaiseCanExecuteChanged();
-            HasImages = true;
+            IsUploading = true;
+
+            try
+            {
+                var attachments = GetAttachmentsFunction().ToList();
+                var attachment = attachments.Last();
+
+                //First: Upload the smallest one
+                using (var stream = await attachment.GetAttachmentStreamAsync())
+                {
+                    await PhotoUploadService.CreateAndUploadAsync(AlbumName, attachment.Filename, stream, ImageResolution.Small);
+                }
+
+                //Then: Upload the cover, if this is the first image
+                if (!HasImages)
+                {
+                    using (var stream = await attachment.GetAttachmentStreamAsync())
+                    {
+                        await PhotoUploadService.CreateAndUploadCoverImageAsync(AlbumName, attachment.Filename, stream, ImageResolution.Small);
+                    }
+                }
+
+                //At this point we have at least one image
+                HasImages = true;
+
+                //Then upload the medium one
+                using (var stream = await attachment.GetAttachmentStreamAsync())
+                {
+                    await PhotoUploadService.CreateAndUploadAsync(AlbumName, attachment.Filename, stream, ImageResolution.Medium);
+                }
+
+                //Then the original one
+                using (var stream = await attachment.GetAttachmentStreamAsync())
+                {
+                    await PhotoUploadService.CreateAndUploadAsync(AlbumName, attachment.Filename, stream, ImageResolution.Original);
+                }
+
+                //After that, refresh the album html
+                await RefreshAlbumAsync();
+            }
+            finally
+            {
+                IsUploading = false;
+            }
+        }
+
+        public async Task RefreshAlbumAsync()
+        {
+            var attachments = GetAttachmentsFunction();
+            var imageNames = attachments.Select(i => i.Filename).ToList();
+            var album = await AlbumService.RefreshAlbumAsync(AlbumName, imageNames);
+
+            var albumList = await AlbumService.ListAlbumsAsync();
+            await AlbumService.RefreshAlbumIndex(albumList);
         }
 
         [Command]
         public void SelectImages()
         {
-            if(SelectImagesAction!= null)
+            if (SelectImagesAction != null)
             {
                 SelectImagesAction.Invoke();
             }

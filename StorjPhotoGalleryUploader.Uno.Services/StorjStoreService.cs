@@ -24,17 +24,15 @@ namespace StorjPhotoGalleryUploader.Services
             _uploadQueueService = uploadQueueService;
         }
 
-        public async Task<bool> PutObjectAsync(AppConfig appConfig, Album album, string key, Stream objectData, string identifier)
+        public async Task<bool> PutObjectAsync(AppConfig appConfig, string key, Stream objectData, string identifier)
         {
-            var bucket = await _bucketService.GetBucketAsync(appConfig.BucketName).ConfigureAwait(false);
-
             try
             {
                 var accessGrant = appConfig.TryGetAccessGrant(out bool success);
                 if (!success)
                     return false;
 
-                await _uploadQueueService.AddObjectToUploadQueueAsync(bucket.Name, key, accessGrant, objectData, identifier).ConfigureAwait(false);
+                await _uploadQueueService.AddObjectToUploadQueueAsync(appConfig.BucketName, key, accessGrant, objectData, identifier).ConfigureAwait(false);
 
                 return true;
             }

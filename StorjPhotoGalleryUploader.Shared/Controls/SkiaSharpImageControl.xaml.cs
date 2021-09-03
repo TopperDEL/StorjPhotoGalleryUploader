@@ -37,7 +37,7 @@ namespace StorjPhotoGalleryUploader.Controls
 
         private void SkiaCanvas_PaintSurface(object sender, SkiaSharp.Views.UWP.SKPaintSurfaceEventArgs e)
         {
-            if (StorjObjectKey != null && _bitmaps.ContainsKey(StorjObjectKey))
+            if (StorjObjectKey != null && _bitmaps.ContainsKey(StorjObjectKey) && _bitmaps[StorjObjectKey] != null)
             {
                 e.Surface.Canvas.Clear();
                 e.Surface.Canvas.DrawBitmap(_bitmaps[StorjObjectKey], e.Info.Rect, BitmapStretch.UniformToFill);
@@ -55,7 +55,14 @@ namespace StorjPhotoGalleryUploader.Controls
             if (e.NewValue == null || string.IsNullOrEmpty(e.NewValue.ToString()))
                 return;
 
-            await LoadImageAsync(e.NewValue.ToString());
+            try
+            {
+                await LoadImageAsync(e.NewValue.ToString());
+            }
+            catch
+            {
+                //Ignore - should be loadable next time
+            }
         }
 
         private async Task LoadImageAsync(string imageKey)
@@ -71,14 +78,26 @@ namespace StorjPhotoGalleryUploader.Controls
                         await _stream.ReadAsync(bytes, 0, (int)_stream.Length);
                         Barrel.Current.Add(imageKey, bytes, TimeSpan.FromDays(180));
                         var skiaBmp = SKBitmap.Decode(bytes);
-                        _bitmaps.TryAdd(imageKey, skiaBmp);
+                        if (skiaBmp != null)
+                        {
+                            _bitmaps.TryAdd(imageKey, skiaBmp);
+                        }
                         ArrayPool<byte>.Shared.Return(bytes);
                     }
                 }
                 else
                 {
                     var skiaBmp = SKBitmap.Decode(Barrel.Current.Get<byte[]>(imageKey));
-                    _bitmaps.TryAdd(imageKey, skiaBmp);
+                    if (skiaBmp != null)
+                    {
+                        _bitmaps.TryAdd(imageKey, skiaBmp);
+                    }
+                    else
+                    {
+                        //Clear that image from the cache - it might be added during upload
+                        //as it was not yet fully available on storj.
+                        Barrel.Current.Empty(imageKey);
+                    }
                 }
             }
 
