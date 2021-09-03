@@ -234,8 +234,7 @@ namespace StorjPhotoGalleryUploader
             var uploadQueueService = uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService<IUploadQueueService>();
             uploadQueueService.ProcessQueueInBackground();
 
-            DoNavigate(typeof(EditAlbumPage), "Empty");
-            //DoNavigate(typeof(BucketCheckPage));
+            DoNavigate(typeof(BucketCheckPage));
         }
 
         public void OnEvent(DoNavigateMessage navigationData)
