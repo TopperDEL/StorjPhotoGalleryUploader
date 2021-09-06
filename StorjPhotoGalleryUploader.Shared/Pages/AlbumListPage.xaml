@@ -9,6 +9,7 @@
     xmlns:viewModels="using:StorjPhotoGalleryUploader.ViewModels"
     xmlns:ctrls="using:uplink.NET.UnoHelpers.Controls"
     xmlns:helper="using:StorjPhotoGalleryUploader.Helper"
+    xmlns:storjControls="using:StorjPhotoGalleryUploader.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -45,12 +46,50 @@
                     Command="{Binding NavigateNewAlbumCommand}"/>
         </StackPanel>
 
-        <ListView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding AlbumList, Mode=OneWay}" HorizontalAlignment="Center" ItemTemplate="{StaticResource AlbumCard}" SelectionMode="None">
+        <ListView Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{Binding AlbumList, Mode=OneWay}" HorizontalAlignment="Center" SelectionMode="None">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <helper:BottomPaddedStackPanel />
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
+
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="#E4ECFA" BorderThickness="7" CornerRadius="14" Height="419" MinWidth="330" Margin="0,5">
+                        <Grid Background="White">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="228"/>
+                                <RowDefinition Height="100"/>
+                                <RowDefinition Height="77"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <storjControls:SkiaSharpImageControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" StorjObjectKey="{Binding Image1, Mode=OneWay}"/>
+                            <storjControls:SkiaSharpImageControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" StorjObjectKey="{Binding Image2, Mode=OneWay}"/>
+                            <storjControls:SkiaSharpImageControl Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" StorjObjectKey="{Binding Image3, Mode=OneWay}"/>
+                            <storjControls:SkiaSharpImageControl Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1" StorjObjectKey="{Binding Image4, Mode=OneWay}"/>
+
+                            <StackPanel Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="3" Padding="14,18,0,0">
+                                <TextBlock Text="{Binding Name}" FontFamily="Inter" FontSize="18" FontWeight="Bold"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding ImageCount}" FontFamily="Inter" FontWeight="Light" FontSize="12" Foreground="#777777" Padding="0,6,0,0" />
+                                    <TextBlock Text="shots" x:Uid="Shots" FontFamily="Inter" FontWeight="Light" FontSize="12" Foreground="#777777" Padding="6,6,0,0" />
+                                    <Image Source="/Assets/SingleDot.png" Margin="9,6,9,0"/>
+                                    <TextBlock Text="{Binding CreationDate, Converter={StaticResource DateTimeConverter}}" FontFamily="Inter" FontWeight="Light" FontSize="12" Foreground="#777777" Padding="0,6,0,0" />
+                                </StackPanel>
+                            </StackPanel>
+                            <Button Background="White" Foreground="#ABABAB" Height="40" BorderThickness="0"
+                                    Grid.Row="3" Grid.Column="3" Margin="45,0,0,0" Command="{Binding EditAlbumCommand}">
+                                <Image Source="/Assets/DotsMenu.png" Width="22" Height="6"/>
+                            </Button>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
         </ListView>
         <ProgressRing Grid.Row="1" Grid.ColumnSpan="2" IsActive="{Binding IsLoading}" Foreground="{StaticResource StorjBlueBrush}" MaxWidth="50" MaxHeight="50"/>
     </Grid>

@@ -68,6 +68,7 @@ namespace StorjPhotoGalleryUploader.Helper
 
             //ViewModel-Factories
             services.AddSingleton<IAlbumImageViewModelFactory, AlbumImageViewModelFactory>();
+            services.AddSingleton<IAlbumViewModelFactory, AlbumViewModelFactory>();
             services.AddSingleton<IAttachmentViewModelFactory, AttachmentViewModelFactory>();
 
             return services.BuildServiceProvider(true);

@@ -9,11 +9,15 @@ using System.Threading.Tasks;
 using uplink.NET.Interfaces;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Linq;
+using MvvmGen.Events;
+using StorjPhotoGalleryUploader.Contracts.Messages;
 
 namespace StorjPhotoGalleryUploader.ViewModels
 {
     [ViewModel(typeof(Album))]
     [Inject(typeof(IAlbumService))]
+    [Inject(typeof(IEventAggregator))]
+    [ViewModelGenerateFactory]
     public partial class AlbumViewModel
     {
         [Property] int _imageCount;
@@ -23,10 +27,9 @@ namespace StorjPhotoGalleryUploader.ViewModels
         [Property] string _image3;
         [Property] string _image4;
 
-        internal AlbumViewModel(Album album, IAlbumService albumService)
+        public void SetModel(Album album)
         {
             Model = album;
-            AlbumService = albumService;
         }
 
         public async Task RefreshImageCountAsync()
@@ -63,6 +66,12 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 Image4 = images[3];
                 OnPropertyChanged(nameof(Image4));
             }
+        }
+
+        [Command]
+        public void EditAlbum()
+        {
+            EventAggregator.Publish(new DoNavigateMessage(NavigationTarget.EditAlbum, Model.Name));
         }
     }
 }

@@ -12,6 +12,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
 {
     [Inject(typeof(IEventAggregator))]
     [Inject(typeof(IAlbumService))]
+    [Inject(typeof(IAlbumViewModelFactory))]
     [ViewModel]
     public partial class AlbumListViewModel
     {
@@ -29,7 +30,8 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 var albums = await AlbumService.ListAlbumsAsync();
                 foreach (var album in albums)
                 {
-                    var vm = new AlbumViewModel(album, AlbumService);
+                    var vm = AlbumViewModelFactory.Create();
+                    vm.SetModel(album);
                     AlbumList.Add(vm);
 
                     await vm.RefreshImageCountAsync();

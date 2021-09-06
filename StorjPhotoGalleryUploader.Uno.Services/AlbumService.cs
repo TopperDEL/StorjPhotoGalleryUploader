@@ -170,6 +170,8 @@ namespace StorjPhotoGalleryUploader.Services
 
         public async Task<AlbumInfo> GetAlbumInfoAsync(string albumName)
         {
+            await InitAsync();
+
             ListObjectsOptions listOptions = new ListObjectsOptions();
             listOptions.Recursive = true;
             listOptions.Prefix = "pics/original/" + albumName + "/";
