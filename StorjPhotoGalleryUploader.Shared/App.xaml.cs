@@ -79,6 +79,8 @@ namespace StorjPhotoGalleryUploader
         /// <param name="e">Details about the launch request and process.</param>
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
+            Application.Current.Resources["ApplicationPageBackgroundThemeBrush"] = Windows.UI.Colors.White;
+
 #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {

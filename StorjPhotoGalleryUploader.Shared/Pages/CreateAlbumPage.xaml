@@ -18,7 +18,8 @@
         </Grid.RowDefinitions>
 
         <Button Grid.Row="0" HorizontalAlignment="Left" Background="White" Margin="10"
-                    Command="{Binding CancelCommand}">
+                BorderThickness="0"
+                Command="{Binding CancelCommand}">
             <Image Source="/Assets/Arrow.png" Width="21" Height="21"/>
         </Button>
         <TextBlock Text="New album" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Inter" FontSize="17" FontWeight="SemiBold"/>
@@ -37,7 +38,7 @@
                 </TextBox.HeaderTemplate>
             </TextBox>
             <Button x:Uid="CreateNewAlbum" Content="Create" Margin="20" FontFamily="Inter" FontWeight="SemiBold" FontSize="17" Background="{StaticResource StorjBlue}" Foreground="White"
-                    Command="{Binding SaveCommand}" CornerRadius="6" HorizontalAlignment="Stretch" Height="48"/>
+                    Command="{Binding SaveCommand}" CornerRadius="6" BorderThickness="0" HorizontalAlignment="Stretch" Height="48"/>
         </StackPanel>
     </Grid>
 </Page>

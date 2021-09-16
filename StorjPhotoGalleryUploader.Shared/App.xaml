@@ -12,7 +12,6 @@
                 <!--<ResourceDictionary Source="uplink.NET.UnoHelpers/Resources/Animations.xaml" />
                 <ResourceDictionary Source="uplink.NET.UnoHelpers/Resources/Converters.xaml" /> -->
                 <ResourceDictionary Source="Resources/UnoHelpers/DefaultStyles.xaml" />
-                <ResourceDictionary Source="Resources/UnoHelpers/Animations.xaml" />
                 <ResourceDictionary Source="Resources/UnoHelpers/Converters.xaml" />
                 <ResourceDictionary Source="Resources/Converters.xaml"/>
                 <ResourceDictionary Source="Resources/Styles.xaml"/>
