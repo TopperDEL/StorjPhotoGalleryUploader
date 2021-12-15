@@ -118,7 +118,7 @@
       <Version>1.5.2</Version>
     </PackageReference>
     <PackageReference Include="MvvmGen">
-      <Version>1.1.1</Version>
+      <Version>1.1.2</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp">
       <Version>2.80.3</Version>
