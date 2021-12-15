@@ -160,6 +160,9 @@
   <data name="Shots.Text" xml:space="preserve">
     <value>Fotos</value>
   </data>
+  <data name="TryAgain.Content" xml:space="preserve">
+    <value>Erneut versuchen</value>
+  </data>
   <data name="UploadsTitle.Text" xml:space="preserve">
     <value>Übermittlungen</value>
   </data>

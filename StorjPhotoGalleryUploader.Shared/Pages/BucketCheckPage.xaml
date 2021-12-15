@@ -38,6 +38,11 @@
             <TextBlock Text="{Binding CurrentStepDescription}" TextWrapping="WrapWholeWords"/>
         </StackPanel>
 
-        <Button Grid.Row="3" Visibility="{Binding Failed, Converter={StaticResource TrueIsVisibleConverter}}" Content="Try again" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10" Background="{StaticResource StorjBlueBrush}" Foreground="White" CornerRadius="5"/>
+        <StackPanel Grid.Row="3" Orientation="Vertical" Visibility="{Binding Failed, Converter={StaticResource TrueIsVisibleConverter}}" >
+            <Button x:Uid="TryAgain" Content="Try again" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10" Background="{StaticResource StorjBlueBrush}" Foreground="White" CornerRadius="5"
+                    Command="{Binding DoChecksAsyncCommand}"/>
+            <Button x:Uid="Logout" Content="Logout" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="10" Background="{StaticResource StorjBlueBrush}" Foreground="White" CornerRadius="5"
+                    Command="{Binding LogoutCommand}"/>
+        </StackPanel>
     </Grid>
 </Page>

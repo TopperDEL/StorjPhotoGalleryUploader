@@ -7,9 +7,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using uplink.NET.UnoHelpers.Contracts.Interfaces;
 
 namespace StorjPhotoGalleryUploader.ViewModels
 {
+    [Inject(typeof(ILoginService))]
     [Inject(typeof(IPrepareBucketService))]
     [Inject(typeof(IEventAggregator))]
     [ViewModel]
@@ -28,13 +30,13 @@ namespace StorjPhotoGalleryUploader.ViewModels
         private async Task DoChecksAsync()
         {
             bool wasUpdating = false;
-
+            Failed = false;
             IsChecking = true;
 
             try
             {
                 var bucketIsready = await PrepareBucketService.CheckIfBucketIsReadyAsync();
-                if(!bucketIsready)
+                if (!bucketIsready)
                 {
                     wasUpdating = true;
                     CurrentStep = 0;
@@ -44,7 +46,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
 
                     PrepareBucketService.PreparationStateChangedEvent += PrepareBucketService_PreparationStateChangedEvent;
                     var prepareResult = await PrepareBucketService.PrepareBucketAsync();
-                    
+
                     NeedsUpdate = false;
 
                     if (!prepareResult.Successfull)
@@ -68,7 +70,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 PrepareBucketService.PreparationStateChangedEvent -= PrepareBucketService_PreparationStateChangedEvent;
             }
 
-            if(CheckSuccessfull)
+            if (CheckSuccessfull)
             {
                 if (wasUpdating)
                 {
@@ -77,6 +79,13 @@ namespace StorjPhotoGalleryUploader.ViewModels
 
                 EventAggregator.Publish(new DoNavigateMessage(NavigationTarget.AlbumList));
             }
+        }
+
+        [Command]
+        private void Logout()
+        {
+            LoginService.Logout();
+            EventAggregator.Publish(new DoNavigateMessage(NavigationTarget.Login));
         }
 
         private void PrepareBucketService_PreparationStateChangedEvent(int currentStep, int totalStepCount, string currentStepDescription)
