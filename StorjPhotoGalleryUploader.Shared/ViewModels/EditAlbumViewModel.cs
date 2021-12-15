@@ -20,6 +20,7 @@ using System.Buffers;
 
 namespace StorjPhotoGalleryUploader.ViewModels
 {
+    [Inject(typeof(IShareService))]
     [Inject(typeof(IEventAggregator))]
     [Inject(typeof(IAlbumImageViewModelFactory))]
     [Inject(typeof(IAlbumService))]
@@ -160,6 +161,13 @@ namespace StorjPhotoGalleryUploader.ViewModels
             {
                 SelectImagesAction.Invoke();
             }
+        }
+
+        [Command]
+        private void ShareAlbum()
+        {
+            var url = ShareService.CreateAlbumLink(AlbumName);
+            ShareService.ShowShareUI(url);
         }
     }
 }

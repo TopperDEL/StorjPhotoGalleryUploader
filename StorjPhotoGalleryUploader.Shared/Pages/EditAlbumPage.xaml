@@ -27,7 +27,7 @@
         <StackPanel Grid.Row="1" Visibility="{Binding HasImages,Converter={StaticResource TrueIsVisibleConverter}}"
                     Orientation="Horizontal" HorizontalAlignment="Center">
             <Button Background="{StaticResource StorjBlue}" Foreground="White" Width="157" Margin="10" CornerRadius="6"
-                    BorderThickness="0">
+                    BorderThickness="0" Command="{Binding ShareAlbumCommand}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/Share.png" Width="21" Height="21" Margin="5"/>
                     <TextBlock Text="Share" VerticalAlignment="Center"/>

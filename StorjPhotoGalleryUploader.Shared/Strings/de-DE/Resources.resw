@@ -157,6 +157,15 @@
   <data name="SettingsTitle.Text" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
+  <data name="ShareDescription" xml:space="preserve">
+    <value>Klicke auf den folgenden Link, um das Album zu öffnen:</value>
+  </data>
+  <data name="ShareText" xml:space="preserve">
+    <value>Klicke auf den folgenden Link, um das Album zu öffnen:</value>
+  </data>
+  <data name="ShareTitle" xml:space="preserve">
+    <value>Ich teile meine Album 'ALBUMNAME' mit dir.</value>
+  </data>
   <data name="Shots.Text" xml:space="preserve">
     <value>Fotos</value>
   </data>
