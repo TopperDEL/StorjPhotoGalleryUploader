@@ -17,7 +17,7 @@
     <AndroidUseAapt2>true</AndroidUseAapt2>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v11.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidUseIntermediateDesignerFile>True</AndroidUseIntermediateDesignerFile>
     <ResourcesDirectory>..\StorjPhotoGalleryUploader.Shared\Strings</ResourcesDirectory>
@@ -92,10 +92,10 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="uplink.NET">
-      <Version>2.7.1912</Version>
+      <Version>2.7.1921</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.Droid">
-      <Version>2.7.1912</Version>
+      <Version>2.7.1921</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers">
       <Version>0.9.29</Version>

@@ -15,7 +15,7 @@
     <PackageReference Include="SkiaSharp" Version="2.80.3" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
     <PackageReference Include="Uno.UI" Version="3.11.0-dev.29" />
-    <PackageReference Include="uplink.NET" Version="2.7.1912" />
+    <PackageReference Include="uplink.NET" Version="2.7.1921" />
     <PackageReference Include="uplink.NET.UnoHelpers" Version="0.9.29" />
     <PackageReference Include="uplink.NET.UnoHelpers.Contracts" Version="0.9.29" />
   </ItemGroup>
