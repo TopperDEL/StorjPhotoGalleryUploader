@@ -156,7 +156,7 @@ namespace StorjPhotoGalleryUploader.Services
                     {
                         var result = await homepageIndexTemplate.RenderAsync(new { Albums = albums.Select(a => new { Name = a.Name, CoverImage = "cover_image.jpg" }).ToList() });
 
-                        await _uploadQueueService.AddObjectToUploadQueueAsync(_bucket.Name, "/index.html", accessGrant, Encoding.UTF8.GetBytes(result), "/index.html").ConfigureAwait(false);
+                        await _uploadQueueService.AddObjectToUploadQueueAsync(_bucket.Name, "index.html", accessGrant, Encoding.UTF8.GetBytes(result), "index.html").ConfigureAwait(false);
                     }
                     catch
                     {
