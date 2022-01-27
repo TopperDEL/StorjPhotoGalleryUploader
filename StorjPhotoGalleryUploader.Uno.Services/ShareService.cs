@@ -43,9 +43,16 @@ namespace StorjPhotoGalleryUploader.Services
             prefixes.Add(new SharePrefix { Bucket = _appConfig.BucketName, Prefix = "assets/album" });
 
             var albumAccess = _access.Share(permissions, prefixes);
-            var url = albumAccess.CreateShareURL(_appConfig.BucketName, albumName + "/index.html", true, true);
+            try
+            {
+                var url = albumAccess.CreateShareURL(_appConfig.BucketName, albumName + "/index.html", true, true);
 
-            return url.Replace("gateway","link");
+                return url.Replace("gateway", "link").Replace("https://link.us1.storjshare.io/raw","https://storjgallery.de").Replace("index.html","#0");
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
 
         public void ShowShareUI(string url)
