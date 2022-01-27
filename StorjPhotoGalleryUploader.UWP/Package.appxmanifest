@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="7b989374-4b0f-441e-87e9-a0d3a9f32338"
-    Publisher="CN=Toppe"
-    Version="1.0.0.0" />
+    Name="8916TimParth.StorjPhotoGallery"
+    Publisher="CN=07929E22-2FB8-4C9D-B9EB-B4A357099123"
+    Version="1.0.5.0" />
 
-  <mp:PhoneIdentity PhoneProductId="5e7132c0-1889-4286-b84d-4d20f58a7159" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="d7bd30f9-5034-41be-8c93-2af8996273f7" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>StorjPhotoGalleryUploader</DisplayName>
-    <PublisherDisplayName>StorjPhotoGalleryUploader</PublisherDisplayName>
+    <DisplayName>Storj Photo Gallery</DisplayName>
+    <PublisherDisplayName>Tim Parth</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
