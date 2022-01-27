@@ -167,7 +167,14 @@ namespace StorjPhotoGalleryUploader.ViewModels
         private void ShareAlbum()
         {
             var url = ShareService.CreateAlbumLink(AlbumName);
-            ShareService.ShowShareUI(url);
+            if (!string.IsNullOrEmpty(url))
+            {
+                ShareService.ShowShareUI(url);
+            }
+            else
+            {
+                //ToDo: Inform user
+            }
         }
     }
 }
