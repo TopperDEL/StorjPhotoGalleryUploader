@@ -42,6 +42,8 @@ namespace StorjPhotoGalleryUploader.Controls
                 e.Surface.Canvas.Clear();
                 e.Surface.Canvas.DrawBitmap(_bitmaps[StorjObjectKey], e.Info.Rect, BitmapStretch.UniformToFill);
             }
+
+            e.Surface.Canvas.Flush();
         }
 
         private static void OnStorjObjectKeyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

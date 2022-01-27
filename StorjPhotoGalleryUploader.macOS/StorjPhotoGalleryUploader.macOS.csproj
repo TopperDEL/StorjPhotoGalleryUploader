@@ -95,7 +95,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
     <PackageReference Include="uplink.NET">
-      <Version>2.7.1921</Version>
+      <Version>2.8.2031</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.Mac">
       <Version>2.6.1283</Version>
