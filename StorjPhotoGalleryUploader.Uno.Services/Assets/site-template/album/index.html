@@ -6,9 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!--[if lte IE 8]><script src="../assets/album/js/ie/html5shiv.js"></script><![endif]-->
     <link rel="stylesheet" href="../assets/album/css/main.css" />
-    <link rel="apple-touch-icon" sizes="180x180" href="../assets/homepage/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="../assets/homepage/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="../assets/homepage/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
     <!--[if lte IE 8]><link rel="stylesheet" href="../assets/album/css/ie8.css" /><![endif]-->
     <!--[if lte IE 9]><link rel="stylesheet" href="../assets/album/css/ie9.css" /><![endif]-->
     <noscript><link rel="stylesheet" href="../assets/album/css/noscript.css" /></noscript>
@@ -29,7 +33,7 @@
               <div class="sharethis-inline-share-buttons"></div>
             </div>
           </div>
-          <p><a href="../">Back to albums</a><a class="image-link-download" href="../pics/original/{{album_name}}/{{imageName}}" download>Download Full Size</a><a href="#" class="social-share-btn">Share</a><a href="https://www.storj.io/" target="_blank" class="image-link-hosted">Hosted on Storj DCS</a></p>
+          <p><a class="image-link-download" href="../pics/original/{{album_name}}/{{imageName}}" download>Download Full Size</a><a href="#" class="social-share-btn">Share</a><a href="https://www.storj.io/" target="_blank" class="image-link-hosted">Hosted on Storj DCS</a></p>
         </article>
         {{ end }}
       </section>
