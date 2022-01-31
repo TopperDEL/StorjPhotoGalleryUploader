@@ -44,6 +44,11 @@ namespace StorjPhotoGalleryUploader.ViewModels
 
         public async Task LoadImagesAsync()
         {
+            if(string.IsNullOrEmpty(_albumInfo.BaseShareUrl))
+            {
+                return;
+            }
+
             var images = await AlbumService.GetImageKeysAsync(Model.Name, 4, ImageResolution.Small);
 
             //URL is storjgallery.de/access/bucket/albumname/#0

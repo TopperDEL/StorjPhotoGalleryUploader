@@ -189,19 +189,27 @@ namespace StorjPhotoGalleryUploader.Services
             info.ImageCount = albumImages.Items.Count;
             info.CreationDate = albumImages.Items.Select(c => c.SystemMetadata).OrderBy(m => m.Created).FirstOrDefault().Created;
 
-            var objectInfo = await _objectService.GetObjectAsync(_bucket, albumName + "/index.html");
-            foreach(var entry in objectInfo.CustomMetadata.Entries)
+            try
             {
-                if(entry.Key == "BASE_SHARE_URL")
+                var objectInfo = await _objectService.GetObjectAsync(_bucket, albumName + "/index.html");
+                foreach (var entry in objectInfo.CustomMetadata.Entries)
                 {
-                    info.BaseShareUrl = entry.Value;
+                    if (entry.Key == "BASE_SHARE_URL")
+                    {
+                        info.BaseShareUrl = entry.Value;
+                    }
+                }
+                if (string.IsNullOrEmpty(info.BaseShareUrl))
+                {
+                    //Create a share-URL and update the Metadata of the album
+                    info.BaseShareUrl = _shareService.CreateAlbumLink(albumName);
+                    await RefreshAlbumMetadata(albumName, info.BaseShareUrl);
                 }
             }
-            if(string.IsNullOrEmpty(info.BaseShareUrl))
+            catch
             {
-                //Create a share-URL and update the Metadata of the album
-                info.BaseShareUrl = _shareService.CreateAlbumLink(albumName);
-                await RefreshAlbumMetadata(albumName, info.BaseShareUrl);
+                //Ignore errors - album would simply not yet show images correctly. Should update on next
+                //jump to album list
             }
             return info;
         }
