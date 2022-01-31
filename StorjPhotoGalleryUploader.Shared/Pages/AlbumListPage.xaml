@@ -8,6 +8,7 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
     xmlns:viewModels="using:StorjPhotoGalleryUploader.ViewModels"
     xmlns:helper="using:StorjPhotoGalleryUploader.Helper"
+    
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 

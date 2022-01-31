@@ -12,9 +12,9 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="SkiaSharp" Version="2.80.3" />
-    <PackageReference Include="Uno.UI" Version="3.11.0-dev.29" />
-    <PackageReference Include="uplink.NET.UnoHelpers" Version="0.9.29" />
-    <PackageReference Include="uplink.NET.UnoHelpers.Contracts" Version="0.9.29" />
+    <PackageReference Include="Uno.UI" Version="4.0.13" />
+    <PackageReference Include="uplink.NET.UnoHelpers" Version="0.9.31" />
+    <PackageReference Include="uplink.NET.UnoHelpers.Contracts" Version="0.9.31" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />

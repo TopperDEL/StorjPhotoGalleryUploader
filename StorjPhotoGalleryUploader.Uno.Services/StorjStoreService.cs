@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using Uno.Extensions;
 using uplink.NET.Interfaces;
 using uplink.NET.Models;
 using uplink.NET.UnoHelpers.Contracts.Models;

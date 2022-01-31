@@ -126,30 +126,24 @@
     <PackageReference Include="SkiaSharp.Views.Uno">
       <Version>2.80.3</Version>
     </PackageReference>
-    <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.UI.Controls">
-      <Version>7.0.0</Version>
-    </PackageReference>
-    <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.UI.Media">
-      <Version>7.0.0</Version>
-    </PackageReference>
     <PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Uwp.Managed">
-      <Version>2.0.3-uno.92</Version>
+      <Version>2.3.0</Version>
     </PackageReference>
-    <PackageReference Include="Uno.UI" Version="3.11.0-dev.29" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="3.10.7" Condition="'$(Configuration)'=='Debug'" />
+    <PackageReference Include="Uno.UI" Version="4.0.13" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="4.0.13" Condition="'$(Configuration)'=='Debug'" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Uno.Extensions.Logging.OSLog " Version="1.1.0" />
     <PackageReference Include="uplink.NET">
-      <Version>2.8.2058</Version>
+      <Version>2.8.2065</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.iOS">
-      <Version>2.8.2051</Version>
+      <Version>2.8.2065</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers">
-      <Version>0.9.29</Version>
+      <Version>0.9.31</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers.Contracts">
-      <Version>0.9.29</Version>
+      <Version>0.9.31</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

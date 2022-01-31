@@ -223,7 +223,7 @@ namespace StorjPhotoGalleryUploader
                 // builder.AddFilter("Uno.Foundation.WebAssemblyRuntime", LogLevel.Debug );
             });
 
-            global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;
+            //global::Uno.Extensions.LogExtensionPoint.AmbientLoggerFactory = factory;
         }
 
         public void OnEvent(UserLoggedInMessage loggedInMessage)

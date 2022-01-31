@@ -8,7 +8,6 @@ using System.Linq;
 using uplink.NET.Interfaces;
 using uplink.NET.Models;
 using uplink.NET.UnoHelpers.Contracts.Models;
-using Uno.Extensions;
 using uplink.NET.UnoHelpers.Services;
 
 namespace StorjPhotoGalleryUploader.Services
