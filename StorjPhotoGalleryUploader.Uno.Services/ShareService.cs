@@ -47,7 +47,7 @@ namespace StorjPhotoGalleryUploader.Services
             {
                 var url = albumAccess.CreateShareURL(_appConfig.BucketName, albumName + "/index.html", true, true);
 
-                return url.Replace("gateway", "link").Replace("https://link.us1.storjshare.io/raw","https://storjgallery.de").Replace("index.html","#0");
+                return url.Replace("gateway", "link").Replace("https://link.storjshare.io/raw","https://storjgallery.de").Replace("index.html","#0");
             }
             catch
             {
@@ -58,7 +58,14 @@ namespace StorjPhotoGalleryUploader.Services
         public void ShowShareUI(string url)
         {
             _shareUrl = url;
-            DataTransferManager.ShowShareUI();
+            if (DataTransferManager.IsSupported())
+            {
+                DataTransferManager.ShowShareUI();
+            }
+            else
+            {
+                //ToDo: Inform user
+            }
         }
 
         private void DataRequested(DataTransferManager sender, DataRequestedEventArgs args)
