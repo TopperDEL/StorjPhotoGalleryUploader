@@ -27,6 +27,8 @@ namespace StorjPhotoGalleryUploader.ViewModels
         [Property] string _image3;
         [Property] string _image4;
 
+        private AlbumInfo _albumInfo;
+
         public void SetModel(Album album)
         {
             Model = album;
@@ -34,36 +36,40 @@ namespace StorjPhotoGalleryUploader.ViewModels
 
         public async Task RefreshImageCountAsync()
         {
-            var info = await AlbumService.GetAlbumInfoAsync(Model.Name);
+            _albumInfo = await AlbumService.GetAlbumInfoAsync(Model.Name);
 
-            ImageCount = info.ImageCount;
-            CreationDate = info.CreationDate;
+            ImageCount = _albumInfo.ImageCount;
+            CreationDate = _albumInfo.CreationDate;
         }
 
         public async Task LoadImagesAsync()
         {
-            var images = await AlbumService.GetImageKeysAsync(Model.Name, 4, ImageResolution.Small); 
-            
+            var images = await AlbumService.GetImageKeysAsync(Model.Name, 4, ImageResolution.Small);
+
+            //URL is storjgallery.de/access/bucket/albumname/#0
+            //But it has to be storjgallery.de/access/bucket/
+            var baseUrl = _albumInfo.BaseShareUrl.Replace("/#0", "").Replace(Uri.EscapeUriString(Model.Name), "");
+
             if (images.Count >= 1)
             {
                 //First image with higher resolution
-                Image1 = "pics/" + ImageResolution.Medium + "/" + Model.Name + "/cover_image.jpg";
+                Image1 = baseUrl + "pics/" + ImageResolution.Medium + "/" + Model.Name + "/cover_image.jpg";
 
                 OnPropertyChanged(nameof(Image1));
             }
             if (images.Count >= 2)
             {
-                Image2 = images[1];
+                Image2 = baseUrl + images[1];
                 OnPropertyChanged(nameof(Image2));
             }
             if (images.Count >= 3)
             {
-                Image3 = images[2];
+                Image3 = baseUrl + images[2];
                 OnPropertyChanged(nameof(Image3));
             }
             if (images.Count >= 4)
             {
-                Image4 = images[3];
+                Image4 = baseUrl + images[3];
                 OnPropertyChanged(nameof(Image4));
             }
         }

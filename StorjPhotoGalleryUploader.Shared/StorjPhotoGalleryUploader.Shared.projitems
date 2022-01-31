@@ -18,9 +18,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Controls\SkiaSharpImageControl.xaml.cs">
-      <DependentUpon>SkiaSharpImageControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Converter\DateTimeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converter\TrueIsActiveConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converter\TrueIsCollapsedConverter.cs" />
@@ -57,10 +54,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SettingsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)Controls\SkiaSharpImageControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Pages\AlbumListPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

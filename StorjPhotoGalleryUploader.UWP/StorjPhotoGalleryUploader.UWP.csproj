@@ -48,6 +48,9 @@
     <PackageReference Include="uplink.NET.Win">
       <Version>2.8.2058</Version>
     </PackageReference>
+    <PackageReference Include="WriteableBitmapEx">
+      <Version>1.6.8</Version>
+    </PackageReference>
   </ItemGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>

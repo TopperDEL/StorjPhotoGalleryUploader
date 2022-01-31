@@ -7,9 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
     xmlns:viewModels="using:StorjPhotoGalleryUploader.ViewModels"
-    xmlns:ctrls="using:uplink.NET.UnoHelpers.Controls"
     xmlns:helper="using:StorjPhotoGalleryUploader.Helper"
-    xmlns:storjControls="using:StorjPhotoGalleryUploader.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -68,10 +66,10 @@
                                 <ColumnDefinition Width="1*"/>
                             </Grid.ColumnDefinitions>
 
-                            <storjControls:SkiaSharpImageControl Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" StorjObjectKey="{Binding Image1, Mode=OneWay}"/>
-                            <storjControls:SkiaSharpImageControl Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" StorjObjectKey="{Binding Image2, Mode=OneWay}"/>
-                            <storjControls:SkiaSharpImageControl Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" StorjObjectKey="{Binding Image3, Mode=OneWay}"/>
-                            <storjControls:SkiaSharpImageControl Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1" StorjObjectKey="{Binding Image4, Mode=OneWay}"/>
+                            <Image Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Source="{Binding Image1, Mode=OneWay}" Stretch="UniformToFill"/>
+                            <Image Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="1" Source="{Binding Image2, Mode=OneWay}" Stretch="UniformToFill"/>
+                            <Image Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="1" Source="{Binding Image3, Mode=OneWay}" Stretch="UniformToFill"/>
+                            <Image Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1" Source="{Binding Image4, Mode=OneWay}" Stretch="UniformToFill"/>
 
                             <StackPanel Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="3" Padding="14,18,0,0">
                                 <TextBlock Text="{Binding Name}" FontFamily="Inter" FontSize="18" FontWeight="Bold"/>

@@ -21,14 +21,16 @@ namespace StorjPhotoGalleryUploader.Services
         readonly IObjectService _objectService;
         readonly IUploadQueueService _uploadQueueService;
         readonly AppConfig _appConfig;
+        readonly IShareService _shareService;
         private Bucket _bucket;
 
-        public AlbumService(IBucketService bucketService, IObjectService objectService, IUploadQueueService uploadQueueService, AppConfig appConfig)
+        public AlbumService(IBucketService bucketService, IObjectService objectService, IUploadQueueService uploadQueueService, AppConfig appConfig, IShareService shareService)
         {
             _bucketService = bucketService;
             _objectService = objectService;
             _uploadQueueService = uploadQueueService;
             _appConfig = appConfig;
+            _shareService = shareService;
         }
 
         private async Task InitAsync()
@@ -102,6 +104,11 @@ namespace StorjPhotoGalleryUploader.Services
                     try
                     {
                         var result = await albumIndexTemplate.RenderAsync(new { AlbumName = albumName, ImageNames = imageNames }).ConfigureAwait(false);
+
+                        //ToDo: Add to customMetadata to UploadQueue
+                        //var baseShareUrl = _shareService.CreateAlbumLink(albumName);
+                        //var customMetadata = new CustomMetadata();
+                        //customMetadata.Entries.Add(new CustomMetadataEntry { Key = "BASE_SHARE_URL", Value = baseShareUrl });
 
                         await _uploadQueueService.AddObjectToUploadQueueAsync(_bucket.Name, albumName + "/index.html", accessGrant, Encoding.UTF8.GetBytes(result), albumName + "/index.html").ConfigureAwait(false);
                     }
@@ -181,7 +188,31 @@ namespace StorjPhotoGalleryUploader.Services
             AlbumInfo info = new AlbumInfo();
             info.ImageCount = albumImages.Items.Count;
             info.CreationDate = albumImages.Items.Select(c => c.SystemMetadata).OrderBy(m => m.Created).FirstOrDefault().Created;
+
+            var objectInfo = await _objectService.GetObjectAsync(_bucket, albumName + "/index.html");
+            foreach(var entry in objectInfo.CustomMetadata.Entries)
+            {
+                if(entry.Key == "BASE_SHARE_URL")
+                {
+                    info.BaseShareUrl = entry.Value;
+                }
+            }
+            if(string.IsNullOrEmpty(info.BaseShareUrl))
+            {
+                //Create a share-URL and update the Metadata of the album
+                info.BaseShareUrl = _shareService.CreateAlbumLink(albumName);
+                await RefreshAlbumMetadata(albumName, info.BaseShareUrl);
+            }
             return info;
+        }
+
+        private async Task RefreshAlbumMetadata(string albumName, string baseShareUrl)
+        {
+            var index = await _objectService.DownloadObjectAsync(_bucket, albumName + "/index.html", new DownloadOptions());
+            var customMetadata = new CustomMetadata();
+            customMetadata.Entries.Add(new CustomMetadataEntry { Key = "BASE_SHARE_URL", Value = baseShareUrl });
+            var upload = await _objectService.UploadObjectAsync(_bucket, albumName + "/index.html", new UploadOptions(), index.DownloadedBytes, customMetadata,false);
+            await upload.StartUploadAsync();
         }
 
         public async Task<List<string>> GetImageKeysAsync(string albumName, int requestedImageCount, ImageResolution resolution)
