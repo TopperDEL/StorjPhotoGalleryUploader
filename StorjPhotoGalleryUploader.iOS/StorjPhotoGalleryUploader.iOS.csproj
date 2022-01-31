@@ -140,10 +140,10 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Uno.Extensions.Logging.OSLog " Version="1.1.0" />
     <PackageReference Include="uplink.NET">
-      <Version>2.8.2031</Version>
+      <Version>2.8.2058</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.iOS">
-      <Version>2.8.2031</Version>
+      <Version>2.8.2051</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers">
       <Version>0.9.29</Version>

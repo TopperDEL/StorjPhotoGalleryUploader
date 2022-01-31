@@ -15,7 +15,7 @@
     <PackageReference Include="SkiaSharp" Version="2.80.3" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
     <PackageReference Include="Uno.UI" Version="3.11.0-dev.29" />
-    <PackageReference Include="uplink.NET" Version="2.8.2031" />
+    <PackageReference Include="uplink.NET" Version="2.8.2058" />
     <PackageReference Include="uplink.NET.UnoHelpers" Version="0.9.29" />
     <PackageReference Include="uplink.NET.UnoHelpers.Contracts" Version="0.9.29" />
   </ItemGroup>
@@ -29,6 +29,8 @@
     <UpToDateCheckInput Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />
   </ItemGroup>
   <ItemGroup>
+    <None Remove="Assets\site-template\album\android-chrome-192x192.png" />
+    <None Remove="Assets\site-template\album\apple-touch-icon.png" />
     <None Remove="Assets\site-template\album\assets\css\font-awesome.min.css" />
     <None Remove="Assets\site-template\album\assets\css\ie8.css" />
     <None Remove="Assets\site-template\album\assets\css\ie9.css" />
@@ -77,7 +79,14 @@
     <None Remove="Assets\site-template\album\assets\sass\main.scss" />
     <None Remove="Assets\site-template\album\assets\sass\noscript.scss" />
     <None Remove="Assets\site-template\album\assets\StorjDCS-logo.svg" />
+    <None Remove="Assets\site-template\album\browserconfig.xml" />
+    <None Remove="Assets\site-template\album\favicon-16x16.png" />
+    <None Remove="Assets\site-template\album\favicon-32x32.png" />
+    <None Remove="Assets\site-template\album\favicon.ico" />
     <None Remove="Assets\site-template\album\index.html" />
+    <None Remove="Assets\site-template\album\mstile-150x150.png" />
+    <None Remove="Assets\site-template\album\safari-pinned-tab.svg" />
+    <None Remove="Assets\site-template\album\site.webmanifest" />
     <None Remove="Assets\site-template\homepage\assets\apple-touch-icon.png" />
     <None Remove="Assets\site-template\homepage\assets\css\font-awesome.min.css" />
     <None Remove="Assets\site-template\homepage\assets\css\ie8.css" />
@@ -124,6 +133,8 @@
     <None Remove="Assets\site-template\homepage\index.html" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Assets\site-template\album\assets\android-chrome-192x192.png" />
+    <EmbeddedResource Include="Assets\site-template\album\assets\apple-touch-icon.png" />
     <EmbeddedResource Include="Assets\site-template\album\assets\css\font-awesome.min.css" />
     <EmbeddedResource Include="Assets\site-template\album\assets\css\ie8.css" />
     <EmbeddedResource Include="Assets\site-template\album\assets\css\ie9.css" />
@@ -172,7 +183,14 @@
     <EmbeddedResource Include="Assets\site-template\album\assets\sass\main.scss" />
     <EmbeddedResource Include="Assets\site-template\album\assets\sass\noscript.scss" />
     <EmbeddedResource Include="Assets\site-template\album\assets\StorjDCS-logo.svg" />
+    <EmbeddedResource Include="Assets\site-template\album\assets\browserconfig.xml" />
+    <EmbeddedResource Include="Assets\site-template\album\assets\favicon-16x16.png" />
+    <EmbeddedResource Include="Assets\site-template\album\assets\favicon-32x32.png" />
+    <EmbeddedResource Include="Assets\site-template\album\assets\favicon.ico" />
     <EmbeddedResource Include="Assets\site-template\album\index.html" />
+    <EmbeddedResource Include="Assets\site-template\album\assets\mstile-150x150.png" />
+    <EmbeddedResource Include="Assets\site-template\album\assets\safari-pinned-tab.svg" />
+    <EmbeddedResource Include="Assets\site-template\album\assets\site.webmanifest" />
     <EmbeddedResource Include="Assets\site-template\homepage\assets\apple-touch-icon.png" />
     <EmbeddedResource Include="Assets\site-template\homepage\assets\css\font-awesome.min.css" />
     <EmbeddedResource Include="Assets\site-template\homepage\assets\css\ie8.css" />
