@@ -225,7 +225,7 @@ namespace StorjPhotoGalleryUploader.Services
             listOptions.System = true;
             var albumImages = await _objectService.ListObjectsAsync(_bucket, listOptions).ConfigureAwait(false);
 
-            return albumImages.Items.Take(requestedImageCount).Select(i => i.Key).ToList();
+            return albumImages.Items.OrderBy(e=> Guid.NewGuid()).Take(requestedImageCount).Select(i => i.Key).ToList();
         }
 
         public async Task<Stream> GetImageStreamAsync(string key)
