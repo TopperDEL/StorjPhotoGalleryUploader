@@ -37,7 +37,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
     [Inject(typeof(uplink.NET.UnoHelpers.Contracts.Models.AppConfig))]
     [Inject(typeof(IAttachmentViewModelFactory))]
     [ViewModel]
-    public partial class EditAlbumViewModel : IEventSubscriber<AttachmentAddedMessage>
+    public partial class EditAlbumViewModel : IEventSubscriber<AttachmentAddedMessage>, IEventSubscriber<AttachmentAddingFinishedMessage>
     {
         [Property] private string _albumName;
         [Property] private bool _hasImages;
@@ -134,14 +134,17 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 {
                     await PhotoUploadService.CreateAndUploadAsync(AlbumName, attachment.Filename, stream, ImageResolution.Original);
                 }
-
-                //After that, refresh the album html
-                await RefreshAlbumAsync();
             }
             finally
             {
                 IsUploading = false;
             }
+        }
+
+        public async void OnEvent(AttachmentAddingFinishedMessage eventData)
+        {
+            //Refresh the album html
+            await RefreshAlbumAsync();
         }
 
         public async Task RefreshAlbumAsync()
