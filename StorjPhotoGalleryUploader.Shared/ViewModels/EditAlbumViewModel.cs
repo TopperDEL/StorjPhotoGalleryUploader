@@ -102,7 +102,6 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 return;
 
             IsUploading = true;
-
             try
             {
                 var attachments = GetAttachmentsFunction().ToList();
@@ -113,7 +112,10 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 //First: Upload the smallest one
                 using (var stream = await attachment.GetAttachmentStreamAsync())
                 {
-                    await PhotoUploadService.CreateAndUploadAsync(AlbumName, attachment.Filename, stream, ImageResolution.Small);
+                    if (stream != null)
+                    {
+                        await PhotoUploadService.CreateAndUploadAsync(AlbumName, attachment.Filename, stream, ImageResolution.Small);
+                    }
                 }
 
                 //Then: Upload the cover, if this is the first image
@@ -131,18 +133,23 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 //Then upload the medium one
                 using (var stream = await attachment.GetAttachmentStreamAsync())
                 {
-                    await PhotoUploadService.CreateAndUploadAsync(AlbumName, attachment.Filename, stream, ImageResolution.Medium);
+                    if (stream != null)
+                    {
+                        await PhotoUploadService.CreateAndUploadAsync(AlbumName, attachment.Filename, stream, ImageResolution.Medium);
+                    }
                 }
 
                 //Then the original one
                 using (var stream = await attachment.GetAttachmentStreamAsync())
                 {
-                    await PhotoUploadService.CreateAndUploadAsync(AlbumName, attachment.Filename, stream, ImageResolution.Original);
+                    if (stream != null)
+                    {
+                        await PhotoUploadService.CreateAndUploadAsync(AlbumName, attachment.Filename, stream, ImageResolution.Original);
+                    }
                 }
             }
             catch (Exception ex)
             {
-
             }
             finally
             {
