@@ -157,6 +157,9 @@
   <data name="SettingsTitle.Text" xml:space="preserve">
     <value>Einstellungen</value>
   </data>
+  <data name="ShareAlbum.Text" xml:space="preserve">
+    <value>Teilen</value>
+  </data>
   <data name="ShareDescription" xml:space="preserve">
     <value>Klicke auf den folgenden Link, um das Album zu öffnen:</value>
   </data>
@@ -171,6 +174,9 @@
   </data>
   <data name="TryAgain.Content" xml:space="preserve">
     <value>Erneut versuchen</value>
+  </data>
+  <data name="UploadImage.Text" xml:space="preserve">
+    <value>Hochladen</value>
   </data>
   <data name="UploadsTitle.Text" xml:space="preserve">
     <value>Übermittlungen</value>

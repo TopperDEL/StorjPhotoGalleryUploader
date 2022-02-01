@@ -30,7 +30,7 @@
                     BorderThickness="0" Command="{Binding ShareAlbumCommand}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/Share.png" Width="21" Height="21" Margin="5"/>
-                    <TextBlock Text="Share" VerticalAlignment="Center"/>
+                    <TextBlock x:Uid="ShareAlbum" Text="Share" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
             <Button Background="#F0EFEB" Foreground="Black" Width="157" Margin="10" CornerRadius="6"
@@ -38,7 +38,7 @@
                     Command="{Binding SelectImagesCommand}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/AddImage.png" Width="21" Height="21" Margin="5"/>
-                    <TextBlock Text="Upload" VerticalAlignment="Center"/>
+                    <TextBlock x:Uid="UploadImage" Text="Upload" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
         </StackPanel>
