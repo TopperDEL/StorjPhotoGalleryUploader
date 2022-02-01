@@ -17,6 +17,7 @@ namespace StorjPhotoGalleryUploader.Services
 {
     public class AlbumService : IAlbumService
     {
+        private const string BASE_SHARE_URL = "BASE_SHARE_URL";
         readonly IBucketService _bucketService;
         readonly IObjectService _objectService;
         readonly IUploadQueueService _uploadQueueService;
@@ -57,33 +58,7 @@ namespace StorjPhotoGalleryUploader.Services
 
         public async Task<Album> CreateAlbumAsync(string albumName)
         {
-            await InitAsync();
-
-            var accessGrant = _appConfig.TryGetAccessGrant(out bool success);
-            if (!success)
-                return null;
-
-            Assembly assembly = GetType().GetTypeInfo().Assembly;
-            using (var indexStream = assembly.GetManifestResourceStream("StorjPhotoGalleryUploader.Services.Assets.site_template.album.index.html"))
-            {
-                using (StreamReader sr = new StreamReader(indexStream))
-                {
-                    var albumIndexTemplate = Template.Parse(sr.ReadToEnd());
-
-                    try
-                    {
-                        var result = await albumIndexTemplate.RenderAsync(new { AlbumName = albumName }).ConfigureAwait(false);
-
-                        await _uploadQueueService.AddObjectToUploadQueueAsync(_bucket.Name, albumName + "/index.html", accessGrant, Encoding.UTF8.GetBytes(result), albumName + "/index.html").ConfigureAwait(false);
-                    }
-                    catch
-                    {
-                        return null;
-                    }
-                }
-            }
-
-            return new Album() { Name = albumName };
+            return await RefreshAlbumAsync(albumName, new List<string>()); //Simply no images, yet
         }
 
         public async Task<Album> RefreshAlbumAsync(string albumName, List<string> imageNames)
@@ -105,12 +80,32 @@ namespace StorjPhotoGalleryUploader.Services
                     {
                         var result = await albumIndexTemplate.RenderAsync(new { AlbumName = albumName, ImageNames = imageNames }).ConfigureAwait(false);
 
-                        //ToDo: Add to customMetadata to UploadQueue
-                        //var baseShareUrl = _shareService.CreateAlbumLink(albumName);
-                        //var customMetadata = new CustomMetadata();
-                        //customMetadata.Entries.Add(new CustomMetadataEntry { Key = "BASE_SHARE_URL", Value = baseShareUrl });
+                        string baseShareUrl = string.Empty;
 
-                        await _uploadQueueService.AddObjectToUploadQueueAsync(_bucket.Name, albumName + "/index.html", accessGrant, Encoding.UTF8.GetBytes(result), albumName + "/index.html").ConfigureAwait(false);
+                        //If the object already exists, get its BaseShareUrl
+                        try
+                        {
+                            var existingIndexObject = await _objectService.GetObjectAsync(_bucket, albumName + "/index.html");
+                            if (existingIndexObject != null)
+                            {
+                                baseShareUrl = existingIndexObject.CustomMetadata.Entries.Where(e => e.Key == BASE_SHARE_URL).First().Value;
+                            }
+                        }
+                        catch
+                        { }
+                        if (string.IsNullOrEmpty(baseShareUrl))
+                        {
+                            //Create the share-URL, that is used to share the album and
+                            //to load the thumbnails for the app.
+                            baseShareUrl = _shareService.CreateAlbumLink(albumName);
+                        }
+
+                        var customMetadata = new CustomMetadata();
+                        customMetadata.Entries.Add(new CustomMetadataEntry { Key = BASE_SHARE_URL, Value = baseShareUrl });
+
+                        var upload = await _objectService.UploadObjectAsync(_bucket, albumName + "/index.html", new UploadOptions(), Encoding.UTF8.GetBytes(result), customMetadata, false);
+                        await upload.StartUploadAsync();
+                        //await _uploadQueueService.AddObjectToUploadQueueAsync(_bucket.Name, albumName + "/index.html", accessGrant, Encoding.UTF8.GetBytes(result), albumName + "/index.html", customMetadata).ConfigureAwait(false);
                     }
                     catch
                     {
@@ -201,16 +196,15 @@ namespace StorjPhotoGalleryUploader.Services
                 var objectInfo = await _objectService.GetObjectAsync(_bucket, albumName + "/index.html");
                 foreach (var entry in objectInfo.CustomMetadata.Entries)
                 {
-                    if (entry.Key == "BASE_SHARE_URL")
+                    if (entry.Key == BASE_SHARE_URL)
                     {
                         info.BaseShareUrl = entry.Value;
                     }
                 }
                 if (string.IsNullOrEmpty(info.BaseShareUrl))
                 {
-                    //Create a share-URL and update the Metadata of the album
+                    //Create a share-URL
                     info.BaseShareUrl = _shareService.CreateAlbumLink(albumName);
-                    await RefreshAlbumMetadata(albumName, info.BaseShareUrl);
                 }
             }
             catch
@@ -219,15 +213,6 @@ namespace StorjPhotoGalleryUploader.Services
                 //jump to album list
             }
             return info;
-        }
-
-        private async Task RefreshAlbumMetadata(string albumName, string baseShareUrl)
-        {
-            var index = await _objectService.DownloadObjectAsync(_bucket, albumName + "/index.html", new DownloadOptions());
-            var customMetadata = new CustomMetadata();
-            customMetadata.Entries.Add(new CustomMetadataEntry { Key = "BASE_SHARE_URL", Value = baseShareUrl });
-            var upload = await _objectService.UploadObjectAsync(_bucket, albumName + "/index.html", new UploadOptions(), index.DownloadedBytes, customMetadata,false);
-            await upload.StartUploadAsync();
         }
 
         public async Task<List<string>> GetImageKeysAsync(string albumName, int requestedImageCount, ImageResolution resolution, bool shuffled)
