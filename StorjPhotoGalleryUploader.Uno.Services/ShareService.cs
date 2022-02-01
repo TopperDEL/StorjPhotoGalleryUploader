@@ -27,8 +27,6 @@ namespace StorjPhotoGalleryUploader.Services
 
         public string CreateAlbumLink(string albumName)
         {
-            _albumName = albumName;
-
             var permissions = new Permission();
             permissions.AllowDelete = false;
             permissions.AllowList = false;
@@ -55,9 +53,11 @@ namespace StorjPhotoGalleryUploader.Services
             }
         }
 
-        public void ShowShareUI(string url)
+        public void ShowShareUI(string url, string albumName)
         {
             _shareUrl = url;
+            _albumName = albumName;
+
             if (DataTransferManager.IsSupported())
             {
                 DataTransferManager.ShowShareUI();
