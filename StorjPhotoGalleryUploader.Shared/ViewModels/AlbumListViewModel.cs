@@ -43,6 +43,10 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 else
                     IsEmpty = false;
             }
+            catch (Exception ex)
+            {
+
+            }
             finally
             {
                 IsLoading = false;
