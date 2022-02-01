@@ -187,7 +187,14 @@ namespace StorjPhotoGalleryUploader.Services
 
             AlbumInfo info = new AlbumInfo();
             info.ImageCount = albumImages.Items.Count;
-            info.CreationDate = albumImages.Items.Select(c => c.SystemMetadata).OrderBy(m => m.Created).FirstOrDefault().Created;
+            if (albumImages.Items.Count > 0)
+            {
+                info.CreationDate = albumImages.Items.Select(c => c.SystemMetadata).OrderBy(m => m.Created).FirstOrDefault().Created;
+            }
+            else
+            {
+                info.CreationDate = DateTime.Now;
+            }
 
             try
             {
