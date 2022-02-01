@@ -49,7 +49,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 return;
             }
 
-            var images = await AlbumService.GetImageKeysAsync(Model.Name, 4, ImageResolution.Small);
+            var images = await AlbumService.GetImageKeysAsync(Model.Name, 4, ImageResolution.Small, true);
 
             //URL is storjgallery.de/access/bucket/albumname/#0
             //But it has to be storjgallery.de/access/bucket/

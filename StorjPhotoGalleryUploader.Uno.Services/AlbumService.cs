@@ -230,7 +230,7 @@ namespace StorjPhotoGalleryUploader.Services
             await upload.StartUploadAsync();
         }
 
-        public async Task<List<string>> GetImageKeysAsync(string albumName, int requestedImageCount, ImageResolution resolution)
+        public async Task<List<string>> GetImageKeysAsync(string albumName, int requestedImageCount, ImageResolution resolution, bool shuffled)
         {
             await InitAsync();
 
@@ -240,7 +240,14 @@ namespace StorjPhotoGalleryUploader.Services
             listOptions.System = true;
             var albumImages = await _objectService.ListObjectsAsync(_bucket, listOptions).ConfigureAwait(false);
 
-            return albumImages.Items.OrderBy(e=> Guid.NewGuid()).Take(requestedImageCount).Select(i => i.Key).ToList();
+            if (shuffled)
+            {
+                return albumImages.Items.OrderBy(e => Guid.NewGuid()).Take(requestedImageCount).Select(i => i.Key).ToList();
+            }
+            else
+            {
+                return albumImages.Items.Take(requestedImageCount).Select(i => i.Key).ToList();
+            }
         }
 
         public async Task<Stream> GetImageStreamAsync(string key)

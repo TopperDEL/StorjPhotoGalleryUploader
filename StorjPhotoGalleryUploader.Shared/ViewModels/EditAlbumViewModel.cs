@@ -69,14 +69,14 @@ namespace StorjPhotoGalleryUploader.ViewModels
             //But it has to be storjgallery.de/access/bucket/
             var baseUrl = albumInfo.BaseShareUrl.Replace("/#0", "").Replace(Uri.EscapeUriString(AlbumName), "");
 
-            var images = await AlbumService.GetImageKeysAsync(AlbumName, int.MaxValue, ImageResolution.Small);
+            var images = await AlbumService.GetImageKeysAsync(AlbumName, int.MaxValue, ImageResolution.Small, false);
             foreach (var image in images)
             {
                 var attachment = new Attachment();
                 var attachmentVm = AttachmentViewModelFactory.Create();
                 attachment.Filename = image;
                 attachment.MimeType = "image/jpeg";
-                attachmentVm.AttachmentThumbnail = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri(baseUrl + image));
+                attachmentVm.SetAttachmentFromURL(attachment, new Uri(baseUrl + image));
 
                 AddAttachmentAction(attachmentVm);
                 HasImages = true;
@@ -139,6 +139,10 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 {
                     await PhotoUploadService.CreateAndUploadAsync(AlbumName, attachment.Filename, stream, ImageResolution.Original);
                 }
+            }
+            catch (Exception ex)
+            {
+
             }
             finally
             {

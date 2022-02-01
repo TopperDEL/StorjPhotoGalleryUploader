@@ -140,10 +140,10 @@
       <Version>2.8.2065</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers">
-      <Version>0.9.32</Version>
+      <Version>0.9.33</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers.Contracts">
-      <Version>0.9.32</Version>
+      <Version>0.9.33</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
