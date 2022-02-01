@@ -7,6 +7,6 @@ namespace StorjPhotoGalleryUploader.Contracts.Interfaces
     public interface IShareService
     {
         string CreateAlbumLink(string albumName);
-        void ShowShareUI(string url);
+        void ShowShareUI(string url, string albumName);
     }
 }

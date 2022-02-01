@@ -54,7 +54,7 @@ namespace StorjPhotoGalleryUploader.Helper
             services.AddTransient<IPrepareBucketService, PrepareBucketService>();
             services.AddTransient<IAttachmentSelectService, AttachmentSelectService>();
             services.AddTransient<IPhotoUploadService, PhotoUploadService>();
-            services.AddTransient<IShareService, ShareService>();
+            services.AddSingleton<IShareService, ShareService>();
 
             //ViewModels
             services.AddTransient<AlbumListViewModel>();

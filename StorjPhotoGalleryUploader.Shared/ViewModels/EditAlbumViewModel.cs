@@ -187,7 +187,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
             }
             if (!string.IsNullOrEmpty(url))
             {
-                ShareService.ShowShareUI(url);
+                ShareService.ShowShareUI(url, AlbumName);
             }
             else
             {
