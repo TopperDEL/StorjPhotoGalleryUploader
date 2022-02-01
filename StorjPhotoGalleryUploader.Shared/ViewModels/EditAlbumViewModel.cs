@@ -58,6 +58,17 @@ namespace StorjPhotoGalleryUploader.ViewModels
             {
                 await Task.Delay(100);
             }
+            var albumInfo = await AlbumService.GetAlbumInfoAsync(AlbumName);
+
+            if (string.IsNullOrEmpty(albumInfo.BaseShareUrl))
+            {
+                return;
+            }
+
+            //URL is storjgallery.de/access/bucket/albumname/#0
+            //But it has to be storjgallery.de/access/bucket/
+            var baseUrl = albumInfo.BaseShareUrl.Replace("/#0", "").Replace(Uri.EscapeUriString(AlbumName), "");
+
             var images = await AlbumService.GetImageKeysAsync(AlbumName, int.MaxValue, ImageResolution.Small);
             foreach (var image in images)
             {
@@ -65,15 +76,16 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 var attachmentVm = AttachmentViewModelFactory.Create();
                 attachment.Filename = image;
                 attachment.MimeType = "image/jpeg";
-                using (var stream = await AlbumService.GetImageStreamAsync(image))
-                {
-                    var bytes = ArrayPool<byte>.Shared.Rent((int)stream.Length);
-                    await stream.ReadAsync(bytes, 0, (int)stream.Length);
-                    MemoryStream mstream = new MemoryStream(bytes);
-                    attachment.AttachmentData = mstream;
-                    ArrayPool<byte>.Shared.Return(bytes);
-                }
-                await attachmentVm.SetAttachmentAsync(attachment);
+                //using (var stream = await AlbumService.GetImageStreamAsync(image))
+                //{
+                //    var bytes = ArrayPool<byte>.Shared.Rent((int)stream.Length);
+                //    await stream.ReadAsync(bytes, 0, (int)stream.Length);
+                //    MemoryStream mstream = new MemoryStream(bytes);
+                //    attachment.AttachmentData = mstream;
+                //    ArrayPool<byte>.Shared.Return(bytes);
+                //}
+                //await attachmentVm.SetAttachmentAsync(attachment);
+                attachmentVm.AttachmentThumbnail = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri(baseUrl + image));
 
                 AddAttachmentAction(attachmentVm);
                 HasImages = true;
@@ -104,6 +116,8 @@ namespace StorjPhotoGalleryUploader.ViewModels
             {
                 var attachments = GetAttachmentsFunction().ToList();
                 var attachment = attachments.Last();
+                if (attachment == null)
+                    return;
 
                 //First: Upload the smallest one
                 using (var stream = await attachment.GetAttachmentStreamAsync())
