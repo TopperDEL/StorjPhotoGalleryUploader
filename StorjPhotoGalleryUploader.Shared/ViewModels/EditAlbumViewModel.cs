@@ -76,15 +76,6 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 var attachmentVm = AttachmentViewModelFactory.Create();
                 attachment.Filename = image;
                 attachment.MimeType = "image/jpeg";
-                //using (var stream = await AlbumService.GetImageStreamAsync(image))
-                //{
-                //    var bytes = ArrayPool<byte>.Shared.Rent((int)stream.Length);
-                //    await stream.ReadAsync(bytes, 0, (int)stream.Length);
-                //    MemoryStream mstream = new MemoryStream(bytes);
-                //    attachment.AttachmentData = mstream;
-                //    ArrayPool<byte>.Shared.Return(bytes);
-                //}
-                //await attachmentVm.SetAttachmentAsync(attachment);
                 attachmentVm.AttachmentThumbnail = new Windows.UI.Xaml.Media.Imaging.BitmapImage(new Uri(baseUrl + image));
 
                 AddAttachmentAction(attachmentVm);
