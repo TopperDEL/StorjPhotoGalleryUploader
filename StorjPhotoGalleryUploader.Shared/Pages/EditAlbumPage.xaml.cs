@@ -39,6 +39,7 @@ namespace StorjPhotoGalleryUploader.Pages
                 _viewModel.AlbumName = e.Parameter.ToString();
             }
 
+            AttachmentContainer.ClearAttachments();
             _viewModel.GetAttachmentsFunction = AttachmentContainer.GetAttachments;
             _viewModel.SelectImagesAction = async () => await ((uplink.NET.UnoHelpers.ViewModels.AttachmentContainerViewModel)AttachmentContainer.DataContext).SelectNewContentAsync();
             _viewModel.AddAttachmentAction = (attachmentVm) => ((uplink.NET.UnoHelpers.ViewModels.AttachmentContainerViewModel)AttachmentContainer.DataContext).AddAttachment(attachmentVm);
