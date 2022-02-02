@@ -148,6 +148,12 @@
   <data name="CreateOne.Text" xml:space="preserve">
     <value>Erstelle ein Album!</value>
   </data>
+  <data name="DeleteAlbumButton.Text" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="EditAlbumButton.Text" xml:space="preserve">
+    <value>Bearbeiten</value>
+  </data>
   <data name="Logout.Content" xml:space="preserve">
     <value>Abmelden</value>
   </data>
@@ -180,5 +186,8 @@
   </data>
   <data name="UploadsTitle.Text" xml:space="preserve">
     <value>Übermittlungen</value>
+  </data>
+  <data name="ViewAlbumInWebButton.Text" xml:space="preserve">
+    <value>Im Browser öffnen</value>
   </data>
 </root>

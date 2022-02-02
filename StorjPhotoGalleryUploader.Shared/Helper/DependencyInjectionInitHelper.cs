@@ -3,6 +3,7 @@ using MvvmGen.Events;
 using StorjPhotoGalleryUploader.Contracts.Interfaces;
 using StorjPhotoGalleryUploader.Contracts.Models;
 using StorjPhotoGalleryUploader.Services;
+using StorjPhotoGalleryUploader.UWPServices;
 using StorjPhotoGalleryUploader.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -55,6 +56,7 @@ namespace StorjPhotoGalleryUploader.Helper
             services.AddTransient<IAttachmentSelectService, AttachmentSelectService>();
             services.AddTransient<IPhotoUploadService, PhotoUploadService>();
             services.AddSingleton<IShareService, ShareService>();
+            services.AddTransient<IOpenBrowserService, OpenBrowserService>();
 
             //ViewModels
             services.AddTransient<AlbumListViewModel>();

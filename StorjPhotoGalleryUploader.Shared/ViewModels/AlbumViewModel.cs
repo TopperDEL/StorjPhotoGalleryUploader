@@ -17,6 +17,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
     [ViewModel(typeof(Album))]
     [Inject(typeof(IAlbumService))]
     [Inject(typeof(IEventAggregator))]
+    [Inject(typeof(IOpenBrowserService))]
     [ViewModelGenerateFactory]
     public partial class AlbumViewModel
     {
@@ -83,6 +84,15 @@ namespace StorjPhotoGalleryUploader.ViewModels
         public void EditAlbum()
         {
             EventAggregator.Publish(new DoNavigateMessage(NavigationTarget.EditAlbum, Model.Name));
+        }
+
+        [Command]
+        public async Task ViewAlbumInWebAsync()
+        {
+            if (!string.IsNullOrEmpty(_albumInfo.BaseShareUrl))
+            {
+                await OpenBrowserService.OpenBrowserAsync(_albumInfo.BaseShareUrl);
+            }
         }
     }
 }

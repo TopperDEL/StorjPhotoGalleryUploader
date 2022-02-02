@@ -44,6 +44,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)UWPServices\OpenBrowserService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumImageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumViewModel.cs" />
