@@ -28,6 +28,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
         [Property] string _image2;
         [Property] string _image3;
         [Property] string _image4;
+        [Property] bool _isInDeletion;
 
         private AlbumInfo _albumInfo;
 
@@ -102,7 +103,9 @@ namespace StorjPhotoGalleryUploader.ViewModels
             var delete = await DialogService.AskYesOrNoAsync("Really delete album '" + Model.Name + "'?");
             if(delete)
             {
+                IsInDeletion = true;
                 await AlbumService.DeleteAlbumAsync(Model.Name);
+                EventAggregator.Publish(new RefreshAlbumListMessage());
             }
         }
     }

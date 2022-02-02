@@ -92,6 +92,10 @@
                                 </Button.Flyout>
                                 <Image Source="/Assets/DotsMenu.png" Width="22" Height="6"/>
                             </Button>
+
+                            <Grid Background="White" Opacity="0.5" Grid.ColumnSpan="3" Grid.RowSpan="3" Visibility="{Binding IsInDeletion, Converter={StaticResource TrueIsVisibleConverter}}">
+                                <ProgressRing IsActive="True" Foreground="Black"/>
+                            </Grid>
                         </Grid>
                     </Border>
                 </DataTemplate>
