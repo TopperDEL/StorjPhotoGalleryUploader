@@ -105,7 +105,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
             {
                 IsInDeletion = true;
                 await AlbumService.DeleteAlbumAsync(Model.Name);
-                EventAggregator.Publish(new RefreshAlbumListMessage());
+                EventAggregator.Publish(new AlbumDeletedMessage(Model.Name));
             }
         }
     }

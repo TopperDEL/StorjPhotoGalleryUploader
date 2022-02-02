@@ -14,7 +14,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
     [Inject(typeof(IAlbumService))]
     [Inject(typeof(IAlbumViewModelFactory))]
     [ViewModel]
-    public partial class AlbumListViewModel: IEventSubscriber<RefreshAlbumListMessage>
+    public partial class AlbumListViewModel: IEventSubscriber<AlbumDeletedMessage>
     {
         [Property] private ObservableCollection<AlbumViewModel> _albumList = new ObservableCollection<AlbumViewModel>();
         [Property] private bool _isLoading;
@@ -59,10 +59,16 @@ namespace StorjPhotoGalleryUploader.ViewModels
             EventAggregator.Publish(new DoNavigateMessage(NavigationTarget.NewAlbum));
         }
 
-        public async void OnEvent(RefreshAlbumListMessage eventData)
+        public async void OnEvent(AlbumDeletedMessage eventData)
         {
-            AlbumList.Clear();
-            await LoadAlbumsAsync();
+            foreach(var albumVM in AlbumList)
+            {
+                if(albumVM.Name == eventData.AlbumName)
+                {
+                    AlbumList.Remove(albumVM);
+                    return;
+                }
+            }
         }
     }
 }
