@@ -127,14 +127,14 @@ namespace StorjPhotoGalleryUploader.Services
 
             ListObjectsOptions listOptions = new ListObjectsOptions();
             listOptions.Recursive = false;
-            listOptions.Prefix = "pics/original/";
+            listOptions.Prefix = "pics/resized/"+ ImageResolution.SmallDescription +"/";
             listOptions.System = true;
             var albumItems = await _objectService.ListObjectsAsync(_bucket, listOptions).ConfigureAwait(false);
             foreach (var albumItem in albumItems.Items.Where(i => i.IsPrefix))
             {
                 albums.Add(new Album()
                 {
-                    Name = albumItem.Key.Replace("pics/original/", "").Replace("/", "")
+                    Name = albumItem.Key.Replace("pics/resized/" + ImageResolution.SmallDescription + "/", "").Replace("/", "")
                 });
             }
 
