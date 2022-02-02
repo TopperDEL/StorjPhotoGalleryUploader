@@ -19,6 +19,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
     [Inject(typeof(IEventAggregator))]
     [Inject(typeof(IOpenBrowserService))]
     [Inject(typeof(IDialogService))]
+    [Inject(typeof(ILocalizedTextService))]
     [ViewModelGenerateFactory]
     public partial class AlbumViewModel
     {
@@ -100,7 +101,10 @@ namespace StorjPhotoGalleryUploader.ViewModels
         [Command]
         public async Task DeleteAlbumAsync()
         {
-            var delete = await DialogService.AskYesOrNoAsync("Really delete album '" + Model.Name + "'?");
+            var deleteQuestion = LocalizedTextService.GetLocalizedText("AskForAlbumDeleteQuestion").Replace("&ALBUM_NAME&", Model.Name);
+            var title = LocalizedTextService.GetLocalizedText("AskForAlbumDeleteTitle");
+
+            var delete = await DialogService.AskYesOrNoAsync(deleteQuestion, title);
             if(delete)
             {
                 IsInDeletion = true;

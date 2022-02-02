@@ -46,6 +46,7 @@
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)UWPServices\DialogService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UWPServices\LocalizedTextService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UWPServices\OpenBrowserService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumImageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumListViewModel.cs" />

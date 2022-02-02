@@ -12,16 +12,22 @@ namespace StorjPhotoGalleryUploader.UWPServices
     public class DialogService : IDialogService
     {
         private static readonly SemaphoreSlim _oneAtATimeAsync = new SemaphoreSlim(1, 1);
+        private ILocalizedTextService _localizedTextService;
 
-        public async Task<bool> AskYesOrNoAsync(string message)
+        public DialogService(ILocalizedTextService localizedTextService)
+        {
+            _localizedTextService = localizedTextService;
+        }
+
+        public async Task<bool> AskYesOrNoAsync(string message, string title)
         {
             bool result = false;
 
             var errorDialog = new ContentDialog
             {
-                Title = "Frage",
+                Title = title,
                 Content = message
-            }.SetPrimaryButton("Ja", (d, e) => { result = true; }).SetSecondaryButton("Nein", (d, e) => { result = false; });
+            }.SetPrimaryButton(_localizedTextService.GetLocalizedText("Yes"), (d, e) => { result = true; }).SetSecondaryButton(_localizedTextService.GetLocalizedText("No"), (d, e) => { result = false; });
 
             await errorDialog.ShowOneAtATimeAsync();
 

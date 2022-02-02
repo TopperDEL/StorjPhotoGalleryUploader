@@ -141,6 +141,12 @@
   <data name="ApplicationName" xml:space="preserve">
     <value>Storj Photo Gallery</value>
   </data>
+  <data name="AskForAlbumDeleteQuestion" xml:space="preserve">
+    <value>Do you really want to delete the album '&amp;ALBUM_NAME&amp;'?</value>
+  </data>
+  <data name="AskForAlbumDeleteTitle" xml:space="preserve">
+    <value>Delete album?</value>
+  </data>
   <data name="CreateAlbum.Content" xml:space="preserve">
     <value>+ Create album</value>
   </data>
@@ -155,6 +161,9 @@
   </data>
   <data name="Logout.Content" xml:space="preserve">
     <value>Logout</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
   </data>
   <data name="PreparingForUpload.Text" xml:space="preserve">
     <value>Preparing images for upload, please wait</value>
@@ -188,5 +197,8 @@
   </data>
   <data name="ViewAlbumInWebButton.Text" xml:space="preserve">
     <value>View in browser</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>

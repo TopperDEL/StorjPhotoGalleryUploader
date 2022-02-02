@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace StorjPhotoGalleryUploader.Contracts.Interfaces
 {
-    public interface IDialogService
+    public interface ILocalizedTextService
     {
-        Task<bool> AskYesOrNoAsync(string message, string title);
+        string GetLocalizedText(string textKey);
     }
 }
