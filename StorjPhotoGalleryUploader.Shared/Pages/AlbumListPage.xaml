@@ -95,7 +95,7 @@
                             </Button>
 
                             <Grid Background="White" Opacity="0.5" Grid.ColumnSpan="3" Grid.RowSpan="3" Visibility="{Binding IsInDeletion, Converter={StaticResource TrueIsVisibleConverter}}">
-                                <ProgressRing IsActive="True" Foreground="Black"/>
+                                <ProgressRing IsActive="True" Foreground="Black" MaxWidth="50" MaxHeight="50"/>
                             </Grid>
                         </Grid>
                     </Border>
