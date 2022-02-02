@@ -25,6 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helper\BitmapExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\BottomPaddedStackPanel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\DependencyInjectionInitHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\DialogExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\TaskCompletionNotifier.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Pages\AlbumListPage.xaml.cs">
       <DependentUpon>AlbumListPage.xaml</DependentUpon>
@@ -44,6 +45,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)UWPServices\DialogService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UWPServices\OpenBrowserService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumImageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumListViewModel.cs" />

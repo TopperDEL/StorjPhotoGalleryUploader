@@ -141,7 +141,7 @@ namespace StorjPhotoGalleryUploader.Services
             return albums;
         }
 
-        public async Task<bool> RefreshAlbumIndex(List<Album> albums)
+        public async Task<bool> RefreshAlbumIndexAsync(List<Album> albums)
         {
             var accessGrant = _appConfig.TryGetAccessGrant(out bool success);
             if (!success)
@@ -242,6 +242,25 @@ namespace StorjPhotoGalleryUploader.Services
             var objectInfo = await _objectService.GetObjectAsync(_bucket, key).ConfigureAwait(false);
 
             return new DownloadStream(_bucket, (int)objectInfo.SystemMetadata.ContentLength, key);
+        }
+
+        public async Task DeleteAlbumAsync(string albumName)
+        {
+            await DeleteImages(albumName, ImageResolution.Original);
+            await DeleteImages(albumName, ImageResolution.Medium);
+            await DeleteImages(albumName, ImageResolution.Small);
+            await _objectService.DeleteObjectAsync(_bucket, albumName + "/index.html");
+            var albumList = await ListAlbumsAsync();
+            await RefreshAlbumIndexAsync(albumList);
+        }
+
+        private async Task DeleteImages(string albumName, ImageResolution resolution)
+        {
+            var keys = await GetImageKeysAsync(albumName, int.MaxValue, resolution, false);
+            foreach (var key in keys)
+            {
+                await _objectService.DeleteObjectAsync(_bucket, key).ConfigureAwait(false);
+            }
         }
     }
 }

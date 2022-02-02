@@ -170,7 +170,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
             var album = await AlbumService.RefreshAlbumAsync(AlbumName, imageNames);
 
             var albumList = await AlbumService.ListAlbumsAsync();
-            await AlbumService.RefreshAlbumIndex(albumList);
+            await AlbumService.RefreshAlbumIndexAsync(albumList);
         }
 
         [Command]

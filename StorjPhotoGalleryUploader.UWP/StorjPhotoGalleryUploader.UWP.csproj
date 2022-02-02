@@ -23,6 +23,9 @@
     <PackageReference Include="SkiaSharp.Views.Uno">
       <Version>2.80.3</Version>
     </PackageReference>
+    <PackageReference Include="System.Text.Json">
+      <Version>6.0.1</Version>
+    </PackageReference>
     <PackageReference Include="Uno.Core" Version="4.0.1" />
     <PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.3.0</Version>

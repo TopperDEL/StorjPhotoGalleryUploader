@@ -18,6 +18,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
     [Inject(typeof(IAlbumService))]
     [Inject(typeof(IEventAggregator))]
     [Inject(typeof(IOpenBrowserService))]
+    [Inject(typeof(IDialogService))]
     [ViewModelGenerateFactory]
     public partial class AlbumViewModel
     {
@@ -92,6 +93,16 @@ namespace StorjPhotoGalleryUploader.ViewModels
             if (!string.IsNullOrEmpty(_albumInfo.BaseShareUrl))
             {
                 await OpenBrowserService.OpenBrowserAsync(_albumInfo.BaseShareUrl);
+            }
+        }
+
+        [Command]
+        public async Task DeleteAlbumAsync()
+        {
+            var delete = await DialogService.AskYesOrNoAsync("Really delete album '" + Model.Name + "'?");
+            if(delete)
+            {
+                await AlbumService.DeleteAlbumAsync(Model.Name);
             }
         }
     }
