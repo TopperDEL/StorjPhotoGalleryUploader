@@ -46,9 +46,14 @@
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center" Visibility="{Binding HasImages,Converter={StaticResource FalseIsVisibleConverter}}">
             <TextBlock x:Uid="AlbumEmpty" Text="This album is empty." HorizontalAlignment="Center" FontFamily="Inter" FontSize="24" Foreground="#8F8F8F"/>
             <TextBlock x:Uid="AddImages" Text="Upload something!" HorizontalAlignment="Center" FontFamily="Inter" FontSize="24" Foreground="#8F8F8F"/>
-            <Button x:Uid="AddImage" Content="Upload" HorizontalAlignment="Center" Margin="30" FontFamily="Inter" FontSize="17" Background="{StaticResource StorjBlue}" Foreground="White"
+            <Button HorizontalAlignment="Center" Margin="30" FontFamily="Inter" FontSize="17" Background="{StaticResource StorjBlue}" Foreground="White"
                      BorderThickness="0"
-                    Command="{Binding SelectImagesCommand}"/>
+                    Command="{Binding SelectImagesCommand}">
+                <StackPanel Orientation="Horizontal">
+                    <BitmapIcon UriSource="/Assets/AddImage.png" Width="21" Height="21" Margin="5" Foreground="White"/>
+                    <TextBlock x:Uid="AddImage" Text="Upload" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
         <helper:AttachmentContainerControl Grid.Row="2" x:Name="AttachmentContainer" Margin="10" Visibility="{Binding HasImages,Converter={StaticResource TrueIsVisibleConverter}}"
                                            CanSetAttachmentAsCover="True" CanDeleteAttachment="True"/>

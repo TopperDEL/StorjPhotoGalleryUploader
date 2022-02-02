@@ -105,6 +105,8 @@ namespace StorjPhotoGalleryUploader.ViewModels
             try
             {
                 var attachments = GetAttachmentsFunction().ToList();
+                if (attachments.Count() == 0)
+                    return;
                 var attachment = attachments.Last();
                 if (attachment == null)
                     return;
