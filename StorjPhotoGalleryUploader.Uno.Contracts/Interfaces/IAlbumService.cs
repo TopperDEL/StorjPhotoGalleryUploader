@@ -18,5 +18,6 @@ namespace StorjPhotoGalleryUploader.Contracts.Interfaces
         Task<List<string>> GetImageKeysAsync(string albumName, int requestedImageCount, ImageResolution resolution, bool shuffled);
         Task<Stream> GetImageStreamAsync(string key);
         Task DeleteAlbumAsync(string albumName);
+        Task DeleteImageAsync(string albumName, string filename);
     }
 }

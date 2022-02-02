@@ -243,17 +243,33 @@ namespace StorjPhotoGalleryUploader.Services
             return new DownloadStream(_bucket, (int)objectInfo.SystemMetadata.ContentLength, key);
         }
 
+        public async Task DeleteImageAsync(string albumName, string filename)
+        {
+            await DeleteImageAsync(albumName, filename.Replace("resized/"+ImageResolution.SmallDescription,"original"), ImageResolution.Original);
+            await DeleteImageAsync(albumName, filename.Replace(ImageResolution.SmallDescription, ImageResolution.MediumDescription), ImageResolution.Medium);
+            await DeleteImageAsync(albumName, filename, ImageResolution.Small);
+        }
+
+        private async Task DeleteImageAsync(string albumName, string filename, ImageResolution resolution)
+        {
+            var keys = await GetImageKeysAsync(albumName, int.MaxValue, resolution, false);
+            foreach (var key in keys.Where(k=>k.Contains(filename)))
+            {
+                await _objectService.DeleteObjectAsync(_bucket, key).ConfigureAwait(false);
+            }
+        }
+
         public async Task DeleteAlbumAsync(string albumName)
         {
-            await DeleteImages(albumName, ImageResolution.Original);
-            await DeleteImages(albumName, ImageResolution.Medium);
-            await DeleteImages(albumName, ImageResolution.Small);
+            await DeleteImagesAsync(albumName, ImageResolution.Original);
+            await DeleteImagesAsync(albumName, ImageResolution.Medium);
+            await DeleteImagesAsync(albumName, ImageResolution.Small);
             await _objectService.DeleteObjectAsync(_bucket, albumName + "/index.html");
             var albumList = await ListAlbumsAsync();
             await RefreshAlbumIndexAsync(albumList);
         }
 
-        private async Task DeleteImages(string albumName, ImageResolution resolution)
+        private async Task DeleteImagesAsync(string albumName, ImageResolution resolution)
         {
             var keys = await GetImageKeysAsync(albumName, int.MaxValue, resolution, false);
             foreach (var key in keys)

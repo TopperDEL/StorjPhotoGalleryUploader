@@ -37,7 +37,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
     [Inject(typeof(uplink.NET.UnoHelpers.Contracts.Models.AppConfig))]
     [Inject(typeof(IAttachmentViewModelFactory))]
     [ViewModel]
-    public partial class EditAlbumViewModel : IEventSubscriber<AttachmentAddedMessage>, IEventSubscriber<AttachmentAddingFinishedMessage>
+    public partial class EditAlbumViewModel : IEventSubscriber<AttachmentAddedMessage>, IEventSubscriber<AttachmentAddingFinishedMessage>, IEventSubscriber<AttachmentDeletedMessage>
     {
         [Property] private string _albumName;
         [Property] private bool _hasImages;
@@ -204,6 +204,11 @@ namespace StorjPhotoGalleryUploader.ViewModels
             {
                 //ToDo: Inform user
             }
+        }
+
+        public async void OnEvent(AttachmentDeletedMessage eventData)
+        {
+            await AlbumService.DeleteImageAsync(AlbumName, eventData.DeletedAttachment.Filename);
         }
     }
 }
