@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Media.Imaging;
 using System.Linq;
 using MvvmGen.Events;
 using StorjPhotoGalleryUploader.Contracts.Messages;
+using uplink.NET.Models;
 
 namespace StorjPhotoGalleryUploader.ViewModels
 {
@@ -20,6 +21,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
     [Inject(typeof(IOpenBrowserService))]
     [Inject(typeof(IDialogService))]
     [Inject(typeof(ILocalizedTextService))]
+    [Inject(typeof(IUploadQueueService))]
     [ViewModelGenerateFactory]
     public partial class AlbumViewModel
     {
@@ -33,6 +35,37 @@ namespace StorjPhotoGalleryUploader.ViewModels
         [Property] bool _hasOnlyOneImage;
 
         private AlbumInfo _albumInfo;
+
+        partial void OnInitialize()
+        {
+            UploadQueueService.UploadQueueChangedEvent += UploadQueueService_UploadQueueChangedEvent;
+        }
+
+        private Windows.UI.Core.CoreDispatcher _dispatcher;
+        public void SetDispatcher(Windows.UI.Core.CoreDispatcher dispatcher)
+        {
+            _dispatcher = dispatcher;
+        }
+
+        private async void UploadQueueService_UploadQueueChangedEvent(QueueChangeType queueChangeType, UploadQueueEntry entry)
+        {
+            await _dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, async () =>
+            {
+                switch (queueChangeType)
+                {
+                    case QueueChangeType.EntryRemoved:
+                        if (entry.Identifier.Contains(Model.Name))
+                        {
+                            await RefreshImageCountAsync();
+                            if (ImageCount < 5)
+                            {
+                                await LoadImagesAsync();
+                            }
+                        }
+                        break;
+                }
+            });
+        }
 
         public void SetModel(Album album)
         {
@@ -83,7 +116,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 OnPropertyChanged(nameof(Image4));
             }
 
-            if(images.Count == 1 && images.Count != 0)
+            if(ImageCount == 1 && ImageCount != 0)
             {
                 HasOnlyOneImage = true;
             }
@@ -121,6 +154,11 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 await AlbumService.DeleteAlbumAsync(Model.Name);
                 EventAggregator.Publish(new AlbumDeletedMessage(Model.Name));
             }
+        }
+
+        public void OnNavigatedAway()
+        {
+            UploadQueueService.UploadQueueChangedEvent -= UploadQueueService_UploadQueueChangedEvent;
         }
     }
 }

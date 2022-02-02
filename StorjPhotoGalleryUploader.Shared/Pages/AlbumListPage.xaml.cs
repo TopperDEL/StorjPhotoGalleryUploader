@@ -28,6 +28,12 @@ namespace StorjPhotoGalleryUploader.Pages
         {
             this.InitializeComponent();
             DataContext = _viewModel = (AlbumListViewModel)uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService(typeof(AlbumListViewModel));
+            _viewModel.SetDispatcher(this.Dispatcher);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            _viewModel.OnNavigatedAway();
         }
     }
 }

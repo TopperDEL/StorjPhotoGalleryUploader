@@ -30,17 +30,17 @@ namespace StorjPhotoGalleryUploader.Services
             if (resolution.Value == ImageResolution.Small)
             {
                 streamToUse = await _thumbnailGeneratorService.GenerateThumbnailForStreamAsync(imageStream, "image/jpeg", 360, 225);
-                identifier = ImageResolution.SmallDescription + "/" + fileName;
+                identifier = ImageResolution.SmallDescription + "/" + fileName + " - " + albumName;
             }
             else if (resolution.Value == ImageResolution.Medium)
             {
                 streamToUse = await _thumbnailGeneratorService.GenerateThumbnailForStreamAsync(imageStream, "image/jpeg", 1200, 750);
-                identifier = ImageResolution.MediumDescription + "/" + fileName;
+                identifier = ImageResolution.MediumDescription + "/" + fileName + " - " + albumName;
             }
             else if (resolution.Value == ImageResolution.Original)
             {
                 streamToUse = imageStream;
-                identifier = fileName;
+                identifier = fileName + " - " + albumName;
             }
             else
             {

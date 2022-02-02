@@ -20,6 +20,12 @@ namespace StorjPhotoGalleryUploader.ViewModels
         [Property] private bool _isLoading;
         [Property] private bool _isEmpty;
 
+        private Windows.UI.Core.CoreDispatcher _dispatcher;
+        public void SetDispatcher(Windows.UI.Core.CoreDispatcher dispatcher)
+        {
+            _dispatcher = dispatcher;
+        }
+
         [Command]
         private async Task LoadAlbumsAsync()
         {
@@ -32,6 +38,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 {
                     var vm = AlbumViewModelFactory.Create();
                     vm.SetModel(album);
+                    vm.SetDispatcher(_dispatcher);
                     AlbumList.Add(vm);
 
                     await vm.RefreshImageCountAsync();
@@ -66,8 +73,17 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 if(albumVM.Name == eventData.AlbumName)
                 {
                     AlbumList.Remove(albumVM);
+                    albumVM.OnNavigatedAway();
                     return;
                 }
+            }
+        }
+
+        public void OnNavigatedAway()
+        {
+            foreach (var albumVM in AlbumList)
+            {
+                albumVM.OnNavigatedAway();
             }
         }
     }

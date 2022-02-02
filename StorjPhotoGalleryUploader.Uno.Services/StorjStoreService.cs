@@ -32,6 +32,10 @@ namespace StorjPhotoGalleryUploader.Services
                     return false;
 
                 await _uploadQueueService.CancelUploadAsync(key); //Remove previous upload-request - the new one is the one to go
+                if (objectData == null)
+                {
+                    return false;
+                }
                 await _uploadQueueService.AddObjectToUploadQueueAsync(appConfig.BucketName, key, accessGrant, objectData, identifier).ConfigureAwait(false);
 
                 return true;
