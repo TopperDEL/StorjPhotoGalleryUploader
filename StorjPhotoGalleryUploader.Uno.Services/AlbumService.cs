@@ -18,6 +18,7 @@ namespace StorjPhotoGalleryUploader.Services
     public class AlbumService : IAlbumService
     {
         private const string BASE_SHARE_URL = "BASE_SHARE_URL";
+        private const string COVER_IMAGE = "COVER_IMAGE";
         readonly IBucketService _bucketService;
         readonly IObjectService _objectService;
         readonly IUploadQueueService _uploadQueueService;
@@ -61,7 +62,7 @@ namespace StorjPhotoGalleryUploader.Services
             return await RefreshAlbumAsync(albumName, new List<string>()); //Simply no images, yet
         }
 
-        public async Task<Album> RefreshAlbumAsync(string albumName, List<string> imageNames)
+        public async Task<Album> RefreshAlbumAsync(string albumName, List<string> imageNames, string coverImage = null)
         {
             await InitAsync();
 
@@ -102,6 +103,10 @@ namespace StorjPhotoGalleryUploader.Services
 
                         var customMetadata = new CustomMetadata();
                         customMetadata.Entries.Add(new CustomMetadataEntry { Key = BASE_SHARE_URL, Value = baseShareUrl });
+                        if(coverImage != null)
+                        {
+                            customMetadata.Entries.Add(new CustomMetadataEntry { Key = COVER_IMAGE, Value = coverImage });
+                        }
 
                         var upload = await _objectService.UploadObjectAsync(_bucket, albumName + "/index.html", new UploadOptions(), Encoding.UTF8.GetBytes(result), customMetadata, false);
                         await upload.StartUploadAsync();
@@ -199,11 +204,19 @@ namespace StorjPhotoGalleryUploader.Services
                     {
                         info.BaseShareUrl = entry.Value;
                     }
+                    else if(entry.Key == COVER_IMAGE)
+                    {
+                        info.CoverImage = entry.Value;
+                    }
                 }
                 if (string.IsNullOrEmpty(info.BaseShareUrl))
                 {
                     //Create a share-URL
                     info.BaseShareUrl = _shareService.CreateAlbumLink(albumName);
+                }
+                if(string.IsNullOrEmpty(info.CoverImage) && albumImages.Items.Count > 0)
+                {
+                    info.CoverImage = albumImages.Items[0].Key;
                 }
             }
             catch
@@ -248,6 +261,10 @@ namespace StorjPhotoGalleryUploader.Services
             await DeleteImageAsync(albumName, filename.Replace("resized/"+ImageResolution.SmallDescription,"original"), ImageResolution.Original);
             await DeleteImageAsync(albumName, filename.Replace(ImageResolution.SmallDescription, ImageResolution.MediumDescription), ImageResolution.Medium);
             await DeleteImageAsync(albumName, filename, ImageResolution.Small);
+
+            var images = await GetImageKeysAsync(albumName, int.MaxValue, ImageResolution.Small, false);
+            var coverImage = (await GetAlbumInfoAsync(albumName)).CoverImage;
+            await RefreshAlbumAsync(albumName, images, coverImage);
         }
 
         private async Task DeleteImageAsync(string albumName, string filename, ImageResolution resolution)
@@ -276,6 +293,12 @@ namespace StorjPhotoGalleryUploader.Services
             {
                 await _objectService.DeleteObjectAsync(_bucket, key).ConfigureAwait(false);
             }
+        }
+
+        public async Task SetCoverImageAsync(string albumName, string filename)
+        {
+            var images = await GetImageKeysAsync(albumName, int.MaxValue, ImageResolution.Small, false);
+            await RefreshAlbumAsync(albumName, images, filename);
         }
     }
 }

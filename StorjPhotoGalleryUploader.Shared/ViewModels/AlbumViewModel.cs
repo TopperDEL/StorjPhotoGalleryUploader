@@ -96,7 +96,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
             if (images.Count >= 1)
             {
                 //First image with higher resolution
-                Image1 = baseUrl + "pics/" + ImageResolution.Medium + "/" + Model.Name + "/cover_image.jpg";
+                Image1 = baseUrl + _albumInfo.CoverImage;
 
                 OnPropertyChanged(nameof(Image1));
             }

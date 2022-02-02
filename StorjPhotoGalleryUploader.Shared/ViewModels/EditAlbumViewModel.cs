@@ -37,7 +37,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
     [Inject(typeof(uplink.NET.UnoHelpers.Contracts.Models.AppConfig))]
     [Inject(typeof(IAttachmentViewModelFactory))]
     [ViewModel]
-    public partial class EditAlbumViewModel : IEventSubscriber<AttachmentAddedMessage>, IEventSubscriber<AttachmentAddingFinishedMessage>, IEventSubscriber<AttachmentDeletedMessage>
+    public partial class EditAlbumViewModel : IEventSubscriber<AttachmentAddedMessage>, IEventSubscriber<AttachmentAddingFinishedMessage>, IEventSubscriber<AttachmentDeletedMessage>, IEventSubscriber<AttachmentSetAsCoverMessage>
     {
         [Property] private string _albumName;
         [Property] private bool _hasImages;
@@ -121,10 +121,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 //Then: Upload the cover, if this is the first image
                 if (!HasImages)
                 {
-                    using (var stream = await attachment.GetAttachmentStreamAsync())
-                    {
-                        await PhotoUploadService.CreateAndUploadCoverImageAsync(AlbumName, attachment.Filename, stream, ImageResolution.Small);
-                    }
+                    await AlbumService.SetCoverImageAsync(AlbumName, attachment.Filename.Replace("original", "pics/" + ImageResolution.MediumDescription));
                 }
 
                 //At this point we have at least one image
@@ -209,6 +206,11 @@ namespace StorjPhotoGalleryUploader.ViewModels
         public async void OnEvent(AttachmentDeletedMessage eventData)
         {
             await AlbumService.DeleteImageAsync(AlbumName, eventData.DeletedAttachment.Filename);
+        }
+
+        public async void OnEvent(AttachmentSetAsCoverMessage eventData)
+        {
+            await AlbumService.SetCoverImageAsync(AlbumName, eventData.SelectedAttachment.Filename);
         }
     }
 }

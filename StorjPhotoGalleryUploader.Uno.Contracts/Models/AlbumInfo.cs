@@ -9,5 +9,6 @@ namespace StorjPhotoGalleryUploader.Contracts.Models
         public int ImageCount { get; set; }
         public DateTime CreationDate { get; set; }
         public string BaseShareUrl { get; set; }
+        public string CoverImage { get; set; }
     }
 }
