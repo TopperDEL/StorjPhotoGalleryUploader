@@ -58,11 +58,5 @@ namespace StorjPhotoGalleryUploader.ViewModels
         {
             EventAggregator.Publish(new DoNavigateMessage(NavigationTarget.NewAlbum));
         }
-
-        [Command]
-        private void NavigateCurrentUploads()
-        {
-            EventAggregator.Publish(new DoNavigateMessage(NavigationTarget.CurrentUploads));
-        }
     }
 }
