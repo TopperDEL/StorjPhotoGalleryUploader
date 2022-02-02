@@ -82,7 +82,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
 
         public async Task LoadImagesAsync()
         {
-            if(string.IsNullOrEmpty(_albumInfo.BaseShareUrl))
+            if (string.IsNullOrEmpty(_albumInfo.BaseShareUrl))
             {
                 return;
             }
@@ -96,7 +96,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
             if (images.Count >= 1)
             {
                 //First image with higher resolution
-                Image1 = baseUrl + _albumInfo.CoverImage;
+                Image1 = baseUrl + _albumInfo.CoverImage.Replace("original", "resized/" + ImageResolution.MediumDescription).Replace(ImageResolution.SmallDescription, ImageResolution.MediumDescription);
 
                 OnPropertyChanged(nameof(Image1));
             }
@@ -116,7 +116,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 OnPropertyChanged(nameof(Image4));
             }
 
-            if(ImageCount == 1 && ImageCount != 0)
+            if (ImageCount == 1 && ImageCount != 0)
             {
                 HasOnlyOneImage = true;
             }
@@ -148,7 +148,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
             var title = LocalizedTextService.GetLocalizedText("AskForAlbumDeleteTitle");
 
             var delete = await DialogService.AskYesOrNoAsync(deleteQuestion, title);
-            if(delete)
+            if (delete)
             {
                 IsInDeletion = true;
                 await AlbumService.DeleteAlbumAsync(Model.Name);
