@@ -50,6 +50,7 @@
                      BorderThickness="0"
                     Command="{Binding SelectImagesCommand}"/>
         </StackPanel>
-        <helper:AttachmentContainerControl Grid.Row="2" x:Name="AttachmentContainer" Margin="10" Visibility="{Binding HasImages,Converter={StaticResource TrueIsVisibleConverter}}"/>
+        <helper:AttachmentContainerControl Grid.Row="2" x:Name="AttachmentContainer" Margin="10" Visibility="{Binding HasImages,Converter={StaticResource TrueIsVisibleConverter}}"
+                                           CanSetAttachmentAsCover="True" CanDeleteAttachment="True"/>
     </Grid>
 </Page>
