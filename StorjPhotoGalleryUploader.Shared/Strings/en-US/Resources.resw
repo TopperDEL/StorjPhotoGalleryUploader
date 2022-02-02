@@ -186,6 +186,9 @@
   <data name="Shots.Text" xml:space="preserve">
     <value>shots</value>
   </data>
+  <data name="ShotsSingle.Text" xml:space="preserve">
+    <value>shot</value>
+  </data>
   <data name="TryAgain.Content" xml:space="preserve">
     <value>Try again</value>
   </data>

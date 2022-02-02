@@ -30,6 +30,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
         [Property] string _image3;
         [Property] string _image4;
         [Property] bool _isInDeletion;
+        [Property] bool _hasOnlyOneImage;
 
         private AlbumInfo _albumInfo;
 
@@ -80,6 +81,15 @@ namespace StorjPhotoGalleryUploader.ViewModels
             {
                 Image4 = baseUrl + images[3];
                 OnPropertyChanged(nameof(Image4));
+            }
+
+            if(images.Count == 1 && images.Count != 0)
+            {
+                HasOnlyOneImage = true;
+            }
+            else
+            {
+                HasOnlyOneImage = false;
             }
         }
 

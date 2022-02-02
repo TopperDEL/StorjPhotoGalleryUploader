@@ -187,6 +187,9 @@
   <data name="Shots.Text" xml:space="preserve">
     <value>Fotos</value>
   </data>
+  <data name="ShotsSingle.Text" xml:space="preserve">
+    <value>Foto</value>
+  </data>
   <data name="TryAgain.Content" xml:space="preserve">
     <value>Erneut versuchen</value>
   </data>
