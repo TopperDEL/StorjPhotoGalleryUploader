@@ -62,7 +62,7 @@ namespace StorjPhotoGalleryUploader.Services
             return await RefreshAlbumAsync(albumName, new List<string>()); //Simply no images, yet
         }
 
-        public async Task<Album> RefreshAlbumAsync(string albumName, List<string> imageNames, string coverImage = null)
+        public async Task<Album> RefreshAlbumAsync(string albumName, List<string> imageNames, string coverImage = null, bool refreshShareUrl = false)
         {
             await InitAsync();
 
@@ -83,17 +83,20 @@ namespace StorjPhotoGalleryUploader.Services
 
                         string baseShareUrl = string.Empty;
 
-                        //If the object already exists, get its BaseShareUrl
-                        try
+                        if (!refreshShareUrl)
                         {
-                            var existingIndexObject = await _objectService.GetObjectAsync(_bucket, albumName + "/index.html");
-                            if (existingIndexObject != null)
+                            //If the object already exists, get its BaseShareUrl
+                            try
                             {
-                                baseShareUrl = existingIndexObject.CustomMetadata.Entries.Where(e => e.Key == BASE_SHARE_URL).First().Value;
+                                var existingIndexObject = await _objectService.GetObjectAsync(_bucket, albumName + "/index.html");
+                                if (existingIndexObject != null)
+                                {
+                                    baseShareUrl = existingIndexObject.CustomMetadata.Entries.Where(e => e.Key == BASE_SHARE_URL).First().Value;
+                                }
                             }
+                            catch
+                            { }
                         }
-                        catch
-                        { }
                         if (string.IsNullOrEmpty(baseShareUrl))
                         {
                             //Create the share-URL, that is used to share the album and
@@ -299,6 +302,32 @@ namespace StorjPhotoGalleryUploader.Services
         {
             var images = await GetImageKeysAsync(albumName, int.MaxValue, ImageResolution.Small, false);
             await RefreshAlbumAsync(albumName, images, filename);
+        }
+
+        public async Task RenameAlbumAsync(string oldName, string newName)
+        {
+            await InitAsync();
+
+            var listOptions = new ListObjectsOptions();
+            listOptions.Recursive = true;
+            var allObjects = await _objectService.ListObjectsAsync(_bucket, listOptions);
+
+            foreach(var obj in allObjects.Items.Where(o=>!o.IsPrefix))
+            {
+                if(obj.Key.Contains(oldName))
+                {
+                    await _objectService.MoveObjectAsync(_bucket, obj.Key, _bucket, obj.Key.Replace(oldName, newName));
+                }
+            }
+
+            //Refresh album itself
+            var images = await GetImageKeysAsync(newName, int.MaxValue, ImageResolution.Small, false);
+            var coverImage = (await GetAlbumInfoAsync(newName)).CoverImage;
+            await RefreshAlbumAsync(newName, images, coverImage, true); //Also refresh the share-URL
+
+            //Refresh album index
+            var albumList = await ListAlbumsAsync();
+            await RefreshAlbumIndexAsync(albumList);
         }
     }
 }

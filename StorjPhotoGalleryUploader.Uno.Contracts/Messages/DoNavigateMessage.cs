@@ -10,7 +10,8 @@ namespace StorjPhotoGalleryUploader.Contracts.Messages
         AlbumList,
         NewAlbum,
         CurrentUploads,
-        EditAlbum
+        EditAlbum,
+        RenameAlbum
     }
     public class DoNavigateMessage
     {

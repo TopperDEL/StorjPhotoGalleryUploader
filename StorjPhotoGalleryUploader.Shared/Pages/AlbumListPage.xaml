@@ -87,6 +87,7 @@
                                 <Button.Flyout>
                                     <MenuFlyout>
                                         <MenuFlyoutItem x:Uid="EditAlbumButton" Text="Edit" Command="{Binding EditAlbumCommand}"/>
+                                        <MenuFlyoutItem x:Uid="RenameAlbumButton" Text="Rename" Command="{Binding RenameAlbumCommand}"/>
                                         <MenuFlyoutItem x:Uid="ViewAlbumInWebButton" Text="View in Browser" Command="{Binding ViewAlbumInWebAsyncCommand}"/>
                                         <MenuFlyoutItem x:Uid="DeleteAlbumButton" Text="Delete" Command="{Binding DeleteAlbumAsyncCommand}"/>
                                     </MenuFlyout>

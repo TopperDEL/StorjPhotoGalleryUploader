@@ -133,6 +133,12 @@ namespace StorjPhotoGalleryUploader.ViewModels
         }
 
         [Command]
+        public void RenameAlbum()
+        {
+            EventAggregator.Publish(new DoNavigateMessage(NavigationTarget.RenameAlbum, Model.Name));
+        }
+
+        [Command]
         public async Task ViewAlbumInWebAsync()
         {
             if (!string.IsNullOrEmpty(_albumInfo.BaseShareUrl))

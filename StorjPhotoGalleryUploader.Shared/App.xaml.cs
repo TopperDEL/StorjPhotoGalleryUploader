@@ -253,6 +253,9 @@ namespace StorjPhotoGalleryUploader
                 case NavigationTarget.EditAlbum:
                     pageType = typeof(EditAlbumPage);
                     break;
+                case NavigationTarget.RenameAlbum:
+                    pageType = typeof(RenameAlbumPage);
+                    break;
                 case NavigationTarget.AlbumList:
                     pageType = typeof(MainPage);
                     break;

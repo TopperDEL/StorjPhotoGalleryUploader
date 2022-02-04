@@ -151,6 +151,9 @@
   <data name="CreateAlbum.Content" xml:space="preserve">
     <value>+ Album anlegen</value>
   </data>
+  <data name="CreateNewAlbum.Content" xml:space="preserve">
+    <value>Album anlegen</value>
+  </data>
   <data name="CreateOne.Text" xml:space="preserve">
     <value>Erstelle ein Album!</value>
   </data>
@@ -163,11 +166,26 @@
   <data name="Logout.Content" xml:space="preserve">
     <value>Abmelden</value>
   </data>
+  <data name="NewAlbumHeader.Text" xml:space="preserve">
+    <value>Neues Album anlegen</value>
+  </data>
   <data name="No" xml:space="preserve">
     <value>Nein</value>
   </data>
   <data name="PreparingForUpload.Text" xml:space="preserve">
     <value>Bilder werden vorbereitet, bitte warten</value>
+  </data>
+  <data name="RenameAlbum.Content" xml:space="preserve">
+    <value>Umbenennen</value>
+  </data>
+  <data name="RenameAlbumButton.Text" xml:space="preserve">
+    <value>Umbenennen</value>
+  </data>
+  <data name="RenameAlbumHeader.Text" xml:space="preserve">
+    <value>Album umbenennen</value>
+  </data>
+  <data name="RenameWarning.Text" xml:space="preserve">
+    <value>Beim Umbenennen werden alle bereits geteilten Links auf das Album ungültig! Vor dem Umbenennen sollten auch alle Übertragungen für dieses Album abgeschlossen sein.</value>
   </data>
   <data name="SettingsTitle.Text" xml:space="preserve">
     <value>Einstellungen</value>

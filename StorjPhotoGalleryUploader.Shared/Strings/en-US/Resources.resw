@@ -150,6 +150,9 @@
   <data name="CreateAlbum.Content" xml:space="preserve">
     <value>+ Create album</value>
   </data>
+  <data name="CreateNewAlbum.Content" xml:space="preserve">
+    <value>Create album</value>
+  </data>
   <data name="CreateOne.Text" xml:space="preserve">
     <value>Create one!</value>
   </data>
@@ -162,11 +165,26 @@
   <data name="Logout.Content" xml:space="preserve">
     <value>Logout</value>
   </data>
+  <data name="NewAlbumHeader.Text" xml:space="preserve">
+    <value>Create new album</value>
+  </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
   <data name="PreparingForUpload.Text" xml:space="preserve">
     <value>Preparing images for upload, please wait</value>
+  </data>
+  <data name="RenameAlbum.Content" xml:space="preserve">
+    <value>Rename album</value>
+  </data>
+  <data name="RenameAlbumButton.Text" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="RenameAlbumHeader.Text" xml:space="preserve">
+    <value>Rename album</value>
+  </data>
+  <data name="RenameWarning.Text" xml:space="preserve">
+    <value>Bear in mind that renaming an album renderes already shared URLs invalid! Please verify that all uploads for this album finished before performing a rename.</value>
   </data>
   <data name="SettingsTitle.Text" xml:space="preserve">
     <value>Settings</value>

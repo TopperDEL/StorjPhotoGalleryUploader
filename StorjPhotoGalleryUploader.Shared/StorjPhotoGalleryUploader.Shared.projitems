@@ -42,6 +42,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Pages\CreateAlbumPage.xaml.cs">
       <DependentUpon>CreateAlbumPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Pages\RenameAlbumPage.xaml.cs">
+      <DependentUpon>RenameAlbumPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Pages\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
@@ -52,6 +55,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumListViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlbumViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BucketCheckViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\RenameAlbumViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\EditAlbumViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CreateAlbumViewModel.cs" />
@@ -75,6 +79,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Pages\CreateAlbumPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Pages\RenameAlbumPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

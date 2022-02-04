@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="StorjPhotoGalleryUploader.Pages.CreateAlbumPage"
+    x:Class="StorjPhotoGalleryUploader.Pages.RenameAlbumPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:StorjPhotoGalleryUploader.Pages"
@@ -22,22 +22,24 @@
                 Command="{Binding CancelCommand}">
             <Image Source="/Assets/Arrow.png" Width="21" Height="21"/>
         </Button>
-        <TextBlock x:Uid="NewAlbumHeader" Text="New album" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Inter" FontSize="17" FontWeight="SemiBold"/>
+        <TextBlock x:Uid="RenameAlbumHeader" Text="Rename album" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Inter" FontSize="17" FontWeight="SemiBold"/>
         <Border BorderThickness="0,0,0,1" BorderBrush="#E5E9F4" Grid.Row="0"/>
 
         <StackPanel Grid.Row="1">
-            <TextBox Text="{Binding AlbumName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            <TextBox Text="{Binding NewAlbumName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                          Header="Name" Height="68"
                          Margin="20" BorderThickness="0" CornerRadius="6"
                          Background="#F0F5FF" SelectionHighlightColor="{StaticResource StorjBlue}" SelectionHighlightColorWhenNotFocused="{StaticResource StorjBlue}"
-                         FontFamily="Inter" FontSize="17">
+                         FontFamily="Inter" FontSize="17" PlaceholderText="{Binding OldAlbumName}">
                 <TextBox.HeaderTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding}" FontFamily="Inter" FontSize="15" FontWeight="SemiBold"/>
                     </DataTemplate>
                 </TextBox.HeaderTemplate>
             </TextBox>
-            <Button x:Uid="CreateNewAlbum" Content="Create album" Margin="20" FontFamily="Inter" FontWeight="SemiBold" FontSize="17" Background="{StaticResource StorjBlue}" Foreground="White"
+            <TextBlock x:Uid="RenameWarning" Text="Bear in mind that renaming an album renderes already shared URLs invalid!" Foreground="Red" FontFamily="Inter" FontSize="17" TextWrapping="WrapWholeWords"
+                       Margin="20" FontWeight="Bold"/>
+            <Button x:Uid="RenameAlbum" Content="Rename album" Margin="20" FontFamily="Inter" FontWeight="SemiBold" FontSize="17" Background="{StaticResource StorjBlue}" Foreground="White"
                     Command="{Binding SaveCommand}" CornerRadius="6" BorderThickness="0" HorizontalAlignment="Stretch" Height="48"/>
         </StackPanel>
     </Grid>
