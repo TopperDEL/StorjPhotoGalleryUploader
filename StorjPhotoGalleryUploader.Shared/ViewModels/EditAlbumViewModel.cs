@@ -119,16 +119,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                         await PhotoUploadService.CreateAndUploadAsync(AlbumName, attachment.Filename, stream, ImageResolution.Small);
                     }
                 }
-
-                //Then: Upload the cover, if this is the first image
-                if (!HasImages)
-                {
-                    await AlbumService.SetCoverImageAsync(AlbumName, attachment.Filename.Replace("original", "pics/" + ImageResolution.MediumDescription));
-                }
-
-                //At this point we have at least one image
-                HasImages = true;
-
+                
                 //Then upload the medium one
                 using (var stream = await attachment.GetAttachmentStreamAsync())
                 {
@@ -166,7 +157,16 @@ namespace StorjPhotoGalleryUploader.ViewModels
         {
             var attachments = GetAttachmentsFunction();
             var imageNames = attachments.Select(i => i.Filename).ToList();
-            var album = await AlbumService.RefreshAlbumAsync(AlbumName, imageNames);
+            string coverImage = null;
+            if (!HasImages)
+            {
+                if(imageNames.Count > 0)
+                {
+                    coverImage = imageNames.First();
+                }
+                HasImages = true;
+            }
+            var album = await AlbumService.RefreshAlbumAsync(AlbumName, imageNames, coverImage);
 
             var albumList = await AlbumService.ListAlbumsAsync();
             await AlbumService.RefreshAlbumIndexAsync(albumList);
