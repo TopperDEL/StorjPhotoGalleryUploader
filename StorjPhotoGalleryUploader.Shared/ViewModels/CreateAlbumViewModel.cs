@@ -56,7 +56,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
             if (IsSaving)
                 return false;
 
-            return !string.IsNullOrEmpty(AlbumName) && !AlbumName.Contains("/");
+            return !string.IsNullOrEmpty(AlbumName) && !AlbumName.Contains("/") && !AlbumName.EndsWith(" ");
         }
 
         [Command(CanExecuteMethod = nameof(CanCancel))]
