@@ -69,9 +69,6 @@
     <Reference Include="System.Memory" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="MonkeyCache.FileStore">
-      <Version>1.5.2</Version>
-    </PackageReference>
     <PackageReference Include="MvvmGen">
       <Version>1.1.2</Version>
     </PackageReference>
