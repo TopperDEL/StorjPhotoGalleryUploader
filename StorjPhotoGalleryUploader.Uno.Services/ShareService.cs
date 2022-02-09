@@ -13,14 +13,19 @@ namespace StorjPhotoGalleryUploader.Services
     {
         readonly Access _access;
         readonly AppConfig _appConfig;
+        readonly IDialogService _dialogService;
+        readonly ILocalizedTextService _localizedTextService;
         private string _shareUrl;
         private string _albumName;
         readonly DataTransferManager _dataTransferManager;
 
-        public ShareService(Access access, AppConfig appConfig)
+        public ShareService(Access access, AppConfig appConfig, IDialogService dialogService, ILocalizedTextService localizedTextService)
         {
             _access = access;
             _appConfig = appConfig;
+            _dialogService = dialogService;
+            _localizedTextService = localizedTextService;
+
             _dataTransferManager = DataTransferManager.GetForCurrentView();
             _dataTransferManager.DataRequested += DataRequested;
         }
@@ -53,7 +58,7 @@ namespace StorjPhotoGalleryUploader.Services
             }
         }
 
-        public void ShowShareUI(string url, string albumName)
+        public async void ShowShareUI(string url, string albumName)
         {
             _shareUrl = url;
             _albumName = albumName;
@@ -64,7 +69,7 @@ namespace StorjPhotoGalleryUploader.Services
             }
             else
             {
-                //ToDo: Inform user
+                await _dialogService.ShowErrorMessageAsync(_localizedTextService.GetLocalizedText("CannotShareError"), _localizedTextService.GetLocalizedText("ErrorTitle"));
             }
         }
 

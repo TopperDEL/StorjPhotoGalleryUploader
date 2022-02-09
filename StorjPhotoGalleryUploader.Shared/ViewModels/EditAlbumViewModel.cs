@@ -26,16 +26,11 @@ namespace StorjPhotoGalleryUploader.ViewModels
     [Inject(typeof(IAlbumService))]
     [Inject(typeof(IStoreService))]
     [Inject(typeof(IThumbnailGeneratorService))]
-    [Inject(typeof(IPhotoUploadService))] //einbinden
-
-    //    wenn erstes foto: mache cover draus
-    //lade sofort das kleinste hoch
-    //im hintergrund die zwei anderen größen
-
-    //beim laden alle kleinen bilder laden
-    //menü "als cover setzen"
-    [Inject(typeof(uplink.NET.UnoHelpers.Contracts.Models.AppConfig))]
+    [Inject(typeof(IPhotoUploadService))]
+    [Inject(typeof(AppConfig))]
     [Inject(typeof(IAttachmentViewModelFactory))]
+    [Inject(typeof(IDialogService))]
+    [Inject(typeof(ILocalizedTextService))]
     [ViewModel]
     public partial class EditAlbumViewModel : IEventSubscriber<AttachmentAddedMessage>, IEventSubscriber<AttachmentAddingFinishedMessage>, IEventSubscriber<AttachmentDeletedMessage>, IEventSubscriber<AttachmentSetAsCoverMessage>
     {
@@ -201,7 +196,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
             }
             else
             {
-                //ToDo: Inform user
+                await DialogService.ShowErrorMessageAsync(LocalizedTextService.GetLocalizedText("CouldNotCreateShareURLError"), LocalizedTextService.GetLocalizedText("ErrorTitle"));
             }
         }
 

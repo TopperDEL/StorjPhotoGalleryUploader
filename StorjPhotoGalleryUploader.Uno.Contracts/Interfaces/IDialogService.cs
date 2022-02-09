@@ -8,5 +8,6 @@ namespace StorjPhotoGalleryUploader.Contracts.Interfaces
     public interface IDialogService
     {
         Task<bool> AskYesOrNoAsync(string message, string title);
+        Task ShowErrorMessageAsync(string message, string title);
     }
 }

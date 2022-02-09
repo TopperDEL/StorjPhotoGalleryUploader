@@ -147,6 +147,18 @@
   <data name="AskForAlbumDeleteTitle" xml:space="preserve">
     <value>Delete album?</value>
   </data>
+  <data name="BucketInitError" xml:space="preserve">
+    <value>Could not initialize the bucket.</value>
+  </data>
+  <data name="CannotShareError" xml:space="preserve">
+    <value>The current device does not support the sharing of content.</value>
+  </data>
+  <data name="CouldNotCreateAlbumError" xml:space="preserve">
+    <value>The album could not be created.</value>
+  </data>
+  <data name="CouldNotCreateShareURLError" xml:space="preserve">
+    <value>Could not create a URL for sharing.</value>
+  </data>
   <data name="CreateAlbum.Content" xml:space="preserve">
     <value>+ Create album</value>
   </data>
@@ -176,6 +188,9 @@
   </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
   </data>
   <data name="OpenSourceInfo.Text" xml:space="preserve">
     <value>The app is open source and the code can be found here:</value>

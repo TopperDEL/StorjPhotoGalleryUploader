@@ -9,6 +9,7 @@ using uplink.NET.Interfaces;
 using uplink.NET.Models;
 using uplink.NET.UnoHelpers.Contracts.Models;
 using uplink.NET.UnoHelpers.Services;
+using StorjPhotoGalleryUploader.Contracts.Interfaces;
 
 namespace StorjPhotoGalleryUploader.Services
 {
@@ -23,14 +24,18 @@ namespace StorjPhotoGalleryUploader.Services
         readonly IBucketService _bucketService;
         readonly IUploadQueueService _uploadQueueService;
         readonly AppConfig _appConfig;
+        readonly IDialogService _dialogService;
+        readonly ILocalizedTextService _localizedTextService;
         private Bucket _currentBucket;
 
-        public PrepareBucketService(IObjectService objectService, IBucketService bucketService, IUploadQueueService uploadQueueService, AppConfig appConfig)
+        public PrepareBucketService(IObjectService objectService, IBucketService bucketService, IUploadQueueService uploadQueueService, AppConfig appConfig, IDialogService dialogService, ILocalizedTextService localizedTextService)
         {
             _objectService = objectService;
             _bucketService = bucketService;
             _uploadQueueService = uploadQueueService;
             _appConfig = appConfig;
+            _dialogService = dialogService;
+            _localizedTextService = localizedTextService;
         }
 
         private async Task InitAsync()
@@ -54,7 +59,7 @@ namespace StorjPhotoGalleryUploader.Services
                     }
                     catch
                     {
-                        //ToDo: info to user
+                        await _dialogService.ShowErrorMessageAsync(_localizedTextService.GetLocalizedText("BucketInitError"), _localizedTextService.GetLocalizedText("ErrorTitle"));
                     }
                 }
             }

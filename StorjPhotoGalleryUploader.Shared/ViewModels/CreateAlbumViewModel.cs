@@ -21,6 +21,8 @@ namespace StorjPhotoGalleryUploader.ViewModels
     [Inject(typeof(IEventAggregator))]
     [Inject(typeof(IAlbumService))]
     [Inject(typeof(IStoreService))]
+    [Inject(typeof(IDialogService))]
+    [Inject(typeof(ILocalizedTextService))]
     [ViewModel]
     public partial class CreateAlbumViewModel
     {
@@ -38,7 +40,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 var album = await AlbumService.CreateAlbumAsync(AlbumName);
                 if (album == null)
                 {
-                    //ToDo: Inform user
+                    await DialogService.ShowErrorMessageAsync(LocalizedTextService.GetLocalizedText("CouldNotCreateAlbumError"), LocalizedTextService.GetLocalizedText("ErrorTitle"));
                     return;
                 }
 

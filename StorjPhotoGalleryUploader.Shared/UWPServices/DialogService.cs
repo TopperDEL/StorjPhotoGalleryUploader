@@ -23,13 +23,13 @@ namespace StorjPhotoGalleryUploader.UWPServices
         {
             bool result = false;
 
-            var errorDialog = new ContentDialog
+            var askDialog = new ContentDialog
             {
                 Title = title,
                 Content = message
             }.SetPrimaryButton(_localizedTextService.GetLocalizedText("Yes"), (d, e) => { result = true; }).SetSecondaryButton(_localizedTextService.GetLocalizedText("No"), (d, e) => { result = false; });
 
-            await errorDialog.ShowOneAtATimeAsync();
+            await askDialog.ShowOneAtATimeAsync();
 
             return result;
         }
@@ -50,6 +50,17 @@ namespace StorjPhotoGalleryUploader.UWPServices
             {
                 _oneAtATimeAsync.Release();
             }
+        }
+
+        public async Task ShowErrorMessageAsync(string message, string title)
+        {
+            var errorDialog = new ContentDialog
+            {
+                Title = title,
+                Content = message
+            }.SetPrimaryButton(_localizedTextService.GetLocalizedText("Ok"));
+
+            await errorDialog.ShowOneAtATimeAsync();
         }
     }
 }
