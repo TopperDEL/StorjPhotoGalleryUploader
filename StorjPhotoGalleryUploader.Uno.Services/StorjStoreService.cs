@@ -30,13 +30,14 @@ namespace StorjPhotoGalleryUploader.Services
                 var accessGrant = appConfig.TryGetAccessGrant(out bool success);
                 if (!success)
                     return false;
-
-                await _uploadQueueService.CancelUploadAsync(key); //Remove previous upload-request - the new one is the one to go
+                System.Diagnostics.Debug.WriteLine("*** Put object: " + key);
+                //await _uploadQueueService.CancelUploadAsync(key); //Remove previous upload-request - the new one is the one to go
                 if (objectData == null)
                 {
                     return false;
                 }
                 await _uploadQueueService.AddObjectToUploadQueueAsync(appConfig.BucketName, key, accessGrant, objectData, identifier).ConfigureAwait(false);
+                System.Diagnostics.Debug.WriteLine("*** Done put object: " + key);
 
                 return true;
             }
