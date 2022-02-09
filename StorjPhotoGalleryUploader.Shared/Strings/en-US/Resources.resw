@@ -165,11 +165,20 @@
   <data name="Logout.Content" xml:space="preserve">
     <value>Logout</value>
   </data>
+  <data name="MadeWith.Text" xml:space="preserve">
+    <value>The app was made with</value>
+  </data>
+  <data name="MadeWithAnd.Text" xml:space="preserve">
+    <value>and:</value>
+  </data>
   <data name="NewAlbumHeader.Text" xml:space="preserve">
     <value>Create new album</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
+  </data>
+  <data name="OpenSourceInfo.Text" xml:space="preserve">
+    <value>The app is open source and the code can be found here:</value>
   </data>
   <data name="PreparingForUpload.Text" xml:space="preserve">
     <value>Preparing images for upload, please wait</value>

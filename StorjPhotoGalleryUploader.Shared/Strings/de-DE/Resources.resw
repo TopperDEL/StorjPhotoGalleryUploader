@@ -166,11 +166,20 @@
   <data name="Logout.Content" xml:space="preserve">
     <value>Abmelden</value>
   </data>
+  <data name="MadeWith.Text" xml:space="preserve">
+    <value>Die App wurde programmiert mit</value>
+  </data>
+  <data name="MadeWithAnd.Text" xml:space="preserve">
+    <value>und:</value>
+  </data>
   <data name="NewAlbumHeader.Text" xml:space="preserve">
     <value>Neues Album anlegen</value>
   </data>
   <data name="No" xml:space="preserve">
     <value>Nein</value>
+  </data>
+  <data name="OpenSourceInfo.Text" xml:space="preserve">
+    <value>Die App ist Open Source und der Quellcode befindet sich hier:</value>
   </data>
   <data name="PreparingForUpload.Text" xml:space="preserve">
     <value>Bilder werden vorbereitet, bitte warten</value>
