@@ -106,11 +106,6 @@ namespace StorjPhotoGalleryUploader
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
-                {
-                    //TODO: Load state from previously suspended application
-                }
-
                 // Place the frame in the current Window
                 _window.Content = rootFrame;
             }
@@ -166,7 +161,8 @@ namespace StorjPhotoGalleryUploader
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: Save application state and stop any background activity
+            var uploadQueueService = uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService<IUploadQueueService>();
+            uploadQueueService.StopQueueInBackground();
             deferral.Complete();
         }
 
