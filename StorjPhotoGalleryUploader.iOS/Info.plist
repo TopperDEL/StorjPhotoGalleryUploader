@@ -3,9 +3,9 @@
 <plist version="1.0">
   <dict>
 	<key>CFBundleDisplayName</key>
-	<string>StorjPhotoGalleryUploader</string>
+	<string>Storj Photo Gallery Uploader</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.companyname.StorjPhotoGalleryUploader</string>
+	<string>io.storj.photogalleryuploader</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -13,7 +13,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
-	<string>8.0</string>
+	<string>14.2</string>
 	<key>UIDeviceFamily</key>
 	<array>
 	  <integer>1</integer>
@@ -52,6 +52,10 @@
 	<key>UILaunchImageSize</key>
 	<string>{320, 568}</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
+	<true/>
+	<key>XSAppIconAssets</key>
+	<string>Media.xcassets/AppIcons.appiconset</string>
+	<key>UIRequiresFullScreen</key>
 	<true/>
   </dict>
 </plist>
