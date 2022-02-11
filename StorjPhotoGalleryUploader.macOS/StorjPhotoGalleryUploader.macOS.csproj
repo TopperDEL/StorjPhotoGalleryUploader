@@ -72,6 +72,9 @@
     <PackageReference Include="MvvmGen">
       <Version>1.1.2</Version>
     </PackageReference>
+    <PackageReference Include="System.Text.Json">
+      <Version>6.0.2</Version>
+    </PackageReference>
     <PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.3.0</Version>
     </PackageReference>
