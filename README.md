@@ -1,3 +1,9 @@
+<img src="https://github.com/storj/storj/raw/main/resources/logo.png" width="100">
+
+# Storj Photo Gallery Uploader
+ 
+This is the repository for the "Storj Photo Gallery Uploader"-App available for Android. It can be found [here](https://play.google.com/store/apps/details?id=io.storj.photogalleryuploader&hl=gsw&gl=US).
+
 ## Build Pipelines
 
 | Platform | development branch                              | releases branch                          |
@@ -9,10 +15,8 @@ Other Platforms in preparation.
 
 | Platform | Beta/TestFlight | Production |
 |----------|-------|-----------|
-| Android  | [![Build status](https://vsrm.dev.azure.com/topperdel/_apis/public/Release/badge/f459be77-a7c0-4773-ba28-35fe3bc86e20/1/1)](https://vsrm.dev.azure.com/topperdel/_apis/public/Release/badge/f459be77-a7c0-4773-ba28-35fe3bc86e20/1/1)
+| Android  | [![Build status](https://vsrm.dev.azure.com/topperdel/_apis/public/Release/badge/f459be77-a7c0-4773-ba28-35fe3bc86e20/1/1)](https://vsrm.dev.azure.com/topperdel/_apis/public/Release/badge/f459be77-a7c0-4773-ba28-35fe3bc86e20/1/1)| `n/a`
 
 Other Platforms in preparation.
 
-# Storj Photo Gallery Uploader
- 
-This is the repository for the "Storj Photo Gallery Uploader"-App available for Android. It can be found [here](https://play.google.com/store/apps/details?id=io.storj.photogalleryuploader&hl=gsw&gl=US).
+
