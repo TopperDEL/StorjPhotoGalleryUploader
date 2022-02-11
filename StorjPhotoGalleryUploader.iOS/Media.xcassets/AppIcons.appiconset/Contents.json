@@ -1,101 +1,112 @@
 {
   "images": [
     {
-      "scale": "2x",
-      "size": "29x29",
-      "idiom": "iphone"
-    },
-    {
-      "scale": "3x",
-      "size": "29x29",
-      "idiom": "iphone"
-    },
-    {
-      "scale": "2x",
-      "size": "40x40",
-      "idiom": "iphone"
-    },
-    {
-      "scale": "3x",
-      "size": "60x60",
-      "idiom": "iphone"
-    },
-    {
-      "scale": "1x",
-      "size": "20x20",
-      "idiom": "ipad"
-    },
-    {
-      "scale": "2x",
-      "size": "20x20",
-      "idiom": "ipad"
-    },
-    {
-      "scale": "1x",
-      "size": "29x29",
-      "idiom": "ipad"
-    },
-    {
-      "scale": "2x",
-      "size": "29x29",
-      "idiom": "ipad"
-    },
-    {
-      "scale": "1x",
-      "size": "40x40",
-      "idiom": "ipad"
-    },
-    {
-      "scale": "2x",
-      "size": "40x40",
-      "idiom": "ipad"
-    },
-    {
-      "scale": "1x",
-      "size": "76x76",
-      "idiom": "ipad"
-    },
-    {
-      "scale": "2x",
-      "size": "20x20",
-      "idiom": "iphone",
-      "filename": "iPhone-20x20@2x.png"
-    },
-    {
-      "scale": "3x",
-      "size": "20x20",
-      "idiom": "iphone",
-      "filename": "iPhone-20x20@3x.png"
-    },
-    {
       "scale": "3x",
       "size": "40x40",
       "idiom": "iphone",
-      "filename": "iPhone-40x40@3x.png"
+      "filename": "Barembo120x120.png"
     },
     {
       "scale": "2x",
       "size": "60x60",
       "idiom": "iphone",
-      "filename": "iPhone-60x60@2x.png"
+      "filename": "Barembo120x1201.png"
     },
     {
       "scale": "2x",
       "size": "76x76",
       "idiom": "ipad",
-      "filename": "iPad-76x76@2x.png squaretile-sdk-ipad.png"
+      "filename": "Barembo152x152.png"
+    },
+    {
+      "scale": "3x",
+      "size": "29x29",
+      "idiom": "iphone",
+      "filename": "Barembo87x87.png"
+    },
+    {
+      "scale": "2x",
+      "size": "40x40",
+      "idiom": "iphone",
+      "filename": "Barembo80x80.png"
+    },
+    {
+      "scale": "2x",
+      "size": "40x40",
+      "idiom": "ipad",
+      "filename": "Barembo80x801.png"
+    },
+    {
+      "scale": "3x",
+      "size": "60x60",
+      "idiom": "iphone",
+      "filename": "Barembo180x180.png"
     },
     {
       "scale": "2x",
       "size": "83.5x83.5",
       "idiom": "ipad",
-      "filename": "iPad-84x84@2x.png"
+      "filename": "Barembo167x167.png"
+    },
+    {
+      "scale": "2x",
+      "size": "20x20",
+      "idiom": "iphone",
+      "filename": "Barembo40x40.png"
+    },
+    {
+      "scale": "3x",
+      "size": "20x20",
+      "idiom": "iphone",
+      "filename": "Barembo60x60.png"
+    },
+    {
+      "scale": "2x",
+      "size": "29x29",
+      "idiom": "iphone",
+      "filename": "Barembo58x58.png"
+    },
+    {
+      "scale": "1x",
+      "size": "20x20",
+      "idiom": "ipad",
+      "filename": "Barembo20x20.png"
+    },
+    {
+      "scale": "2x",
+      "size": "20x20",
+      "idiom": "ipad",
+      "filename": "Barembo40x401.png"
+    },
+    {
+      "scale": "1x",
+      "size": "29x29",
+      "idiom": "ipad",
+      "filename": "Barembo29x29.png"
+    },
+    {
+      "scale": "2x",
+      "size": "29x29",
+      "idiom": "ipad",
+      "filename": "Barembo58x581.png"
+    },
+    {
+      "scale": "1x",
+      "size": "40x40",
+      "idiom": "ipad",
+      "filename": "Barembo40x402.png"
+    },
+    {
+      "scale": "1x",
+      "size": "76x76",
+      "idiom": "ipad",
+      "filename": "Barembo76x76.png"
     },
     {
       "scale": "1x",
       "size": "1024x1024",
       "idiom": "ios-marketing",
-      "filename": "ios-marketing-1024x1024@1x.png"
+      "filename": "Barembo1024x1024.png"
     }
   ],
   "properties": {},
