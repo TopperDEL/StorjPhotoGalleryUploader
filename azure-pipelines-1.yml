@@ -26,8 +26,8 @@ steps:
     targetType: 'inline'
     script: |
       # Remove UAP-TargetFrameworks
-      sed -i 's/;uap10.0.18362//' StorjPhotoGalleryUploader.Uno.Contracts/StorjPhotoGalleryUploader.Uno.Contracts.csproj
-      sed -i 's/;uap10.0.18362//' StorjPhotoGalleryUploader.Uno.Services/StorjPhotoGalleryUploader.Uno.Services.csproj
+      sed -i 's/;uap10.0.18362//g' StorjPhotoGalleryUploader.Uno.Contracts/StorjPhotoGalleryUploader.Uno.Contracts.csproj
+      sed -i 's/;uap10.0.18362//g' StorjPhotoGalleryUploader.Uno.Services/StorjPhotoGalleryUploader.Uno.Services.csproj
 
 - task: NuGetCommand@2
   inputs:
