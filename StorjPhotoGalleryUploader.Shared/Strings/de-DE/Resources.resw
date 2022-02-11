@@ -247,16 +247,58 @@
   <data name="TryAgain.Content" xml:space="preserve">
     <value>Erneut versuchen</value>
   </data>
-  <data name="UploadImage.Text" xml:space="preserve">
+  <data name="UploadImage-Text" xml:space="preserve">
     <value>Hochladen</value>
   </data>
-  <data name="UploadsTitle.Text" xml:space="preserve">
+  <data name="UploadsTitle-Text" xml:space="preserve">
     <value>Übermittlungen</value>
   </data>
-  <data name="ViewAlbumInWebButton.Text" xml:space="preserve">
+  <data name="ViewAlbumInWebButton-Text" xml:space="preserve">
     <value>Im Browser öffnen</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Ja</value>
+  </data>
+  <data name="UH_AccessGrant-Header" xml:space="preserve">
+    <value>Zugriffsschlüssel</value>
+  </data>
+  <data name="UH_ApiKey-Header" xml:space="preserve">
+    <value>API Schlüssel</value>
+  </data>
+  <data name="UH_BucketName-Header" xml:space="preserve">
+    <value>Basispfad (bucket)</value>
+  </data>
+  <data name="UH_DeleteAttachment-Text" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="UH_HaveNoAccount-Text" xml:space="preserve">
+    <value>Noch kein Account? </value>
+  </data>
+  <data name="UH_LoginButton-Content" xml:space="preserve">
+    <value>Anmelden</value>
+  </data>
+  <data name="UH_LoginVia-Title" xml:space="preserve">
+    <value>Anmelden per</value>
+  </data>
+  <data name="UH_NoUploadInProgress-Text" xml:space="preserve">
+    <value>Keine ausstehenden Übertragungen</value>
+  </data>
+  <data name="UH_RegisterForFree-Text" xml:space="preserve">
+    <value>Hier kostenlos anmelden</value>
+  </data>
+  <data name="UH_SatelliteAddress-Header" xml:space="preserve">
+    <value>Adresse des Satelliten</value>
+  </data>
+  <data name="UH_Secret-Header" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="UH_SecretVerify-Header" xml:space="preserve">
+    <value>Passwort (zur Prüfung)</value>
+  </data>
+  <data name="UH_SetAttachmentAsCover-Text" xml:space="preserve">
+    <value>Als Cover verwenden</value>
+  </data>
+  <data name="UH_Upload-Text" xml:space="preserve">
+    <value>Übermittlungen</value>
   </data>
 </root>

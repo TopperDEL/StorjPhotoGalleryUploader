@@ -71,6 +71,7 @@ namespace StorjPhotoGalleryUploader.Helper
             services.AddTransient<AttachmentContainerViewModel>();
             services.AddTransient<MainPageViewModel>();
             services.AddTransient<SettingsViewModel>();
+            services.AddSingleton<LocalizedUnoHelpersTextViewModel>();
 
             //ViewModel-Factories
             services.AddSingleton<IAlbumImageViewModelFactory, AlbumImageViewModelFactory>();
@@ -90,6 +91,7 @@ namespace StorjPhotoGalleryUploader.Helper
 
             AddBasics(services);
             services.AddTransient<LoginViewModel>();
+            services.AddSingleton<LocalizedUnoHelpersTextViewModel>();
 
             return services.BuildServiceProvider(true);
         }
