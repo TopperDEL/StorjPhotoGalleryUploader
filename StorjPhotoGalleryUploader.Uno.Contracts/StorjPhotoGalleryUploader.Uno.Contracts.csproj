@@ -5,7 +5,8 @@
 	Please see https://github.com/unoplatform/uno/issues/3909 for more details.
 	-->
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;xamarinios10;xamarinmac20;MonoAndroid11.0;monoandroid10.0;uap10.0.18362</TargetFrameworks>
+    <TargetFrameworks Condition="!$(TargetFramework.Contains('-ios'))">netstandard2.0;xamarinmac20;MonoAndroid11.0;monoandroid10.0;uap10.0.18362</TargetFrameworks>
+    <TargetFrameworks Condition="$(TargetFramework.Contains('-ios'))">xamarinios10</TargetFrameworks>
     <!-- Ensures the .xr.xml files are generated in a proper layout folder -->
     <GenerateLibraryLayout>true</GenerateLibraryLayout>
     <RootNamespace>StorjPhotoGalleryUploader.Contracts</RootNamespace>
