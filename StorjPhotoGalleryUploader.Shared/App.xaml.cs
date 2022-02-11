@@ -165,7 +165,10 @@ namespace StorjPhotoGalleryUploader
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             var uploadQueueService = uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService<IUploadQueueService>();
-            uploadQueueService.StopQueueInBackground();
+            if (uploadQueueService != null)
+            {
+                uploadQueueService.StopQueueInBackground();
+            }
             deferral.Complete();
         }
 
