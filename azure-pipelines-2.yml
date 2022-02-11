@@ -25,6 +25,14 @@ steps:
   inputs:
     restoreSolution: '**/*iOs.sln'
 
+- task: Bash@3
+  displayName: Remove UAP-TargetFrameworks (uap10.0.18362)
+  inputs:
+    targetType: 'inline'
+    script: |
+      # Remove UAP-TargetFrameworks
+      grep -e ';uap10.0.18362' -rl . | xargs sed -i '' 's/;uap10.0.18362//g'
+
 - task: InstallAppleCertificate@2
   inputs:
     certSecureFile: 'iOs2022.p12'
