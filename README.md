@@ -16,4 +16,4 @@ This is the repository for the "Storj Photo Gallery Uploader"-App available for 
 | Platform | Beta/TestFlight | Production |
 |----------|-------|-----------|
 | Android  | [![Build status](https://vsrm.dev.azure.com/topperdel/_apis/public/Release/badge/f459be77-a7c0-4773-ba28-35fe3bc86e20/1/1)](https://vsrm.dev.azure.com/topperdel/_apis/public/Release/badge/f459be77-a7c0-4773-ba28-35fe3bc86e20/1/1)| `n/a`|
-| iOs | `n/a`| `n/a`|
+| iOs | [![Build status](https://vsrm.dev.azure.com/topperdel/_apis/public/Release/badge/f459be77-a7c0-4773-ba28-35fe3bc86e20/2/2)](https://vsrm.dev.azure.com/topperdel/_apis/public/Release/badge/f459be77-a7c0-4773-ba28-35fe3bc86e20/2/2)| `n/a`|
