@@ -30,7 +30,6 @@
             <HyperlinkButton Content="uplink.NET.UnoHelpers" NavigateUri="https://github.com/TopperDEL/uplink.NET.UnoHelpers" FontFamily="Inter"/>
             <HyperlinkButton Content="MvvmGen" NavigateUri="https://github.com/thomasclaudiushuber/mvvmgen" FontFamily="Inter"/>
             <HyperlinkButton Content="Scriban" NavigateUri="https://github.com/scriban/scriban" FontFamily="Inter"/>
-            <HyperlinkButton Content="SkiaSharp" NavigateUri="https://github.com/mono/SkiaSharp" FontFamily="Inter"/>
             <TextBlock x:Uid="OpenSourceInfo" Text="The app is open source and the code can be found here:" Margin="0,20,0,0"
                        TextWrapping="WrapWholeWords" FontFamily="Inter"/>
             <HyperlinkButton Content="https://github.com/TopperDEL/StorjPhotoGalleryUploader" NavigateUri="https://github.com/TopperDEL/StorjPhotoGalleryUploader" FontFamily="Inter"/>

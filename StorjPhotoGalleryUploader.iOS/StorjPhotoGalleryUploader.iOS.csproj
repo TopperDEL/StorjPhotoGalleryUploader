@@ -117,12 +117,6 @@
     <PackageReference Include="MvvmGen">
       <Version>1.1.2</Version>
     </PackageReference>
-    <PackageReference Include="SkiaSharp">
-      <Version>2.80.3</Version>
-    </PackageReference>
-    <PackageReference Include="SkiaSharp.Views.Uno">
-      <Version>2.80.3</Version>
-    </PackageReference>
     <PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Uwp.Managed">
       <Version>2.3.0</Version>
     </PackageReference>
@@ -137,10 +131,10 @@
       <Version>2.8.2088</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers">
-      <Version>0.9.36</Version>
+      <Version>0.9.37</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers.Contracts">
-      <Version>0.9.36</Version>
+      <Version>0.9.37</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

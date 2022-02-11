@@ -46,6 +46,9 @@ namespace StorjPhotoGalleryUploader
         /// </summary>
         public App()
         {
+            //To test a different language:
+            //Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = "en-US";
+            
             InitializeLogging();
             this.UnhandledException += App_UnhandledException;
 
