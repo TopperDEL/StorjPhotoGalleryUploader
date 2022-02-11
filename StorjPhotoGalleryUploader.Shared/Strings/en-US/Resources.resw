@@ -150,8 +150,17 @@
   <data name="BucketInitError" xml:space="preserve">
     <value>Could not initialize the bucket.</value>
   </data>
+  <data name="BucketReady.Text" xml:space="preserve">
+    <value>Bucket is ready to go!</value>
+  </data>
   <data name="CannotShareError" xml:space="preserve">
     <value>The current device does not support the sharing of content.</value>
+  </data>
+  <data name="CheckFailed.Text" xml:space="preserve">
+    <value>Check failed!</value>
+  </data>
+  <data name="CheckingBucket.Text" xml:space="preserve">
+    <value>Checking bucket...</value>
   </data>
   <data name="CouldNotCreateAlbumError" xml:space="preserve">
     <value>The album could not be created.</value>
@@ -194,6 +203,9 @@
   </data>
   <data name="OpenSourceInfo.Text" xml:space="preserve">
     <value>The app is open source and the code can be found here:</value>
+  </data>
+  <data name="PreparingBucket.Text" xml:space="preserve">
+    <value>Preparing bucket...</value>
   </data>
   <data name="PreparingForUpload.Text" xml:space="preserve">
     <value>Preparing images for upload, please wait</value>

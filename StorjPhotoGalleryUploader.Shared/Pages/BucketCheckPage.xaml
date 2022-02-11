@@ -25,11 +25,11 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Text="Checking bucket..." Grid.Row="0" Visibility="{Binding IsChecking, Converter={StaticResource TrueIsVisibleConverter}}" TextWrapping="WrapWholeWords"/>
-        <TextBlock Text="Check failed!" Grid.Row="0" Grid.RowSpan="3" Visibility="{Binding Failed, Converter={StaticResource TrueIsVisibleConverter}}" TextWrapping="WrapWholeWords" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
-        <TextBlock Text="Bucket is ready to go!" Grid.Row="0" Grid.RowSpan="4" Visibility="{Binding CheckSuccessfull, Converter={StaticResource TrueIsVisibleConverter}}" TextWrapping="WrapWholeWords" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock x:Uid="CheckingBucket" Text="Checking bucket..." Grid.Row="0" Visibility="{Binding IsChecking, Converter={StaticResource TrueIsVisibleConverter}}" TextWrapping="WrapWholeWords"/>
+        <TextBlock x:Uid="CheckFailed" Text="Check failed!" Grid.Row="0" Grid.RowSpan="3" Visibility="{Binding Failed, Converter={StaticResource TrueIsVisibleConverter}}" TextWrapping="WrapWholeWords" VerticalAlignment="Top" HorizontalAlignment="Center" FontWeight="Bold"/>
+        <TextBlock x:Uid="BucketReady" Text="Bucket is ready to go!" Grid.Row="0" Grid.RowSpan="4" Visibility="{Binding CheckSuccessfull, Converter={StaticResource TrueIsVisibleConverter}}" TextWrapping="WrapWholeWords" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-        <TextBlock Text="Preparing bucket..." Grid.Row="1" Visibility="{Binding NeedsUpdate, Converter={StaticResource TrueIsVisibleConverter}}" TextWrapping="WrapWholeWords"/>
+        <TextBlock x:Uid="PreparingBucket" Text="Preparing bucket..." Grid.Row="1" Visibility="{Binding NeedsUpdate, Converter={StaticResource TrueIsVisibleConverter}}" TextWrapping="WrapWholeWords"/>
 
         <TextBlock Text="{Binding CheckError}" Grid.Row="2" Visibility="{Binding Failed, Converter={StaticResource TrueIsVisibleConverter}}" TextWrapping="WrapWholeWords"/>
 
