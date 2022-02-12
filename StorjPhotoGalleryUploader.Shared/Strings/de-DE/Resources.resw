@@ -260,10 +260,10 @@
     <value>Ja</value>
   </data>
   <data name="UH_AccessGrant-Header" xml:space="preserve">
-    <value>Zugriffsschlüssel</value>
+    <value>Zugriffsschl.</value>
   </data>
   <data name="UH_ApiKey-Header" xml:space="preserve">
-    <value>API Schlüssel</value>
+    <value>API Schl.</value>
   </data>
   <data name="UH_BucketName-Header" xml:space="preserve">
     <value>Basispfad (bucket)</value>
