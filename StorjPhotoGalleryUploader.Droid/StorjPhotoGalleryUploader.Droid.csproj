@@ -68,6 +68,9 @@
     <PackageReference Include="MvvmGen">
       <Version>1.1.2</Version>
     </PackageReference>
+    <PackageReference Include="SkiaSharp">
+      <Version>2.80.2</Version>
+    </PackageReference>
     <PackageReference Include="System.Text.Json">
       <Version>6.0.2</Version>
     </PackageReference>
