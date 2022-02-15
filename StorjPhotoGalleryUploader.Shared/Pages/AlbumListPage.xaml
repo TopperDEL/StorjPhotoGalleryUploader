@@ -8,8 +8,9 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
     xmlns:viewModels="using:StorjPhotoGalleryUploader.ViewModels"
     xmlns:helper="using:uplink.NET.UnoHelpers.Helper"
-    
-    mc:Ignorable="d"
+    xmlns:android="http://uno.ui/android"
+    xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    mc:Ignorable="d android"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Interactivity:Interaction.Behaviors>
@@ -54,12 +55,14 @@
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="{StaticResource StorjLightBlue}" BorderThickness="7" CornerRadius="14" Height="419" MinWidth="330" Margin="0,5">
+                    <Border BorderBrush="{StaticResource StorjLightBlue}" BorderThickness="7" CornerRadius="14" Height="429" Margin="0,5"
+                             android:MinWidth="330" win:MinWidth="475"
+                            >
                         <Grid Background="{ThemeResource AlbumCardBackground}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="228"/>
                                 <RowDefinition Height="100"/>
-                                <RowDefinition Height="77"/>
+                                <RowDefinition Height="87"/>
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="1*"/>
@@ -73,7 +76,9 @@
                             <Image Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="1" Source="{Binding Image4, Mode=OneWay}" Stretch="UniformToFill"/>
 
                             <StackPanel Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="3" Padding="14,18,0,0">
-                                <TextBlock Text="{Binding Name}" FontFamily="Inter" FontSize="18" FontWeight="Bold"/>
+                                <TextBlock Text="{Binding Name}" FontFamily="Inter" FontSize="18" FontWeight="Bold" TextWrapping="Wrap" HorizontalAlignment="Left"
+                                           android:MaxWidth="250" win:MaxWidth="350"
+                                           />
                                 <StackPanel Orientation="Horizontal">
                                     <TextBlock Text="{Binding ImageCount}" FontFamily="Inter" FontWeight="Light" FontSize="12" Foreground="#777777" Padding="0,6,0,0" />
                                     <TextBlock Visibility="{Binding HasOnlyOneImage, Converter={StaticResource TrueIsCollapsedConverter}}" Text="shots" x:Uid="Shots" FontFamily="Inter" FontWeight="Light" FontSize="12" Foreground="#777777" Padding="6,6,0,0" />
@@ -83,7 +88,9 @@
                                 </StackPanel>
                             </StackPanel>
                             <Button Background="{ThemeResource AlbumCardBackground}" Foreground="{StaticResource StorjMiddleGrey}" Height="40" BorderThickness="0"
-                                    Grid.Row="3" Grid.Column="3" Margin="45,0,0,0">
+                                    Grid.Row="3" Grid.Column="3"
+                                    android:Margin="45,0,0,0" win:Margin="95,0,0,0"
+                                    >
                                 <Button.Flyout>
                                     <MenuFlyout>
                                         <MenuFlyoutItem x:Uid="EditAlbumButton" Text="Edit" Command="{Binding EditAlbumCommand}"/>

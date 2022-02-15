@@ -6,7 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:helper="using:uplink.NET.UnoHelpers.Controls"
-    mc:Ignorable="d"
+    xmlns:android="http://uno.ui/android"
+    xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    mc:Ignorable="d android"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
@@ -21,7 +23,8 @@
                 Command="{Binding CancelCommand}">
             <Image Source="/Assets/Arrow.png" Width="21" Height="21"/>
         </Button>
-        <TextBlock Text="{Binding AlbumName}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Inter" FontSize="17" FontWeight="SemiBold"/>
+        <TextBlock Text="{Binding AlbumName}" Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Inter" FontSize="17" FontWeight="SemiBold" TextWrapping="Wrap"
+                   android:MaxWidth="270"/>
         <Border BorderThickness="0,0,0,1" BorderBrush="#E5E9F4" Grid.Row="0"/>
 
         <StackPanel Grid.Row="1" Visibility="{Binding HasImages,Converter={StaticResource TrueIsVisibleConverter}}"
