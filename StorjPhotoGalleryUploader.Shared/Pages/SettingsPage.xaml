@@ -15,7 +15,7 @@
             <RowDefinition Height="200"/>
         </Grid.RowDefinitions>
 
-        <TextBlock x:Uid="SettingsTitle" Grid.Row="0" Text="Settings" FontFamily="Inter" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="34" FontWeight="ExtraBold" Foreground="Black" 
+        <TextBlock x:Uid="SettingsTitle" Grid.Row="0" Text="Settings" FontFamily="Inter" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="34" FontWeight="ExtraBold"
                    Margin="25,20"/>
 
         <StackPanel Grid.Row="1" Margin="25,20">
