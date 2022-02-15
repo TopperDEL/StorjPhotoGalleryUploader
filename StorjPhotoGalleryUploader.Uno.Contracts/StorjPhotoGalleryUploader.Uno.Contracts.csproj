@@ -13,8 +13,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Uno.UI" Version="4.0.13" />
-    <PackageReference Include="uplink.NET.UnoHelpers" Version="0.9.40" />
-    <PackageReference Include="uplink.NET.UnoHelpers.Contracts" Version="0.9.40" />
+    <PackageReference Include="uplink.NET.UnoHelpers" Version="0.9.41" />
+    <PackageReference Include="uplink.NET.UnoHelpers.Contracts" Version="0.9.41" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="**\*.xaml" Exclude="bin\**\*.xaml;obj\**\*.xaml" />

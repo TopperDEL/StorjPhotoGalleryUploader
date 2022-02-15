@@ -83,16 +83,16 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="5.0.0" />
     <PackageReference Include="uplink.NET">
-      <Version>2.8.2138</Version>
+      <Version>2.8.2255</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.Mac">
       <Version>2.6.1283</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers">
-      <Version>0.9.40</Version>
+      <Version>0.9.41</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers.Contracts">
-      <Version>0.9.40</Version>
+      <Version>0.9.41</Version>
     </PackageReference>
   </ItemGroup>
   <Import Project="..\StorjPhotoGalleryUploader.Shared\StorjPhotoGalleryUploader.Shared.projitems" Label="Shared" />
