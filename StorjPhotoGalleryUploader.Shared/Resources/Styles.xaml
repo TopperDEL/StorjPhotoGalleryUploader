@@ -3,6 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Color x:Key="StorjBlue">#286CFF</Color>
+    <Color x:Key="StorjDarkGrey">#302f2f</Color>
+    <Color x:Key="StorjLightGrey">#F0EFEB</Color>
+    <Color x:Key="StorjLightBlue">#E4ECFA</Color>
+    <Color x:Key="StorjMiddleGrey">#ABABAB</Color>
     <SolidColorBrush x:Key="StorjBlueBrush" Color="{StaticResource StorjBlue}"/>
 
     <Style x:Key="ButtonRoundedStyle" TargetType="Button">
@@ -65,6 +69,13 @@
             <SolidColorBrush x:Key="ButtonBackground" Color="{StaticResource StorjBlue}"/>
             <SolidColorBrush x:Key="ButtonForeground" Color="White"/>
             <SolidColorBrush x:Key="ButtonBorderBrush" Color="{StaticResource StorjBlue}"/>
+            <SolidColorBrush x:Key="AlbumCardBackground" Color="White"/>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Dark">
+            <SolidColorBrush x:Key="ButtonBackground" Color="{StaticResource StorjBlue}"/>
+            <SolidColorBrush x:Key="ButtonForeground" Color="Black"/>
+            <SolidColorBrush x:Key="ButtonBorderBrush" Color="{StaticResource StorjBlue}"/>
+            <SolidColorBrush x:Key="AlbumCardBackground" Color="{StaticResource StorjDarkGrey}"/>
         </ResourceDictionary>
     </ResourceDictionary.ThemeDictionaries>
 

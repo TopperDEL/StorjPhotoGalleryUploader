@@ -34,7 +34,7 @@
         <TextBlock x:Uid="AlbumListTitle" Grid.Column="0" Grid.Row="0" Text="Albums" FontFamily="Inter" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="34" FontWeight="ExtraBold" Foreground="Black" 
                    Margin="25,20"/>
         <Button Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Left" BorderThickness="0"
-                Command="{Binding NavigateNewAlbumCommand}" Foreground="#286CFF" Background="White">
+                Command="{Binding NavigateNewAlbumCommand}" Foreground="#286CFF" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <Image Source="/Assets/PlusBlue.png" Width="21" Height="21"/>
         </Button>
 
@@ -54,8 +54,8 @@
 
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border BorderBrush="#E4ECFA" BorderThickness="7" CornerRadius="14" Height="419" MinWidth="330" Margin="0,5">
-                        <Grid Background="White">
+                    <Border BorderBrush="{StaticResource StorjLightBlue}" BorderThickness="7" CornerRadius="14" Height="419" MinWidth="330" Margin="0,5">
+                        <Grid Background="{ThemeResource AlbumCardBackground}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="228"/>
                                 <RowDefinition Height="100"/>
@@ -82,7 +82,7 @@
                                     <TextBlock Text="{Binding CreationDate, Converter={StaticResource DateTimeConverter}}" FontFamily="Inter" FontWeight="Light" FontSize="12" Foreground="#777777" Padding="0,6,0,0" />
                                 </StackPanel>
                             </StackPanel>
-                            <Button Background="White" Foreground="#ABABAB" Height="40" BorderThickness="0"
+                            <Button Background="{ThemeResource AlbumCardBackground}" Foreground="{StaticResource StorjMiddleGrey}" Height="40" BorderThickness="0"
                                     Grid.Row="3" Grid.Column="3" Margin="45,0,0,0">
                                 <Button.Flyout>
                                     <MenuFlyout>
