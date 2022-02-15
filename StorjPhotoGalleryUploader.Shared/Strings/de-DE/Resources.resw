@@ -253,7 +253,7 @@
   <data name="UploadsTitle-Text" xml:space="preserve">
     <value>Übermittlungen</value>
   </data>
-  <data name="ViewAlbumInWebButton-Text" xml:space="preserve">
+  <data name="ViewAlbumInWebButton.Text" xml:space="preserve">
     <value>Im Browser öffnen</value>
   </data>
   <data name="Yes" xml:space="preserve">
