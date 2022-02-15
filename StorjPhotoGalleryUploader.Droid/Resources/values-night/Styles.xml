@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <resources>
-	<style name="AppTheme" parent="Theme.AppCompat.Light">
+	<style name="AppTheme" parent="Theme.AppCompat">
 		<!-- This removes the ActionBar -->
 		<item name="windowActionBar">false</item>
 		<item name="android:windowActionBar">false</item>
 		<item name="windowNoTitle">true</item>
 		<item name="android:windowNoTitle">true</item>
-		<item name="android:windowBackground">@drawable/splash_light</item>
-	</style>
+		<item name="android:windowBackground">@drawable/splash</item>
+	</style>	
 </resources>

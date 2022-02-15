@@ -7,6 +7,8 @@ using Android.Views;
 namespace StorjPhotoGalleryUploader.Droid
 {
 	[Activity(
+			Theme = "@style/AppTheme",
+		    LaunchMode = LaunchMode.SingleTop,
 			MainLauncher = true,
 			ConfigurationChanges = global::Uno.UI.ActivityHelper.AllConfigChanges,
 			WindowSoftInputMode = SoftInput.AdjustPan | SoftInput.StateHidden
