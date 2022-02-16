@@ -98,11 +98,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
-    <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="Entitlements.plist" />
     <BundleResource Include="Resources\Default-568h%402x.png" />
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
+    <None Include="Info.plist" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -141,35 +141,6 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\ios-marketing-1024x1024%401x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\iPad-76x76%402x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\iPad-84x84%402x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\iPhone-20x20%402x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\iPhone-20x20%403x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\iPhone-40x40%403x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\AppIcons.appiconset\iPhone-60x60%402x.png">
-      <Visible>false</Visible>
-    </ImageAsset>
-    <ImageAsset Include="Media.xcassets\LaunchImages.launchimage\Contents.json">
-      <Visible>false</Visible>
-    </ImageAsset>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\StorjPhotoGalleryUploader.Uno.Contracts\StorjPhotoGalleryUploader.Uno.Contracts.csproj">
       <Project>{949d3b78-7a70-4f00-9794-f25ff2992d2b}</Project>
       <Name>StorjPhotoGalleryUploader.Uno.Contracts</Name>
@@ -178,6 +149,25 @@
       <Project>{848c9690-8eb8-4144-8c9d-d748857f29ac}</Project>
       <Name>StorjPhotoGalleryUploader.Uno.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\40.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\60.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\58.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\87.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\80.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\120-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\180.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\40-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\29.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\58-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\40-2.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\80-1.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\1024.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\120-2.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\180-1.png" />
   </ItemGroup>
   <Import Project="..\StorjPhotoGalleryUploader.Shared\StorjPhotoGalleryUploader.Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
