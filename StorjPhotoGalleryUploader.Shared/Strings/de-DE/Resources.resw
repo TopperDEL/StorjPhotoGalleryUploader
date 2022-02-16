@@ -247,7 +247,7 @@
   <data name="TryAgain.Content" xml:space="preserve">
     <value>Erneut versuchen</value>
   </data>
-  <data name="UploadImage-Text" xml:space="preserve">
+  <data name="UploadImage.Text" xml:space="preserve">
     <value>Hochladen</value>
   </data>
   <data name="UploadsTitle-Text" xml:space="preserve">
