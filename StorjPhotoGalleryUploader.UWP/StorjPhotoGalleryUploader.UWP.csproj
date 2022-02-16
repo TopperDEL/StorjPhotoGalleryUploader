@@ -28,10 +28,10 @@
       <Version>2.8.2255</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers">
-      <Version>0.9.41</Version>
+      <Version>0.9.42</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers.Contracts">
-      <Version>0.9.41</Version>
+      <Version>0.9.42</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.Win">
       <Version>2.8.2255</Version>
