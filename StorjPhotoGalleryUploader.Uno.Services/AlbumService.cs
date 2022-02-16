@@ -275,7 +275,11 @@ namespace StorjPhotoGalleryUploader.Services
             var keys = await GetImageKeysAsync(albumName, int.MaxValue, resolution, false);
             foreach (var key in keys.Where(k=>k.Contains(filename)))
             {
-                await _objectService.DeleteObjectAsync(_bucket, key).ConfigureAwait(false);
+                try
+                {
+                    await _objectService.DeleteObjectAsync(_bucket, key).ConfigureAwait(false);
+                }
+                catch { }
             }
         }
 
