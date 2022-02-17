@@ -54,13 +54,17 @@ namespace StorjPhotoGalleryUploader.UWPServices
 
         public async Task ShowErrorMessageAsync(string message, string title)
         {
-            var errorDialog = new ContentDialog
+            try
             {
-                Title = title,
-                Content = message
-            }.SetPrimaryButton(_localizedTextService.GetLocalizedText("Ok"));
+                var errorDialog = new ContentDialog
+                {
+                    Title = title,
+                    Content = message
+                }.SetPrimaryButton(_localizedTextService.GetLocalizedText("Ok"));
 
-            await errorDialog.ShowOneAtATimeAsync();
+                await errorDialog.ShowOneAtATimeAsync();
+            }
+            catch { }
         }
     }
 }
