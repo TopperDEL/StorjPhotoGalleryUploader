@@ -12,7 +12,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="200"/>
+            <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
 
         <TextBlock x:Uid="SettingsTitle" Grid.Row="0" Text="Settings" FontFamily="Inter" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="34" FontWeight="ExtraBold"
@@ -34,8 +34,6 @@
             <TextBlock x:Uid="OpenSourceInfo" Text="The app is open source and the code can be found here:" Margin="0,20,0,0"
                        TextWrapping="WrapWholeWords" FontFamily="Inter"/>
             <HyperlinkButton Content="https://github.com/TopperDEL/StorjPhotoGalleryUploader" NavigateUri="https://github.com/TopperDEL/StorjPhotoGalleryUploader" FontFamily="Inter"/>
-
-            <TextBlock Text="© TopperDEL, Storj Labs 2022" Margin="0,20,0,0" TextWrapping="WrapWholeWords" FontFamily="Inter"/>
         </StackPanel>
 
         <Button x:Uid="Logout" Content="Logout" Grid.Row="2" VerticalAlignment="Top" HorizontalAlignment="Stretch"
