@@ -29,14 +29,14 @@
 
         <StackPanel Grid.Row="1" Visibility="{Binding HasImages,Converter={StaticResource TrueIsVisibleConverter}}"
                     Orientation="Horizontal" HorizontalAlignment="Center">
-            <Button Background="{StaticResource StorjBlue}" Foreground="White" Width="157" Margin="10" CornerRadius="6"
+            <Button Background="{StaticResource StorjBlue}" Foreground="White" MinWidth="130" MaxWidth="157" Margin="10" CornerRadius="6"
                     BorderThickness="0" Command="{Binding ShareAlbumCommand}">
                 <StackPanel Orientation="Horizontal">
                     <Image Source="/Assets/Share.png" Width="21" Height="21" Margin="5"/>
                     <TextBlock x:Uid="ShareAlbum" Text="Share" VerticalAlignment="Center"/>
                 </StackPanel>
             </Button>
-            <Button Background="#F0EFEB" Foreground="Black" Width="157" Margin="10" CornerRadius="6"
+            <Button Background="#F0EFEB" Foreground="Black" MinWidth="130" MaxWidth="157" Margin="10" CornerRadius="6"
                     BorderThickness="0"
                     Command="{Binding SelectImagesCommand}">
                 <StackPanel Orientation="Horizontal">
@@ -50,7 +50,7 @@
             <TextBlock x:Uid="AlbumEmpty" Text="This album is empty." HorizontalAlignment="Center" FontFamily="Inter" FontSize="24" Foreground="#8F8F8F"/>
             <TextBlock x:Uid="AddImages" Text="Upload something!" HorizontalAlignment="Center" FontFamily="Inter" FontSize="24" Foreground="#8F8F8F"/>
             <Button HorizontalAlignment="Center" Margin="30" FontFamily="Inter" FontSize="17" Background="{StaticResource StorjBlue}" Foreground="White"
-                     BorderThickness="0"
+                     BorderThickness="0" CornerRadius="6"
                     Command="{Binding SelectImagesCommand}">
                 <StackPanel Orientation="Horizontal">
                     <BitmapIcon UriSource="/Assets/AddImage.png" Width="21" Height="21" Margin="5" Foreground="White"/>
