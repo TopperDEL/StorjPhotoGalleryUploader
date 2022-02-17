@@ -8,9 +8,10 @@
     xmlns:Interactivity="using:Microsoft.Xaml.Interactivity" xmlns:Interactions="using:Microsoft.Xaml.Interactions.Core"
     xmlns:viewModels="using:StorjPhotoGalleryUploader.ViewModels"
     xmlns:helper="using:uplink.NET.UnoHelpers.Helper"
+    xmlns:ios="http://uno.ui/ios"
     xmlns:android="http://uno.ui/android"
     xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    mc:Ignorable="d android"
+    mc:Ignorable="d android ios"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Interactivity:Interaction.Behaviors>
@@ -89,7 +90,7 @@
                             </StackPanel>
                             <Button Background="{ThemeResource AlbumCardBackground}" Foreground="{StaticResource StorjMiddleGrey}" Height="40" BorderThickness="0"
                                     Grid.Row="3" Grid.Column="3"
-                                    android:Margin="45,0,0,0" win:Margin="95,0,0,0"
+                                    android:Margin="45,0,0,0" win:Margin="95,0,0,0" ios:Margin="45,25,0,0"
                                     >
                                 <Button.Flyout>
                                     <MenuFlyout>
