@@ -107,6 +107,8 @@
     <BundleResource Include="Resources\Default-568h%402x.png" />
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
     <None Include="Info.plist" />
+    <InterfaceDefinition Include="Splash.storyboard" />
+    <BundleResource Include="Resources\iOsSplashScreen.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
