@@ -69,9 +69,9 @@ namespace StorjPhotoGalleryUploader.ViewModels
             {
                 var attachment = new Attachment();
                 var attachmentVm = AttachmentViewModelFactory.Create();
-                attachment.Filename = image;
+                attachment.Filename = Uri.EscapeUriString(image);
                 attachment.MimeType = "image/jpeg";
-                attachmentVm.SetAttachmentFromURL(attachment, new Uri(baseUrl + image));
+                attachmentVm.SetAttachmentFromURL(attachment, new Uri(baseUrl + Uri.EscapeUriString(image)));
 
                 AddAttachmentAction(attachmentVm);
                 HasImages = true;

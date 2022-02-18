@@ -98,28 +98,28 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 //First image with higher resolution
                 if (_albumInfo.CoverImage.Contains("original"))
                 {
-                    Image1 = baseUrl + _albumInfo.CoverImage.Replace("original","resized/"+ImageResolution.MediumDescription);
+                    Image1 = Uri.EscapeUriString(baseUrl + _albumInfo.CoverImage.Replace("original","resized/"+ImageResolution.MediumDescription));
                 }
                 else
                 {
-                    Image1 = baseUrl + "pics/resized/" + ImageResolution.MediumDescription + "/" + Model.Name + "/" + _albumInfo.CoverImage;
+                    Image1 = Uri.EscapeUriString(baseUrl + "pics/resized/" + ImageResolution.MediumDescription + "/" + Model.Name + "/" + _albumInfo.CoverImage);
                 }
 
                 OnPropertyChanged(nameof(Image1));
             }
             if (images.Count >= 2)
             {
-                Image2 = baseUrl + images[1];
+                Image2 = Uri.EscapeUriString(baseUrl + images[1]);
                 OnPropertyChanged(nameof(Image2));
             }
             if (images.Count >= 3)
             {
-                Image3 = baseUrl + images[2];
+                Image3 = Uri.EscapeUriString(baseUrl + images[2]);
                 OnPropertyChanged(nameof(Image3));
             }
             if (images.Count >= 4)
             {
-                Image4 = baseUrl + images[3];
+                Image4 = Uri.EscapeUriString(baseUrl + images[3]);
                 OnPropertyChanged(nameof(Image4));
             }
 
