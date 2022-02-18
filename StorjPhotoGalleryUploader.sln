@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31205.134
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32210.238
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "StorjPhotoGalleryUploader.Shared", "StorjPhotoGalleryUploader.Shared\StorjPhotoGalleryUploader.Shared.shproj", "{6279C845-92F8-4333-AB99-3D213163593C}"
 EndProject
@@ -15,9 +15,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorjPhotoGalleryUploader.U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorjPhotoGalleryUploader.macOS", "StorjPhotoGalleryUploader.macOS\StorjPhotoGalleryUploader.macOS.csproj", "{49285987-FAB0-417C-9330-2F6FB3082848}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorjPhotoGalleryUploader.Uno.Contracts", "StorjPhotoGalleryUploader.Uno.Contracts\StorjPhotoGalleryUploader.Uno.Contracts.csproj", "{949D3B78-7A70-4F00-9794-F25FF2992D2B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StorjPhotoGalleryUploader.Uno.Contracts", "StorjPhotoGalleryUploader.Uno.Contracts\StorjPhotoGalleryUploader.Uno.Contracts.csproj", "{949D3B78-7A70-4F00-9794-F25FF2992D2B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorjPhotoGalleryUploader.Uno.Services", "StorjPhotoGalleryUploader.Uno.Services\StorjPhotoGalleryUploader.Uno.Services.csproj", "{848C9690-8EB8-4144-8C9D-D748857F29AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StorjPhotoGalleryUploader.Uno.Services", "StorjPhotoGalleryUploader.Uno.Services\StorjPhotoGalleryUploader.Uno.Services.csproj", "{848C9690-8EB8-4144-8C9D-D748857F29AC}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -110,8 +110,6 @@ Global
 		{9875FC0F-9944-4356-8ABF-4684858300A1}.Debug|ARM64.Build.0 = Debug|Any CPU
 		{9875FC0F-9944-4356-8ABF-4684858300A1}.Debug|ARM64.Deploy.0 = Debug|Any CPU
 		{9875FC0F-9944-4356-8ABF-4684858300A1}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{9875FC0F-9944-4356-8ABF-4684858300A1}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{9875FC0F-9944-4356-8ABF-4684858300A1}.Debug|iPhone.Deploy.0 = Debug|Any CPU
 		{9875FC0F-9944-4356-8ABF-4684858300A1}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
 		{9875FC0F-9944-4356-8ABF-4684858300A1}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
 		{9875FC0F-9944-4356-8ABF-4684858300A1}.Debug|iPhoneSimulator.Deploy.0 = Debug|Any CPU
@@ -165,6 +163,7 @@ Global
 		{0FC65758-4BBA-419D-8A1A-D87C2B3F8286}.Debug|ARM64.ActiveCfg = Debug|iPhoneSimulator
 		{0FC65758-4BBA-419D-8A1A-D87C2B3F8286}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{0FC65758-4BBA-419D-8A1A-D87C2B3F8286}.Debug|iPhone.Build.0 = Debug|iPhone
+		{0FC65758-4BBA-419D-8A1A-D87C2B3F8286}.Debug|iPhone.Deploy.0 = Debug|iPhone
 		{0FC65758-4BBA-419D-8A1A-D87C2B3F8286}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
 		{0FC65758-4BBA-419D-8A1A-D87C2B3F8286}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
 		{0FC65758-4BBA-419D-8A1A-D87C2B3F8286}.Debug|x64.ActiveCfg = Debug|iPhoneSimulator
