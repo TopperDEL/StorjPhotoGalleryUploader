@@ -25,7 +25,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="5.0.0" />
     <PackageReference Include="uplink.NET">
-      <Version>2.8.2255</Version>
+      <Version>2.8.2374</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers">
       <Version>0.9.47</Version>
@@ -34,7 +34,7 @@
       <Version>0.9.47</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.Win">
-      <Version>2.8.2255</Version>
+      <Version>2.8.2374</Version>
     </PackageReference>
   </ItemGroup>
   <PropertyGroup>
