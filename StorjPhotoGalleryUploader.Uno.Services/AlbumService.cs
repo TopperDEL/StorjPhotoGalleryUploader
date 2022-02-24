@@ -106,7 +106,7 @@ namespace StorjPhotoGalleryUploader.Services
 
                         var customMetadata = new CustomMetadata();
                         customMetadata.Entries.Add(new CustomMetadataEntry { Key = BASE_SHARE_URL, Value = baseShareUrl });
-                        if(coverImage != null)
+                        if (coverImage != null)
                         {
                             customMetadata.Entries.Add(new CustomMetadataEntry { Key = COVER_IMAGE, Value = coverImage });
                         }
@@ -137,7 +137,7 @@ namespace StorjPhotoGalleryUploader.Services
             listOptions.Recursive = true;
             listOptions.System = true;
             var albumItems = await _objectService.ListObjectsAsync(_bucket, listOptions).ConfigureAwait(false);
-            foreach (var albumItem in albumItems.Items.Where(i => i.Key.Contains("/index.html")).OrderByDescending(i=>i.SystemMetadata.Created))
+            foreach (var albumItem in albumItems.Items.Where(i => i.Key.Contains("/index.html")).OrderByDescending(i => i.SystemMetadata.Created))
             {
                 albums.Add(new Album()
                 {
@@ -207,7 +207,7 @@ namespace StorjPhotoGalleryUploader.Services
                     {
                         info.BaseShareUrl = entry.Value;
                     }
-                    else if(entry.Key == COVER_IMAGE)
+                    else if (entry.Key == COVER_IMAGE)
                     {
                         info.CoverImage = entry.Value;
                     }
@@ -217,7 +217,7 @@ namespace StorjPhotoGalleryUploader.Services
                     //Create a share-URL
                     info.BaseShareUrl = _shareService.CreateAlbumLink(albumName);
                 }
-                if(string.IsNullOrEmpty(info.CoverImage) && albumImages.Items.Count > 0)
+                if (string.IsNullOrEmpty(info.CoverImage) && albumImages.Items.Count > 0)
                 {
                     info.CoverImage = albumImages.Items[0].Key;
                 }
@@ -261,7 +261,7 @@ namespace StorjPhotoGalleryUploader.Services
 
         public async Task DeleteImageAsync(string albumName, string filename)
         {
-            await DeleteImageAsync(albumName, filename.Replace("resized/"+ImageResolution.SmallDescription,"original"), ImageResolution.Original);
+            await DeleteImageAsync(albumName, filename.Replace("resized/" + ImageResolution.SmallDescription, "original"), ImageResolution.Original);
             await DeleteImageAsync(albumName, filename.Replace(ImageResolution.SmallDescription, ImageResolution.MediumDescription), ImageResolution.Medium);
             await DeleteImageAsync(albumName, filename, ImageResolution.Small);
 
@@ -273,7 +273,7 @@ namespace StorjPhotoGalleryUploader.Services
         private async Task DeleteImageAsync(string albumName, string filename, ImageResolution resolution)
         {
             var keys = await GetImageKeysAsync(albumName, int.MaxValue, resolution, false);
-            foreach (var key in keys.Where(k=>k.Contains(filename)))
+            foreach (var key in keys.Where(k => k.Contains(filename)))
             {
                 try
                 {
@@ -305,7 +305,12 @@ namespace StorjPhotoGalleryUploader.Services
         public async Task SetCoverImageAsync(string albumName, string filename)
         {
             var images = await GetImageKeysAsync(albumName, int.MaxValue, ImageResolution.Small, false);
-            await RefreshAlbumAsync(albumName, images, filename);
+            await RefreshAlbumAsync(albumName, images, filename.Replace("pics/", "") //We only need the filename here
+                                                               .Replace(ImageResolution.SmallDescription + "/", "")
+                                                               .Replace(ImageResolution.MediumDescription + "/", "")
+                                                               .Replace(albumName + "/", "")
+                                                               .Replace("resized/", "")
+                                                               );
         }
 
         public async Task RenameAlbumAsync(string oldName, string newName)
@@ -316,9 +321,9 @@ namespace StorjPhotoGalleryUploader.Services
             listOptions.Recursive = true;
             var allObjects = await _objectService.ListObjectsAsync(_bucket, listOptions);
 
-            foreach(var obj in allObjects.Items.Where(o=>!o.IsPrefix))
+            foreach (var obj in allObjects.Items.Where(o => !o.IsPrefix))
             {
-                if(obj.Key.Contains(oldName))
+                if (obj.Key.Contains(oldName))
                 {
                     await _objectService.MoveObjectAsync(_bucket, obj.Key, _bucket, obj.Key.Replace(oldName, newName));
                 }
