@@ -59,10 +59,18 @@ steps:
     packageApp: true
 
 - task: CopyFiles@2
-  displayName: 'Copy Files to: $(Build.ArtifactStagingDirectory)'
+  displayName: 'Copy IPA-Files to: $(Build.ArtifactStagingDirectory)'
   inputs:
     SourceFolder: '$(system.defaultworkingdirectory)'
     Contents: '**/*.ipa'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+  condition: succeededOrFailed()
+
+- task: CopyFiles@2
+  displayName: 'Copy dSYM-Files to: $(Build.ArtifactStagingDirectory)'
+  inputs:
+    SourceFolder: '$(system.defaultworkingdirectory)'
+    Contents: '**/*.dSYM'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
   condition: succeededOrFailed()
 
