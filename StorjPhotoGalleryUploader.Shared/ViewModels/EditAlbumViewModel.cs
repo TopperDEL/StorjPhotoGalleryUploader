@@ -151,7 +151,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
         public async Task RefreshAlbumAsync()
         {
             var attachments = GetAttachmentsFunction();
-            var imageNames = attachments.Select(i => i.Filename).ToList();
+            var imageNames = attachments.Select(i => i.Filename.Replace("pics/resized/360x225/" + AlbumName + "/", "")).ToList();
             string coverImage = null;
             if (!HasImages)
             {
