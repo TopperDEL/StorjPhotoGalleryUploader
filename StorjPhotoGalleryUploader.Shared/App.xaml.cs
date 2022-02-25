@@ -228,15 +228,25 @@ namespace StorjPhotoGalleryUploader
 
         public void OnEvent(UserLoggedInMessage loggedInMessage)
         {
-            var services = Helper.DependencyInjectionInitHelper.ConfigureServices(loggedInMessage.AppConfig);
-            uplink.NET.UnoHelpers.Services.Initializer.Init(services, STORJPHOTOGALLERY_RESOURCE);
-            var eventAggregator = uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService<IEventAggregator>();
-            eventAggregator.RegisterSubscriber(this);
+            try
+            {
+                var services = Helper.DependencyInjectionInitHelper.ConfigureServices(loggedInMessage.AppConfig);
+                uplink.NET.UnoHelpers.Services.Initializer.Init(services, STORJPHOTOGALLERY_RESOURCE);
+                var eventAggregator = uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService<IEventAggregator>();
+                eventAggregator.RegisterSubscriber(this);
 
-            var uploadQueueService = uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService<IUploadQueueService>();
-            uploadQueueService.ProcessQueueInBackground();
+                var uploadQueueService = uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService<IUploadQueueService>();
+                uploadQueueService.ProcessQueueInBackground();
 
-            DoNavigate(typeof(BucketCheckPage));
+                DoNavigate(typeof(BucketCheckPage));
+            }
+            catch
+            {
+                var loginService = uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService<ILoginService>();
+                loginService.Logout();
+                var eventAggregator = uplink.NET.UnoHelpers.Services.Initializer.GetServiceProvider().GetService<IEventAggregator>();
+                eventAggregator.Publish(new DoNavigateMessage(NavigationTarget.Login));
+            }
         }
 
         public void OnEvent(DoNavigateMessage navigationData)
