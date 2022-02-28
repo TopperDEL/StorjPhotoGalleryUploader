@@ -149,7 +149,7 @@ var main = (function($) { var _ = {
 			_.$viewer = $(
 				'<div id="viewer">' +
 					'<div class="inner">' +
-						'<p class="logo-wrapper"><a href="https://www.storj.io/" target="_blank" class="logo"><img src="../assets/album/StorjDCS-logo.svg" width="174"></a></p>' +
+						'<p class="logo-wrapper"><a href="https://www.storj.io/" target="_blank" class="logo"><img src="../assets/StorjDCS-logo.svg" width="174"></a></p>' +
 						'<div class="nav-next"></div>' +
 						'<div class="nav-previous"></div>' +
 						'<div class="toggle"></div>' +

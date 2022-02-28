@@ -43,7 +43,7 @@ namespace StorjPhotoGalleryUploader.Services
             prefixes.Add(new SharePrefix { Bucket = _appConfig.BucketName, Prefix = "pics/resized/360x225/" + albumName });
             prefixes.Add(new SharePrefix { Bucket = _appConfig.BucketName, Prefix = "pics/resized/1200x750/" + albumName });
             prefixes.Add(new SharePrefix { Bucket = _appConfig.BucketName, Prefix = albumName });
-            prefixes.Add(new SharePrefix { Bucket = _appConfig.BucketName, Prefix = "assets/album" });
+            prefixes.Add(new SharePrefix { Bucket = _appConfig.BucketName, Prefix = "assets" });
 
             var albumAccess = _access.Share(permissions, prefixes);
             try
