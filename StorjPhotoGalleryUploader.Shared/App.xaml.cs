@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MonkeyCache.FileStore;
 using MvvmGen.Events;
 using StorjPhotoGalleryUploader.Contracts.Messages;
 using StorjPhotoGalleryUploader.Pages;
@@ -69,6 +70,8 @@ namespace StorjPhotoGalleryUploader
 #if HAS_UNO || NETFX_CORE
             this.Suspending += OnSuspending;
 #endif
+
+            Barrel.ApplicationId = "StorjPhotoGallery";
         }
 
         private void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)

@@ -12,6 +12,7 @@ using System.IO;
 using System.Text;
 using uplink.NET.UnoHelpers.Contracts.Models;
 using uplink.NET.UnoHelpers.Services;
+using MonkeyCache.FileStore;
 
 namespace StorjPhotoGalleryUploader.Services
 {
@@ -59,6 +60,8 @@ namespace StorjPhotoGalleryUploader.Services
 
         public async Task<Album> CreateAlbumAsync(string albumName)
         {
+            Barrel.Current.Empty("AlbumList");
+
             return await RefreshAlbumAsync(albumName, new List<string>()); //Simply no images, yet
         }
 
@@ -127,6 +130,11 @@ namespace StorjPhotoGalleryUploader.Services
 
         public async Task<List<Album>> ListAlbumsAsync()
         {
+            if(!Barrel.Current.IsExpired("AlbumList"))
+            {
+                return Barrel.Current.Get<List<Album>>("AlbumList");
+            }
+
             List<Album> albums = new List<Album>();
 
             await InitAsync();
@@ -144,6 +152,8 @@ namespace StorjPhotoGalleryUploader.Services
                     Name = albumItem.Key.Replace("/index.html", "")
                 });
             }
+
+            Barrel.Current.Add("AlbumList", albums, TimeSpan.FromDays(365));
 
             return albums;
         }
@@ -285,6 +295,8 @@ namespace StorjPhotoGalleryUploader.Services
 
         public async Task DeleteAlbumAsync(string albumName)
         {
+            Barrel.Current.Empty("AlbumList");
+
             await DeleteImagesAsync(albumName, ImageResolution.Original);
             await DeleteImagesAsync(albumName, ImageResolution.Medium);
             await DeleteImagesAsync(albumName, ImageResolution.Small);
@@ -315,6 +327,8 @@ namespace StorjPhotoGalleryUploader.Services
 
         public async Task RenameAlbumAsync(string oldName, string newName)
         {
+            Barrel.Current.Empty("AlbumList");
+
             await InitAsync();
 
             var listOptions = new ListObjectsOptions();

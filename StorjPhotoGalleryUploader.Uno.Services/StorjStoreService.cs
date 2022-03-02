@@ -24,7 +24,6 @@ namespace StorjPhotoGalleryUploader.Services
             _bucketService = bucketService;
             _objectService = objectService;
             _uploadQueueService = uploadQueueService;
-            Barrel.ApplicationId = "StorjPhotoGallery";
         }
 
         public async Task<Stream> GetObjectAsStreamAsync(AppConfig appConfig, string key)
