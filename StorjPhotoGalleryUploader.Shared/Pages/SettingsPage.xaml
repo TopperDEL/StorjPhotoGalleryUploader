@@ -10,7 +10,7 @@
 
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0" MaxWidth="440">
         <Grid.RowDefinitions>
-            <RowDefinition Height="80"/>
+            <RowDefinition Height="70"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="150"/>
         </Grid.RowDefinitions>
@@ -18,7 +18,7 @@
         <TextBlock x:Uid="SettingsTitle" Grid.Row="0" Text="Settings" FontFamily="Inter" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="34" FontWeight="ExtraBold"
                    Margin="25,20"/>
 
-        <StackPanel Grid.Row="1" Margin="25,20">
+        <StackPanel Grid.Row="1" Margin="25,10,25,20">
             <TextBlock FontFamily="Inter" Margin="0,0,0,10">
                 <Run x:Uid="MadeWith">The app was made with</Run>
                 <Run Foreground="Red">❤️</Run>
@@ -31,6 +31,7 @@
             <HyperlinkButton Content="MvvmGen" NavigateUri="https://github.com/thomasclaudiushuber/mvvmgen" FontFamily="Inter"/>
             <HyperlinkButton Content="Scriban" NavigateUri="https://github.com/scriban/scriban" FontFamily="Inter"/>
             <HyperlinkButton Content="SkiaSharp" NavigateUri="https://github.com/mono/SkiaSharp" FontFamily="Inter"/>
+            <HyperlinkButton Content="MonkeyCache" NavigateUri="https://github.com/jamesmontemagno/monkey-cache" FontFamily="Inter"/>
             <TextBlock x:Uid="OpenSourceInfo" Text="The app is open source and the code can be found here:" Margin="0,20,0,0"
                        TextWrapping="WrapWholeWords" FontFamily="Inter"/>
             <HyperlinkButton Content="https://github.com/TopperDEL/StorjPhotoGalleryUploader" NavigateUri="https://github.com/TopperDEL/StorjPhotoGalleryUploader" FontFamily="Inter"/>
