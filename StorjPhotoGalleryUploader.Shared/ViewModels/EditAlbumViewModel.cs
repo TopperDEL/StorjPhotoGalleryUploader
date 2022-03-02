@@ -72,8 +72,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 attachment.Filename = Uri.EscapeUriString(image);
                 attachment.MimeType = "image/jpeg";
                 attachment.AttachmentData = await StoreService.GetObjectAsStreamAsync(AppConfig, attachment.Filename);
-                await attachmentVm.SetAttachmentAsync(attachment);
-                //attachmentVm.SetAttachmentFromURL(attachment, new Uri(baseUrl + Uri.EscapeUriString(image)));
+                await attachmentVm.SetAttachmentWithThumbnailAsync(attachment, attachment.AttachmentData);
 
                 AddAttachmentAction(attachmentVm);
                 HasImages = true;
