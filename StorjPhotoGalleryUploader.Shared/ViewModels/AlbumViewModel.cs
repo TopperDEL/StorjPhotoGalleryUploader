@@ -12,6 +12,7 @@ using System.Linq;
 using MvvmGen.Events;
 using StorjPhotoGalleryUploader.Contracts.Messages;
 using uplink.NET.Models;
+using uplink.NET.UnoHelpers.Contracts.Models;
 
 namespace StorjPhotoGalleryUploader.ViewModels
 {
@@ -22,6 +23,8 @@ namespace StorjPhotoGalleryUploader.ViewModels
     [Inject(typeof(IDialogService))]
     [Inject(typeof(ILocalizedTextService))]
     [Inject(typeof(IUploadQueueService))]
+    [Inject(typeof(IStoreService))]
+    [Inject(typeof(AppConfig))]
     [ViewModelGenerateFactory]
     public partial class AlbumViewModel
     {
@@ -33,6 +36,10 @@ namespace StorjPhotoGalleryUploader.ViewModels
         [Property] string _image4;
         [Property] bool _isInDeletion;
         [Property] bool _hasOnlyOneImage;
+        [Property] BitmapImage _image1Bmp;
+        [Property] BitmapImage _image2Bmp;
+        [Property] BitmapImage _image3Bmp;
+        [Property] BitmapImage _image4Bmp;
 
         private AlbumInfo _albumInfo;
 
@@ -95,32 +102,52 @@ namespace StorjPhotoGalleryUploader.ViewModels
 
             if (images.Count >= 1)
             {
-                //First image with higher resolution
-                if (_albumInfo.CoverImage.Contains("original"))
+                if (!string.IsNullOrEmpty(_albumInfo.CoverImage))
                 {
-                    Image1 = Uri.EscapeUriString(baseUrl + _albumInfo.CoverImage.Replace("original","resized/"+ImageResolution.MediumDescription));
+                    //First image with higher resolution
+                    string imageBase;
+                    if (_albumInfo.CoverImage.Contains("original"))
+                    {
+                        imageBase = _albumInfo.CoverImage.Replace("original", "resized/" + ImageResolution.MediumDescription);
+                    }
+                    else
+                    {
+                        imageBase = "pics/resized/" + ImageResolution.MediumDescription + "/" + Model.Name + "/" + _albumInfo.CoverImage;
+                    }
+                    _image1 = Uri.EscapeUriString(baseUrl + imageBase);
+
+                    Image1Bmp = await GenerateBitmapImageFromKeyAsync(imageBase);
+
+                    OnPropertyChanged(nameof(Image1));
                 }
                 else
                 {
-                    Image1 = Uri.EscapeUriString(baseUrl + "pics/resized/" + ImageResolution.MediumDescription + "/" + Model.Name + "/" + _albumInfo.CoverImage);
+                    Image1 = Uri.EscapeUriString(baseUrl + images[0]);
+                    Image1Bmp = await GenerateBitmapImageFromKeyAsync(images[0]);
+                    OnPropertyChanged(nameof(Image1));
+                    images.RemoveAt(0);
                 }
-
-                OnPropertyChanged(nameof(Image1));
             }
-            if (images.Count >= 2)
+            if (images.Count >= 1)
             {
-                Image2 = Uri.EscapeUriString(baseUrl + images[1]);
+                Image2 = Uri.EscapeUriString(baseUrl + images[0]);
+                Image2Bmp = await GenerateBitmapImageFromKeyAsync(images[0]);
                 OnPropertyChanged(nameof(Image2));
+                images.RemoveAt(0);
             }
-            if (images.Count >= 3)
+            if (images.Count >= 1)
             {
-                Image3 = Uri.EscapeUriString(baseUrl + images[2]);
+                Image3 = Uri.EscapeUriString(baseUrl + images[0]);
+                Image3Bmp = await GenerateBitmapImageFromKeyAsync(images[0]);
                 OnPropertyChanged(nameof(Image3));
+                images.RemoveAt(0);
             }
-            if (images.Count >= 4)
+            if (images.Count >= 1)
             {
-                Image4 = Uri.EscapeUriString(baseUrl + images[3]);
+                Image4 = Uri.EscapeUriString(baseUrl + images[0]);
+                Image4Bmp = await GenerateBitmapImageFromKeyAsync(images[0]);
                 OnPropertyChanged(nameof(Image4));
+                images.RemoveAt(0);
             }
 
             if (ImageCount == 1 && ImageCount != 0)
@@ -131,6 +158,23 @@ namespace StorjPhotoGalleryUploader.ViewModels
             {
                 HasOnlyOneImage = false;
             }
+        }
+
+        private async Task<BitmapImage> GenerateBitmapImageFromKeyAsync(string key)
+        {
+            BitmapImage bitmapImage = new BitmapImage();
+            try
+            {
+#if WINDOWS_UWP
+                await bitmapImage.SetSourceAsync((await StoreService.GetObjectAsStreamAsync(AppConfig, key)).AsRandomAccessStream());
+#else
+                await bitmapImage.SetSourceAsync(await StoreService.GetObjectAsStreamAsync(AppConfig, key));
+#endif
+            }
+            catch
+            {
+            }
+            return bitmapImage;
         }
 
         [Command]

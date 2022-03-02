@@ -11,5 +11,6 @@ namespace StorjPhotoGalleryUploader.Contracts.Interfaces
     public interface IStoreService
     {
         Task<bool> PutObjectAsync(AppConfig appConfig, string key, Stream objectData, string identifier);
+        Task<Stream> GetObjectAsStreamAsync(AppConfig appConfig, string key);
     }
 }

@@ -15,12 +15,29 @@ namespace StorjPhotoGalleryUploader.Services
     public class StorjStoreService : IStoreService
     {
         readonly IBucketService _bucketService;
+        readonly IObjectService _objectService;
         readonly IUploadQueueService _uploadQueueService;
 
-        public StorjStoreService(IBucketService bucketService, IUploadQueueService uploadQueueService)
+        public StorjStoreService(IBucketService bucketService, IObjectService objectService, IUploadQueueService uploadQueueService)
         {
             _bucketService = bucketService;
+            _objectService = objectService;
             _uploadQueueService = uploadQueueService;
+        }
+
+        public async Task<Stream> GetObjectAsStreamAsync(AppConfig appConfig, string key)
+        {
+            try
+            {
+                var bucket = await _bucketService.GetBucketAsync(appConfig.BucketName);
+                var objectInfo = await _objectService.GetObjectAsync(bucket, key);
+                var downloadStream = new DownloadStream(bucket, (int)objectInfo.SystemMetadata.ContentLength, key);
+                return downloadStream;
+            }
+            catch
+            {
+                return null; //TODO: Return "processing"-image
+            }
         }
 
         public async Task<bool> PutObjectAsync(AppConfig appConfig, string key, Stream objectData, string identifier)

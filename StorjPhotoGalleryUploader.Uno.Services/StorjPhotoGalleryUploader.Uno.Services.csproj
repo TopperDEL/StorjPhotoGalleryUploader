@@ -15,7 +15,7 @@
     <PackageReference Include="Scriban" Version="3.8.1" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
     <PackageReference Include="Uno.UI" Version="4.0.13" />
-    <PackageReference Include="uplink.NET" Version="2.8.2374" />
+    <PackageReference Include="uplink.NET" Version="2.8.2410" />
     <PackageReference Include="uplink.NET.UnoHelpers" Version="0.9.47" />
     <PackageReference Include="uplink.NET.UnoHelpers.Contracts" Version="0.9.47" />
   </ItemGroup>
