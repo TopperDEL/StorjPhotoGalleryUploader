@@ -66,7 +66,12 @@ namespace StorjPhotoGalleryUploader.ViewModels
                             await RefreshImageCountAsync();
                             if (ImageCount < 5)
                             {
-                                await LoadImagesAsync();
+                                try
+                                {
+                                    await LoadImagesAsync();
+                                }
+                                catch
+                                { }
                             }
                         }
                         break;
@@ -156,22 +161,29 @@ namespace StorjPhotoGalleryUploader.ViewModels
 
         private async Task<BitmapImage> GenerateBitmapImageFromKeyAsync(string key)
         {
+            try
+            {
 #if WINDOWS_UWP
             using (var stream = (await StoreService.GetObjectAsStreamAsync(AppConfig, key)).AsRandomAccessStream())
 #else
-            using (var stream = await StoreService.GetObjectAsStreamAsync(AppConfig, key))
+                using (var stream = await StoreService.GetObjectAsStreamAsync(AppConfig, key))
 #endif
-            {
+                {
 
-                BitmapImage bitmapImage = new BitmapImage();
-                try
-                {
-                    await bitmapImage.SetSourceAsync(stream);
+                    BitmapImage bitmapImage = new BitmapImage();
+                    try
+                    {
+                        await bitmapImage.SetSourceAsync(stream);
+                    }
+                    catch
+                    {
+                    }
+                    return bitmapImage;
                 }
-                catch
-                {
-                }
-                return bitmapImage;
+            }
+            catch
+            {
+                return new BitmapImage();//new Uri("ms-appx:///Assets/NothingFound.png")
             }
         }
 

@@ -119,6 +119,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\DotsMenu.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\File.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\HorizontalDots.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\NothingFound.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\PlusBlue.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\SettingsIcon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Share.png" />

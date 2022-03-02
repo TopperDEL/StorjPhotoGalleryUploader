@@ -12,6 +12,7 @@
     <RootNamespace>StorjPhotoGalleryUploader.Services</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="MonkeyCache.FileStore" Version="1.5.2" />
     <PackageReference Include="Scriban" Version="3.8.1" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
     <PackageReference Include="Uno.UI" Version="4.0.13" />

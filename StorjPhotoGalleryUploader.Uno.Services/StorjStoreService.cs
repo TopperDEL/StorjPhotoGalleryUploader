@@ -1,4 +1,5 @@
-﻿using StorjPhotoGalleryUploader.Contracts.Interfaces;
+﻿using MonkeyCache.FileStore;
+using StorjPhotoGalleryUploader.Contracts.Interfaces;
 using StorjPhotoGalleryUploader.Contracts.Models;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,15 @@ namespace StorjPhotoGalleryUploader.Services
             _bucketService = bucketService;
             _objectService = objectService;
             _uploadQueueService = uploadQueueService;
+            Barrel.ApplicationId = "StorjPhotoGallery";
         }
 
         public async Task<Stream> GetObjectAsStreamAsync(AppConfig appConfig, string key)
         {
+            if (!Barrel.Current.IsExpired(key: key))
+            {
+                return Barrel.Current.Get<Stream>(key: key);
+            }
             try
             {
                 var bucket = await _bucketService.GetBucketAsync(appConfig.BucketName);
@@ -36,7 +42,7 @@ namespace StorjPhotoGalleryUploader.Services
             }
             catch
             {
-                return null; //TODO: Return "processing"-image
+                return null;
             }
         }
 
@@ -53,7 +59,11 @@ namespace StorjPhotoGalleryUploader.Services
                     return false;
                 }
                 await _uploadQueueService.AddObjectToUploadQueueAsync(appConfig.BucketName, key, accessGrant, objectData, identifier).ConfigureAwait(false);
-                
+
+                if (!key.Contains("original"))
+                {
+                    Barrel.Current.Add(key: key, data: objectData, expireIn: TimeSpan.FromDays(14));
+                }
                 return true;
             }
             catch
