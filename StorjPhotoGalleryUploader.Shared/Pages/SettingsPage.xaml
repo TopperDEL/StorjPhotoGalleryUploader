@@ -10,9 +10,9 @@
 
     <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0" MaxWidth="440">
         <Grid.RowDefinitions>
-            <RowDefinition Height="70"/>
+            <RowDefinition Height="80"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="140"/>
         </Grid.RowDefinitions>
 
         <TextBlock x:Uid="SettingsTitle" Grid.Row="0" Text="Settings" FontFamily="Inter" HorizontalAlignment="Left" VerticalAlignment="Bottom" FontSize="34" FontWeight="ExtraBold"
