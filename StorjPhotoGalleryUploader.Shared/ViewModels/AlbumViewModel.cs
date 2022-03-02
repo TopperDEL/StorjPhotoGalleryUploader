@@ -117,14 +117,11 @@ namespace StorjPhotoGalleryUploader.ViewModels
                     _image1 = Uri.EscapeUriString(baseUrl + imageBase);
 
                     Image1Bmp = await GenerateBitmapImageFromKeyAsync(imageBase);
-
-                    OnPropertyChanged(nameof(Image1));
                 }
                 else
                 {
                     Image1 = Uri.EscapeUriString(baseUrl + images[0]);
                     Image1Bmp = await GenerateBitmapImageFromKeyAsync(images[0]);
-                    OnPropertyChanged(nameof(Image1));
                     images.RemoveAt(0);
                 }
             }
@@ -132,21 +129,18 @@ namespace StorjPhotoGalleryUploader.ViewModels
             {
                 Image2 = Uri.EscapeUriString(baseUrl + images[0]);
                 Image2Bmp = await GenerateBitmapImageFromKeyAsync(images[0]);
-                OnPropertyChanged(nameof(Image2));
                 images.RemoveAt(0);
             }
             if (images.Count >= 1)
             {
                 Image3 = Uri.EscapeUriString(baseUrl + images[0]);
                 Image3Bmp = await GenerateBitmapImageFromKeyAsync(images[0]);
-                OnPropertyChanged(nameof(Image3));
                 images.RemoveAt(0);
             }
             if (images.Count >= 1)
             {
                 Image4 = Uri.EscapeUriString(baseUrl + images[0]);
                 Image4Bmp = await GenerateBitmapImageFromKeyAsync(images[0]);
-                OnPropertyChanged(nameof(Image4));
                 images.RemoveAt(0);
             }
 
@@ -162,19 +156,23 @@ namespace StorjPhotoGalleryUploader.ViewModels
 
         private async Task<BitmapImage> GenerateBitmapImageFromKeyAsync(string key)
         {
-            BitmapImage bitmapImage = new BitmapImage();
-            try
-            {
 #if WINDOWS_UWP
-                await bitmapImage.SetSourceAsync((await StoreService.GetObjectAsStreamAsync(AppConfig, key)).AsRandomAccessStream());
+            using (var stream = (await StoreService.GetObjectAsStreamAsync(AppConfig, key)).AsRandomAccessStream())
 #else
-                await bitmapImage.SetSourceAsync(await StoreService.GetObjectAsStreamAsync(AppConfig, key));
+            using (var stream = await StoreService.GetObjectAsStreamAsync(AppConfig, key))
 #endif
-            }
-            catch
             {
+
+                BitmapImage bitmapImage = new BitmapImage();
+                try
+                {
+                    await bitmapImage.SetSourceAsync(stream);
+                }
+                catch
+                {
+                }
+                return bitmapImage;
             }
-            return bitmapImage;
         }
 
         [Command]
