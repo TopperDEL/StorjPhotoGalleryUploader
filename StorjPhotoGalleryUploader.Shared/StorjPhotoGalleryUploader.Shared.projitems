@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converter\TrueIsCollapsedConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converter\TrueIsVisibleConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\BitmapExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helper\CachingDownloadStream.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\DependencyInjectionInitHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\DialogExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helper\TaskCompletionNotifier.cs" />

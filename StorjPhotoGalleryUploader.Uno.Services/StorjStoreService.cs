@@ -28,7 +28,7 @@ namespace StorjPhotoGalleryUploader.Services
 
         public async Task<Stream> GetObjectAsStreamAsync(AppConfig appConfig, string key)
         {
-            if(!Barrel.Current.IsExpired(key))
+            if (!Barrel.Current.IsExpired(key))
             {
                 return new MemoryStream(Barrel.Current.Get<byte[]>(key));
             }
@@ -36,7 +36,8 @@ namespace StorjPhotoGalleryUploader.Services
             {
                 var bucket = await _bucketService.GetBucketAsync(appConfig.BucketName);
                 var objectInfo = await _objectService.GetObjectAsync(bucket, key);
-                var downloadStream = new DownloadStream(bucket, (int)objectInfo.SystemMetadata.ContentLength, key);
+                var downloadStream = new CachingDownloadStream(bucket, (int)objectInfo.SystemMetadata.ContentLength, key);
+                downloadStream.DownloadStreamCachedEvent += (sender, data) => { Barrel.Current.Add(key, data, TimeSpan.FromDays(365)); };
                 return downloadStream;
             }
             catch
@@ -54,7 +55,7 @@ namespace StorjPhotoGalleryUploader.Services
                     if (objectData is MemoryStream)
                     {
                         MemoryStream mstream = objectData as MemoryStream;
-                        Barrel.Current.Add(key, mstream.ToArray(), TimeSpan.FromDays(14));
+                        Barrel.Current.Add(key, mstream.ToArray(), TimeSpan.FromDays(365));
                         mstream.Position = 0;
                     }
                 }
