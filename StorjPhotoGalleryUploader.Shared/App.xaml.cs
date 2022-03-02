@@ -72,6 +72,8 @@ namespace StorjPhotoGalleryUploader
 #endif
 
             Barrel.ApplicationId = "StorjPhotoGallery";
+
+            Barrel.Current.Empty(StorjPhotoGalleryUploader.Services.AlbumService.CACHE_ALBUM_LIST);
         }
 
         private void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)

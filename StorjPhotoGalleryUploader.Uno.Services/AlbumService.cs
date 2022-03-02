@@ -18,6 +18,7 @@ namespace StorjPhotoGalleryUploader.Services
 {
     public class AlbumService : IAlbumService
     {
+        public const string CACHE_ALBUM_LIST = "AlbumList";
         private const string BASE_SHARE_URL = "BASE_SHARE_URL";
         private const string COVER_IMAGE = "COVER_IMAGE";
         readonly IBucketService _bucketService;
@@ -60,7 +61,7 @@ namespace StorjPhotoGalleryUploader.Services
 
         public async Task<Album> CreateAlbumAsync(string albumName)
         {
-            Barrel.Current.Empty("AlbumList");
+            Barrel.Current.Empty(CACHE_ALBUM_LIST);
 
             return await RefreshAlbumAsync(albumName, new List<string>()); //Simply no images, yet
         }
@@ -130,9 +131,9 @@ namespace StorjPhotoGalleryUploader.Services
 
         public async Task<List<Album>> ListAlbumsAsync()
         {
-            if(!Barrel.Current.IsExpired("AlbumList"))
+            if(!Barrel.Current.IsExpired(CACHE_ALBUM_LIST))
             {
-                return Barrel.Current.Get<List<Album>>("AlbumList");
+                return Barrel.Current.Get<List<Album>>(CACHE_ALBUM_LIST);
             }
 
             List<Album> albums = new List<Album>();
@@ -153,7 +154,7 @@ namespace StorjPhotoGalleryUploader.Services
                 });
             }
 
-            Barrel.Current.Add("AlbumList", albums, TimeSpan.FromDays(365));
+            Barrel.Current.Add(CACHE_ALBUM_LIST, albums, TimeSpan.FromDays(365));
 
             return albums;
         }
@@ -295,7 +296,7 @@ namespace StorjPhotoGalleryUploader.Services
 
         public async Task DeleteAlbumAsync(string albumName)
         {
-            Barrel.Current.Empty("AlbumList");
+            Barrel.Current.Empty(CACHE_ALBUM_LIST);
 
             await DeleteImagesAsync(albumName, ImageResolution.Original);
             await DeleteImagesAsync(albumName, ImageResolution.Medium);
@@ -327,7 +328,7 @@ namespace StorjPhotoGalleryUploader.Services
 
         public async Task RenameAlbumAsync(string oldName, string newName)
         {
-            Barrel.Current.Empty("AlbumList");
+            Barrel.Current.Empty(CACHE_ALBUM_LIST);
 
             await InitAsync();
 
