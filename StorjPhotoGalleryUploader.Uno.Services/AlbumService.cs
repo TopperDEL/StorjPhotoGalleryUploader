@@ -63,16 +63,23 @@ namespace StorjPhotoGalleryUploader.Services
         {
             Barrel.Current.Empty(CACHE_ALBUM_LIST);
 
-            return await RefreshAlbumAsync(albumName, new List<string>()); //Simply no images, yet
+            return await RefreshAlbumAsync(albumName); //Create album with no images
         }
 
-        public async Task<Album> RefreshAlbumAsync(string albumName, List<string> imageNames, string coverImage = null, bool refreshShareUrl = false)
+        public async Task<Album> RefreshAlbumAsync(string albumName, string coverImage = null, bool refreshShareUrl = false)
         {
             await InitAsync();
 
             var accessGrant = _appConfig.TryGetAccessGrant(out bool success);
             if (!success)
                 return null;
+
+            var images = await GetImageKeysAsync(albumName, int.MaxValue, ImageResolution.Small, false);
+            var imageNames = images.Select(i => i.Replace("pics/", "") //We only need the filename here
+                                                 .Replace(ImageResolution.SmallDescription + "/", "")
+                                                 .Replace(ImageResolution.MediumDescription + "/", "")
+                                                 .Replace(albumName + "/", "")
+                                                 .Replace("resized/", "")).ToList();
 
             Assembly assembly = GetType().GetTypeInfo().Assembly;
             using (var indexStream = assembly.GetManifestResourceStream("StorjPhotoGalleryUploader.Services.Assets.site_template.album.index.html"))
@@ -276,9 +283,8 @@ namespace StorjPhotoGalleryUploader.Services
             await DeleteImageAsync(albumName, filename.Replace(ImageResolution.SmallDescription, ImageResolution.MediumDescription), ImageResolution.Medium);
             await DeleteImageAsync(albumName, filename, ImageResolution.Small);
 
-            var images = await GetImageKeysAsync(albumName, int.MaxValue, ImageResolution.Small, false);
             var coverImage = (await GetAlbumInfoAsync(albumName)).CoverImage;
-            await RefreshAlbumAsync(albumName, images, coverImage);
+            await RefreshAlbumAsync(albumName, coverImage);
         }
 
         private async Task DeleteImageAsync(string albumName, string filename, ImageResolution resolution)
@@ -317,12 +323,11 @@ namespace StorjPhotoGalleryUploader.Services
 
         public async Task SetCoverImageAsync(string albumName, string filename)
         {
-            var images = await GetImageKeysAsync(albumName, int.MaxValue, ImageResolution.Small, false);
-            await RefreshAlbumAsync(albumName, images, filename.Replace("pics/", "") //We only need the filename here
-                                                               .Replace(ImageResolution.SmallDescription + "/", "")
-                                                               .Replace(ImageResolution.MediumDescription + "/", "")
-                                                               .Replace(albumName + "/", "")
-                                                               .Replace("resized/", "")
+            await RefreshAlbumAsync(albumName, filename.Replace("pics/", "") //We only need the filename here
+                                                       .Replace(ImageResolution.SmallDescription + "/", "")
+                                                       .Replace(ImageResolution.MediumDescription + "/", "")
+                                                       .Replace(albumName + "/", "")
+                                                       .Replace("resized/", "")
                                                                );
         }
 
@@ -345,9 +350,8 @@ namespace StorjPhotoGalleryUploader.Services
             }
 
             //Refresh album itself
-            var images = await GetImageKeysAsync(newName, int.MaxValue, ImageResolution.Small, false);
             var coverImage = (await GetAlbumInfoAsync(newName)).CoverImage;
-            await RefreshAlbumAsync(newName, images, coverImage, true); //Also refresh the share-URL
+            await RefreshAlbumAsync(newName, coverImage, true); //Also refresh the share-URL
 
             //Refresh album index
             var albumList = await ListAlbumsAsync();
