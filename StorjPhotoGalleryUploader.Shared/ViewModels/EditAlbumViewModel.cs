@@ -162,7 +162,7 @@ namespace StorjPhotoGalleryUploader.ViewModels
                 }
                 HasImages = true;
             }
-            var album = await AlbumService.RefreshAlbumAsync(AlbumName, imageNames, coverImage);
+            var album = await AlbumService.RefreshAlbumAsync(AlbumName, coverImage);
 
             var albumList = await AlbumService.ListAlbumsAsync();
             await AlbumService.RefreshAlbumIndexAsync(albumList);
