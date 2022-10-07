@@ -17,7 +17,7 @@
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
     <PackageReference Include="Uno.SourceGenerationTasks" Version="4.1.0" />
     <PackageReference Include="Uno.UI" Version="4.0.13" />
-    <PackageReference Include="uplink.NET" Version="2.8.2410" />
+    <PackageReference Include="uplink.NET" Version="2.9.2958" />
     <PackageReference Include="uplink.NET.UnoHelpers" Version="0.9.50" />
     <PackageReference Include="uplink.NET.UnoHelpers.Contracts" Version="0.9.50" />
   </ItemGroup>
