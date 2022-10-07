@@ -12,6 +12,7 @@
     <RootNamespace>StorjPhotoGalleryUploader.Contracts</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Uno.SourceGenerationTasks" Version="4.1.0" />
     <PackageReference Include="Uno.UI" Version="4.0.13" />
     <PackageReference Include="uplink.NET.UnoHelpers" Version="0.9.50" />
     <PackageReference Include="uplink.NET.UnoHelpers.Contracts" Version="0.9.50" />
