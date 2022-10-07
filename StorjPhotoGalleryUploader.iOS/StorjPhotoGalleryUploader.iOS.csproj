@@ -143,10 +143,10 @@
       <Version>2.9.2958</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers">
-      <Version>0.9.50</Version>
+      <Version>0.9.51</Version>
     </PackageReference>
     <PackageReference Include="uplink.NET.UnoHelpers.Contracts">
-      <Version>0.9.50</Version>
+      <Version>0.9.51</Version>
     </PackageReference>
     <PackageReference Include="SkiaSharp">
       <Version>2.80.2</Version>
